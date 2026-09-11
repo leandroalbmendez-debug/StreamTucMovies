@@ -14,9 +14,9 @@ export const initialUsers: User[] = [
   },
   {
     id: uuidv4(),
-    email: "juan@gmail.com",
-    password: "Juan123",
-    username: "Juan Perez",
+    email: "lucasfacdef@gmail.com",
+    password: "Lucas123",
+    username: "Lucas Lencina",
     role: "client",
     plan: "free",
     favorites: [1, 3],
