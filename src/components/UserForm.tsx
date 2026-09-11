@@ -1,33 +1,68 @@
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { Button, Form, Card } from "react-bootstrap";
 import { v4 as uuidv4 } from "uuid";
 import type { User } from "../types/User";
 
 interface UserFormProps {
   onAddUser: (user: User) => void;
+  onUpdateUser: (user: User) => void;
+  userToEdit: User | null;
+  onCancelEdit: () => void;
 }
 
-function UserForm({ onAddUser }: UserFormProps) {
+function UserForm({
+  onAddUser,
+  onUpdateUser,
+  userToEdit,
+  onCancelEdit,
+}: UserFormProps) {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [plan, setPlan] = useState<"free" | "premium">("free");
 
+  useEffect(() => {
+    if (userToEdit) {
+      setUsername(userToEdit.username);
+      setEmail(userToEdit.email);
+      setPassword(userToEdit.password);
+      setPlan(userToEdit.plan);
+    } else {
+      setUsername("");
+      setEmail("");
+      setPassword("");
+      setPlan("free");
+    }
+  }, [userToEdit]);
+
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const newUser: User = {
-      id: uuidv4(),
-      username,
-      email,
-      password,
-      role: "client",
-      plan,
-      favorites: [],
-      comments: [],
-    };
+    if (userToEdit) {
+      const updatedUser: User = {
+        ...userToEdit,
+        username,
+        email,
+        password,
+        plan,
+      };
 
-    onAddUser(newUser);
+      onUpdateUser(updatedUser);
+      onCancelEdit();
+    } else {
+      const newUser: User = {
+        id: uuidv4(),
+        username,
+        email,
+        password,
+        role: "client",
+        plan,
+        favorites: [],
+        comments: [],
+      };
+
+      onAddUser(newUser);
+    }
 
     setUsername("");
     setEmail("");
@@ -38,7 +73,9 @@ function UserForm({ onAddUser }: UserFormProps) {
   return (
     <Card className="mb-4">
       <Card.Body>
-        <Card.Title>Crear usuario</Card.Title>
+        <Card.Title>
+          {userToEdit ? "Editar usuario" : "Crear usuario"}
+        </Card.Title>
 
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3">
@@ -96,8 +133,19 @@ function UserForm({ onAddUser }: UserFormProps) {
           </Form.Group>
 
           <Button type="submit" variant="primary">
-            Crear usuario
+            {userToEdit ? "Guardar cambios" : "Crear usuario"}
           </Button>
+
+          {userToEdit && (
+            <Button
+              type="button"
+              variant="secondary"
+              className="ms-2"
+              onClick={onCancelEdit}
+            >
+              Cancelar
+            </Button>
+          )}
         </Form>
       </Card.Body>
     </Card>

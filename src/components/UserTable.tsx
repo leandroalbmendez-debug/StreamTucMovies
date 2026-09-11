@@ -4,9 +4,14 @@ import type { User } from "../types/User";
 interface UserTableProps {
   users: User[];
   onDeleteUser: (id: string) => void;
+  onEditUser: (user: User) => void;
 }
 
-function UserTable({ users, onDeleteUser }: UserTableProps) {
+function UserTable({
+  users,
+  onDeleteUser,
+  onEditUser,
+}: UserTableProps) {
   return (
     <Table striped bordered hover responsive>
       <thead>
@@ -33,13 +38,24 @@ function UserTable({ users, onDeleteUser }: UserTableProps) {
 
             <td>
               {user.role !== "admin" && (
-                <Button
-                  variant="danger"
-                  size="sm"
-                  onClick={() => onDeleteUser(user.id)}
-                >
-                  Eliminar
-                </Button>
+                <>
+                  <Button
+                    variant="warning"
+                    size="sm"
+                    className="me-2"
+                    onClick={() => onEditUser(user)}
+                  >
+                    Editar
+                  </Button>
+
+                  <Button
+                    variant="danger"
+                    size="sm"
+                    onClick={() => onDeleteUser(user.id)}
+                  >
+                    Eliminar
+                  </Button>
+                </>
               )}
             </td>
           </tr>
