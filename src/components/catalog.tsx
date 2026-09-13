@@ -1,23 +1,14 @@
 import { useData } from "../context/database";
-import { Button, Card, Container, Row } from "react-bootstrap";
+import { Button, Card, Container, Pagination, Row } from "react-bootstrap";
+import { Paginator } from "./paginator";
 
 export function Catalog() {
-	const { loading, list, refetch } = useData();
-
+	const { loading, list, nudge, jumpTo, currentIndex, data, limit } = useData();
 	return (
 		<Container fluid>
-			<Row>
-				<p>DESTACADOS</p>
-                <Button
-					disabled={loading}
-					onClick={() => refetch(-1)}>
-					Prev Page
-				</Button>
-				<Button
-					disabled={loading}
-					onClick={() => refetch(1)}>
-					Next Page
-				</Button>
+			<p>DESTACADOS</p>
+			<Row className="row-cols-2">
+				<Paginator step={10} tracker={currentIndex} min={1} max={500} bump={nudge} jump={jumpTo}></Paginator>
 			</Row>
 			<Row className="row-cols-5">
 				{loading ? (
