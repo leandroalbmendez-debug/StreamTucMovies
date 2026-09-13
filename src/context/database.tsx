@@ -4,12 +4,15 @@ const DataEnviroment = createContext(undefined);
 
 export function DataCtx({ children }) {
 	const [list, setList] = useState(null);
+	const [featured, setFeatured] = useState(null);
+	const [categories, setCategories] = useState(null);
 	const [data, setData] = useState(null);
 	const [loading, setLoading] = useState<boolean>(true);
 	const apiKey: string = import.meta.env.VITE_API_KEY;
-	const [currentIndex, setIndex] = useLocalStorage<number>("currentIndex", 1);
-	const [url, setURL] = useState(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=es-ES&page=${currentIndex}`);
-	
+	const [currentIndex, setIndex] = useState(1);
+	const [url, setURL] = useState(
+		`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=es-ES&page=${currentIndex}`,
+	);
 	async function fetchData(requestUrl = url) {
 		setLoading(true);
 		try {
@@ -19,6 +22,7 @@ export function DataCtx({ children }) {
 			}
 			const result = await response.json();
 			setData(result);
+			console.log(result);
 			setList(result.results);
 		} catch (error) {
 			console.error(error);
@@ -27,10 +31,14 @@ export function DataCtx({ children }) {
 		}
 	}
 
-	const refetch = async (step = 0) => {
+	const nudge = async (step = 0) => {
 		const newIndex = currentIndex + step;
-		const newUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=es-ES&page=${newIndex}`;
+		jumpTo(newIndex);
+	};
+
+	const jumpTo = async (newIndex) => {
 		setIndex(newIndex);
+		const newUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=es-ES&page=${newIndex}`;
 		setURL(newUrl);
 		await fetchData(newUrl);
 	};
@@ -48,7 +56,8 @@ export function DataCtx({ children }) {
 				setIndex,
 				data,
 				loading,
-				refetch,
+				nudge,
+				jumpTo,
 			}}>
 			{children}
 		</DataEnviroment.Provider>
