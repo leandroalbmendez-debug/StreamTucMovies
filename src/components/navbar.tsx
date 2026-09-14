@@ -1,59 +1,121 @@
-// import { BiSearch } from "react-icons/bi";
-// import menu from "../assets/menu.png";
-// import logo from "../assets/logo.png";
-// import { useData } from "../context/database";
-// import { Link, Form } from "react-router-dom";
+import {
+  Button,
+  Container,
+  Nav,
+  Navbar as BootstrapNavbar,
+} from "react-bootstrap";
+import { Link, useLocation, useNavigate } from "react-router";
+import { useEffect, useState } from "react";
+import type { User } from "../types/User";
 
 function Navbar() {
-	// const { handleFormSubmit, query, handleInputChange } = useData();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-	return (
-		// <div
-		// 	className="flex flex-col sm:flex-row w-full justify-center sm:justify-around gap-4 items-center z-20 absolute top-10"
-		// 	data-testid="navbar">
-		// 	<Link
-		// 		to={"/"}
-		// 		className="flex items-center"
-		// 		data-testid="logo-link">
-		// 		<img
-		// 			src={logo}
-		// 			alt="logo icon"
-		// 			data-testid="logo-img"
-		// 		/>
-		// 	</Link>
-		// 	<Form
-		// 		onSubmit={handleFormSubmit}
-		// 		className="flex w-3/5 sm:w-2/5 h-4 items-center border-white border-2 p-4 rounded-lg shadow-md"
-		// 		data-testid="search-bar">
-		// 		<input
-		// 			type="text"
-		// 			placeholder="What do you want to watch?"
-		// 			value={query}
-		// 			onChange={handleInputChange}
-		// 			className="w-full placeholder-white bg-transparent border-none outline-0 text-sm text-white sm:text-lg"
-		// 			data-testid="search-input"
-		// 		/>
-		// 		<BiSearch
-		// 			className="text-white font-bold"
-		// 			data-testid="search-icon"
-		// 		/>
-		// 	</Form>
-		// 	<div
-		// 		className="flex items-center"
-		// 		data-testid="menu-icon">
-		// 		<img
-		// 			src={menu}
-		// 			alt="menu icon"
-		// 		/>
-		// 	</div>
-		// </div>
-    <>
-    <a href="/">Home</a>
-    <a href="/login">Login</a>
-    <a href="/admin">Admin</a>
-	<a href="/catalog">Catalog</a>
-    </>
-	);
+  const [loggedUser, setLoggedUser] = useState<User | null>(() => {
+    const storedUser = localStorage.getItem("streamtuc-logged-user");
+
+    if (storedUser) {
+      return JSON.parse(storedUser);
+    }
+
+    return null;
+  });
+
+  useEffect(() => {
+    const updateLoggedUser = () => {
+      const storedUser = localStorage.getItem("streamtuc-logged-user");
+      
+      if (storedUser) {
+        setLoggedUser(JSON.parse(storedUser));
+      } else {
+        setLoggedUser(null);
+      }
+    };
+    
+    window.addEventListener("streamtuc-auth-change", updateLoggedUser);
+    
+    return () => {
+      window.removeEventListener(
+        "streamtuc-auth-change",
+        updateLoggedUser,
+      );
+    };
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("streamtuc-logged-user");
+
+    setLoggedUser(null);
+
+    window.dispatchEvent(new Event("streamtuc-auth-change"));
+
+    navigate("/login");
+  };
+
+  // En Login y Register no mostramos los datos del usuario logueado
+  const isAuthPage =
+    location.pathname === "/login" ||
+    location.pathname === "/register";
+
+  return (
+    <BootstrapNavbar bg="dark" variant="dark" expand="lg">
+      <Container>
+        <BootstrapNavbar.Brand as={Link} to="/">
+          STREAMTUC
+        </BootstrapNavbar.Brand>
+
+        <BootstrapNavbar.Toggle aria-controls="navbar-streamtuc" />
+
+        <BootstrapNavbar.Collapse id="navbar-streamtuc">
+          <Nav className="me-auto">
+            <Nav.Link as={Link} to="/">
+              Inicio
+            </Nav.Link>
+
+            {!isAuthPage && !loggedUser && (
+              <Nav.Link as={Link} to="/login">
+                Login
+              </Nav.Link>
+            )}
+          </Nav>
+
+          <Nav className="align-items-lg-center">
+            {loggedUser && !isAuthPage ? (
+              <>
+                <Nav.Link disabled>
+                  Hola, {loggedUser.username}
+                </Nav.Link>
+
+                {loggedUser.role === "admin" && (
+                  <Nav.Link as={Link} to="/admin">
+                    Administrar
+                  </Nav.Link>
+                )}
+
+                <Button
+                  variant="outline-light"
+                  size="sm"
+                  onClick={handleLogout}
+                  className="ms-lg-2"
+                >
+                  Cerrar sesión
+                </Button>
+              </>
+            ) : (
+              <>
+                {!isAuthPage && (
+                  <Nav.Link as={Link} to="/login">
+                    Iniciar sesión
+                  </Nav.Link>
+                )}
+              </>
+            )}
+          </Nav>
+        </BootstrapNavbar.Collapse>
+      </Container>
+    </BootstrapNavbar>
+  );
 }
 
 export default Navbar;

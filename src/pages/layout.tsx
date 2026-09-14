@@ -1,13 +1,11 @@
-import { Container } from 'react-bootstrap'
-import Navbar from '../components/navbar'
+import { Outlet } from "react-router";
+import Navbar from "../components/navbar";
 
-export default function Layout({ children }) {
+export default function Layout() {
     return (
         <>
-            <Container>
-                <Navbar />
-                {children}
-            </Container>
+            <Navbar />
+            <Outlet />
         </>
-    )
+    );
 }

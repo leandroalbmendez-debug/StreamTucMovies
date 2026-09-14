@@ -1,7 +1,6 @@
 import {
   createBrowserRouter,
   Navigate,
-  Outlet,
   useNavigate,
 } from "react-router";
 import { RouterProvider } from "react-router/dom";
@@ -15,20 +14,9 @@ import { Register } from "./pages/Register";
 import Admin from "./pages/Admin";
 import { Catalog } from "./components/catalog";
 import { NotFound } from "./pages/404";
-
-import Navbar from "./components/Navbar/Navbar";
-
 import { useLocalStorage } from "./hooks/useLocalStorage";
 import type { User } from "./types/User";
-
-function Layout() {
-  return (
-    <>
-      <Navbar />
-      <Outlet />
-    </>
-  );
-}
+import Layout from "./pages/Layout";
 
 function ProtectedAdmin() {
   const [loggedUser] = useLocalStorage<User | null>(
