@@ -1,7 +1,6 @@
 import {
   createBrowserRouter,
   Navigate,
-  Outlet,
   useNavigate,
 } from "react-router";
 import { RouterProvider } from "react-router/dom";
@@ -17,6 +16,7 @@ import { Catalog } from "./components/catalog";
 import { NotFound } from "./pages/404";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 import type { User } from "./types/User";
+import Layout from "./pages/Layout";
 
 function ProtectedAdmin() {
   const [loggedUser] = useLocalStorage<User | null>(
@@ -54,7 +54,10 @@ function ProtectedAdmin() {
 }
 
 const router = createBrowserRouter([
-    {
+  {
+    element: <Layout />,
+    children: [
+      {
         path: "/",
         element: <Index />,
       },
@@ -78,6 +81,8 @@ const router = createBrowserRouter([
         path: "*",
         element: <NotFound />,
       },
+    ],
+  },
 ]);
 
 function App() {
