@@ -1,19 +1,18 @@
-import { useLocalStorage } from "@uidotdev/usehooks";
-import { useContext, createContext, useState, useEffect } from "react";
-const DataEnviroment = createContext(undefined);
+import { useContext, createContext, useState, useEffect, type ReactNode } from "react";
+import type { DataContextValue, Movie } from "./types";
 
-export function DataCtx({ children }) {
-	const [list, setList] = useState(null);
-	const [featured, setFeatured] = useState(null);
-	const [categories, setCategories] = useState(null);
-	const [data, setData] = useState(null);
+const DataEnviroment = createContext<DataContextValue | undefined>(undefined);
+
+export function DataCtx({ children }: { children: ReactNode }) {
+	const [list, setList] = useState<Movie[]>([]);
+	const [data, setData] = useState<unknown>(null);
 	const [loading, setLoading] = useState<boolean>(true);
 	const apiKey: string = import.meta.env.VITE_API_KEY;
 	const [currentIndex, setIndex] = useState(1);
 	const [url, setURL] = useState(
 		`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=es-ES&page=${currentIndex}`,
 	);
-	async function fetchData(requestUrl = url) {
+	async function fetchData(requestUrl: string = url): Promise<void> {
 		setLoading(true);
 		try {
 			const response = await fetch(requestUrl);
@@ -22,8 +21,8 @@ export function DataCtx({ children }) {
 			}
 			const result = await response.json();
 			setData(result);
-			console.log(result);
 			setList(result.results);
+			console.log(list);
 		} catch (error) {
 			console.error(error);
 		} finally {
@@ -31,12 +30,12 @@ export function DataCtx({ children }) {
 		}
 	}
 
-	const nudge = async (step = 0) => {
+	const nudge = async (step = 0): Promise<void> => {
 		const newIndex = currentIndex + step;
 		jumpTo(newIndex);
 	};
 
-	const jumpTo = async (newIndex) => {
+	const jumpTo = async (newIndex: number): Promise<void> => {
 		setIndex(newIndex);
 		const newUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=es-ES&page=${newIndex}`;
 		setURL(newUrl);

@@ -79,7 +79,7 @@ export function Login() {
     if (userFound.role === "admin") {
       navigate("/admin");
     } else {
-      navigate("/");
+      navigate("/catalog");
     }
   };
 
