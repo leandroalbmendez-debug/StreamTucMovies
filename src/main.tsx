@@ -7,10 +7,10 @@ import Layout from "./pages/layout.tsx";
 
 createRoot(document.getElementById("root")!).render(
 	<StrictMode>
-		<DataCtx>
-			<Layout>
+		<Layout>
+			<DataCtx>
 				<App />
-			</Layout>
-		</DataCtx>
+			</DataCtx>
+		</Layout>
 	</StrictMode>,
 );
