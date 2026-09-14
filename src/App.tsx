@@ -15,20 +15,8 @@ import { Register } from "./pages/Register";
 import Admin from "./pages/Admin";
 import { Catalog } from "./components/catalog";
 import { NotFound } from "./pages/404";
-
-import Navbar from "./components/Navbar/Navbar";
-
 import { useLocalStorage } from "./hooks/useLocalStorage";
 import type { User } from "./types/User";
-
-function Layout() {
-  return (
-    <>
-      <Navbar />
-      <Outlet />
-    </>
-  );
-}
 
 function ProtectedAdmin() {
   const [loggedUser] = useLocalStorage<User | null>(
@@ -66,10 +54,7 @@ function ProtectedAdmin() {
 }
 
 const router = createBrowserRouter([
-  {
-    element: <Layout />,
-    children: [
-      {
+    {
         path: "/",
         element: <Index />,
       },
@@ -93,8 +78,6 @@ const router = createBrowserRouter([
         path: "*",
         element: <NotFound />,
       },
-    ],
-  },
 ]);
 
 function App() {
