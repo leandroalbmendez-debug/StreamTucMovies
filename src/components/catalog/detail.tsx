@@ -3,6 +3,7 @@ import { Alert, Badge, Col, Container, Image, ListGroup, Row } from "react-boots
 import { useData } from "../../context/database";
 import { CommentSection } from "../comments/CommentSection";
 import type { Movie } from "../../types/database";
+import { useStyle } from "../../context/styles";
 
 function formatReleaseDate(releaseDate: Movie["release_date"]): string {
 	return releaseDate instanceof Date
@@ -11,6 +12,7 @@ function formatReleaseDate(releaseDate: Movie["release_date"]): string {
 }
 
 export function Detail() {
+	const {theme} = useStyle();
 	const { movieId } = useParams();
 	const { list, loading } = useData();
 	const movie = list.find((item) => item.id === Number(movieId));
@@ -37,7 +39,7 @@ export function Detail() {
 					<Image
 						fluid
 						rounded
-						src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+						src={movie.poster_path != null ? `https://image.tmdb.org/t/p/original${movie.poster_path}` : `../src/assets/${theme}.png`}
 						alt={movie.title}
 					/>
 				</Col>
@@ -66,7 +68,7 @@ export function Detail() {
 					<Col>
 						<Image
 							fluid
-							src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+							src={movie.backdrop_path != null ? `https://image.tmdb.org/t/p/original${movie.backdrop_path}` : `../src/assets/${theme}.png`}
 							alt={`Fondo de ${movie.title}`}
 						/>
 					</Col>
