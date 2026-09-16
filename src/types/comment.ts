@@ -6,4 +6,5 @@ export interface Comment {
   text: string;
   rating?: number; // opcional, 1-10
   createdAt: string; // ISO date
+  updatedAt?: string;
 }
