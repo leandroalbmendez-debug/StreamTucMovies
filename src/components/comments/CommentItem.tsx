@@ -27,22 +27,6 @@ export function CommentItem({ comment, canEdit, canDelete, onUpdate, onDelete }:
     setIsEditing(false);
   };
 
-  // Si un admin lo ocultó, no mostramos el contenido real ni permitimos editar/borrar
-  if (comment.hidden) {
-    return (
-      <Card className="mb-2">
-        <Card.Body>
-          <Card.Subtitle className="mb-1 text-body-secondary">
-            {comment.author}
-          </Card.Subtitle>
-          <Card.Text className="mt-2 mb-1 fst-italic text-muted">
-            Comentario oculto por un administrador
-          </Card.Text>
-        </Card.Body>
-      </Card>
-    );
-  }
-
   return (
     <Card className="mb-2">
       <Card.Body>

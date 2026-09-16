@@ -29,6 +29,7 @@ export function useComments(movieId: string, loggedUser: User | null) {
       (!comment.authorId && comment.author === loggedUser.username);
   };
 
+  // Solo el autor puede editar (a diferencia de borrar, el admin no edita ajenos)
   const canEdit = (comment: Comment) => isOwnComment(comment);
 
   const canDelete = (comment: Comment) => {
