@@ -3,22 +3,32 @@ import { Card, Container, Row } from "react-bootstrap";
 import { Paginator } from "../paginator";
 import { round } from "../../data/math";
 import { Link } from "react-router";
+import { useStyle } from "../../context/styles";
 
 export function Catalog() {
 	const { loading, list, nudge, jumpTo, currentIndex } = useData();
+	const { theme, isMobile, isTablet } = useStyle();
+	function sizeQuery(){
+		if (isMobile) {
+			return 5;
+		}
+		if (isTablet) {
+			return 15;
+		}
+		return 20;
+	}
 	return (
-		<Container fluid>
-			<p>DESTACADOS</p>
+		<Container fluid className={`${theme}-mode`}>
 			<Row className="row-cols-2">
 				<Paginator
-					step={10}
+					step={sizeQuery()}
 					tracker={currentIndex}
 					min={1}
 					max={500}
 					bump={nudge}
 					jump={jumpTo}></Paginator>
 			</Row>
-			<Row className="row-cols-5">
+			<Row className="row-cols-lg-5 row-cols-row-cols-sm-3 row-cols-2">
 				{loading ? (
 					<>Loading</>
 				) : (
@@ -30,7 +40,7 @@ export function Catalog() {
 								to={`/detail/${movie.id}`}
 								className="text-decoration-none">
 								<Card.Img
-									src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+									src={movie.poster_path != null ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : `./src/assets/square ${theme}.png`}
 									alt={movie.title}
 									variant="top"
 									className="object-fit-contain"

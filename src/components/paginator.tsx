@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Pagination } from "react-bootstrap";
+import { useStyle } from "../context/styles";
 
 type PaginatorProps = {
 	tracker: number;
@@ -12,8 +13,17 @@ type PaginatorProps = {
 
 type JumpInputPosition = "before" | "after" | null;
 
-export function Paginator({ tracker, min = 0, max = 100, bump, jump, step = 10 }: PaginatorProps) {
-	const [jumpInputPosition, setJumpInputPosition] = useState<JumpInputPosition>(null);
+export function Paginator({
+	tracker,
+	min = 0,
+	max = 100,
+	bump,
+	jump,
+	step = 10,
+}: PaginatorProps) {
+	const {theme} = useStyle();
+	const [jumpInputPosition, setJumpInputPosition] =
+		useState<JumpInputPosition>(null);
 	const [jumpInput, setJumpInput] = useState(String(tracker));
 
 	function openJumpInput(position: Exclude<JumpInputPosition, null>) {
@@ -21,11 +31,17 @@ export function Paginator({ tracker, min = 0, max = 100, bump, jump, step = 10 }
 		setJumpInputPosition(position);
 	}
 
-	function handleJumpInputKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
+	function handleJumpInputKeyDown(
+		event: React.KeyboardEvent<HTMLInputElement>,
+	) {
 		if (event.key !== "Enter") return;
 
 		const selectedIndex = Number(jumpInput);
-		if (Number.isInteger(selectedIndex) && selectedIndex >= min && selectedIndex <= max) {
+		if (
+			Number.isInteger(selectedIndex) &&
+			selectedIndex >= min &&
+			selectedIndex <= max
+		) {
 			jump(selectedIndex);
 			setJumpInputPosition(null);
 		}
@@ -68,37 +84,37 @@ export function Paginator({ tracker, min = 0, max = 100, bump, jump, step = 10 }
 		});
 	}
 	return (
-		<Pagination>
-			<Pagination.First
-				disabled={tracker <= min + 1}
-				onClick={() => jump(min)}
-			/>
-			<Pagination.Prev
-				disabled={tracker <= min}
-				onClick={() => bump(-1)}
-			/>
-			{jumpInputPosition === "before" ? (
-				renderJumpInput()
-			) : (
-				<Pagination.Ellipsis
-					disabled={tracker <= min}
-					onClick={() => openJumpInput("before")}
+			<Pagination size="sm">
+				<Pagination.First
+					disabled={tracker <= min + 1}
+					onClick={() => jump(min)}
 				/>
-			)}
-			{tierJump()}
-			{jumpInputPosition === "after" ? (
-				renderJumpInput()
-			) : (
-				<Pagination.Ellipsis onClick={() => openJumpInput("after")} />
-			)}
-			<Pagination.Next
-				disabled={tracker >= max - 2}
-				onClick={() => bump(1)}
-			/>
-			<Pagination.Last
-				disabled={tracker >= max - 1}
-				onClick={() => jump(max)}
-			/>
-		</Pagination>
+				<Pagination.Prev
+					disabled={tracker <= min}
+					onClick={() => bump(-1)}
+				/>
+				{jumpInputPosition === "before" ? (
+					renderJumpInput()
+				) : (
+					<Pagination.Ellipsis
+						disabled={tracker <= min}
+						onClick={() => openJumpInput("before")}
+					/>
+				)}
+				{tierJump()}
+				{jumpInputPosition === "after" ? (
+					renderJumpInput()
+				) : (
+					<Pagination.Ellipsis onClick={() => openJumpInput("after")} />
+				)}
+				<Pagination.Next
+					disabled={tracker >= max - 2}
+					onClick={() => bump(1)}
+				/>
+				<Pagination.Last
+					disabled={tracker >= max - 1}
+					onClick={() => jump(max)}
+				/>
+			</Pagination>
 	);
 }

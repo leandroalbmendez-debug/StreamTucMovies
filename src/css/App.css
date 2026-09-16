@@ -1,9 +1,9 @@
-.btn-primary {
-    color: #fff;
-    background-color: red;
-    border-color: yellow;
+.dark-mode {
+    background-color: black;
+    color: white;
 }
 
-.card-glass:hover {
-    filter: blur(5px);
+.light-mode {
+    background-color: white;
+    color: black;
 }
