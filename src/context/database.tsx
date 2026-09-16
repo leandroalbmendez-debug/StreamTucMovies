@@ -1,5 +1,5 @@
 import { useContext, createContext, useState, useEffect, type ReactNode } from "react";
-import type { DataContextValue, Movie } from "./types";
+import type { DataContextValue, Movie } from "../types/database";
 
 const DataEnviroment = createContext<DataContextValue | undefined>(undefined);
 
