@@ -23,11 +23,25 @@ export function useComments(movieId: string, loggedUser: User | null) {
     setAllComments((prev) => [...prev, newComment]);
   };
 
+  const isOwnComment = (comment: Comment) => {
+    if (!loggedUser) return false;
+    return comment.authorId === loggedUser.id ||
+      (!comment.authorId && comment.author === loggedUser.username);
+  };
+
+  const canEdit = (comment: Comment) => isOwnComment(comment);
+
   const canDelete = (comment: Comment) => {
     if (!loggedUser) return false;
     if (loggedUser.role === 'admin') return true;
-    return comment.authorId === loggedUser.id ||
-      (!comment.authorId && comment.author === loggedUser.username);
+    return isOwnComment(comment);
+  };
+
+  const updateComment = (id: string, text: string, rating?: number) => {
+    setAllComments((prev) => prev.map((comment) => {
+      if (comment.id !== id || !canEdit(comment)) return comment;
+      return { ...comment, text, rating, updatedAt: new Date().toISOString() };
+    }));
   };
 
   const deleteComment = (id: string) => {
@@ -36,5 +50,5 @@ export function useComments(movieId: string, loggedUser: User | null) {
     }));
   };
 
-  return { comments, addComment, canDelete, deleteComment };
+  return { comments, addComment, canEdit, canDelete, updateComment, deleteComment };
 }

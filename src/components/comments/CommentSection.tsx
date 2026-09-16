@@ -10,7 +10,7 @@ interface Props {
 
 export function CommentSection({ movieId }: Props) {
   const [loggedUser] = useLocalStorage<User | null>('streamtuc-logged-user', null);
-  const { comments, addComment, canDelete, deleteComment } = useComments(movieId, loggedUser);
+  const { comments, addComment, canEdit, canDelete, updateComment, deleteComment } = useComments(movieId, loggedUser);
 
   return (
     <section className="mt-4">
@@ -25,7 +25,9 @@ export function CommentSection({ movieId }: Props) {
       )}
       <CommentList
         comments={comments}
+        canEdit={canEdit}
         canDelete={canDelete}
+        onUpdate={updateComment}
         onDelete={deleteComment}
       />
     </section>
