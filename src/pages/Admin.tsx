@@ -1,13 +1,16 @@
-import { useState } from "react";
-import { Container } from "react-bootstrap";
+import { useMemo, useState } from "react";
+import { Container, Row, Col, Form } from "react-bootstrap";
 import UserForm from "../components/UserForm";
 import UserTable from "../components/UserTable";
-import { useLocalStorage } from "../hooks/useLocalStorage";
+import { CommentsAdminTable } from "../components/comments/CommentsAdminTable";
+import { useLocalStorage as useLocalStorageCustom } from "../hooks/useLocalStorage";
+import { useLocalStorage } from "@uidotdev/usehooks";
 import { initialUsers } from "../data/initialUsers";
+import { useData } from "../context/database";
 import type { User } from "../types/User";
 
 function Admin() {
-  const [users, setUsers] = useLocalStorage<User[]>(
+  const [users, setUsers] = useLocalStorageCustom<User[]>(
     "streamtuc-users",
     initialUsers,
   );
