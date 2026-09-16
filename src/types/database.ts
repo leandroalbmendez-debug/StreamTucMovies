@@ -26,4 +26,6 @@ export type DataContextValue = {
 	loading: boolean;
 	nudge: (step?: number) => Promise<void>;
 	jumpTo: (newIndex: number) => Promise<void>;
+      selectedGenre: number | null;
+      selectGenre: (genreId: number | null) => Promise<void>;
 };

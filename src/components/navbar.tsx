@@ -8,10 +8,14 @@ import {
 import { Link, useLocation, useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import type { User } from "../types/User";
+import { useStyle } from "../context/styles";
+import logo from "../assets/Logo.png";
+import { FaMoon, FaSun } from "react-icons/fa";
 
 function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { theme, switchTheme } = useStyle();
 
   const [loggedUser, setLoggedUser] = useState<User | null>(() => {
     const storedUser = localStorage.getItem("streamtuc-logged-user");
@@ -64,10 +68,10 @@ function Navbar() {
 
   return (
     <>
-      <BootstrapNavbar bg="dark" variant="dark" expand="lg">
+      <BootstrapNavbar className={`${theme}-mode catalog-navbar`} variant="dark" expand="lg">
         <Container>
-          <BootstrapNavbar.Brand>
-            STREAMTUC
+          <BootstrapNavbar.Brand as={Link} to="/" className="catalog-brand">
+            <img src={logo} alt="StreamTUC" className="catalog-brand-logo" />
           </BootstrapNavbar.Brand>
 
           <BootstrapNavbar.Toggle aria-controls="navbar-streamtuc" />
@@ -86,10 +90,23 @@ function Navbar() {
             </Nav>
 
             <Nav className="align-items-lg-center">
+              <Button
+                variant="link"
+                className="catalog-theme-button"
+                type="button"
+                aria-label={theme === "dark" ? "Cambiar a tema claro" : "Cambiar a tema oscuro"}
+                title={theme === "dark" ? "Tema claro" : "Tema oscuro"}
+                onClick={switchTheme}>
+                {theme === "dark" ? <FaSun /> : <FaMoon />}
+              </Button>
               {loggedUser && !isAuthPage ? (
                 <>
                   <Nav.Link disabled>
                     Hola, {loggedUser.username}
+                  </Nav.Link>
+
+                  <Nav.Link as={Link} to="/favorites">
+                    Favoritos
                   </Nav.Link>
 
                   {loggedUser.role === "admin" && (
@@ -102,7 +119,7 @@ function Navbar() {
                     variant="outline-light"
                     size="sm"
                     onClick={() => setShowLogoutModal(true)}
-                    className="ms-lg-2"
+                    className="catalog-logout-button ms-lg-2"
                   >
                     Cerrar sesión
                   </Button>

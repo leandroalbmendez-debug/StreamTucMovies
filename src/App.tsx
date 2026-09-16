@@ -7,11 +7,12 @@ import { Register } from "./pages/Register";
 import Admin from "./pages/Admin";
 import { Catalog } from "./components/catalog/catalog";
 import { Detail } from "./components/catalog/detail";
+import { Favorites } from "./pages/Favorites";
 import { NotFound } from "./pages/404";
 import type { User } from "./types/User";
 import { useLocalStorage } from "@uidotdev/usehooks";
 import "./css/App.css";
-import Layout from "./pages/layout";
+import Layout from "./pages/Layout";
 
 function ProtectedAdmin() {
 	const [loggedUser] = useLocalStorage<User | null>(
@@ -78,6 +79,10 @@ const router = createBrowserRouter([
 			{
 				path: "/catalog",
 				element: <Catalog />,
+			},
+			{
+				path: "/favorites",
+				element: <Favorites />,
 			},
 			{
 				path: "/detail",

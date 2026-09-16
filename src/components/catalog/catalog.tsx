@@ -1,64 +1,130 @@
 import { useData } from "../../context/database";
-import { Card, Container, Row } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 import { Paginator } from "../paginator";
-import { round } from "../../data/math";
-import { Link } from "react-router";
 import { useStyle } from "../../context/styles";
+import { Card } from "./Card";
+import { FaChevronDown, FaPlay, FaStar } from "react-icons/fa";
+import { Link } from "react-router";
+import { useState } from "react";
+
+type SortOption = "popularity" | "vote_average";
 
 export function Catalog() {
-	const { loading, list, nudge, jumpTo, currentIndex } = useData();
+	const {
+		loading,
+		list,
+		nudge,
+		jumpTo,
+		currentIndex,
+		selectedGenre,
+		selectGenre,
+	} = useData();
 	const { theme, isMobile, isTablet } = useStyle();
-	function sizeQuery(){
+	const [sortOption, setSortOption] = useState<SortOption>("popularity");
+	const sortedMovies = [...list].sort((firstMovie, secondMovie) =>
+		sortOption === "popularity"
+			? secondMovie.popularity - firstMovie.popularity
+			: secondMovie.vote_average - firstMovie.vote_average,
+	);
+	const genres = [
+		{ label: "Todos", id: null },
+		{ label: "Acción", id: 28 },
+		{ label: "Ciencia ficción", id: 878 },
+		{ label: "Drama", id: 18 },
+		{ label: "Thriller", id: 53 },
+		{ label: "Terror", id: 27 },
+		{ label: "Comedia", id: 35 },
+		{ label: "Animación", id: 16 },
+	];
+	function sizeQuery() {
 		if (isMobile) {
 			return 5;
 		}
 		if (isTablet) {
-			return 15;
+			return 20;
 		}
-		return 20;
+		return 30;
 	}
 	return (
-		<Container fluid className={`${theme}-mode`}>
-			<Row className="row-cols-2">
-				<Paginator
-					step={sizeQuery()}
-					tracker={currentIndex}
-					min={1}
-					max={500}
-					bump={nudge}
-					jump={jumpTo}></Paginator>
-			</Row>
-			<Row className="row-cols-lg-5 row-cols-row-cols-sm-3 row-cols-2">
-				{loading ? (
-					<>Loading</>
-				) : (
-					list.map((movie, index) => (
-						<Container>
-							<Card
-								key={movie.id ?? index}
-								as={Link}
-								to={`/detail/${movie.id}`}
-								className="text-decoration-none">
-								<Card.Img
-									src={movie.poster_path != null ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : `./src/assets/square ${theme}.png`}
-									alt={movie.title}
-									variant="top"
-									className="object-fit-contain"
-								/>
-								<Card.ImgOverlay className="d-flex flex-column justify-content-evenly text-light">
-									<h4 className="text-end">
-										{movie.vote_average >= 1
-											? round(movie.vote_average, 2)
-											: "No rating"}{" "}
-										/10 ⭐
-									</h4>
-									<h1 className="text-break">{movie.original_title}</h1>
-								</Card.ImgOverlay>
-							</Card>
-						</Container>
-					))
-				)}
-			</Row>
+		<Container
+			fluid
+			className={`${theme}-mode catalog-page`}>
+			{!loading && sortedMovies[0] && (
+				<section
+					className="catalog-hero"
+					style={{
+						backgroundImage: `url(https://image.tmdb.org/t/p/original${sortedMovies[0].backdrop_path})`,
+					}}>
+					<div className="catalog-hero-content">
+						<span className="catalog-eyebrow">Cine sin límites</span>
+						<h1>{sortedMovies[0].title}</h1>
+						<div className="catalog-hero-meta">
+							<span><FaStar /> {sortedMovies[0].vote_average.toFixed(1)} IMDb</span>
+							<span>{String(sortedMovies[0].release_date).slice(0, 4)}</span>
+							<span>4K HDR10</span>
+						</div>
+						<p>{sortedMovies[0].overview || "Una nueva historia para descubrir en StreamTUC."}</p>
+						<Link className="catalog-hero-button" to={`/detail/${sortedMovies[0].id}`}>
+							<FaPlay /> Ver detalles
+						</Link>
+					</div>
+				</section>
+			)}
+
+			<section className="catalog-explorer">
+				<div className="catalog-section-heading">
+					<div>
+						<span className="catalog-eyebrow">Tu próxima película favorita</span>
+						<h2>Explorar películas</h2>
+					</div>
+					<div className="catalog-controls">
+						<label>
+							<span className="visually-hidden">Ordenar películas</span>
+							<select
+								aria-label="Ordenar películas"
+								value={sortOption}
+								onChange={(event) => setSortOption(event.target.value as SortOption)}>
+								<option value="popularity">Más populares</option>
+								<option value="vote_average">Mejor valoradas</option>
+							</select>
+							<FaChevronDown />
+						</label>
+					</div>
+				</div>
+				<div className="catalog-genres" aria-label="Géneros">
+					{genres.map((genre) => (
+						<button
+							className={selectedGenre === genre.id ? "active" : ""}
+							key={genre.label}
+							type="button"
+							onClick={() => void selectGenre(genre.id)}
+							disabled={loading}>
+							{genre.label}
+						</button>
+					))}
+				</div>
+				<Row className="catalog-grid">
+					{loading ? (
+						<p className="catalog-loading">Cargando películas...</p>
+					) : (
+						sortedMovies.map((movie) => (
+							<div key={movie.id}>
+								<Card movie={movie} theme={theme} />
+							</div>
+						))
+					)}
+				</Row>
+				<div className="catalog-pagination">
+					<Paginator
+						step={sizeQuery()}
+						tracker={currentIndex}
+						min={1}
+						max={500}
+						bump={nudge}
+						jump={jumpTo}
+					/>
+				</div>
+			</section>
 		</Container>
 	);
 }

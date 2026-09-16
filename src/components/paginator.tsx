@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Pagination } from "react-bootstrap";
-import { useStyle } from "../context/styles";
 
 type PaginatorProps = {
 	tracker: number;
@@ -21,7 +20,6 @@ export function Paginator({
 	jump,
 	step = 10,
 }: PaginatorProps) {
-	const {theme} = useStyle();
 	const [jumpInputPosition, setJumpInputPosition] =
 		useState<JumpInputPosition>(null);
 	const [jumpInput, setJumpInput] = useState(String(tracker));
@@ -84,7 +82,7 @@ export function Paginator({
 		});
 	}
 	return (
-			<Pagination size="sm">
+			<Pagination size="sm" className="catalog-pagination-list">
 				<Pagination.First
 					disabled={tracker <= min + 1}
 					onClick={() => jump(min)}
