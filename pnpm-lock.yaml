@@ -23,6 +23,9 @@ importers:
       react-bootstrap:
         specifier: ^2.10.10
         version: 2.10.10(@types/react@19.3.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      react-device-sizes:
+        specifier: ^1.0.5
+        version: 1.0.5(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       react-dom:
         specifier: ^19.3.0
         version: 19.3.0(react@19.3.0)
@@ -1090,6 +1093,12 @@ packages:
     peerDependenciesMeta:
       '@types/react':
         optional: true
+
+  react-device-sizes@1.0.5:
+    resolution: {integrity: sha512-pXwrCkhoASR6D5y8mbe8/KtTmN78mBTHKF2qrUCq5pgZ6r8Rby4vii/bUFnS282yJ7VKalYHoZrzqK9A2l2Nrg==}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
 
   react-dom@19.3.0:
     resolution: {integrity: sha512-JDk8dgif51OjFoDE70+OT9ICyYr+69HlmihNwp1+Nsfbna3t5sIiCa9ZJktDmQ4/1b/rn26hIAR2uYXDMr5r0Q==}
@@ -2295,6 +2304,11 @@ snapshots:
       warning: 4.0.3
     optionalDependencies:
       '@types/react': 19.3.0
+
+  react-device-sizes@1.0.5(react-dom@19.3.0(react@19.3.0))(react@19.3.0):
+    dependencies:
+      react: 19.3.0
+      react-dom: 19.3.0(react@19.3.0)
 
   react-dom@19.3.0(react@19.3.0):
     dependencies:

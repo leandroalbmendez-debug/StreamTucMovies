@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>StreamTUC - Panel de Admin - Gestión de Usuarios</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-primary-fixed": "#351000",
+            "on-primary-container": "#561e00",
+            "on-primary": "#571f00",
+            "surface-container-high": "#292a2e",
+            "tertiary": "#dbb8ff",
+            "outline": "#a98a7d",
+            "surface-variant": "#343439",
+            "secondary-fixed": "#ecdcff",
+            "surface-container-lowest": "#0d0e12",
+            "inverse-primary": "#a23f00",
+            "primary": "#ffb695",
+            "on-secondary-fixed": "#280056",
+            "on-primary-fixed-variant": "#7b2f00",
+            "secondary-container": "#6c00d6",
+            "surface": "#121317",
+            "error-container": "#93000a",
+            "on-error": "#690005",
+            "on-tertiary-fixed-variant": "#6600b7",
+            "background": "#121317",
+            "on-error-container": "#ffdad6",
+            "surface-container-low": "#1a1b20",
+            "outline-variant": "#5a4136",
+            "surface-bright": "#38393e",
+            "on-secondary-fixed-variant": "#6000bf",
+            "on-surface-variant": "#e2bfb1",
+            "tertiary-fixed": "#efdbff",
+            "primary-fixed-dim": "#ffb695",
+            "error": "#ffb4ab",
+            "surface-dim": "#121317",
+            "surface-tint": "#ffb695",
+            "on-tertiary-fixed": "#2b0052",
+            "primary-container": "#ff6800",
+            "tertiary-container": "#b879ff",
+            "inverse-surface": "#e3e2e8",
+            "secondary-fixed-dim": "#d6baff",
+            "on-secondary-container": "#d3b5ff",
+            "inverse-on-surface": "#2f3035",
+            "on-background": "#e3e2e8",
+            "secondary": "#d6baff",
+            "surface-container": "#1f1f24",
+            "tertiary-fixed-dim": "#dbb8ff",
+            "surface-container-highest": "#343439",
+            "on-secondary": "#430089",
+            "primary-fixed": "#ffdbcc",
+            "on-surface": "#e3e2e8",
+            "on-tertiary-container": "#470082",
+            "on-tertiary": "#470083"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xl": "2.5rem",
+            "space-lg": "1.5rem",
+            "space-md": "1rem",
+            "space-sm": "0.5rem",
+            "gutter": "1.5rem",
+            "margin-mobile": "1.25rem",
+            "gutter-sm": "0.75rem",
+            "space-xs": "0.25rem",
+            "margin": "3.5rem"
+          },
+          "fontFamily": {
+            "body-md": ["Inter"],
+            "label-sm": ["Inter"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "body-lg": ["Inter"],
+            "label-md": ["Inter"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "display": ["Plus Jakarta Sans"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "headline-xl-mobile": ["Plus Jakarta Sans"],
+            "display-mobile": ["Plus Jakarta Sans"],
+            "headline-lg-mobile": ["Plus Jakarta Sans"],
+            "title-md": ["Plus Jakarta Sans"],
+            "body-sm": ["Inter"]
+          },
+          "fontSize": {
+            "body-md": ["15px", { "lineHeight": "22px", "fontWeight": "400" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "700" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "display": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.03em", "fontWeight": "800" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "headline-xl-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "display-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "headline-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "0em", "fontWeight": "700" }],
+            "title-md": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "body-sm": ["13px", { "lineHeight": "18px", "fontWeight": "400" }]
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased min-h-screen flex flex-col selection:bg-primary-container selection:text-white">
+<!-- TOP HEADER (Admin View) -->
+<header class="bg-surface/75 backdrop-blur-md border-b border-outline-variant/30 sticky top-0 z-50 h-16 w-full flex items-center px-6 lg:px-8 justify-between">
+<!-- Brand / Logo & Portal Badge -->
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-3">
+<img alt="StreamTUC Logo" class="w-9 h-9 object-contain drop-shadow-[0_0_12px_rgba(255,104,0,0.45)]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuASiGCzuCFT5C4boTgg9bFe7886CGA1mF5F65ynkkzVlRpVB_bDEZJT6dC4-wkzvk_78nQ4yxtT5Kf3LOjSfxskauLc6JDqVDlck0iryIuUkxJiFU9g4-8gicUS0KXkiFUBcWMlcWhIczKxk66Ui44f3jbJR23qdpLeNtnwtZZs3REJy1FVKqVfiKgNDEx1X0ex7QyFzuw-ZlvGRUTfLCKUchZVX6tVhUAYCfAuK4vg9lO_GJrnQA5hTifZDiBzBl67Xg"/>
+<span class="text-headline-md font-headline-md font-extrabold tracking-tight text-primary-container">StreamTUC</span>
+</div>
+<span class="bg-secondary-container/30 border border-secondary text-secondary font-label-sm text-label-sm px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+        ADMIN PANEL
+      </span>
+</div>
+<!-- Search in Topbar -->
+<div class="hidden md:flex items-center w-96 relative">
+<span class="material-symbols-outlined absolute left-3.5 text-on-surface-variant pointer-events-none" data-icon="search">search</span>
+<input class="w-full bg-surface-container-low border border-surface-variant rounded-xl pl-10 pr-10 py-1.5 text-body-sm font-body-sm text-on-surface placeholder:text-on-surface-variant/70 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-all" placeholder="Buscar suscriptor, ID, transacción..." type="text"/>
+<span class="absolute right-3 font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-1.5 py-0.5 rounded border border-surface-variant/60">⌘K</span>
+</div>
+<!-- Actions & Profile Info -->
+<div class="flex items-center gap-4">
+<!-- Status Indicator -->
+<div class="hidden lg:flex items-center gap-2 bg-surface-container-low border border-surface-variant/40 px-3 py-1.5 rounded-full">
+<span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Cluster: 99.98% OK</span>
+</div>
+<!-- Notifications -->
+<button aria-label="Notificaciones" class="relative w-10 h-10 rounded-xl bg-surface-container-low border border-surface-variant/50 flex items-center justify-center text-on-surface hover:text-primary transition-colors duration-150">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-primary-container"></span>
+</button>
+<!-- Admin Profile Avatar Badge -->
+<div class="flex items-center gap-3 pl-2 border-l border-surface-variant/50">
+<div class="relative">
+<img class="w-9 h-9 rounded-full object-cover ring-2 ring-secondary-container" data-alt="Portrait photo of a confident professional male system administrator in a dark studio setting with soft atmospheric orange and violet backlighting, looking friendly and sharp, dressed in a sleek charcoal tech pullover." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMCKY6NdLHeusqh2H1k1n08u1GW-Z-SRYM2ZWtbrI9eQZzoXsBJ4R0F0erRw_1YMiqgD4I5SzRW5Aye_n6do6zUJKLEGsnLwbxPplhZCTujukMJ_zKAa_yhy8KMFFff3r6FpW8FWball8gIhpp4JHUhS6iVvtl-wYTN_PlLkx3uaqsvMwFR-P-mrTP85tgfMZo2LrIIZEc2PLSro-yZoEtA7pXj9HgqNKFJgxiWyiP_xqLmyrv175w"/>
+<span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 border-2 border-surface rounded-full"></span>
+</div>
+<div class="hidden sm:flex flex-col text-left">
+<span class="text-label-md font-label-md text-on-surface font-semibold">Carlos Mendoza</span>
+<span class="text-label-sm font-label-sm text-primary font-medium">Super Admin</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-sm cursor-pointer" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+</header>
+<!-- WORKSPACE BODY (Sidebar + Main Content) -->
+<div class="flex-1 flex w-full">
+<!-- LEFT SIDEBAR -->
+<aside class="w-64 bg-surface-container-lowest border-r border-surface-variant/30 flex flex-col justify-between py-6 shrink-0 hidden lg:flex">
+<nav class="px-4 space-y-1.5">
+<p class="px-3 pb-2 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-widest opacity-70">Navegación</p>
+<!-- Link: Dashboard -->
+<a class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-on-surface-variant hover:text-on-surface hover:bg-surface-container/60 transition-colors" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="dashboard">dashboard</span>
+<span class="text-body-sm font-body-sm font-medium">Dashboard</span>
+</a>
+<!-- Link: Gestión de Usuarios (Active) -->
+<a class="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-primary-container/20 to-secondary-container/25 text-primary-container font-semibold border-l-4 border-primary-container shadow-[0_0_20px_rgba(255,104,0,0.15)] transition-all" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-lg" data-icon="group" data-weight="fill" style="font-variation-settings: 'FILL' 1;">group</span>
+<span class="text-body-sm font-body-sm">Gestión de Usuarios</span>
+</div>
+<span class="text-label-sm font-label-sm bg-primary-container text-white px-2 py-0.5 rounded-full">1.4M</span>
+</a>
+<!-- Link: Catálogo de Contenidos -->
+<a class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-on-surface-variant hover:text-on-surface hover:bg-surface-container/60 transition-colors" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="movie">movie</span>
+<span class="text-body-sm font-body-sm font-medium">Catálogo de Contenidos</span>
+</a>
+<!-- Link: Suscripciones y Pagos -->
+<a class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-on-surface-variant hover:text-on-surface hover:bg-surface-container/60 transition-colors" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="credit_card">credit_card</span>
+<span class="text-body-sm font-body-sm font-medium">Suscripciones y Pagos</span>
+</a>
+<!-- Link: Métricas y Analytics -->
+<a class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-on-surface-variant hover:text-on-surface hover:bg-surface-container/60 transition-colors" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="monitoring">monitoring</span>
+<span class="text-body-sm font-body-sm font-medium">Métricas y Analytics</span>
+</a>
+<!-- Link: Servidores y Streaming -->
+<a class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-on-surface-variant hover:text-on-surface hover:bg-surface-container/60 transition-colors" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="dns">dns</span>
+<span class="text-body-sm font-body-sm font-medium">Servidores y Streaming</span>
+</a>
+<div class="pt-4">
+<p class="px-3 pb-2 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-widest opacity-70">Sistema</p>
+<!-- Link: Configuración -->
+<a class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-on-surface-variant hover:text-on-surface hover:bg-surface-container/60 transition-colors" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="settings">settings</span>
+<span class="text-body-sm font-body-sm font-medium">Configuración</span>
+</a>
+<!-- Link: Auditoría & Logs -->
+<a class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-on-surface-variant hover:text-on-surface hover:bg-surface-container/60 transition-colors" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="security">security</span>
+<span class="text-body-sm font-body-sm font-medium">Seguridad y Logs</span>
+</a>
+</div>
+</nav>
+<!-- Sidebar Footer Badge -->
+<div class="px-4">
+<div class="bg-surface-container-low border border-surface-variant/40 rounded-xl p-3.5 flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-secondary-container/40 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-base" data-icon="shield">shield</span>
+</div>
+<div class="overflow-hidden">
+<p class="text-label-md font-label-md text-on-surface truncate">StreamTUC Core v3.8</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Conexión TLS 1.3 Segura</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- MAIN CONTENT AREA -->
+<main class="flex-1 overflow-x-hidden p-6 lg:p-8 space-y-6">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="text-label-md font-label-md text-on-surface-variant">Panel Central</span>
+<span class="text-on-surface-variant text-xs">/</span>
+<span class="text-label-md font-label-md text-primary font-semibold">Usuarios</span>
+</div>
+<h1 class="text-headline-lg font-headline-lg text-on-surface">Administración de Usuarios</h1>
+<p class="text-body-md font-body-md text-on-surface-variant mt-0.5">Monitorea, administra y audita los usuarios registrados en StreamTUC.</p>
+</div>
+<!-- Quick Primary Actions -->
+<div class="flex items-center gap-3 shrink-0">
+<button class="px-4 py-2.5 rounded-full bg-surface-container border border-surface-variant text-on-surface hover:border-outline hover:text-primary transition-colors flex items-center gap-2 text-body-sm font-body-sm font-semibold">
+<span class="material-symbols-outlined text-base" data-icon="file_download">file_download</span>
+<span>Exportar CSV</span>
+</button>
+<button class="px-5 py-2.5 rounded-full bg-primary-container text-white font-title-md text-title-md hover:bg-[#FF7700] transition-transform duration-150 active:scale-95 shadow-[0_4px_18px_rgba(255,104,0,0.35)] flex items-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="person_add">person_add</span>
+<span>Nuevo Usuario +</span>
+</button>
+</div>
+</div>
+<!-- KPI METRICS GRID (4 Bento Cards) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+<!-- KPI 1: Total Usuarios -->
+<div class="bg-surface-container-low border border-surface-variant/40 rounded-xl p-5 relative overflow-hidden group hover:border-outline-variant/60 transition-all">
+<div class="flex items-center justify-between">
+<span class="text-label-md font-label-md text-on-surface-variant uppercase tracking-wider">Total Usuarios</span>
+<div class="w-9 h-9 rounded-xl bg-primary-container/10 border border-primary-container/20 flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-lg" data-icon="groups">groups</span>
+</div>
+</div>
+<div class="mt-3">
+<p class="text-headline-lg font-headline-lg text-on-surface">1,420,580</p>
+<div class="flex items-center gap-1.5 mt-1 text-emerald-400 font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-sm" data-icon="trending_up">trending_up</span>
+<span>+12.4% este mes</span>
+</div>
+</div>
+<div class="absolute -bottom-8 -right-8 w-24 h-24 bg-primary-container/5 rounded-full blur-xl pointer-events-none"></div>
+</div>
+<!-- KPI 2: Usuarios Activos Ahora -->
+<div class="bg-surface-container-low border border-surface-variant/40 rounded-xl p-5 relative overflow-hidden group hover:border-outline-variant/60 transition-all">
+<div class="flex items-center justify-between">
+<span class="text-label-md font-label-md text-on-surface-variant uppercase tracking-wider">Activos Ahora</span>
+<div class="w-9 h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+<span class="material-symbols-outlined text-lg" data-icon="play_circle">play_circle</span>
+</div>
+</div>
+<div class="mt-3">
+<p class="text-headline-lg font-headline-lg text-on-surface">84,230</p>
+<div class="flex items-center gap-2 mt-1 text-on-surface-variant font-label-sm text-label-sm">
+<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+<span>En streaming concurrentemente</span>
+</div>
+</div>
+<div class="absolute -bottom-8 -right-8 w-24 h-24 bg-emerald-500/5 rounded-full blur-xl pointer-events-none"></div>
+</div>
+<!-- KPI 3: Planes Premium 4K -->
+<div class="bg-surface-container-low border border-surface-variant/40 rounded-xl p-5 relative overflow-hidden group hover:border-outline-variant/60 transition-all">
+<div class="flex items-center justify-between">
+<span class="text-label-md font-label-md text-on-surface-variant uppercase tracking-wider">Planes Premium 4K</span>
+<div class="w-9 h-9 rounded-xl bg-secondary-container/20 border border-secondary/30 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-lg" data-icon="workspace_premium">workspace_premium</span>
+</div>
+</div>
+<div class="mt-3">
+<p class="text-headline-lg font-headline-lg text-on-surface">68%</p>
+<div class="flex items-center gap-1.5 mt-1 text-secondary font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-sm" data-icon="auto_awesome">auto_awesome</span>
+<span>Mayor penetración anual (Ultra HD)</span>
+</div>
+</div>
+<div class="absolute -bottom-8 -right-8 w-24 h-24 bg-secondary-container/10 rounded-full blur-xl pointer-events-none"></div>
+</div>
+<!-- KPI 4: Cuentas Suspendidas / Reportes -->
+<div class="bg-surface-container-low border border-surface-variant/40 rounded-xl p-5 relative overflow-hidden group hover:border-outline-variant/60 transition-all">
+<div class="flex items-center justify-between">
+<span class="text-label-md font-label-md text-on-surface-variant uppercase tracking-wider">Suspendidas / Reportes</span>
+<div class="w-9 h-9 rounded-xl bg-error-container/20 border border-error/30 flex items-center justify-center text-error">
+<span class="material-symbols-outlined text-lg" data-icon="gavel">gavel</span>
+</div>
+</div>
+<div class="mt-3">
+<p class="text-headline-lg font-headline-lg text-on-surface">142</p>
+<div class="flex items-center gap-1.5 mt-1 text-error font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-sm" data-icon="warning">warning</span>
+<span>Revisiones pendientes de auditoría</span>
+</div>
+</div>
+<div class="absolute -bottom-8 -right-8 w-24 h-24 bg-error-container/10 rounded-full blur-xl pointer-events-none"></div>
+</div>
+</div>
+<!-- FILTER & ACTION TOOLBAR -->
+<div class="bg-surface-container-low border border-surface-variant/40 rounded-xl p-4 flex flex-col lg:flex-row gap-4 justify-between items-stretch lg:items-center">
+<!-- Search Field -->
+<div class="flex-1 max-w-md relative">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-on-surface-variant" data-icon="search">search</span>
+<input class="w-full bg-surface-container border border-surface-variant rounded-lg pl-10 pr-4 py-2 text-body-sm font-body-sm text-on-surface placeholder:text-on-surface-variant/70 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" placeholder="Filtrar por nombre, correo electrónico o token..." type="text"/>
+</div>
+<!-- Dropdown Filters -->
+<div class="flex flex-wrap items-center gap-3">
+<!-- Role Filter -->
+<div class="relative">
+<select class="appearance-none bg-surface-container border border-surface-variant text-on-surface font-body-sm text-body-sm rounded-lg pl-3.5 pr-9 py-2 focus:outline-none focus:border-secondary transition-colors cursor-pointer">
+<option value="">Todos los roles</option>
+<option value="premium">Suscriptor Premium</option>
+<option value="estandar">Suscriptor Estándar</option>
+<option value="admin">Administrador</option>
+<option value="moderador">Moderador</option>
+</select>
+<span class="material-symbols-outlined pointer-events-none absolute right-2.5 top-2.5 text-on-surface-variant text-sm" data-icon="expand_more">expand_more</span>
+</div>
+<!-- Status Filter -->
+<div class="relative">
+<select class="appearance-none bg-surface-container border border-surface-variant text-on-surface font-body-sm text-body-sm rounded-lg pl-3.5 pr-9 py-2 focus:outline-none focus:border-secondary transition-colors cursor-pointer">
+<option value="">Todos los Estados</option>
+<option value="activo">Activo</option>
+<option value="inactivo">Inactivo</option>
+<option value="suspendido">Suspendido</option>
+</select>
+<span class="material-symbols-outlined pointer-events-none absolute right-2.5 top-2.5 text-on-surface-variant text-sm" data-icon="expand_more">expand_more</span>
+</div>
+<!-- Extra Filter Chip Toggle -->
+<button class="bg-surface-container hover:bg-surface-variant/70 border border-surface-variant text-on-surface font-body-sm text-body-sm rounded-lg px-3 py-2 flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="filter_list">filter_list</span>
+<span>Más Filtros</span>
+</button>
+</div>
+</div>
+<!-- COMPREHENSIVE USER TABLE -->
+<div class="bg-surface-container-low border border-surface-variant/40 rounded-xl overflow-hidden shadow-2xl">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-surface-variant/50 bg-surface-container-lowest/60 text-on-surface-variant font-label-md text-label-md">
+<th class="py-3.5 px-5">Usuario</th>
+<th class="py-3.5 px-4">Plan de Suscripción</th>
+<th class="py-3.5 px-4">Estado</th>
+<th class="py-3.5 px-4">Dispositivos</th>
+<th class="py-3.5 px-4">Fecha de Registro</th>
+<th class="py-3.5 px-4">Última Conexión</th>
+<th class="py-3.5 px-5 text-right">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-variant/30 text-body-sm font-body-sm">
+<!-- ROW 1 -->
+<tr class="hover:bg-surface-container/40 transition-colors group">
+<td class="py-4 px-5">
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full object-cover ring-1 ring-surface-variant" data-alt="Close-up portrait of a stylish Latina woman in her late 20s with warm cinematic rim lighting, neutral relaxed expression, deep contrast ambient background, dark aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuANYfK1YxJMr5NdmGwfO8dJ7-j4ULPE5PnqwJOlErObeAcq7eIFG4PxxTB3R7AAgTZz5SoAP6fEjavduy-Hm6p8x5H1xJvPsv56rIYhIEFQoVqfu1NqrU7qB7GQoKpLQlkdD2QaWxcqvmk1g_rv4er2lSBYUOYVuSxOPwf4ZKwIEqcdia7o6tEKu169frcHgN3fzArPmj8FFd-tbcoW4Bdu6TkBOaJGM9vyjKDmQ1XMDASoPb0o08bF"/>
+<div>
+<p class="font-semibold text-on-surface group-hover:text-primary transition-colors">Valentina Morales</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">v.morales@streamtuc.com</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-label-sm font-label-sm bg-gradient-to-r from-secondary-container to-[#7928CA] text-white shadow-sm font-bold">
+<span class="material-symbols-outlined text-xs" data-icon="stars">stars</span>
+                    Premium 4K Ultra
+                  </span>
+</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                    Activo
+                  </span>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-2">
+<span class="font-medium text-on-surface">4 / 4 pantallas</span>
+<span class="material-symbols-outlined text-xs text-primary" data-icon="tv">tv</span>
+</div>
+</td>
+<td class="py-4 px-4 text-on-surface-variant">14 Ene 2023</td>
+<td class="py-4 px-4">
+<span class="text-emerald-400 font-medium">Hace 3 minutos</span>
+</td>
+<td class="py-4 px-5 text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1.5 rounded-lg hover:bg-surface-variant text-on-surface-variant hover:text-on-surface transition-colors" title="Editar usuario">
+<span class="material-symbols-outlined text-lg" data-icon="edit">edit</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-variant text-on-surface-variant hover:text-primary transition-colors" title="Restablecer Contraseña">
+<span class="material-symbols-outlined text-lg" data-icon="lock_reset">lock_reset</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-variant text-on-surface-variant hover:text-error transition-colors" title="Suspender cuenta">
+<span class="material-symbols-outlined text-lg" data-icon="block">block</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-variant text-on-surface-variant hover:text-on-surface transition-colors" title="Más opciones">
+<span class="material-symbols-outlined text-lg" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- ROW 2 -->
+<tr class="hover:bg-surface-container/40 transition-colors group">
+<td class="py-4 px-5">
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full object-cover ring-1 ring-surface-variant" data-alt="Portrait photo of a mature Hispanic man with silver hair and beard, soft violet studio lighting against a dark slate backdrop, elegant and composed expression." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKhGkEEbl7j9T8AshHHjsb0ayq60VLahc5Unk-asOG19mbnZs30qd8jv8N0msARZkWK782EPznlfL7LCIuEmNhPQqNW__q6mz1HyQ40woBoqO_OxceEvyMPdvxKGty00zsDqgbHfqNB6yztLwmheZ4wLIFsmtMbt5Blkv9nMOfQv6yR_ysB9YElWrEk3YyhqNOSn4L8WIscu4_CPK6sxZngoAGGi5Wq0u8v_wAzyNlSLFuCPbmEz49"/>
+<div>
+<p class="font-semibold text-on-surface group-hover:text-primary transition-colors">Esteban Benítez</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">ebenitez@gmail.com</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-label-sm font-label-sm bg-surface-container border border-surface-variant text-on-surface font-semibold">
+<span class="material-symbols-outlined text-xs text-on-surface-variant" data-icon="hd">hd</span>
+                    Estándar HD
+                  </span>
+</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                    Activo
+                  </span>
+</td>
+<td class="py-4 px-4">
+<span class="font-medium text-on-surface">1 / 2 pantallas</span>
+</td>
+<td class="py-4 px-4 text-on-surface-variant">08 Mar 2023</td>
+<td class="py-4 px-4 text-on-surface-variant">Ayer a las 22:15</td>
+<td class="py-4 px-5 text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1.5 rounded-lg hover:bg-surface-variant text-on-surface-variant hover:text-on-surface transition-colors" title="Editar usuario">
+<span class="material-symbols-outlined text-lg" data-icon="edit">edit</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-variant text-on-surface-variant hover:text-primary transition-colors" title="Restablecer Contraseña">
+<span class="material-symbols-outlined text-lg" data-icon="lock_reset">lock_reset</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-variant text-on-surface-variant hover:text-error transition-colors" title="Suspender cuenta">
+<span class="material-symbols-outlined text-lg" data-icon="block">block</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-variant text-on-surface-variant hover:text-on-surface transition-colors" title="Más opciones">
+<span class="material-symbols-outlined text-lg" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- ROW 3 (Suspendido) -->
+<tr class="hover:bg-surface-container/40 transition-colors group bg-error-container/5">
+<td class="py-4 px-5">
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full object-cover ring-1 ring-error/50" data-alt="Portrait photography of a young man wearing glasses with dramatic side key lighting and subtle red highlight, solemn expression, dark minimalist backdrop." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD53YP29D99V3G6684TJ4gluELQnHAmJCeA1mILAptOafz6gTaTwVXsZQlnMK0aAWxX038W3e2Omu-yM9LSiGr_DfqeWscT2RXnqMhBEsSxOX5O3186DEe34oHYkroysB7eiSf5LgEHBmLkk3Nu6e4HyQwv1dKj_XX7k51T9UWvY9Ecp_FcYWr3KuBxWcbau6hMuAYeKqqAvNy1M5i6tpNNaSQy4VqVrYzv3G7Duyspdti2RGmnUFh_"/>
+<div>
+<p class="font-semibold text-on-surface group-hover:text-primary transition-colors">Facundo Rossi</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">rossi_stream@yahoo.com</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-label-sm font-label-sm bg-gradient-to-r from-secondary-container to-[#7928CA] text-white shadow-sm font-bold">
+<span class="material-symbols-outlined text-xs" data-icon="stars">stars</span>
+                    Premium 4K Ultra
+                  </span>
+</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-error-container/30 text-error border border-error/40 font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+                    Suspendido
+                  </span>
+</td>
+<td class="py-4 px-4">
+<span class="text-on-surface-variant line-through">0 / 4 pantallas</span>
+</td>
+<td class="py-4 px-4 text-on-surface-variant">29 Nov 2022</td>
+<td class="py-4 px-4 text-error font-medium">Hace 18 días (IP Abuso)</td>
+<td class="py-4 px-5 text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1.5 rounded-lg hover:bg-surface-variant text-on-surface-variant hover:text-on-surface transition-colors" title="Editar usuario">
+<span class="material-symbols-outlined text-lg" data-icon="edit">edit</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-emerald-500/20 text-emerald-400 transition-colors" title="Desbloquear cuenta">
+<span class="material-symbols-outlined text-lg" data-icon="lock_open">lock_open</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-variant text-on-surface-variant hover:text-on-surface transition-colors" title="Más opciones">
+<span class="material-symbols-outlined text-lg" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- ROW 4 -->
+<tr class="hover:bg-surface-container/40 transition-colors group">
+<td class="py-4 px-5">
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full object-cover ring-1 ring-surface-variant" data-alt="Warm portrait of a smiling woman with wavy chestnut hair in modern cinema-themed office, natural warm tungsten side lighting, deep shadows, crisp modern styling." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBawo_RxuB5_n9FJNAqWMijLAylCNKx74prXAya_gLrSr_DKfENqOGmG7O58MyLK3lUVa6ccVHlvBZXg3khpNl6ifZHWCVXmuFQghVaQXRILEZ64-Ba_X8pD3HFLVtOyfiMhimWk58ReLMhxFf1X4jggsNpPLf_ibnpYAUZGYI2GS_IxdamwMeQxjRja9CBP52wmgm9u3-mGstuvuY_hJHf7y994AjyEtW5AWAGhj28TfcpVbZ_H3jx"/>
+<div>
+<p class="font-semibold text-on-surface group-hover:text-primary transition-colors">Camila Albarracín</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">camila.tuc@outlook.com</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-label-sm font-label-sm bg-primary-container/15 text-primary border border-primary/30 font-semibold">
+<span class="material-symbols-outlined text-xs" data-icon="diversity_3">diversity_3</span>
+                    Familiar
+                  </span>
+</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                    Activo
+                  </span>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-2">
+<span class="font-medium text-on-surface">3 / 5 pantallas</span>
+<span class="material-symbols-outlined text-xs text-primary" data-icon="devices">devices</span>
+</div>
+</td>
+<td class="py-4 px-4 text-on-surface-variant">02 Feb 2024</td>
+<td class="py-4 px-4 text-emerald-400 font-medium">En vivo (Smart TV)</td>
+<td class="py-4 px-5 text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1.5 rounded-lg hover:bg-surface-variant text-on-surface-variant hover:text-on-surface transition-colors" title="Editar usuario">
+<span class="material-symbols-outlined text-lg" data-icon="edit">edit</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-variant text-on-surface-variant hover:text-primary transition-colors" title="Restablecer Contraseña">
+<span class="material-symbols-outlined text-lg" data-icon="lock_reset">lock_reset</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-variant text-on-surface-variant hover:text-error transition-colors" title="Suspender cuenta">
+<span class="material-symbols-outlined text-lg" data-icon="block">block</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-variant text-on-surface-variant hover:text-on-surface transition-colors" title="Más opciones">
+<span class="material-symbols-outlined text-lg" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- ROW 5 -->
+<tr class="hover:bg-surface-container/40 transition-colors group">
+<td class="py-4 px-5">
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full object-cover ring-1 ring-surface-variant" data-alt="Portrait of an energetic young professional gamer male with neon violet ambient lighting framing his face, deep shadows, crisp modern tech aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAV0gWq7esiD7IlpFdpdzaiee-3bqtcZ6r6sFwsjMXH7h2J_yljDIUiK-ClmV9mInzpR2s9QLv5A0WrGNjRkjd5NbtJw7bUIUrWlf0ZswHpAQdVUj8NWOu4f-UWQBRLfMj2d0UwyITqAI3V2jN8l0-LH5IqasHCdzqN6FH023OSePst1z1wTNkEFJGpSUWJTVkxC4hTK2y_IcQxcA4LU3Ic4u0hz_3W0YyVRdGbUF6LMiiK5PuZQgDS"/>
+<div>
+<p class="font-semibold text-on-surface group-hover:text-primary transition-colors">Lucas Navarro</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">lucas_streamer@proton.me</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-label-sm font-label-sm bg-gradient-to-r from-secondary-container to-[#7928CA] text-white shadow-sm font-bold">
+<span class="material-symbols-outlined text-xs" data-icon="stars">stars</span>
+                    Premium 4K Ultra
+                  </span>
+</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                    Activo
+                  </span>
+</td>
+<td class="py-4 px-4">
+<span class="font-medium text-on-surface">2 / 4 pantallas</span>
+</td>
+<td class="py-4 px-4 text-on-surface-variant">19 Ago 2023</td>
+<td class="py-4 px-4 text-on-surface-variant">Hace 2 horas</td>
+<td class="py-4 px-5 text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1.5 rounded-lg hover:bg-surface-variant text-on-surface-variant hover:text-on-surface transition-colors" title="Editar usuario">
+<span class="material-symbols-outlined text-lg" data-icon="edit">edit</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-variant text-on-surface-variant hover:text-primary transition-colors" title="Restablecer Contraseña">
+<span class="material-symbols-outlined text-lg" data-icon="lock_reset">lock_reset</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-variant text-on-surface-variant hover:text-error transition-colors" title="Suspender cuenta">
+<span class="material-symbols-outlined text-lg" data-icon="block">block</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-variant text-on-surface-variant hover:text-on-surface transition-colors" title="Más opciones">
+<span class="material-symbols-outlined text-lg" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- ROW 6 -->
+<tr class="hover:bg-surface-container/40 transition-colors group">
+<td class="py-4 px-5">
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full object-cover ring-1 ring-surface-variant" data-alt="Portrait photography of an elegant middle-aged businesswoman in front of dark textured slate wall with focused warm cinema lighting, confident pleasant expression." src="https://lh3.googleusercontent.com/aida-public/AB6AXuARbOKOg8KWWXIkc1zVozkGsb--cX6XukoTeiOx8Z6gOlH83etyqzMz-CC5aZdqOBPF9E3Ox7lGHZfElkjxcxYoPtDD_LGhyvFQbhHwGC_Ojm3e3-DoXqtrGlMwDDkHn6MqSQimYygQpO-psK2kSYLJW9Ffv6gg_n9OgoxMr5wwQ0qQHmDGCke3yElMGkivwP3ZPwWdsJD7epxS7xnIKmeSS0dMZcNWEH7cw8l9Nkgg0tvCKA3CY0w3"/>
+<div>
+<p class="font-semibold text-on-surface group-hover:text-primary transition-colors">Mariana Toledo</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">m.toledo@empresa.com.ar</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-label-sm font-label-sm bg-surface-container border border-surface-variant text-on-surface font-semibold">
+<span class="material-symbols-outlined text-xs text-on-surface-variant" data-icon="hd">hd</span>
+                    Estándar HD
+                  </span>
+</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-surface-variant text-on-surface-variant border border-surface-variant font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+                    Inactivo
+                  </span>
+</td>
+<td class="py-4 px-4">
+<span class="text-on-surface-variant">0 / 2 pantallas</span>
+</td>
+<td class="py-4 px-4 text-on-surface-variant">11 Jun 2023</td>
+<td class="py-4 px-4 text-on-surface-variant">Hace 14 días</td>
+<td class="py-4 px-5 text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1.5 rounded-lg hover:bg-surface-variant text-on-surface-variant hover:text-on-surface transition-colors" title="Editar usuario">
+<span class="material-symbols-outlined text-lg" data-icon="edit">edit</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-variant text-on-surface-variant hover:text-primary transition-colors" title="Restablecer Contraseña">
+<span class="material-symbols-outlined text-lg" data-icon="lock_reset">lock_reset</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-variant text-on-surface-variant hover:text-error transition-colors" title="Suspender cuenta">
+<span class="material-symbols-outlined text-lg" data-icon="block">block</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-variant text-on-surface-variant hover:text-on-surface transition-colors" title="Más opciones">
+<span class="material-symbols-outlined text-lg" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- ROW 7 -->
+<tr class="hover:bg-surface-container/40 transition-colors group">
+<td class="py-4 px-5">
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full object-cover ring-1 ring-surface-variant" data-alt="Portrait photo of a thoughtful creative designer with neat dark beard, minimal black t-shirt, glowing neon orange background rim light, crisp clarity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGMkFWc1TwVK28lmvzvpDk3EaFvm5wzNMqyeNmdWLR6vJLasZVMHSPevs7lFtpgmxPYbwiWQYQQu0qANFxUfGsNmE51f8mlRCWbqAlxuzBNiknhCLi7VMwLQJCTUk-6CYp4F2ICqgvNfpD141YhqgYKsEACGdv50VcVuNVPTiD3XVzL1roGJVLLHK1j_2hT14WHGCYJKLvazLiw3MJIJWTubC65u4yPwD8V-3rHAmF-of0BZGirgc2"/>
+<div>
+<p class="font-semibold text-on-surface group-hover:text-primary transition-colors">Gonzalo Páez</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">paez_films@gmail.com</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-label-sm font-label-sm bg-gradient-to-r from-secondary-container to-[#7928CA] text-white shadow-sm font-bold">
+<span class="material-symbols-outlined text-xs" data-icon="stars">stars</span>
+                    Premium 4K Ultra
+                  </span>
+</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                    Activo
+                  </span>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-2">
+<span class="font-medium text-on-surface">2 / 4 pantallas</span>
+<span class="material-symbols-outlined text-xs text-primary" data-icon="tablet_mac">tablet_mac</span>
+</div>
+</td>
+<td class="py-4 px-4 text-on-surface-variant">04 May 2023</td>
+<td class="py-4 px-4 text-emerald-400 font-medium">Hace 45 minutos</td>
+<td class="py-4 px-5 text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1.5 rounded-lg hover:bg-surface-variant text-on-surface-variant hover:text-on-surface transition-colors" title="Editar usuario">
+<span class="material-symbols-outlined text-lg" data-icon="edit">edit</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-variant text-on-surface-variant hover:text-primary transition-colors" title="Restablecer Contraseña">
+<span class="material-symbols-outlined text-lg" data-icon="lock_reset">lock_reset</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-variant text-on-surface-variant hover:text-error transition-colors" title="Suspender cuenta">
+<span class="material-symbols-outlined text-lg" data-icon="block">block</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-variant text-on-surface-variant hover:text-on-surface transition-colors" title="Más opciones">
+<span class="material-symbols-outlined text-lg" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- TABLE PAGINATION FOOTER -->
+<div class="px-6 py-4 border-t border-surface-variant/30 flex flex-col sm:flex-row items-center justify-between gap-4 bg-surface-container-lowest/40">
+<div class="text-body-sm font-body-sm text-on-surface-variant">
+            Mostrando <span class="font-semibold text-on-surface">1 a 7</span> de <span class="font-semibold text-on-surface">1,420,580</span> usuarios
+          </div>
+<!-- Page Navigation -->
+<div class="flex items-center gap-1.5">
+<button class="px-3 py-1.5 rounded-lg bg-surface-container border border-surface-variant/50 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-colors disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1 text-label-md font-label-md" disabled="">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_left">chevron_left</span>
+<span>Anterior</span>
+</button>
+<!-- Page numbers -->
+<button class="w-8 h-8 rounded-lg bg-primary-container text-white font-label-md text-label-md font-bold flex items-center justify-center">1</button>
+<button class="w-8 h-8 rounded-lg bg-surface-container hover:bg-surface-variant text-on-surface font-label-md text-label-md flex items-center justify-center transition-colors">2</button>
+<button class="w-8 h-8 rounded-lg bg-surface-container hover:bg-surface-variant text-on-surface font-label-md text-label-md flex items-center justify-center transition-colors">3</button>
+<span class="px-1 text-on-surface-variant">...</span>
+<button class="w-8 h-8 rounded-lg bg-surface-container hover:bg-surface-variant text-on-surface font-label-md text-label-md flex items-center justify-center transition-colors">202,940</button>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container border border-surface-variant/50 text-on-surface hover:text-primary hover:bg-surface-variant transition-colors flex items-center gap-1 text-label-md font-label-md">
+<span>Siguiente</span>
+<span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- SHARED FOOTER COMPONENT -->
+<footer class="bg-surface-container-lowest border-t border-outline-variant/20 w-full mt-auto">
+<div class="w-full max-w-7xl mx-auto px-6 lg:px-14 py-12 flex flex-col gap-6">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+<div class="flex items-center gap-3">
+<img alt="StreamTUC Logo" class="w-7 h-7 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeYKANchXP6FFi8Bwif_lxgq3zZAA6AgYM_A5pvdY22u8VFSvjOhOmS3Cq35aVL2cOWh1iN7lENBHUxADeQZ6MnsThDgRfHPnHlLYzsJpaRuFm8nCv3TX_T9CyaBQTNS2TuPaCNJsMGgvStpbv3h2YH-Rlhjx9Xs-UVBvS8KvR8LlPhBWoKuffZeKhLc4x8Oevg4Ji9WPZQtv_tYkEkPwi2Dlh1twtvTPFE6tHJ4tpdndMWcML9-COQeH3q5oNFe2zXA"/>
+<span class="text-headline-sm font-headline-sm font-bold text-on-surface">StreamTUC</span>
+</div>
+<nav class="flex flex-wrap gap-x-6 gap-y-2">
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Centro de Ayuda</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Términos de Uso</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Privacidad</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Configuración de Audio</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Descargar Apps</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Preferencias de Idioma</a>
+</nav>
+</div>
+<div class="pt-4 border-t border-surface-variant/20 flex flex-col sm:flex-row justify-between items-center text-body-sm font-body-sm text-on-surface-variant/70 gap-2">
+<p>© 2024 StreamTUC, Inc. Todos los derechos reservados.</p>
+<p class="flex items-center gap-1 text-xs">
+<span class="w-2 h-2 rounded-full bg-emerald-400 inline-block"></span>
+          Servidores operativos en LatAm Norte y Sur (Ping: 12ms)
+        </p>
+</div>
+</div>
+</footer>
+</body></html>

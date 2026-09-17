@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Horizonte Perdido: El Viaje a Kepler-452b | StreamTUC</title>
+<!-- Google Fonts: Inter & Plus Jakarta Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-primary-fixed": "#351000",
+            "on-primary-container": "#561e00",
+            "on-primary": "#571f00",
+            "surface-container-high": "#292a2e",
+            "tertiary": "#dbb8ff",
+            "outline": "#a98a7d",
+            "surface-variant": "#343439",
+            "secondary-fixed": "#ecdcff",
+            "surface-container-lowest": "#0d0e12",
+            "inverse-primary": "#a23f00",
+            "primary": "#ffb695",
+            "on-secondary-fixed": "#280056",
+            "on-primary-fixed-variant": "#7b2f00",
+            "secondary-container": "#6c00d6",
+            "surface": "#121317",
+            "error-container": "#93000a",
+            "on-error": "#690005",
+            "on-tertiary-fixed-variant": "#6600b7",
+            "background": "#121317",
+            "on-error-container": "#ffdad6",
+            "surface-container-low": "#1a1b20",
+            "outline-variant": "#5a4136",
+            "surface-bright": "#38393e",
+            "on-secondary-fixed-variant": "#6000bf",
+            "on-surface-variant": "#e2bfb1",
+            "tertiary-fixed": "#efdbff",
+            "primary-fixed-dim": "#ffb695",
+            "error": "#ffb4ab",
+            "surface-dim": "#121317",
+            "surface-tint": "#ffb695",
+            "on-tertiary-fixed": "#2b0052",
+            "primary-container": "#ff6800",
+            "tertiary-container": "#b879ff",
+            "inverse-surface": "#e3e2e8",
+            "secondary-fixed-dim": "#d6baff",
+            "on-secondary-container": "#d3b5ff",
+            "inverse-on-surface": "#2f3035",
+            "on-background": "#e3e2e8",
+            "secondary": "#d6baff",
+            "surface-container": "#1f1f24",
+            "tertiary-fixed-dim": "#dbb8ff",
+            "surface-container-highest": "#343439",
+            "on-secondary": "#430089",
+            "primary-fixed": "#ffdbcc",
+            "on-surface": "#e3e2e8",
+            "on-tertiary-container": "#470082",
+            "on-tertiary": "#470083"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xl": "2.5rem",
+            "space-lg": "1.5rem",
+            "space-md": "1rem",
+            "space-sm": "0.5rem",
+            "gutter": "1.5rem",
+            "margin-mobile": "1.25rem",
+            "gutter-sm": "0.75rem",
+            "space-xs": "0.25rem",
+            "margin": "3.5rem"
+          },
+          "fontFamily": {
+            "body-md": ["Inter"],
+            "label-sm": ["Inter"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "body-lg": ["Inter"],
+            "label-md": ["Inter"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "display": ["Plus Jakarta Sans"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "headline-xl-mobile": ["Plus Jakarta Sans"],
+            "display-mobile": ["Plus Jakarta Sans"],
+            "headline-lg-mobile": ["Plus Jakarta Sans"],
+            "title-md": ["Plus Jakarta Sans"],
+            "body-sm": ["Inter"]
+          },
+          "fontSize": {
+            "body-md": ["15px", {"lineHeight": "22px", "fontWeight": "400"}],
+            "label-sm": ["11px", {"lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "700"}],
+            "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+            "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+            "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600"}],
+            "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+            "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+            "display": ["56px", {"lineHeight": "64px", "letterSpacing": "-0.03em", "fontWeight": "800"}],
+            "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+            "headline-xl-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+            "display-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+            "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "0em", "fontWeight": "700"}],
+            "title-md": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+            "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-surface text-on-surface antialiased selection:bg-primary-container selection:text-white overflow-x-hidden min-h-screen flex flex-col font-body-md">
+<!-- TopNavBar (Shared Component JSON Conformance) -->
+<header class="docked full-width top-0 fixed z-50 bg-surface/75 dark:bg-surface/75 backdrop-blur-md border-b border-outline-variant/30 shadow-2xl">
+<div class="flex justify-between items-center w-full px-6 lg:px-14 py-3">
+<!-- Left side: Brand + Nav Items -->
+<div class="flex items-center gap-8 lg:gap-12">
+<a class="flex items-center gap-3 group" href="#">
+<img alt="StreamTUC" class="w-8 h-9 object-contain group-hover:scale-105 transition-transform duration-200" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6Q72_RzlC3HShJ2vTuPEOamUrIBjb01YHk9l7ns6jfREhaXoP-8Wj_c5EcjiGR3wpl2Z7oGMh9wZviavZzKCugdQUuWYSeryAP5El5PFl_mWc6FuMr3SMAj7P50PDI3Gbe9FBqCMxKpEKBH0cVSYegN2M6F0GQ8Ft6dgmzdxUkRSjJWz3libI_uHkRrHajQ7m1OM9s-Q2eJjyXsjpumpOoTn6z-19YWUErWRcSiygJle83X9OIfPTI8pOG9SOumWgbQ"/>
+<span class="text-headline-md font-headline-md font-extrabold tracking-tight text-primary-container dark:text-primary">StreamTUC</span>
+</a>
+<!-- Navigation Links: Exact JSON labels preserved, 'Películas' selected as active context -->
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-label-md font-label-md text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface dark:hover:text-on-surface hover:text-primary dark:hover:text-primary transition-colors duration-200" href="#">Inicio</a>
+<a class="text-label-md font-label-md text-primary-container dark:text-primary font-bold transition-colors" href="#">Películas</a>
+<a class="text-label-md font-label-md text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface dark:hover:text-on-surface hover:text-primary dark:hover:text-primary transition-colors duration-200" href="#">Series</a>
+<a class="text-label-md font-label-md text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface dark:hover:text-on-surface hover:text-primary dark:hover:text-primary transition-colors duration-200" href="#">Novedades populares</a>
+<a class="text-label-md font-label-md text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface dark:hover:text-on-surface hover:text-primary dark:hover:text-primary transition-colors duration-200" href="#">Mi Lista</a>
+</nav>
+</div>
+<!-- Right side: Search bar + Trailing Icons + Avatar -->
+<div class="flex items-center gap-4 lg:gap-6">
+<!-- Search bar on right -->
+<div class="relative hidden sm:block">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="search" style="font-size: 18px;">search</span>
+</div>
+<input class="bg-surface-container-low text-on-surface text-body-sm font-body-sm pl-9 pr-4 py-1.5 rounded-full border border-outline-variant/40 focus:outline-none focus:border-secondary-container focus:ring-1 focus:ring-secondary-container w-44 lg:w-64 transition-all duration-200" placeholder="Títulos, géneros, actores..." type="text"/>
+</div>
+<!-- Trailing action: Notifications -->
+<button aria-label="Notificaciones" class="relative p-2 rounded-full hover:bg-surface-container transition-colors duration-150 scale-105 active:scale-95 text-on-surface-variant hover:text-primary">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-primary-container"></span>
+</button>
+<!-- User avatar dropdown -->
+<div class="flex items-center gap-2 pl-2 border-l border-outline-variant/30 cursor-pointer group">
+<img alt="User avatar profile dropdown" class="w-8 h-8 rounded-full ring-2 ring-outline-variant/40 object-cover group-hover:ring-primary transition-all" data-alt="A sleek circular profile photo portrait of a modern movie enthusiast, ambiently back-lit with deep electric violet and warm cinematic orange rim lighting in a low-key aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9v188gMhwqmuX8ixa8H9ZRueEAS2KE6auKCRqrsGgFljPF7sfyTreKC3dvqSngnLOWfQyYKQ6hdbZNLg8r6r8dx-F8NyOzI6U7YJ0QDGmmkHxIYFT_0RfudYSwHjPCmsmQ8aKx9NnSXuC6BZDwreufBJF2ULY3S4rYNergQfEDreyxoH9hv2cM_k3PSk23XkBfq7COeQVn5yZy0HttERyKBVCYYX9Sx11DtC-MvFywWDlZUKWYOh0"/>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-surface text-sm transition-transform group-hover:rotate-180" data-icon="arrow_drop_down">arrow_drop_down</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Hero & Backdrop Section -->
+<main class="flex-grow pt-16">
+<section class="relative w-full min-h-[85vh] lg:min-h-[92vh] flex items-end pb-16 lg:pb-24 overflow-hidden">
+<!-- Backdrop Layer with Cinematic Deep Vignettes -->
+<div class="absolute inset-0 z-0">
+<img alt="Backdrop de Horizonte Perdido" class="w-full h-full object-cover object-center scale-105 transform motion-safe:animate-pulse transition-transform duration-1000" data-alt="Breathtaking cinematic wide establishing shot of an enigmatic deep-space exploration mission orbiting Kepler-452b, showcasing a monolithic spaceship traversing through glowing violet nebulae with hyper-detailed planetary rings illuminated by a distant intense orange star." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVqQ4Eq9E2WePOG82rsp9eAJAdG6QdWshqbc82zgTEp0rjMdpUwmnnNlytnV-w4kcxiNcNUF4vQaJCPgS6VLcgQmMcn4JFZPF8phKEVxiBWzlX31eQAe4J_D9eE27TKZKwINwiz63ViPACpAgMcfbD6VwGBBFv8Zo6BkSOmmJL6zI-gINVPdBxtwztWnfumC75mJVQqOqXoRdC0TJoTy4GlWDHXO_0xrH1ZilPONqZK1YViR73gY8F"/>
+<!-- Multilayered Gradient Scrim (Dark obsidian aesthetic matching level 0) -->
+<div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/85 to-transparent"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-surface via-surface/75 to-transparent w-full lg:w-4/5"></div>
+<div class="absolute inset-0 bg-radial from-transparent via-surface/40 to-surface"></div>
+</div>
+<!-- Hero Content Container -->
+<div class="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-14 flex flex-col gap-6">
+<!-- Breadcrumbs Navigation -->
+<nav class="flex items-center gap-2 text-label-md font-label-md text-on-surface-variant">
+<a class="hover:text-primary transition-colors" href="#">Inicio</a>
+<span class="material-symbols-outlined text-xs" data-icon="chevron_right">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Películas</a>
+<span class="material-symbols-outlined text-xs" data-icon="chevron_right">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Ciencia Ficción</a>
+<span class="material-symbols-outlined text-xs" data-icon="chevron_right">chevron_right</span>
+<span class="text-on-surface font-semibold">Horizonte Perdido</span>
+</nav>
+<!-- Movie Header Cluster -->
+<div class="max-w-4xl space-y-4">
+<!-- Premium Originals Pill -->
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gradient-to-r from-secondary-container to-[#7928CA] shadow-lg shadow-secondary-container/20">
+<span class="material-symbols-outlined text-white text-sm" data-icon="stars" data-weight="fill">stars</span>
+<span class="text-white text-label-sm font-label-sm tracking-wider uppercase">Exclusivo StreamTUC Original</span>
+</div>
+<!-- Main Title -->
+<h1 class="font-display text-display text-white tracking-tight drop-shadow-md">
+            Horizonte Perdido
+            <span class="block text-headline-lg font-headline-lg text-primary font-medium mt-1">El Viaje a Kepler-452b</span>
+</h1>
+<!-- Meta Specifications & Ratings Row -->
+<div class="flex flex-wrap items-center gap-3 pt-1">
+<!-- Ratings -->
+<div class="flex items-center gap-1.5 bg-surface-container-high/80 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/10">
+<span class="material-symbols-outlined text-primary-container text-base" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-white font-title-md text-title-md">9.4</span>
+<span class="text-on-surface-variant text-label-sm font-label-sm">(124K votos)</span>
+</div>
+<div class="flex items-center gap-1.5 bg-[#F5C518]/20 backdrop-blur-md px-2.5 py-1.5 rounded-lg border border-[#F5C518]/30">
+<span class="text-[#F5C518] font-bold text-label-sm font-label-sm">IMDb</span>
+<span class="text-white font-title-md text-title-md">8.8</span>
+</div>
+<div class="h-4 w-px bg-outline-variant/40 mx-1 hidden sm:block"></div>
+<!-- Standard Specs Badges -->
+<span class="text-label-md font-label-md text-on-surface bg-surface-container-low px-2.5 py-1 rounded border border-white/5">2024</span>
+<span class="text-label-md font-label-md text-on-surface bg-surface-container-low px-2.5 py-1 rounded border border-white/5">2h 38m</span>
+<span class="text-label-md font-label-md text-error bg-error-container/40 px-2 py-1 rounded border border-error/30 font-bold">16+</span>
+<span class="text-label-sm font-label-sm text-on-surface bg-white/10 backdrop-blur-sm px-2 py-1 rounded border border-white/15">4K ULTRA HD</span>
+<span class="text-label-sm font-label-sm text-tertiary bg-secondary-container/30 backdrop-blur-sm px-2 py-1 rounded border border-secondary/20">DOLBY VISION</span>
+<span class="text-label-sm font-label-sm text-primary bg-primary-container/20 backdrop-blur-sm px-2 py-1 rounded border border-primary-container/30">DOLBY ATMOS</span>
+</div>
+<!-- Synopsis Plot -->
+<p class="text-body-lg font-body-lg text-on-surface-variant leading-relaxed max-w-3xl pt-2">
+            En un futuro donde la Tierra agota su último aliento ecológico, la astrofísica Dra. Sarah Miller y el Comandante Vance lideran la expedición estelar más arriesgada en la historia humana: cruzar una anomalía cuántica inestable hacia el exoplaneta Kepler-452b. Aislados a 1,400 años luz de casa, deberán confrontar dilemas éticos trascendentales y una inteligencia cósmica que altera el flujo del tiempo y los recuerdos.
+          </p>
+<!-- Genre Tags -->
+<div class="flex flex-wrap items-center gap-2 pt-2">
+<span class="px-3.5 py-1 rounded-full text-label-md font-label-md bg-surface-container-low border border-primary-container/40 text-white shadow-sm">Ciencia Ficción</span>
+<span class="px-3.5 py-1 rounded-full text-label-md font-label-md bg-surface-container-low border border-outline-variant/30 text-on-surface-variant hover:text-white transition-colors">Aventura Espacial</span>
+<span class="px-3.5 py-1 rounded-full text-label-md font-label-md bg-surface-container-low border border-outline-variant/30 text-on-surface-variant hover:text-white transition-colors">Drama Filosófico</span>
+</div>
+</div>
+<!-- CTA Action Buttons Bar -->
+<div class="flex flex-wrap items-center gap-4 pt-4">
+<!-- Primary Play Button -->
+<button class="flex items-center gap-3 px-8 py-3.5 rounded-full bg-primary-container text-white font-title-md text-title-md hover:bg-[#FF7700] hover:shadow-[0_0_24px_rgba(255,104,0,0.45)] transform hover:scale-105 active:scale-95 transition-all duration-200">
+<span class="material-symbols-outlined text-2xl" data-icon="play_arrow" data-weight="fill" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+<span>Reproducir Película</span>
+</button>
+<!-- Secondary Trailer Button -->
+<button class="flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-white/10 hover:bg-white/15 text-white font-title-md text-title-md backdrop-blur-md border border-white/20 hover:border-white/35 transition-all duration-200">
+<span class="material-symbols-outlined text-xl" data-icon="smart_display">smart_display</span>
+<span>Ver Tráiler Oficial</span>
+</button>
+<!-- Tertiary Interactive Tool Group -->
+<div class="flex items-center gap-2 pl-2">
+<button class="w-12 h-12 rounded-full bg-surface-container-high/80 hover:bg-surface-bright text-on-surface border border-white/10 flex items-center justify-center transition-all hover:scale-105" title="Añadir a Mi Lista">
+<span class="material-symbols-outlined text-xl" data-icon="add">add</span>
+</button>
+<button class="w-12 h-12 rounded-full bg-surface-container-high/80 hover:bg-surface-bright text-on-surface border border-white/10 flex items-center justify-center transition-all hover:scale-105" title="Descargar en HD">
+<span class="material-symbols-outlined text-xl" data-icon="download">download</span>
+</button>
+<button class="w-12 h-12 rounded-full bg-surface-container-high/80 hover:bg-surface-bright text-on-surface border border-white/10 flex items-center justify-center transition-all hover:scale-105" title="Me gusta">
+<span class="material-symbols-outlined text-xl" data-icon="thumb_up">thumb_up</span>
+</button>
+<button class="w-12 h-12 rounded-full bg-surface-container-high/80 hover:bg-surface-bright text-on-surface border border-white/10 flex items-center justify-center transition-all hover:scale-105" title="Compartir">
+<span class="material-symbols-outlined text-xl" data-icon="share">share</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Main Content Grid & Sections -->
+<div class="w-full max-w-7xl mx-auto px-6 lg:px-14 py-12 space-y-16">
+<!-- Section: Reparto Principal (Cast & Crew) -->
+<section class="space-y-6">
+<div class="flex items-center justify-between border-b border-outline-variant/20 pb-4">
+<div class="flex items-center gap-3">
+<div class="w-1.5 h-6 rounded-full bg-primary-container"></div>
+<h2 class="text-headline-md font-headline-md text-white tracking-tight">Reparto Principal y Equipo</h2>
+</div>
+<span class="text-label-md font-label-md text-primary cursor-pointer hover:underline">Ver ficha completa</span>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-5">
+<!-- Actor 1 -->
+<div class="flex flex-col items-center text-center p-4 rounded-xl bg-surface-container-low border border-white/5 hover:border-secondary-container/50 hover:bg-surface-container transition-all group">
+<div class="w-24 h-24 mb-3 rounded-full overflow-hidden p-1 ring-2 ring-outline-variant/30 group-hover:ring-primary-container transition-all">
+<img alt="Elena Rostova" class="w-full h-full object-cover rounded-full" data-alt="Studio character portrait headshot of actress Elena Rostova in a futuristic flight suit with subtle orange edge highlights on an obsidian black studio background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDszh1jdF4SeUb0ah9kG5NsmCtaugKUV7HYnKVvcBxn2eTjEXxQp6tothZk6gUKOp2wD2P9XcfWfaQKdmEFvPJj8Z4vO7OxGdpvR1Xgyrk6SCJoxJxqP2qmIzwHexW5Q1oPQTpSOBOwfn6ljDx8m-RW-qxWvvZHV38FY4kGvJvNViri8vYaekhZU4r0hwaZzgoqJ6vadRlwopDk1DwCdKN0KhzU4s3xkKAFpNSCzVARBWFGwu1U57oO"/>
+</div>
+<h3 class="text-title-md font-title-md text-white group-hover:text-primary transition-colors">Elena Rostova</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">Dra. Sarah Miller</p>
+</div>
+<!-- Actor 2 -->
+<div class="flex flex-col items-center text-center p-4 rounded-xl bg-surface-container-low border border-white/5 hover:border-secondary-container/50 hover:bg-surface-container transition-all group">
+<div class="w-24 h-24 mb-3 rounded-full overflow-hidden p-1 ring-2 ring-outline-variant/30 group-hover:ring-primary-container transition-all">
+<img alt="Marcus Chen" class="w-full h-full object-cover rounded-full" data-alt="High quality character portrait of actor Marcus Chen portraying a stern veteran space commander with subtle silver temples under moody cinematic teal and orange illumination." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQBkxEbTSuV7dGEeopZiZDSvPi6to6FrGeYhm0ELwuDuOBQd_7b_zG0KNuAu_-yFFsR_JWfGwUOSlqp-yDenPHU_SMlBCiPVchTf01iIFbnwK1x9d7X9GdLJSAmvqG5hPtv-QgOrTLkS_XE-D37yUM0TOA3DvP-BoqnT85XN7qtomzKULkReCjDWKiKQ8134wtXAosEYXjQXmaBsge3XMrtfNdwB1RLnix4swWdLCi03iJg0v8DbP4"/>
+</div>
+<h3 class="text-title-md font-title-md text-white group-hover:text-primary transition-colors">Marcus Chen</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">Cmdte. James Vance</p>
+</div>
+<!-- Actor 3 -->
+<div class="flex flex-col items-center text-center p-4 rounded-xl bg-surface-container-low border border-white/5 hover:border-secondary-container/50 hover:bg-surface-container transition-all group">
+<div class="w-24 h-24 mb-3 rounded-full overflow-hidden p-1 ring-2 ring-outline-variant/30 group-hover:ring-primary-container transition-all">
+<img alt="Sofia Al-Mansoor" class="w-full h-full object-cover rounded-full" data-alt="Cinematic studio headshot portrait of actress Sofia Al-Mansoor wearing high collar minimalist uniform with soft deep violet lighting against dark textured background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5KEmO7a-4ni-r2ptdISYkVuNjuCssr0i29nTwG2_KkzFsnOQ12u4sts2-K46W89EX3b8L2CGKoLFDqc1eGVElTt0s7OqXftlqLZD1v2cTh2GzYXUmay3Ue_MNswfCN2kX73b_82SfTjYS8s4oq7G1h96b2HG-8Qf9BOG2N0cwVVMxerzjAK1zlhozAdGnu_30CWqdKuTl-uCmN1f35UtmdaTnru4_5VT4L3W0d5v62CVmN-51at1t"/>
+</div>
+<h3 class="text-title-md font-title-md text-white group-hover:text-primary transition-colors">Sofia Al-Mansoor</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">Dra. Leila Kouri</p>
+</div>
+<!-- Actor 4 -->
+<div class="flex flex-col items-center text-center p-4 rounded-xl bg-surface-container-low border border-white/5 hover:border-secondary-container/50 hover:bg-surface-container transition-all group">
+<div class="w-24 h-24 mb-3 rounded-full overflow-hidden p-1 ring-2 ring-outline-variant/30 group-hover:ring-primary-container transition-all">
+<img alt="Julian Thorne" class="w-full h-full object-cover rounded-full" data-alt="Photorealistic portrait of actor Julian Thorne looking contemplative with deep shadow contouring and sharp rim lighting in a sophisticated dark theater room setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuClJJNNA3LOxDVMfxsKGs0AO_3-ij-ohtvh4m7suHAnPVL2YIhOBd5MHEeJPKzmLifc-EZvVaPhS3trhqJN-FUwXRV-WcU7YygxVlUYkqdDCACyF7qG4GCcZ6qVij1e0AXyaDQpuT9evlJ1V4OXkLF116AHlTvudp3dSJpsAd5mBWvc9kDw2L-6ZbbddurxjB6Ni7Zl1ac15JEuixToxrW2L_Y-8iYlkBTfJOP-m1h8dVXETqNB21dF"/>
+</div>
+<h3 class="text-title-md font-title-md text-white group-hover:text-primary transition-colors">Julian Thorne</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">Ing. David Brooks</p>
+</div>
+<!-- Director -->
+<div class="flex flex-col items-center text-center p-4 rounded-xl bg-surface-container-low border border-white/5 hover:border-secondary-container/50 hover:bg-surface-container transition-all group">
+<div class="w-24 h-24 mb-3 rounded-full overflow-hidden p-1 ring-2 ring-secondary-container/60 group-hover:ring-secondary transition-all">
+<img alt="Christopher Nolan" class="w-full h-full object-cover rounded-full" data-alt="Professional monochrome studio portrait of renowned director Christopher Nolan against pure obsidian black background with sharp directional light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLSzmW_Stv_aVDadODmuBP7eENceMuIKiG-sPZMLDlH76wQb86IhQdk4UHB00q02gqgoRlmG2leBXGKdwbv9By2XMFpt6nFR9lKfeq2RYJe6ymbr5bbhQDVKv6Yfbp5oSOboBz3hwiY8L_kVfr-fpqpZMq5uXD0dCxvu-csS86KxGUNpq9cbmj1o6FMXBIfngIM8sQ1TX3spe0KcHU6lqLpkwsQTPtP9B-iUFp8vX-4OTMS_a97QNs"/>
+</div>
+<h3 class="text-title-md font-title-md text-white group-hover:text-tertiary transition-colors">Christopher Nolan</h3>
+<p class="text-body-sm font-body-sm text-secondary mt-0.5 font-medium">Director</p>
+</div>
+<!-- Composer -->
+<div class="flex flex-col items-center text-center p-4 rounded-xl bg-surface-container-low border border-white/5 hover:border-secondary-container/50 hover:bg-surface-container transition-all group">
+<div class="w-24 h-24 mb-3 rounded-full overflow-hidden p-1 ring-2 ring-secondary-container/60 group-hover:ring-secondary transition-all">
+<img alt="Hans Zimmer" class="w-full h-full object-cover rounded-full" data-alt="Refined artistic portrait of film composer Hans Zimmer surrounded by ambient studio lights and modular synthesizers in low key atmospheric shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvw2RoKaoe3-__thadP5gW5iMcyKBhBUpVrBRsGS5am7W-DROoxp38Lqoe4oWHDRRcUE-atXnXAuedE2nBbVUs2rfx27947Z_QbzenAt6IMRvfUsXAnJkokbt-oPizyuyNuoyw3fVtYidr_5VBqhbRFpzxnPHLrj_mKT0_IQUKhfrRQ-WawjVQVIL1qt0CN8aMhptyAvSMVvvF5tPL_tkeRuPZNBYMbZ4kvibYNrQWU-sVTniZq7v-"/>
+</div>
+<h3 class="text-title-md font-title-md text-white group-hover:text-tertiary transition-colors">Hans Zimmer</h3>
+<p class="text-body-sm font-body-sm text-secondary mt-0.5 font-medium">Banda Sonora Original</p>
+</div>
+</div>
+</section>
+<!-- Section: Bento Grid for Technical Specs & Experience -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Tech Specs Detail Card -->
+<div class="lg:col-span-2 p-6 lg:p-8 rounded-2xl bg-surface-container-low border border-white/5 space-y-6">
+<div class="flex items-center gap-3">
+<div class="w-1.5 h-6 rounded-full bg-secondary-container"></div>
+<h2 class="text-headline-md font-headline-md text-white">Especificaciones Técnicas y Producción</h2>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-8">
+<div class="space-y-1">
+<span class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Dirección</span>
+<p class="text-body-md font-body-md text-white font-medium">Christopher Nolan</p>
+</div>
+<div class="space-y-1">
+<span class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Guion</span>
+<p class="text-body-md font-body-md text-white font-medium">Jonathan Nolan, Sarah Miller</p>
+</div>
+<div class="space-y-1">
+<span class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Idiomas de Audio</span>
+<p class="text-body-md font-body-md text-white">
+                Español Latino (Dolby 5.1), Inglés (Dolby Atmos Original), Francés, Alemán, Portugués Brasileño
+              </p>
+</div>
+<div class="space-y-1">
+<span class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Subtítulos</span>
+<p class="text-body-md font-body-md text-white">
+                Español (CC), Inglés (CC), Francés, Alemán, Portugués, Italiano, Japonés
+              </p>
+</div>
+<div class="space-y-1 sm:col-span-2 border-t border-outline-variant/20 pt-4">
+<span class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Clasificación de Contenido</span>
+<div class="flex items-center gap-3 mt-1">
+<span class="px-2 py-0.5 rounded bg-error-container/60 text-error text-label-sm font-label-sm font-bold border border-error/40">16+</span>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Tensión psicológica extrema, lenguaje moderado, situaciones de peligro espacial inminente.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Side: Audio/Video Experience Quality Card -->
+<div class="p-6 lg:p-8 rounded-2xl bg-gradient-to-br from-surface-container to-surface-container-lowest border border-white/10 flex flex-col justify-between space-y-6">
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<span class="text-label-sm font-label-sm text-primary uppercase tracking-wider">Experiencia StreamTUC MAX</span>
+<span class="material-symbols-outlined text-secondary" data-icon="hd">hd</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-white">Inmersión Cinematográfica en Tu Sala</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant">
+              Optimizada para pantallas OLED con masterización nativa en 4K UHD, HDR10+ dinámico y mezcla acústica calibrada en Dolby Atmos 7.1.4.
+            </p>
+</div>
+<div class="p-4 rounded-xl bg-surface/60 border border-white/5 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-container text-2xl" data-icon="volume_up">volume_up</span>
+<div>
+<p class="text-label-md font-label-md text-white font-semibold">Sonido Espacial Activo</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Reconocimiento acústico por dispositivo</p>
+</div>
+</div>
+<span class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></span>
+</div>
+</div>
+</section>
+<!-- Section: Títulos Similares que te pueden gustar -->
+<section class="space-y-6">
+<div class="flex items-center justify-between border-b border-outline-variant/20 pb-4">
+<div class="flex items-center gap-3">
+<div class="w-1.5 h-6 rounded-full bg-primary-container"></div>
+<h2 class="text-headline-md font-headline-md text-white tracking-tight">Títulos Similares que te pueden gustar</h2>
+</div>
+<div class="flex items-center gap-2">
+<button aria-label="Anterior" class="w-9 h-9 rounded-full bg-surface-container hover:bg-surface-bright flex items-center justify-center text-white border border-white/5 transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="chevron_left">chevron_left</span>
+</button>
+<button aria-label="Siguiente" class="w-9 h-9 rounded-full bg-surface-container hover:bg-surface-bright flex items-center justify-center text-white border border-white/5 transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- 4-Card Media Shelf -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Similar Card 1 -->
+<div class="group relative rounded-xl overflow-hidden bg-surface-container-low border border-white/5 hover:border-primary-container/60 transition-all duration-300 transform hover:scale-[1.03] hover:shadow-[0_16px_36px_-8px_rgba(255,104,0,0.25)] flex flex-col">
+<div class="aspect-[16/10] w-full relative overflow-hidden">
+<img alt="Crónicas de Europa" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Cinematic movie poster scene showing an astronaut traversing glowing crystalline frozen dunes under dual moons with intense cold blue and fiery orange contrast." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhQsLaJyH2p7cEEFk5Yu042va8WaLX4mRAN3Q3VRFjOrkLzGtsWdTQeC8m9nSKCY3cAF-T9EwEOITYv7aIW346soWLUyKjVQhIIhn9vc9WOrkNivlfAEZ46lqPCNsUMhkhk_z1D2uaztrgrE7Sz0_P8ZUx6ZfQJZUQiXBvVm3cblveVwdzht0n-PPtHPOP0YkaRsLaxykFqbYEcWkDmqx-z7hD5Q6IFbqWkAEsmbF_T1hOWWnqwD65"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-transparent to-transparent"></div>
+<span class="absolute top-3 left-3 bg-secondary-container/90 text-white text-label-sm font-label-sm px-2 py-0.5 rounded font-bold">98% COINCIDENCIA</span>
+</div>
+<div class="p-4 flex flex-col flex-grow justify-between space-y-3">
+<div>
+<h3 class="text-title-md font-title-md text-white group-hover:text-primary transition-colors">Crónicas de Europa: Misión Cero</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant line-clamp-2 mt-1">Una solitaria bióloga descubre un océano líquido subterráneo con señales biológicas activas.</p>
+</div>
+<div class="flex items-center justify-between text-label-sm font-label-sm text-on-surface-variant pt-2 border-t border-white/5">
+<span class="flex items-center gap-1 text-white"><span class="material-symbols-outlined text-primary text-xs" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span> 9.1</span>
+<span>2h 15m</span>
+<span class="px-1.5 py-0.5 rounded border border-outline-variant/40">4K HDR</span>
+</div>
+</div>
+</div>
+<!-- Similar Card 2 -->
+<div class="group relative rounded-xl overflow-hidden bg-surface-container-low border border-white/5 hover:border-secondary-container/60 transition-all duration-300 transform hover:scale-[1.03] hover:shadow-[0_16px_36px_-8px_rgba(108,0,214,0.35)] flex flex-col">
+<div class="aspect-[16/10] w-full relative overflow-hidden">
+<img alt="Singularidad Alpha" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Dramatic movie still of a massive ring-shaped orbital habitat positioned over a swirling purple black hole accretion disk in cinematic high fidelity rendering." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIL66g1HYdgmwQ0kBghAN1QrtHE3lZQ2J-WFteSbja0q0-XiQageVNNYky6q1qPwgmp0c43rh8J-QMt6iyQ84uXPu5AAcsYF30otmpuPKJW_OJTU5P48qXi0jDkCFUy08j1GjP3vS1u_LhlZCnD3Yw7q_VvMqco3zZaJXP4cpbctqKMG1NMzjNcb6j0TDF-9uF_La19r2G0e7Gac-ppT-uOgTi_o75usbmLVAKrYbdQDKmYGvfLPdm"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-transparent to-transparent"></div>
+<span class="absolute top-3 left-3 bg-secondary-container/90 text-white text-label-sm font-label-sm px-2 py-0.5 rounded font-bold">95% COINCIDENCIA</span>
+</div>
+<div class="p-4 flex flex-col flex-grow justify-between space-y-3">
+<div>
+<h3 class="text-title-md font-title-md text-white group-hover:text-tertiary transition-colors">Singularidad Alpha</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant line-clamp-2 mt-1">El colapso de un motor de distorsión temporal atrapa a la tripulación en bucles de 24 horas.</p>
+</div>
+<div class="flex items-center justify-between text-label-sm font-label-sm text-on-surface-variant pt-2 border-t border-white/5">
+<span class="flex items-center gap-1 text-white"><span class="material-symbols-outlined text-primary text-xs" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span> 8.9</span>
+<span>2h 04m</span>
+<span class="px-1.5 py-0.5 rounded border border-outline-variant/40">HD</span>
+</div>
+</div>
+</div>
+<!-- Similar Card 3 -->
+<div class="group relative rounded-xl overflow-hidden bg-surface-container-low border border-white/5 hover:border-primary-container/60 transition-all duration-300 transform hover:scale-[1.03] hover:shadow-[0_16px_36px_-8px_rgba(255,104,0,0.25)] flex flex-col">
+<div class="aspect-[16/10] w-full relative overflow-hidden">
+<img alt="El Silencio Estelar" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Cinematic still of scientists in high-tech helmets examining a radiant luminescent extraterrestrial artifact deep in a subterranean alien sanctuary." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCt7NOdwuXA3UOvovIIwqWsTUphjwGp3NLSyc4moHTF9PmNBa8Xm0qzqYDgYkoW5AdFHV6HV4LnVQ01d001o_7Dn0khdXnSHqULsy1O8h13r8taWdww50kvNFGOd2wdXauubdIsGUPCX8DjoNh2uBqURLFKIe2gTSsjLyBBTwDoyU-LwIubUu9OC7l-QMv8tDBHtlmDM251pCPUBsInWtZ5rKZ0y37Lve3SSQMvpFlxj_dEALt6_rLg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-transparent to-transparent"></div>
+<span class="absolute top-3 left-3 bg-primary-container text-white text-label-sm font-label-sm px-2 py-0.5 rounded font-bold">TOP 10 HOY</span>
+</div>
+<div class="p-4 flex flex-col flex-grow justify-between space-y-3">
+<div>
+<h3 class="text-title-md font-title-md text-white group-hover:text-primary transition-colors">El Silencio Estelar</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant line-clamp-2 mt-1">El primer mensaje decodificado desde la constelación de Orión no era un saludo, sino una advertencia.</p>
+</div>
+<div class="flex items-center justify-between text-label-sm font-label-sm text-on-surface-variant pt-2 border-t border-white/5">
+<span class="flex items-center gap-1 text-white"><span class="material-symbols-outlined text-primary text-xs" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span> 8.7</span>
+<span>1h 56m</span>
+<span class="px-1.5 py-0.5 rounded border border-outline-variant/40">4K HDR</span>
+</div>
+</div>
+</div>
+<!-- Similar Card 4 -->
+<div class="group relative rounded-xl overflow-hidden bg-surface-container-low border border-white/5 hover:border-primary-container/60 transition-all duration-300 transform hover:scale-[1.03] hover:shadow-[0_16px_36px_-8px_rgba(255,104,0,0.25)] flex flex-col">
+<div class="aspect-[16/10] w-full relative overflow-hidden">
+<img alt="Génesis: Nuevo Mundo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Hyper-realistic wide shot of an atmospheric descent module breaking through burning fiery clouds over a lush alien canopy on a newly charted earth-like world." src="https://lh3.googleusercontent.com/aida-public/AB6AXuArJcVDjvP6zSp0QtBDFh0gTddjyj_1fGqML4PyV-BYSeMeT3iib22bwG8t6r4QOwmzqhTYabNUJ_HDuRnj-8BClViQnJOHr_ZprxWw1FANM0ZIuS5swwCNh68-7M4gwbOR6dsm2ANjJJKP_DLpZ1j7pnS9GV7llVo-3NgQjJ8H0V1qjzLVvwmLYWgqIr2DHjqRm-0SuDHEcITn0iX8_LkuAWPzvRvHhpZicqC4okelw4NgL5gLijba"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-transparent to-transparent"></div>
+<span class="absolute top-3 left-3 bg-secondary-container/90 text-white text-label-sm font-label-sm px-2 py-0.5 rounded font-bold">92% COINCIDENCIA</span>
+</div>
+<div class="p-4 flex flex-col flex-grow justify-between space-y-3">
+<div>
+<h3 class="text-title-md font-title-md text-white group-hover:text-primary transition-colors">Génesis: Nuevo Mundo</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant line-clamp-2 mt-1">Los primeros colonos descubren que la biosfera tiene una conciencia vegetal simbiótica.</p>
+</div>
+<div class="flex items-center justify-between text-label-sm font-label-sm text-on-surface-variant pt-2 border-t border-white/5">
+<span class="flex items-center gap-1 text-white"><span class="material-symbols-outlined text-primary text-xs" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span> 8.5</span>
+<span>2h 20m</span>
+<span class="px-1.5 py-0.5 rounded border border-outline-variant/40">4K ATMOS</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Global Footer (Shared Component JSON Conformance) -->
+<footer class="w-full bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-outline-variant/20 mt-16">
+<div class="w-full max-w-7xl mx-auto px-6 lg:px-14 py-12 flex flex-col gap-6">
+<!-- Top row with Logo and Language Selector -->
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-outline-variant/10 pb-8">
+<div class="flex items-center gap-3">
+<img alt="StreamTUC" class="w-7 h-8 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC95OcodEtJRVa35UvaKFUzgzbnPUEVW1NytFUd0YBk6PJuc6Uif9yoYkbwvLzAULBpHwkUo_pRH5NfCvs-KlGxvi9ycl7YtyB8XxnMusKtRlnQe_8lrGwG54e_ny2fQ2Tx7h8dkCA5ABsDNuDl2x2hORiMmBHF2bd71hN9IUZNQ1lHIXWPCd-2bNa3NCypC_A_nJxpaen89zwEkIXjcs9e9rE39Wrnbb9c-7ov59NUFu6Vg1oXLSD_TNddO7H8ZkqwJw"/>
+<span class="text-headline-sm font-headline-sm font-bold text-on-surface dark:text-on-surface">StreamTUC</span>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant text-label-sm font-label-sm">
+<span class="flex items-center gap-1 cursor-pointer hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-base" data-icon="language">language</span>
+            Español (Latinoamérica)
+          </span>
+</div>
+</div>
+<!-- Links Grid strictly using JSON strings -->
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 text-label-sm font-label-sm pt-2">
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary transition-colors duration-200" href="#">Centro de Ayuda</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary transition-colors duration-200" href="#">Términos de Uso</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary transition-colors duration-200" href="#">Privacidad</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary transition-colors duration-200" href="#">Configuración de Audio</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary transition-colors duration-200" href="#">Descargar Apps</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary transition-colors duration-200" href="#">Preferencias de Idioma</a>
+</div>
+<!-- Copyright text strictly from JSON -->
+<div class="pt-6 text-body-sm font-body-sm text-on-surface-variant/70 border-t border-outline-variant/10 flex flex-col sm:flex-row justify-between items-center gap-4">
+<p>© 2024 StreamTUC, Inc. Todos los derechos reservados.</p>
+<div class="flex items-center gap-4 text-on-surface-variant/80">
+<span class="cursor-pointer hover:text-primary transition-colors">Facebook</span>
+<span class="cursor-pointer hover:text-primary transition-colors">Instagram</span>
+<span class="cursor-pointer hover:text-primary transition-colors">X / Twitter</span>
+<span class="cursor-pointer hover:text-primary transition-colors">YouTube</span>
+</div>
+</div>
+</div>
+</footer>
+</body></html>
