@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import type { User } from "../types/User";
 import { useStyle } from "../context/styles";
 import logo from "../assets/Logo.png";
-import { FaMoon, FaSun } from "react-icons/fa";
+import { FaMoon, FaSun, FaSearch } from "react-icons/fa";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -68,10 +68,22 @@ function Navbar() {
 
   return (
     <>
-      <BootstrapNavbar className={`${theme}-mode catalog-navbar`} variant="dark" expand="lg">
+      <BootstrapNavbar
+        className={`${theme}-mode catalog-navbar`}
+        variant="dark"
+        expand="lg"
+      >
         <Container>
-          <BootstrapNavbar.Brand as={Link} to="/" className="catalog-brand">
-            <img src={logo} alt="StreamTUC" className="catalog-brand-logo" />
+          <BootstrapNavbar.Brand
+            as={Link}
+            to="/"
+            className="catalog-brand"
+          >
+            <img
+              src={logo}
+              alt="StreamTUC"
+              className="catalog-brand-logo"
+            />
           </BootstrapNavbar.Brand>
 
           <BootstrapNavbar.Toggle aria-controls="navbar-streamtuc" />
@@ -80,6 +92,15 @@ function Navbar() {
             <Nav className="me-auto">
               <Nav.Link as={Link} to="/">
                 Inicio
+              </Nav.Link>
+
+              <Nav.Link as={Link} to="/catalog">
+                Catálogo
+              </Nav.Link>
+
+              <Nav.Link as={Link} to="/search">
+                <FaSearch className="me-1" />
+                Buscar
               </Nav.Link>
 
               {!isAuthPage && !loggedUser && (
@@ -94,11 +115,21 @@ function Navbar() {
                 variant="link"
                 className="catalog-theme-button"
                 type="button"
-                aria-label={theme === "dark" ? "Cambiar a tema claro" : "Cambiar a tema oscuro"}
-                title={theme === "dark" ? "Tema claro" : "Tema oscuro"}
-                onClick={switchTheme}>
+                aria-label={
+                  theme === "dark"
+                    ? "Cambiar a tema claro"
+                    : "Cambiar a tema oscuro"
+                }
+                title={
+                  theme === "dark"
+                    ? "Tema claro"
+                    : "Tema oscuro"
+                }
+                onClick={switchTheme}
+              >
                 {theme === "dark" ? <FaSun /> : <FaMoon />}
               </Button>
+
               {loggedUser && !isAuthPage ? (
                 <>
                   <Nav.Link disabled>
@@ -159,7 +190,10 @@ function Navbar() {
             Cancelar
           </Button>
 
-          <Button variant="danger" onClick={handleLogout}>
+          <Button
+            variant="danger"
+            onClick={handleLogout}
+          >
             Sí, cerrar sesión
           </Button>
         </Modal.Footer>
