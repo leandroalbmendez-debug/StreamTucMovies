@@ -1,9 +1,15 @@
-import { useState, type FormEvent } from "react";
+import { useState } from "react";
 import { Alert, Button, Card, Container, Form } from "react-bootstrap";
+import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { initialUsers } from "../data/initialUsers";
 import type { User } from "../types/User";
+
+interface LoginData {
+  email: string;
+  password: string;
+}
 
 export function Login() {
   const navigate = useNavigate();
@@ -13,47 +19,21 @@ export function Login() {
     initialUsers,
   );
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
   const [loginError, setLoginError] = useState("");
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginData>();
 
-    setEmailError("");
-    setPasswordError("");
+  const onSubmit = (data: LoginData) => {
     setLoginError("");
-
-    let hasError = false;
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-
-    if (email.trim() === "") {
-      setEmailError("El email es obligatorio.");
-      hasError = true;
-    } else if (!emailRegex.test(email)) {
-      setEmailError(
-        "Ingresá un email válido. Ejemplo: nombre@gmail.com",
-      );
-      hasError = true;
-    }
-
-    if (password === "") {
-      setPasswordError("La contraseña es obligatoria.");
-      hasError = true;
-    }
-
-    if (hasError) {
-      return;
-    }
 
     const userFound = users.find(
       (user) =>
-        user.email === email &&
-        user.password === password,
+        user.email === data.email &&
+        user.password === data.password,
     );
 
     if (!userFound) {
@@ -95,22 +75,29 @@ export function Login() {
             </Alert>
           )}
 
-          <Form onSubmit={handleSubmit}>
+          <Form onSubmit={handleSubmit(onSubmit)}>
             <Form.Group className="mb-3">
               <Form.Label>Email</Form.Label>
 
               <Form.Control
                 type="email"
-                value={email}
-                onChange={(event) =>
-                  setEmail(event.target.value)
-                }
                 placeholder="Ingresá tu email"
+                {...register("email", {
+                  required: {
+                    value: true,
+                    message: "El email es obligatorio.",
+                  },
+                  pattern: {
+                    value: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
+                    message:
+                      "Ingresá un email válido. Ejemplo: nombre@gmail.com",
+                  },
+                })}
               />
 
-              {emailError && (
+              {errors.email && (
                 <Form.Text className="text-danger">
-                  {emailError}
+                  {errors.email.message}
                 </Form.Text>
               )}
             </Form.Group>
@@ -120,16 +107,18 @@ export function Login() {
 
               <Form.Control
                 type="password"
-                value={password}
-                onChange={(event) =>
-                  setPassword(event.target.value)
-                }
                 placeholder="Ingresá tu contraseña"
+                {...register("password", {
+                  required: {
+                    value: true,
+                    message: "La contraseña es obligatoria.",
+                  },
+                })}
               />
 
-              {passwordError && (
+              {errors.password && (
                 <Form.Text className="text-danger">
-                  {passwordError}
+                  {errors.password.message}
                 </Form.Text>
               )}
             </Form.Group>
