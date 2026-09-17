@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Catálogo de Series | StreamTUC</title>
+<!-- Google Fonts: Plus Jakarta Sans & Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration verbatim -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-primary-fixed": "#351000",
+            "on-primary-container": "#561e00",
+            "on-primary": "#571f00",
+            "surface-container-high": "#292a2e",
+            "tertiary": "#dbb8ff",
+            "outline": "#a98a7d",
+            "surface-variant": "#343439",
+            "secondary-fixed": "#ecdcff",
+            "surface-container-lowest": "#0d0e12",
+            "inverse-primary": "#a23f00",
+            "primary": "#ffb695",
+            "on-secondary-fixed": "#280056",
+            "on-primary-fixed-variant": "#7b2f00",
+            "secondary-container": "#6c00d6",
+            "surface": "#121317",
+            "error-container": "#93000a",
+            "on-error": "#690005",
+            "on-tertiary-fixed-variant": "#6600b7",
+            "background": "#121317",
+            "on-error-container": "#ffdad6",
+            "surface-container-low": "#1a1b20",
+            "outline-variant": "#5a4136",
+            "surface-bright": "#38393e",
+            "on-secondary-fixed-variant": "#6000bf",
+            "on-surface-variant": "#e2bfb1",
+            "tertiary-fixed": "#efdbff",
+            "primary-fixed-dim": "#ffb695",
+            "error": "#ffb4ab",
+            "surface-dim": "#121317",
+            "surface-tint": "#ffb695",
+            "on-tertiary-fixed": "#2b0052",
+            "primary-container": "#ff6800",
+            "tertiary-container": "#b879ff",
+            "inverse-surface": "#e3e2e8",
+            "secondary-fixed-dim": "#d6baff",
+            "on-secondary-container": "#d3b5ff",
+            "inverse-on-surface": "#2f3035",
+            "on-background": "#e3e2e8",
+            "secondary": "#d6baff",
+            "surface-container": "#1f1f24",
+            "tertiary-fixed-dim": "#dbb8ff",
+            "surface-container-highest": "#343439",
+            "on-secondary": "#430089",
+            "primary-fixed": "#ffdbcc",
+            "on-surface": "#e3e2e8",
+            "on-tertiary-container": "#470082",
+            "on-tertiary": "#470083"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xl": "2.5rem",
+            "space-lg": "1.5rem",
+            "space-md": "1rem",
+            "space-sm": "0.5rem",
+            "gutter": "1.5rem",
+            "margin-mobile": "1.25rem",
+            "gutter-sm": "0.75rem",
+            "space-xs": "0.25rem",
+            "margin": "3.5rem"
+          },
+          "fontFamily": {
+            "body-md": ["Inter"],
+            "label-sm": ["Inter"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "body-lg": ["Inter"],
+            "label-md": ["Inter"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "display": ["Plus Jakarta Sans"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "headline-xl-mobile": ["Plus Jakarta Sans"],
+            "display-mobile": ["Plus Jakarta Sans"],
+            "headline-lg-mobile": ["Plus Jakarta Sans"],
+            "title-md": ["Plus Jakarta Sans"],
+            "body-sm": ["Inter"]
+          },
+          "fontSize": {
+            "body-md": ["15px", { "lineHeight": "22px", "fontWeight": "400" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "700" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "display": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.03em", "fontWeight": "800" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "headline-xl-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "display-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "headline-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "0em", "fontWeight": "700" }],
+            "title-md": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "body-sm": ["13px", { "lineHeight": "18px", "fontWeight": "400" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .glass-panel {
+      background: rgba(18, 20, 28, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .purple-badge {
+      background: linear-gradient(135deg, #6C00D6, #7928CA);
+    }
+    .poster-hover-glow:hover {
+      box-shadow: 0 16px 36px -8px rgba(108, 0, 214, 0.45);
+    }
+    .primary-hover-glow:hover {
+      box-shadow: 0 14px 28px -6px rgba(255, 104, 0, 0.4);
+    }
+    /* Hide scrollbar for smooth shelves */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased selection:bg-primary-container selection:text-on-primary-fixed min-h-screen flex flex-col overflow-x-hidden">
+<!-- TOP APP BAR (Shared Component Anchor) -->
+<header class="bg-surface/75 dark:bg-surface/75 backdrop-blur-md text-primary dark:text-primary docked full-width top-0 fixed z-50 border-b border-outline-variant/30 shadow-2xl flex justify-between items-center w-full px-6 lg:px-14 py-3">
+<!-- Brand Cluster -->
+<div class="flex items-center gap-8">
+<a class="flex items-center gap-3 transition-transform duration-150 scale-105 active:scale-95 group" href="#">
+<img alt="StreamTUC Logo" class="h-9 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYvvI2HN5zL8qHZceRKiXMK9eLJCZtbIMvyDPEBiQWEo9za0rNH7Jy143daixELGaPl2aMVgpq6Kf9gZnPBJc0cNVHaRYnxEbc3JEIqjv6VQ6O6E5nTNr4dE7bOf9wRsyQJNNSls4PB-7fERNsqjE3V0n8X41YAficUPrCdFZwLLt5YyXeC-GfCI2Z_A8ENpLGBisTDmwuqfLC2ZRqU55ifAdqUmeLW7c-8Tg_DHETwgQ_vcFNmyCAmMjECPvt7bGVrg"/>
+<span class="text-headline-md font-headline-md font-extrabold tracking-tight text-primary-container dark:text-primary">StreamTUC</span>
+</a>
+<!-- Navigation Links (Active: 'Series') -->
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-label-md font-label-md text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface dark:hover:text-on-surface hover:text-primary dark:hover:text-primary transition-colors duration-200" href="#">Inicio</a>
+<a class="text-label-md font-label-md text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface dark:hover:text-on-surface hover:text-primary dark:hover:text-primary transition-colors duration-200" href="#">Películas</a>
+<!-- Active Nav: Series -->
+<a class="text-label-md font-label-md text-primary-container dark:text-primary font-bold transition-colors" href="#">Series</a>
+<a class="text-label-md font-label-md text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface dark:hover:text-on-surface hover:text-primary dark:hover:text-primary transition-colors duration-200" href="#">Novedades populares</a>
+<a class="text-label-md font-label-md text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface dark:hover:text-on-surface hover:text-primary dark:hover:text-primary transition-colors duration-200" href="#">Mi Lista</a>
+</nav>
+</div>
+<!-- Search and Actions Cluster (on_right) -->
+<div class="flex items-center gap-5">
+<!-- Search Input Pill -->
+<div class="relative hidden sm:flex items-center">
+<span class="absolute left-3.5 text-on-surface-variant flex items-center pointer-events-none" data-icon="search">
+<span class="material-symbols-outlined text-lg">search</span>
+</span>
+<input class="bg-surface-container-low border border-outline-variant/40 rounded-full pl-10 pr-10 py-1.5 text-body-sm font-body-sm text-on-surface placeholder:text-on-surface-variant/60 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary w-64 lg:w-72 transition-all" placeholder="Buscar series, géneros, actores..." type="text"/>
+<span class="absolute right-3.5 text-[10px] font-mono bg-surface-variant/60 text-on-surface-variant px-1.5 py-0.5 rounded border border-outline-variant/30">⌘K</span>
+</div>
+<!-- Trailing Icon Action: notifications -->
+<button aria-label="Notificaciones" class="relative p-2 rounded-full text-on-surface-variant hover:text-primary transition-colors duration-200" data-icon="notifications">
+<span class="material-symbols-outlined text-xl">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-primary-container"></span>
+</button>
+<!-- Profile Dropdown Avatar -->
+<button aria-label="User avatar profile dropdown" class="flex items-center gap-2 p-0.5 rounded-full hover:ring-2 hover:ring-primary-container transition-all">
+<img alt="User avatar profile dropdown" class="w-9 h-9 rounded-full object-cover border border-outline-variant/40" data-alt="A cinematic portrait shot of a contemporary digital streaming user bathed in ambient violet and soft amber light, looking stylishly into camera with modern dark glasses, minimalist neon cinema tone." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVpZMYW5WhDybfUJbx7xu4FFBnPSOr9k0PLgodlMJmPwpwp2ypgDOWOLuxqGfML-20ieOXnB1gr8dhGnGCgcB8Jzz5kA8lHS5eOUXT6D86wO3fpUPHaQMGybcFHCgG3Q0EyiTTzZF7tCg4F3W-I5BTHL-f6nXNf4udPQ8RAxMdpFysw-kyEseynjJ5dBgPoJnVQRhfncEXXX_EitZ2d9WAjCUuEPx6Ntk9R0bMvEeY4bFH1OEk4Ljs"/>
+<span class="material-symbols-outlined text-on-surface-variant text-sm hidden lg:block" data-icon="expand_more">expand_more</span>
+</button>
+</div>
+</header>
+<!-- MAIN CANVAS -->
+<main class="flex-grow pt-24 pb-16 px-6 lg:px-14 flex flex-col gap-10">
+<!-- HERO / FEATURED SPLIT BANNER: Crónicas del Multiverso T3 -->
+<section class="relative w-full rounded-2xl overflow-hidden glass-panel border border-outline-variant/30 bg-surface-container-low">
+<div class="grid grid-cols-1 lg:grid-cols-12 min-h-[460px]">
+<!-- Showcase Backdrop Image with atmospheric gradient -->
+<div class="relative lg:col-span-7 order-1 lg:order-2 overflow-hidden h-72 sm:h-96 lg:h-auto">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 hover:scale-105" data-alt="A breathtaking cinematic wide screen frame from an epic sci-fi series showing characters stepping into a glowing dimensional gateway over an obsidian landscape illuminated by vivid electric purple nebulae and burning warm orange light trails, high dynamic range theater visual quality." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAGLgbbPrEYKzrhCWcqKCsD0BtKjmTX6xGUfN22KHi5Lnh8GfIq5ui8_rr8J1f4n61zFEElgKR8gxzuOTm5_9TRYibYOfrzJhY3QZnC6uQDt1Y_u1ZLaa4if4YrYFWlk9mT_qO91Lhi0yI8XcNDysRt8hF09xnatmdjFZEEUaX8uZRNDOW9gXwhskJJ2XxUN_iR8kmFMlO2QhSzUrQ1A7QPrgBwxhW7WmFKsuga_VtOWLX25bs36vhR')">
+</div>
+<!-- Gradients merging image smoothly -->
+<div class="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-surface-container-low via-surface-container-low/40 to-transparent"></div>
+<!-- Top specs badge cluster inside image -->
+<div class="absolute top-5 right-5 flex items-center gap-2">
+<span class="purple-badge text-white text-label-sm font-label-sm px-3 py-1 rounded-full shadow-lg flex items-center gap-1.5">
+<span class="material-symbols-outlined text-xs" data-icon="auto_awesome">auto_awesome</span>
+              ESTRENO STREAMTUC
+            </span>
+<span class="glass-panel text-on-surface text-label-sm font-label-sm px-2.5 py-1 rounded">4K ULTRA HD</span>
+<span class="glass-panel text-on-surface text-label-sm font-label-sm px-2.5 py-1 rounded">DOLBY ATMOS</span>
+</div>
+</div>
+<!-- Meta and Synopsis Panel -->
+<div class="lg:col-span-5 order-2 lg:order-1 p-8 lg:p-12 flex flex-col justify-between z-10">
+<div class="flex flex-col gap-4">
+<!-- Badges and Title -->
+<div class="flex items-center gap-3">
+<span class="bg-primary-container text-on-primary-fixed text-label-sm font-label-sm font-bold px-2.5 py-0.5 rounded">T3 DISPONIBLE COMPLETA</span>
+<span class="text-tertiary font-label-md text-label-md flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+                98% de Aprobación
+              </span>
+<span class="text-on-surface-variant font-label-md text-label-md">10 Episodios</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl lg:text-display font-extrabold tracking-tight text-white leading-none">
+              Crónicas del Multiverso
+            </h1>
+<div class="flex items-center gap-2 text-label-md font-label-md text-on-surface-variant">
+<span>2024</span>
+<span>•</span>
+<span class="border border-outline-variant/50 px-1.5 py-0.2 rounded text-[11px]">16+</span>
+<span>•</span>
+<span class="text-secondary font-semibold">Sci-Fi &amp; Multiversos</span>
+<span>•</span>
+<span>Audio Espacial</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface/80 line-clamp-3 lg:line-clamp-4">
+              Tras la ruptura de la última línea temporal, el equipo de exploradores dimensionales debe sincronizar los fragmentos cuánticos antes de que la entropía consuma las realidades paralelas. La entrega definitiva aclamada por la crítica global.
+            </p>
+</div>
+<!-- CTAs and quick stats -->
+<div class="pt-8 flex flex-wrap items-center gap-4">
+<button class="bg-primary-container hover:bg-primary text-on-primary-container hover:text-on-primary-fixed font-title-md text-title-md font-bold px-7 py-3.5 rounded-full flex items-center gap-2.5 transition-all duration-200 primary-hover-glow scale-105 active:scale-95">
+<span class="material-symbols-outlined text-xl" data-icon="play_arrow" data-weight="fill" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+              Ver Temporada 3
+            </button>
+<button class="glass-panel hover:bg-surface-variant/40 text-on-surface font-title-md text-title-md px-5 py-3.5 rounded-full flex items-center gap-2 transition-all border border-white/10 hover:border-white/30">
+<span class="material-symbols-outlined text-xl" data-icon="bookmark_add">bookmark_add</span>
+              Guardar en Mi Lista
+            </button>
+<button aria-label="Ver Tráiler Oficial" class="p-3.5 glass-panel text-on-surface-variant hover:text-white rounded-full flex items-center justify-center border border-white/10">
+<span class="material-symbols-outlined text-xl" data-icon="movie">movie</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 2: HEADER & SUB-NAVIGATION TABS -->
+<section class="flex flex-col gap-6">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-outline-variant/30 pb-4">
+<div>
+<span class="text-secondary font-label-md text-label-md tracking-wider uppercase font-bold">Exploración Premium</span>
+<h2 class="text-headline-lg font-headline-lg font-extrabold text-on-surface">Series y Producciones Exclusivas</h2>
+</div>
+<!-- Series Scope Tabs -->
+<nav class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1">
+<button class="px-4 py-2 rounded-full text-label-md font-label-md bg-secondary-container text-on-secondary-container font-semibold transition-all">
+            Todas las Series
+          </button>
+<button class="px-4 py-2 rounded-full text-label-md font-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all">
+            Originales StreamTUC
+          </button>
+<button class="px-4 py-2 rounded-full text-label-md font-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all">
+            Nuevas Temporadas
+          </button>
+<button class="px-4 py-2 rounded-full text-label-md font-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all">
+            Miniseries
+          </button>
+<button class="px-4 py-2 rounded-full text-label-md font-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all">
+            Finalizadas
+          </button>
+</nav>
+</div>
+<!-- FILTER & SORT CONTROLS BAR -->
+<div class="flex flex-wrap items-center justify-between gap-4 bg-surface-container-low p-3.5 rounded-xl border border-outline-variant/20">
+<!-- Category Filter Pills -->
+<div class="flex items-center gap-2 overflow-x-auto no-scrollbar flex-1">
+<span class="text-on-surface-variant text-label-sm font-label-sm mr-2 flex items-center gap-1 shrink-0">
+<span class="material-symbols-outlined text-sm" data-icon="tune">tune</span> Géneros:
+          </span>
+<button class="px-3.5 py-1.5 rounded-full text-label-md font-label-md bg-surface-container-highest border border-primary-container text-white shrink-0 font-medium">
+            Todos
+          </button>
+<button class="px-3.5 py-1.5 rounded-full text-label-md font-label-md bg-surface-container border border-outline-variant/40 text-on-surface-variant hover:text-on-surface hover:border-outline shrink-0 transition-colors">
+            Misterio &amp; Suspenso
+          </button>
+<button class="px-3.5 py-1.5 rounded-full text-label-md font-label-md bg-surface-container border border-outline-variant/40 text-on-surface-variant hover:text-on-surface hover:border-outline shrink-0 transition-colors">
+            Sci-Fi
+          </button>
+<button class="px-3.5 py-1.5 rounded-full text-label-md font-label-md bg-surface-container border border-outline-variant/40 text-on-surface-variant hover:text-on-surface hover:border-outline shrink-0 transition-colors">
+            Fantasía Épica
+          </button>
+<button class="px-3.5 py-1.5 rounded-full text-label-md font-label-md bg-surface-container border border-outline-variant/40 text-on-surface-variant hover:text-on-surface hover:border-outline shrink-0 transition-colors">
+            Drama Policial
+          </button>
+<button class="px-3.5 py-1.5 rounded-full text-label-md font-label-md bg-surface-container border border-outline-variant/40 text-on-surface-variant hover:text-on-surface hover:border-outline shrink-0 transition-colors">
+            Comedia
+          </button>
+</div>
+<!-- Sorting Dropdown and View Toggle -->
+<div class="flex items-center gap-3 shrink-0">
+<div class="flex items-center gap-2 text-label-md font-label-md text-on-surface-variant">
+<span>Ordenar por:</span>
+<div class="relative inline-block">
+<select class="bg-surface-container border border-outline-variant/40 text-on-surface font-title-md text-body-sm rounded-lg pl-3 pr-8 py-1.5 focus:outline-none focus:border-primary-container appearance-none cursor-pointer">
+<option selected="">Tendencia actual</option>
+<option>Más vistas</option>
+<option>Mejor valoradas</option>
+<option>Recién añadidas</option>
+</select>
+<span class="material-symbols-outlined text-sm absolute right-2 top-2.5 pointer-events-none text-on-surface-variant" data-icon="unfold_more">unfold_more</span>
+</div>
+</div>
+<div class="h-6 w-px bg-outline-variant/30 hidden sm:block"></div>
+<!-- Quick view layout switchers -->
+<div class="flex items-center gap-1 bg-surface-container p-1 rounded-lg border border-outline-variant/30">
+<button aria-label="Cuadrícula" class="p-1 rounded bg-surface-container-high text-primary">
+<span class="material-symbols-outlined text-base" data-icon="grid_view">grid_view</span>
+</button>
+<button aria-label="Lista compacta" class="p-1 rounded text-on-surface-variant hover:text-on-surface">
+<span class="material-symbols-outlined text-base" data-icon="view_list">view_list</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 3: SERIES GRID CARDS (High-End Poster Architecture) -->
+<section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-6">
+<!-- CARD 1: Secretos en la Nieve -->
+<article class="group relative rounded-xl overflow-hidden bg-surface-container-low border border-outline-variant/30 transition-all duration-300 hover:scale-105 poster-hover-glow flex flex-col">
+<div class="relative aspect-[2/3] w-full overflow-hidden bg-surface-container">
+<img alt="Secretos en la Nieve" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A dramatic cinematic vertical film poster of a dark nordic thriller series set in a frozen blizzard landscape, a lone silhouette detective holding a tactical light illuminating frozen blood on snow with deep shadows and chilling violet-blue tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpEwdowwEg1byxi20b-q3pA5FXOh8iG6aZfJ1znH5-hr5oZoGK4miak8RO9JuAbZtYnEKQhKm6pTY5Oh56L8RyQaQ3U12_sBB3pqmZBSNO0Ac5kxWPT6qyO-Z3C-ynIPQAqLwWfFq2tq1btxP-K-jy649Id_tg0AFLdKPG8k1W53SqAWbOsi4_nnwbPqRyBibP2juCQ-TpRkZoS3gw_sW6HL_rXtBIYva7C-QWafFKAw0LfnUNnWW0"/>
+<!-- Persistent Badges -->
+<div class="absolute top-3 left-3 flex flex-col gap-1.5 items-start">
+<span class="purple-badge text-white text-[10px] font-bold px-2 py-0.5 rounded shadow">ORIGINAL</span>
+<span class="bg-primary-container text-on-primary-fixed text-[10px] font-bold px-2 py-0.5 rounded shadow">NUEVA TEMPORADA</span>
+</div>
+<div class="absolute top-3 right-3">
+<span class="glass-panel text-white text-[10px] font-bold px-2 py-0.5 rounded">T1-T4</span>
+</div>
+<!-- Bottom Overlay Bar in Image -->
+<div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent opacity-90"></div>
+<!-- Hover quick actions overlay -->
+<div class="absolute inset-0 bg-surface-container-lowest/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-200 p-5 flex flex-col justify-end gap-3">
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 rounded-full bg-primary-container text-on-primary-fixed flex items-center justify-center font-bold hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-xl" data-icon="play_arrow" data-weight="fill" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+<button class="w-10 h-10 rounded-full glass-panel text-white hover:bg-surface-variant flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="bookmark_add">bookmark_add</span>
+</button>
+<button class="w-10 h-10 rounded-full glass-panel text-white hover:bg-surface-variant flex items-center justify-center transition-colors ml-auto">
+<span class="material-symbols-outlined text-lg" data-icon="thumb_up">thumb_up</span>
+</button>
+</div>
+<div class="text-tertiary text-label-md font-label-md flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="verified">verified</span> 96% Coincidencia
+            </div>
+<p class="text-on-surface-variant text-body-sm line-clamp-3">
+              Un asesinato sin resolver en un pueblo alpino despierta conspiraciones enterradas durante dos décadas bajo el permafrost.
+            </p>
+<div class="flex items-center justify-between text-[11px] text-on-surface/70 pt-1 border-t border-outline-variant/30">
+<span>32 Episodios</span>
+<span class="text-primary">4K HDR</span>
+</div>
+</div>
+</div>
+<!-- Meta Bottom Footer -->
+<div class="p-4 flex flex-col gap-1 bg-surface-container-low flex-grow justify-between">
+<div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-white group-hover:text-primary transition-colors">Secretos en la Nieve</h3>
+<p class="text-label-md font-label-md text-on-surface-variant">Misterio • Suspenso Psicológico</p>
+</div>
+<div class="flex items-center justify-between pt-2 text-label-sm font-label-sm text-outline">
+<span>4 Temporadas</span>
+<span class="text-tertiary">★ 8.9 / 10</span>
+</div>
+</div>
+</article>
+<!-- CARD 2: Código Zero: Hacker -->
+<article class="group relative rounded-xl overflow-hidden bg-surface-container-low border border-outline-variant/30 transition-all duration-300 hover:scale-105 poster-hover-glow flex flex-col">
+<div class="relative aspect-[2/3] w-full overflow-hidden bg-surface-container">
+<img alt="Código Zero: Hacker" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A gritty cyberpunk television series portrait showing a rogue cyber operative bathed in neon orange holographic lines and electric purple monitors within a dark subterranean tech sanctuary, cinematic shallow depth of field." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDS8VzOVfKiPX2sJxg02XRskP6eDOAtzbIGFuifHb2QessrJlMPp0X1QKcDX0XyRLoLLPQW7kd7d8tZssainVB0y_syZyBlI71G7bnNc7aVycsucj5yf26flgTg_1fiVV6Qx1ZZ9GbAAVyQ5pmgT6oj1AuISymwuCKUWzG7I4QG8TRk7GczitDQVMnxO5EIpumOfHqI1_KRzEtTYIAU4uxUG8K1FU4b9oziWw4FGUpQ7604kirMu6v-"/>
+<div class="absolute top-3 left-3 flex flex-col gap-1.5 items-start">
+<span class="purple-badge text-white text-[10px] font-bold px-2 py-0.5 rounded shadow">ORIGINAL</span>
+</div>
+<div class="absolute top-3 right-3">
+<span class="glass-panel text-white text-[10px] font-bold px-2 py-0.5 rounded">T1-T2</span>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent opacity-90"></div>
+<!-- Hover Details -->
+<div class="absolute inset-0 bg-surface-container-lowest/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-200 p-5 flex flex-col justify-end gap-3">
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 rounded-full bg-primary-container text-on-primary-fixed flex items-center justify-center font-bold hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-xl" data-icon="play_arrow" data-weight="fill" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+<button class="w-10 h-10 rounded-full glass-panel text-white hover:bg-surface-variant flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="bookmark_add">bookmark_add</span>
+</button>
+<button class="w-10 h-10 rounded-full glass-panel text-white hover:bg-surface-variant flex items-center justify-center transition-colors ml-auto">
+<span class="material-symbols-outlined text-lg" data-icon="thumb_up">thumb_up</span>
+</button>
+</div>
+<div class="text-tertiary text-label-md font-label-md flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="verified">verified</span> 94% Coincidencia
+            </div>
+<p class="text-on-surface-variant text-body-sm line-clamp-3">
+              Un grupo de hacktivistas se infiltra en los servidores del consorcio bancario más hermético del continente con repercusiones mundiales.
+            </p>
+<div class="flex items-center justify-between text-[11px] text-on-surface/70 pt-1 border-t border-outline-variant/30">
+<span>18 Episodios</span>
+<span class="text-primary">Dolby Vision</span>
+</div>
+</div>
+</div>
+<div class="p-4 flex flex-col gap-1 bg-surface-container-low flex-grow justify-between">
+<div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-white group-hover:text-primary transition-colors">Código Zero: Hacker</h3>
+<p class="text-label-md font-label-md text-on-surface-variant">Tecno-Thriller • Crimen</p>
+</div>
+<div class="flex items-center justify-between pt-2 text-label-sm font-label-sm text-outline">
+<span>2 Temporadas</span>
+<span class="text-tertiary">★ 9.1 / 10</span>
+</div>
+</div>
+</article>
+<!-- CARD 3: El Imperio Carmesí -->
+<article class="group relative rounded-xl overflow-hidden bg-surface-container-low border border-outline-variant/30 transition-all duration-300 hover:scale-105 poster-hover-glow flex flex-col">
+<div class="relative aspect-[2/3] w-full overflow-hidden bg-surface-container">
+<img alt="El Imperio Carmesí" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A lavish dark period drama series poster featuring a monarch in velvet royal garments adorned with gold filigree sitting on an ornate dark iron throne, dramatic chiaroscuro candlelight and deep crimson velvet hues." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNP_SBwx_DHgNAx_ZGuuZd7PMg5C4_iFBKA3hZj8ub1DBuR2GAq9dexF_SNySqohNb1I4I-t1vuBhCd_y1oMiVgqVTN6RaKjo64QxI_8UOSDjp244xF8XhqbMMNqStGbwiTGvkYNF1RlqkHzM1fFwYTIT7hefVrTwtGEWkj9bpTlypKHsRpmVFADfx1o6nImSBX00FcrF23qEpQTpbGAB9SPJW5TMRkrvglG3J1XQMBKSNzKW3IRTy"/>
+<div class="absolute top-3 left-3 flex flex-col gap-1.5 items-start">
+<span class="purple-badge text-white text-[10px] font-bold px-2 py-0.5 rounded shadow">ORIGINAL</span>
+<span class="bg-primary-container text-on-primary-fixed text-[10px] font-bold px-2 py-0.5 rounded shadow">NUEVA TEMPORADA</span>
+</div>
+<div class="absolute top-3 right-3">
+<span class="glass-panel text-white text-[10px] font-bold px-2 py-0.5 rounded">T1-T3</span>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent opacity-90"></div>
+<div class="absolute inset-0 bg-surface-container-lowest/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-200 p-5 flex flex-col justify-end gap-3">
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 rounded-full bg-primary-container text-on-primary-fixed flex items-center justify-center font-bold hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-xl" data-icon="play_arrow" data-weight="fill" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+<button class="w-10 h-10 rounded-full glass-panel text-white hover:bg-surface-variant flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="bookmark_add">bookmark_add</span>
+</button>
+<button class="w-10 h-10 rounded-full glass-panel text-white hover:bg-surface-variant flex items-center justify-center transition-colors ml-auto">
+<span class="material-symbols-outlined text-lg" data-icon="thumb_up">thumb_up</span>
+</button>
+</div>
+<div class="text-tertiary text-label-md font-label-md flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="verified">verified</span> 99% Coincidencia
+            </div>
+<p class="text-on-surface-variant text-body-sm line-clamp-3">
+              Linajes dinásticos colisionan por la corona en una corte dominada por venenos, alianzas de medianoche y ambición desmedida.
+            </p>
+<div class="flex items-center justify-between text-[11px] text-on-surface/70 pt-1 border-t border-outline-variant/30">
+<span>24 Episodios</span>
+<span class="text-primary">4K UHD</span>
+</div>
+</div>
+</div>
+<div class="p-4 flex flex-col gap-1 bg-surface-container-low flex-grow justify-between">
+<div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-white group-hover:text-primary transition-colors">El Imperio Carmesí</h3>
+<p class="text-label-md font-label-md text-on-surface-variant">Drama Histórico • Conspiraciones</p>
+</div>
+<div class="flex items-center justify-between pt-2 text-label-sm font-label-sm text-outline">
+<span>3 Temporadas</span>
+<span class="text-tertiary">★ 9.4 / 10</span>
+</div>
+</div>
+</article>
+<!-- CARD 4: Vórtice Temporal -->
+<article class="group relative rounded-xl overflow-hidden bg-surface-container-low border border-outline-variant/30 transition-all duration-300 hover:scale-105 poster-hover-glow flex flex-col">
+<div class="relative aspect-[2/3] w-full overflow-hidden bg-surface-container">
+<img alt="Vórtice Temporal" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="An ethereal sci-fi series artwork featuring a mysterious shattered clock tower suspended in a gravitational distortion field with glowing purple particles and radiant neon amber sundial accents in a dark sky." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0-xExEHe9kjEJW07DJbM8vG5apOB5wee2K4qcewgtOAigJ_ge6881uPoc9KMwUeujYS3jBQhHqqjIkW2whi4Hl6kB_S1nYtYIPn8qs1Xhak0TlBTDjy1kM4sDl_oVfKXd8PE0K4bP9Fk2dQDrnSZeydRIRMIfqD6R2KqbgtO_ESTOy2rnfoMehvgKSfrzAwhHXFlB08tQERsIzSELIsIfehK-jwYvrKHZOsSF6q-FbiiMTCaJEps6"/>
+<div class="absolute top-3 left-3 flex flex-col gap-1.5 items-start">
+<span class="purple-badge text-white text-[10px] font-bold px-2 py-0.5 rounded shadow">ORIGINAL</span>
+</div>
+<div class="absolute top-3 right-3">
+<span class="glass-panel text-white text-[10px] font-bold px-2 py-0.5 rounded">T1-T4</span>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent opacity-90"></div>
+<div class="absolute inset-0 bg-surface-container-lowest/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-200 p-5 flex flex-col justify-end gap-3">
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 rounded-full bg-primary-container text-on-primary-fixed flex items-center justify-center font-bold hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-xl" data-icon="play_arrow" data-weight="fill" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+<button class="w-10 h-10 rounded-full glass-panel text-white hover:bg-surface-variant flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="bookmark_add">bookmark_add</span>
+</button>
+<button class="w-10 h-10 rounded-full glass-panel text-white hover:bg-surface-variant flex items-center justify-center transition-colors ml-auto">
+<span class="material-symbols-outlined text-lg" data-icon="thumb_up">thumb_up</span>
+</button>
+</div>
+<div class="text-tertiary text-label-md font-label-md flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="verified">verified</span> 97% Coincidencia
+            </div>
+<p class="text-on-surface-variant text-body-sm line-clamp-3">
+              Un experimento de aceleración de partículas crea bucles temporales irreversibles en una metrópolis que revive el mismo fatídico día.
+            </p>
+<div class="flex items-center justify-between text-[11px] text-on-surface/70 pt-1 border-t border-outline-variant/30">
+<span>36 Episodios</span>
+<span class="text-primary">Dolby Atmos</span>
+</div>
+</div>
+</div>
+<div class="p-4 flex flex-col gap-1 bg-surface-container-low flex-grow justify-between">
+<div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-white group-hover:text-primary transition-colors">Vórtice Temporal</h3>
+<p class="text-label-md font-label-md text-on-surface-variant">Sci-Fi • Paradojas</p>
+</div>
+<div class="flex items-center justify-between pt-2 text-label-sm font-label-sm text-outline">
+<span>4 Temporadas</span>
+<span class="text-tertiary">★ 9.3 / 10</span>
+</div>
+</div>
+</article>
+<!-- CARD 5: La Dinastía Prohibida -->
+<article class="group relative rounded-xl overflow-hidden bg-surface-container-low border border-outline-variant/30 transition-all duration-300 hover:scale-105 poster-hover-glow flex flex-col">
+<div class="relative aspect-[2/3] w-full overflow-hidden bg-surface-container">
+<img alt="La Dinastía Prohibida" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="An atmospheric dramatic series poster portraying high society tycoons gathered inside an ultra-modern glass skyscraper overlooking an obsidian skyline at dusk, accented with rich amber backlight and sleek luxury aesthetics." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1akfTjUXdLByBwowQ5h3CvEBgf-FifznL9RaRv-bJW-LKqja6cAt2go0EznItacrEPh2Dm2PZRcp-tOd7usom2TdHKSNaHmxdPzPZnV757FN-iJ6yiu4vVUc9INGD1qMRfygb_ho0QcPgqDXmAOGos1MXGv924raN2fa71deGmiEQTcBYAMDcAoUKnYPTKKNJvvyA68W2fOqnNTDbjPhHm1DXYQacLr7mh8XC-UGc7k78ebh4CyDP"/>
+<div class="absolute top-3 left-3 flex flex-col gap-1.5 items-start">
+<span class="purple-badge text-white text-[10px] font-bold px-2 py-0.5 rounded shadow">ORIGINAL</span>
+</div>
+<div class="absolute top-3 right-3">
+<span class="glass-panel text-white text-[10px] font-bold px-2 py-0.5 rounded">T1-T2</span>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent opacity-90"></div>
+<div class="absolute inset-0 bg-surface-container-lowest/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-200 p-5 flex flex-col justify-end gap-3">
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 rounded-full bg-primary-container text-on-primary-fixed flex items-center justify-center font-bold hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-xl" data-icon="play_arrow" data-weight="fill" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+<button class="w-10 h-10 rounded-full glass-panel text-white hover:bg-surface-variant flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="bookmark_add">bookmark_add</span>
+</button>
+<button class="w-10 h-10 rounded-full glass-panel text-white hover:bg-surface-variant flex items-center justify-center transition-colors ml-auto">
+<span class="material-symbols-outlined text-lg" data-icon="thumb_up">thumb_up</span>
+</button>
+</div>
+<div class="text-tertiary text-label-md font-label-md flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="verified">verified</span> 92% Coincidencia
+            </div>
+<p class="text-on-surface-variant text-body-sm line-clamp-3">
+              Traición y codicia corporativa sacuden a la familia propietaria del conglomerado mediático más poderoso de Iberoamérica.
+            </p>
+<div class="flex items-center justify-between text-[11px] text-on-surface/70 pt-1 border-t border-outline-variant/30">
+<span>16 Episodios</span>
+<span class="text-primary">4K HDR</span>
+</div>
+</div>
+</div>
+<div class="p-4 flex flex-col gap-1 bg-surface-container-low flex-grow justify-between">
+<div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-white group-hover:text-primary transition-colors">La Dinastía Prohibida</h3>
+<p class="text-label-md font-label-md text-on-surface-variant">Drama Corporativo • Finanzas</p>
+</div>
+<div class="flex items-center justify-between pt-2 text-label-sm font-label-sm text-outline">
+<span>2 Temporadas</span>
+<span class="text-tertiary">★ 8.8 / 10</span>
+</div>
+</div>
+</article>
+<!-- CARD 6: Cazadores de Sombras -->
+<article class="group relative rounded-xl overflow-hidden bg-surface-container-low border border-outline-variant/30 transition-all duration-300 hover:scale-105 poster-hover-glow flex flex-col">
+<div class="relative aspect-[2/3] w-full overflow-hidden bg-surface-container">
+<img alt="Cazadores de Sombras" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A dark urban fantasy television poster showcasing an arcane demon hunter with glowing runic tattoos across arms standing in a rainy gothic alleyway illuminated by deep ultraviolet and fiery orange sparks." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMSKSgfo2v5P7fvZimuesgbiBtytRcJi1pDmOGNwLNVA92Jp0Fd_RLxJEtN-rl9MvaqDl0yikuMRoUfJ4I1GS4nDowxCVF7aN2Jgg75ddum3WzomGmEbZUIO2OBEkIIk8hx9EF3UEbdaVNIqhVfaE5U7HGBZLKdEFgGhy2CjuVLMazcNY7uPofh-XvANTVdP46tuGxpygjU1mTJNFTO7OjY7aCJuRvsS5cBCNzK0jLTF14C55Cl-Ej"/>
+<div class="absolute top-3 left-3 flex flex-col gap-1.5 items-start">
+<span class="purple-badge text-white text-[10px] font-bold px-2 py-0.5 rounded shadow">ORIGINAL</span>
+<span class="bg-primary-container text-on-primary-fixed text-[10px] font-bold px-2 py-0.5 rounded shadow">NUEVA TEMPORADA</span>
+</div>
+<div class="absolute top-3 right-3">
+<span class="glass-panel text-white text-[10px] font-bold px-2 py-0.5 rounded">T1-T5</span>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent opacity-90"></div>
+<div class="absolute inset-0 bg-surface-container-lowest/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-200 p-5 flex flex-col justify-end gap-3">
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 rounded-full bg-primary-container text-on-primary-fixed flex items-center justify-center font-bold hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-xl" data-icon="play_arrow" data-weight="fill" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+<button class="w-10 h-10 rounded-full glass-panel text-white hover:bg-surface-variant flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="bookmark_add">bookmark_add</span>
+</button>
+<button class="w-10 h-10 rounded-full glass-panel text-white hover:bg-surface-variant flex items-center justify-center transition-colors ml-auto">
+<span class="material-symbols-outlined text-lg" data-icon="thumb_up">thumb_up</span>
+</button>
+</div>
+<div class="text-tertiary text-label-md font-label-md flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="verified">verified</span> 95% Coincidencia
+            </div>
+<p class="text-on-surface-variant text-body-sm line-clamp-3">
+              Una orden secreta de guerreros ancestrales protege a los humanos de entidades oscuras que emergen entre las grietas de la metrópoli moderna.
+            </p>
+<div class="flex items-center justify-between text-[11px] text-on-surface/70 pt-1 border-t border-outline-variant/30">
+<span>50 Episodios</span>
+<span class="text-primary">Dolby Atmos</span>
+</div>
+</div>
+</div>
+<div class="p-4 flex flex-col gap-1 bg-surface-container-low flex-grow justify-between">
+<div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-white group-hover:text-primary transition-colors">Cazadores de Sombras</h3>
+<p class="text-label-md font-label-md text-on-surface-variant">Fantasía Oscura • Acción</p>
+</div>
+<div class="flex items-center justify-between pt-2 text-label-sm font-label-sm text-outline">
+<span>5 Temporadas</span>
+<span class="text-tertiary">★ 9.0 / 10</span>
+</div>
+</div>
+</article>
+<!-- CARD 7: Ciudad de Cristal -->
+<article class="group relative rounded-xl overflow-hidden bg-surface-container-low border border-outline-variant/30 transition-all duration-300 hover:scale-105 poster-hover-glow flex flex-col">
+<div class="relative aspect-[2/3] w-full overflow-hidden bg-surface-container">
+<img alt="Ciudad de Cristal" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A neo-noir detective thriller poster displaying a reflective glass architecture city shrouded in evening fog, two detectives standing in silhouette with vibrant magenta and incandescent orange traffic reflections." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCepVO6rK6zBA1KgHAwlYOvjK3O9hFwbOYaNZfHHWkCK3421vDQG52KBgBDdzqc1XvsPpiC98qaDzTX-YRI_u6ejP3hkubt1ih9rwTVR4k9I1OCUw8MmT1dTahDHyecmF0RYQuA5iLTpGn_gJDvPMrjIalIrKrOKyeEAYnUmp9Da-PapFoAGWjgEZB4oVx7YnkAlLvkubo8jZJZ09TFiMBUEZ56Bg1AQXir0WSlJ1LCP9koW9V8YN1D"/>
+<div class="absolute top-3 left-3 flex flex-col gap-1.5 items-start">
+<span class="purple-badge text-white text-[10px] font-bold px-2 py-0.5 rounded shadow">ORIGINAL</span>
+</div>
+<div class="absolute top-3 right-3">
+<span class="glass-panel text-white text-[10px] font-bold px-2 py-0.5 rounded">T1-T3</span>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent opacity-90"></div>
+<div class="absolute inset-0 bg-surface-container-lowest/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-200 p-5 flex flex-col justify-end gap-3">
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 rounded-full bg-primary-container text-on-primary-fixed flex items-center justify-center font-bold hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-xl" data-icon="play_arrow" data-weight="fill" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+<button class="w-10 h-10 rounded-full glass-panel text-white hover:bg-surface-variant flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="bookmark_add">bookmark_add</span>
+</button>
+<button class="w-10 h-10 rounded-full glass-panel text-white hover:bg-surface-variant flex items-center justify-center transition-colors ml-auto">
+<span class="material-symbols-outlined text-lg" data-icon="thumb_up">thumb_up</span>
+</button>
+</div>
+<div class="text-tertiary text-label-md font-label-md flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="verified">verified</span> 93% Coincidencia
+            </div>
+<p class="text-on-surface-variant text-body-sm line-clamp-3">
+              Crimen organizado, jueces intocables y una inspectora tenaz atrapada en una red de espejismos y asesinatos rituales.
+            </p>
+<div class="flex items-center justify-between text-[11px] text-on-surface/70 pt-1 border-t border-outline-variant/30">
+<span>20 Episodios</span>
+<span class="text-primary">4K HDR</span>
+</div>
+</div>
+</div>
+<div class="p-4 flex flex-col gap-1 bg-surface-container-low flex-grow justify-between">
+<div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-white group-hover:text-primary transition-colors">Ciudad de Cristal</h3>
+<p class="text-label-md font-label-md text-on-surface-variant">Drama Policial • Neo-Noir</p>
+</div>
+<div class="flex items-center justify-between pt-2 text-label-sm font-label-sm text-outline">
+<span>3 Temporadas</span>
+<span class="text-tertiary">★ 8.7 / 10</span>
+</div>
+</div>
+</article>
+<!-- CARD 8: Próximo Estreno Card (Prestigio StreamTUC) -->
+<article class="group relative rounded-xl overflow-hidden bg-gradient-to-br from-surface-container-low to-surface-container-high border border-secondary/40 p-6 flex flex-col justify-between hover:border-secondary transition-all">
+<div class="flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<span class="purple-badge text-white text-[10px] font-bold px-2 py-0.5 rounded shadow">PRÓXIMAMENTE</span>
+<span class="text-label-sm font-label-sm text-tertiary">Viernes 20 Dic</span>
+</div>
+<div class="mt-4">
+<span class="text-primary text-label-sm font-label-sm uppercase font-bold tracking-wider">Superproducción Original</span>
+<h3 class="text-headline-md font-headline-md font-bold text-white mt-1">El Enigma del Sol Negro</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-2">
+              Un thriller astronómico filmado íntegramente en locaciones de la Patagonia y el desierto de Atacama con cámaras IMAX®.
+            </p>
+</div>
+</div>
+<div class="pt-6">
+<div class="bg-surface-container p-3 rounded-lg border border-outline-variant/30 flex items-center justify-between mb-4">
+<span class="text-body-sm text-on-surface-variant flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-primary" data-icon="notifications_active">notifications_active</span>
+              Recordatorio activado
+            </span>
+<span class="text-label-sm font-bold text-tertiary">14.2k en espera</span>
+</div>
+<button class="w-full glass-panel hover:bg-secondary-container hover:text-white text-secondary font-title-md text-title-md py-2.5 rounded-full transition-all border border-secondary/30 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="notification_add">notification_add</span>
+            Avisarme al Estreno
+          </button>
+</div>
+</article>
+</section>
+<!-- SECTION 4: MARATONES POPULARES DE FIN DE SEMANA (Horizontal Cards Shelf) -->
+<section class="flex flex-col gap-5 pt-4">
+<div class="flex items-center justify-between">
+<div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container" data-icon="local_fire_department" data-weight="fill" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<h2 class="text-headline-md font-headline-md font-bold text-on-surface">Maratones Populares de Fin de Semana</h2>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Historias diseñadas para no despegarte del sillón con arcos narrativos completos.</p>
+</div>
+<div class="hidden sm:flex items-center gap-2">
+<button aria-label="Anterior" class="p-2 rounded-full glass-panel hover:bg-surface-variant text-on-surface-variant hover:text-white transition-colors">
+<span class="material-symbols-outlined text-xl" data-icon="chevron_left">chevron_left</span>
+</button>
+<button aria-label="Siguiente" class="p-2 rounded-full glass-panel hover:bg-surface-variant text-on-surface-variant hover:text-white transition-colors">
+<span class="material-symbols-outlined text-xl" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Horizontal Cards Grid (16:9 Landscape Layout) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Marathon 1 -->
+<article class="group relative rounded-xl overflow-hidden glass-panel border border-outline-variant/30 hover:border-primary/50 transition-all flex flex-col">
+<div class="relative aspect-video w-full overflow-hidden bg-surface-container">
+<img alt="Caso 404: Conspiración Digital" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Cinematic landscape shot of a tense procedural courtroom interrogation scene in an obsidian and walnut wood courtroom, crisp cinematic studio lighting with amber highlights on witnesses." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkumDYIv1QzzYObmcYfENXMcej-gj7cd3TNz_T1uTBYKhGmehQjQX4ECkcP07Dq3DaWEKFb-IPCKPZi0sTiYQnmX7Bts7zKb7tEmTsPXeC8BhIsE0yrZ37DLJ5hznh_d99mlMXO3bK9QEJFDmCqKudB1uYxBQVxq7x-wu-1uUEUZHWthIgmgpOc0S9kcasytT8SuBcO0GtctylBkkUp2k0N04hYjHfAq-uDaj_o9qRF4PLfy3SiQsK"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent"></div>
+<span class="absolute bottom-3 left-3 bg-surface-container-lowest/80 backdrop-blur-md text-white text-[11px] font-semibold px-2.5 py-1 rounded flex items-center gap-1 border border-white/10">
+<span class="material-symbols-outlined text-xs text-primary-container" data-icon="schedule">schedule</span> 6h 20m • Temporada Única
+            </span>
+<button class="absolute bottom-3 right-3 w-9 h-9 rounded-full bg-primary-container text-on-primary-fixed flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-lg" data-icon="play_arrow" data-weight="fill" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+</div>
+<div class="p-4 flex flex-col gap-1.5 flex-grow justify-between">
+<div>
+<div class="flex items-center justify-between">
+<span class="text-tertiary font-label-sm text-label-sm font-bold uppercase">Miniserie Cerrada</span>
+<span class="text-on-surface-variant text-label-sm font-label-sm">8 Episodios</span>
+</div>
+<h3 class="font-title-md text-title-md font-bold text-white group-hover:text-primary transition-colors mt-1">Caso 404: Conspiración Digital</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant line-clamp-2 mt-1">
+                La desaparición misteriosa del director de ciberseguridad nacional desata una carrera contra el reloj legal de 48 horas.
+              </p>
+</div>
+<!-- Progress Bar Simulation -->
+<div class="pt-3">
+<div class="w-full bg-surface-variant rounded-full h-1.5 overflow-hidden">
+<div class="bg-primary-container h-1.5 rounded-full" style="width: 45%;"></div>
+</div>
+<div class="flex justify-between items-center text-[10px] text-on-surface-variant mt-1.5">
+<span>Episodio 4 de 8</span>
+<span class="text-primary">Continuar viendo</span>
+</div>
+</div>
+</div>
+</article>
+<!-- Marathon 2 -->
+<article class="group relative rounded-xl overflow-hidden glass-panel border border-outline-variant/30 hover:border-primary/50 transition-all flex flex-col">
+<div class="relative aspect-video w-full overflow-hidden bg-surface-container">
+<img alt="Tierras Lejanas: El Origen" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Wide cinematic cinematic still of an astronaut standing on an alien obsidian volcanic cliff under a massive violet celestial ring system and twin glowing amber suns, high fidelity deep space photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxwGicc7fRdyRHwxhWTj_rWVLrQ18XyDtsTgNlVync2UD1yo7iY1fjjQ8YeNqrwqPnTVpiwGIoJwL0LFdp98GIIdytOzdv9cDs9S4ZSQHfypCnehMSKElUkvSdDi-J9uYAAIRHTKMLdwDW-dCLukdBNp9ODGtEvOIm3ztpIzprFkaqa0QPWkDVEtACrT_oSfYCRzOV7D9CcdNfuGFXnEmyM8MWgdAo0vtAi2LqebJyCfoTRywrMpHp"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent"></div>
+<span class="absolute bottom-3 left-3 bg-surface-container-lowest/80 backdrop-blur-md text-white text-[11px] font-semibold px-2.5 py-1 rounded flex items-center gap-1 border border-white/10">
+<span class="material-symbols-outlined text-xs text-primary-container" data-icon="schedule">schedule</span> 8h 40m • 2 Temporadas
+            </span>
+<button class="absolute bottom-3 right-3 w-9 h-9 rounded-full bg-primary-container text-on-primary-fixed flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-lg" data-icon="play_arrow" data-weight="fill" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+</div>
+<div class="p-4 flex flex-col gap-1.5 flex-grow justify-between">
+<div>
+<div class="flex items-center justify-between">
+<span class="text-secondary font-label-sm text-label-sm font-bold uppercase">Ciencia Ficción Hard</span>
+<span class="text-on-surface-variant text-label-sm font-label-sm">12 Episodios</span>
+</div>
+<h3 class="font-title-md text-title-md font-bold text-white group-hover:text-primary transition-colors mt-1">Tierras Lejanas: El Origen</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant line-clamp-2 mt-1">
+                La primera colonia fuera del sistema solar descubre que el planeta anfitrión contiene una civilización biológicamente durmiente.
+              </p>
+</div>
+<div class="pt-3 flex items-center justify-between border-t border-outline-variant/30 text-label-sm font-label-sm">
+<span class="text-on-surface-variant">Calificación StreamTUC</span>
+<span class="text-tertiary font-bold">★ 9.5 Sobresaliente</span>
+</div>
+</div>
+</article>
+<!-- Marathon 3 -->
+<article class="group relative rounded-xl overflow-hidden glass-panel border border-outline-variant/30 hover:border-primary/50 transition-all flex flex-col">
+<div class="relative aspect-video w-full overflow-hidden bg-surface-container">
+<img alt="Bocados &amp; Caos" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="An atmospheric cinematic still frame from a culinary prestige comedy series showing an energetic open commercial kitchen with steel pots sizzling, warm amber fire flair and focused chefs plating delicacies." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMKK0ptyaOHeUzm1hmWjWbgWd0WXkz2jRqFzpT04AL1L81fYewZSu7FqCCP5oJLtW_Zg5BlrAgrzye_Y9yJkCHIqwXWdCR5OfNYcmtXQ9urhwVITiD_twHXBcyQ-hrT4G-yJJt0OEP3mwJnBho6ZBt9slYJttx6oHeEyG13G1idvKZ6lGX9ofQggXohksTSrxJCehay5Ri8qWfO2b3XCwYsJF76pMUhQfArUh0bMQ7VALxor4FABi0"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent"></div>
+<span class="absolute bottom-3 left-3 bg-surface-container-lowest/80 backdrop-blur-md text-white text-[11px] font-semibold px-2.5 py-1 rounded flex items-center gap-1 border border-white/10">
+<span class="material-symbols-outlined text-xs text-primary-container" data-icon="schedule">schedule</span> 5h 15m • Temporadas 1-3
+            </span>
+<button class="absolute bottom-3 right-3 w-9 h-9 rounded-full bg-primary-container text-on-primary-fixed flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-lg" data-icon="play_arrow" data-weight="fill" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+</div>
+<div class="p-4 flex flex-col gap-1.5 flex-grow justify-between">
+<div>
+<div class="flex items-center justify-between">
+<span class="text-primary font-label-sm text-label-sm font-bold uppercase">Dramedia Culinaria</span>
+<span class="text-on-surface-variant text-label-sm font-label-sm">24 Episodios</span>
+</div>
+<h3 class="font-title-md text-title-md font-bold text-white group-hover:text-primary transition-colors mt-1">Bocados &amp; Caos</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant line-clamp-2 mt-1">
+                La reconstrucción de un restaurante de barrio en una capital gastronómica mientras la brigada lidia con el ego y las deudas.
+              </p>
+</div>
+<div class="pt-3 flex items-center justify-between border-t border-outline-variant/30 text-label-sm font-label-sm">
+<span class="text-on-surface-variant">Premio Mejor Guion</span>
+<span class="text-tertiary font-bold">Ganador 2024</span>
+</div>
+</div>
+</article>
+</div>
+</section>
+</main>
+<!-- FOOTER (Shared Component Anchor) -->
+<footer class="bg-surface-container-lowest dark:bg-surface-container-lowest text-primary dark:text-primary w-full border-t border-outline-variant/20 mt-16">
+<div class="w-full max-w-7xl mx-auto px-6 lg:px-14 py-12 flex flex-col gap-6">
+<!-- Top row: Brand & Socials -->
+<div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-6 border-b border-outline-variant/20">
+<div class="flex items-center gap-3">
+<img alt="StreamTUC Logo" class="h-7 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcUlBiZEx-JTbOscXrbSs-XXUz-8mGE5zwzkmv2hT_Yj8A-QZigUI4Mwu0WfrHAvgJdyhzHs9BglBQriPVZ44MwB2pe5hplpR3obSupCs1tPVY35EDbQm-V6Jw2ocMjsJbb_lAyWOL_1LE6eIW0pSgVkZeTtSggT9KKHCf4xHdtk_T2HDGiSzzkJx4fKdMDd29DXtnldlfgD3M7hgxITVi1TfbychVPgRZTvcOU_T7jiidii6RoYDLWPpeW97PNkfbAA"/>
+<span class="text-headline-sm font-headline-sm font-bold text-on-surface dark:text-on-surface">StreamTUC</span>
+</div>
+<!-- Social Icons -->
+<div class="flex items-center gap-4 text-on-surface-variant">
+<a aria-label="YouTube" class="p-2 glass-panel rounded-full hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="smart_display">smart_display</span>
+</a>
+<a aria-label="Podcast" class="p-2 glass-panel rounded-full hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="podcasts">podcasts</span>
+</a>
+<a aria-label="Comunidad" class="p-2 glass-panel rounded-full hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="forum">forum</span>
+</a>
+</div>
+</div>
+<!-- Links Array from JSON: ["Centro de Ayuda", "Términos de Uso", "Privacidad", "Configuración de Audio", "Descargar Apps", "Preferencias de Idioma"] -->
+<nav class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 py-2">
+<a class="text-label-sm font-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary transition-colors duration-200" href="#">Centro de Ayuda</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary transition-colors duration-200" href="#">Términos de Uso</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary transition-colors duration-200" href="#">Privacidad</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary transition-colors duration-200" href="#">Configuración de Audio</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary transition-colors duration-200" href="#">Descargar Apps</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary transition-colors duration-200" href="#">Preferencias de Idioma</a>
+</nav>
+<!-- Copyright string exact from JSON -->
+<div class="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-body-sm font-body-sm text-on-surface-variant/70">
+<p>© 2024 StreamTUC, Inc. Todos los derechos reservados.</p>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-emerald-500 inline-block"></span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Servidores Ultra-HD Operativos</span>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

@@ -7,7 +7,7 @@ export function DataCtx({ children }: { children: ReactNode }) {
 	const [list, setList] = useState<Movie[]>([]);
 	const [data, setData] = useState<unknown>(null);
 	const [loading, setLoading] = useState<boolean>(true);
-	const apiKey: string = import.meta.env.VITE_API_KEY;
+	const apiKey = import.meta.env.VITE_API_KEY as string | undefined;
 	const [currentIndex, setIndex] = useState(1);
 	const [selectedGenre, setSelectedGenre] = useState<number | null>(null);
 
@@ -27,7 +27,6 @@ export function DataCtx({ children }: { children: ReactNode }) {
 			const result = await response.json();
 			setData(result);
 			setList(result.results);
-			console.log(list);
 		} catch (error) {
 			console.error(error);
 		} finally {

@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Crónicas del Multiverso - StreamTUC</title>
+<!-- Google Fonts: Plus Jakarta Sans & Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-primary-fixed": "#351000",
+            "on-primary-container": "#561e00",
+            "on-primary": "#571f00",
+            "surface-container-high": "#292a2e",
+            "tertiary": "#dbb8ff",
+            "outline": "#a98a7d",
+            "surface-variant": "#343439",
+            "secondary-fixed": "#ecdcff",
+            "surface-container-lowest": "#0d0e12",
+            "inverse-primary": "#a23f00",
+            "primary": "#ffb695",
+            "on-secondary-fixed": "#280056",
+            "on-primary-fixed-variant": "#7b2f00",
+            "secondary-container": "#6c00d6",
+            "surface": "#121317",
+            "error-container": "#93000a",
+            "on-error": "#690005",
+            "on-tertiary-fixed-variant": "#6600b7",
+            "background": "#121317",
+            "on-error-container": "#ffdad6",
+            "surface-container-low": "#1a1b20",
+            "outline-variant": "#5a4136",
+            "surface-bright": "#38393e",
+            "on-secondary-fixed-variant": "#6000bf",
+            "on-surface-variant": "#e2bfb1",
+            "tertiary-fixed": "#efdbff",
+            "primary-fixed-dim": "#ffb695",
+            "error": "#ffb4ab",
+            "surface-dim": "#121317",
+            "surface-tint": "#ffb695",
+            "on-tertiary-fixed": "#2b0052",
+            "primary-container": "#ff6800",
+            "tertiary-container": "#b879ff",
+            "inverse-surface": "#e3e2e8",
+            "secondary-fixed-dim": "#d6baff",
+            "on-secondary-container": "#d3b5ff",
+            "inverse-on-surface": "#2f3035",
+            "on-background": "#e3e2e8",
+            "secondary": "#d6baff",
+            "surface-container": "#1f1f24",
+            "tertiary-fixed-dim": "#dbb8ff",
+            "surface-container-highest": "#343439",
+            "on-secondary": "#430089",
+            "primary-fixed": "#ffdbcc",
+            "on-surface": "#e3e2e8",
+            "on-tertiary-container": "#470082",
+            "on-tertiary": "#470083"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xl": "2.5rem",
+            "space-lg": "1.5rem",
+            "space-md": "1rem",
+            "space-sm": "0.5rem",
+            "gutter": "1.5rem",
+            "margin-mobile": "1.25rem",
+            "gutter-sm": "0.75rem",
+            "space-xs": "0.25rem",
+            "margin": "3.5rem"
+          },
+          "fontFamily": {
+            "body-md": ["Inter"],
+            "label-sm": ["Inter"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "body-lg": ["Inter"],
+            "label-md": ["Inter"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "display": ["Plus Jakarta Sans"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "headline-xl-mobile": ["Plus Jakarta Sans"],
+            "display-mobile": ["Plus Jakarta Sans"],
+            "headline-lg-mobile": ["Plus Jakarta Sans"],
+            "title-md": ["Plus Jakarta Sans"],
+            "body-sm": ["Inter"]
+          },
+          "fontSize": {
+            "body-md": ["15px", { "lineHeight": "22px", "fontWeight": "400" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "700" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "display": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.03em", "fontWeight": "800" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "headline-xl-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "display-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "headline-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "0em", "fontWeight": "700" }],
+            "title-md": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "body-sm": ["13px", { "lineHeight": "18px", "fontWeight": "400" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 20px;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      display: inline-block;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -webkit-font-smoothing: antialiased;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #121317;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #343439;
+      border-radius: 9999px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #ff6800;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary-container selection:text-white antialiased overflow-x-hidden min-h-screen">
+<!-- TOP APP BAR -->
+<header class="bg-surface/75 dark:bg-surface/75 backdrop-blur-md text-primary dark:text-primary docked full-width top-0 fixed z-50 shadow-2xl flex justify-between items-center w-full px-6 lg:px-14 py-3">
+<!-- Brand Anchor & Nav Links -->
+<div class="flex items-center gap-10">
+<a class="flex items-center gap-2.5 group" href="#">
+<img alt="StreamTUC" class="w-8 h-8 object-contain transition-transform duration-300 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDW81spLDj3WBjovhKxrwC29S-Vm8teGROpjqS82cX6M4L4MRaEngpKM73HXamDs-TjLCvbMwpm_uf2mNaYbEms9BfJzHqsGnOQb3_Ava64mVO0xriqvcHb0eGZNqmNBhCCF3eABf7N52mgY00_phSqUOIhxbyoLGe4VAkYlwzlSP3iD3VrBnn9SDkM-7SiHjHXxax-2FnEus0qZACDbh0khYiPE2u0vgkdP-cWN_mvsVW9AnQYU_smv4hgyPrQKT4Dfg"/>
+<span class="text-headline-md font-headline-md font-extrabold tracking-tight text-primary-container dark:text-primary">StreamTUC</span>
+</a>
+<nav class="hidden md:flex items-center gap-7">
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface dark:hover:text-on-surface transition-colors font-label-md text-label-md" href="#">Inicio</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface dark:hover:text-on-surface transition-colors font-label-md text-label-md" href="#">Películas</a>
+<a class="text-primary-container dark:text-primary font-bold transition-colors font-label-md text-label-md relative py-1" href="#">
+          Series
+          <span class="absolute bottom-0 left-0 w-full h-0.5 bg-primary-container rounded-full"></span>
+</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface dark:hover:text-on-surface transition-colors font-label-md text-label-md" href="#">Novedades populares</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface dark:hover:text-on-surface transition-colors font-label-md text-label-md" href="#">Mi Lista</a>
+</nav>
+</div>
+<!-- Search & Trailing Profile Actions -->
+<div class="flex items-center gap-5">
+<div class="relative hidden sm:block w-64 lg:w-72">
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-[18px]">search</span>
+<input class="w-full bg-surface-container-low border border-surface-variant/40 rounded-full py-1.5 pl-10 pr-10 text-body-sm font-body-sm text-on-surface placeholder:text-on-surface-variant/60 focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all" placeholder="Títulos, géneros, personas..." type="text"/>
+<span class="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] uppercase font-bold text-on-surface-variant/70 border border-surface-variant/60 px-1.5 py-0.5 rounded">⌘K</span>
+</div>
+<button aria-label="Notificaciones" class="text-on-surface-variant hover:text-primary transition-colors p-2 rounded-full hover:bg-surface-container-high transition-transform duration-150 active:scale-95 relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-primary-container rounded-full ring-2 ring-surface"></span>
+</button>
+<div class="flex items-center gap-2 cursor-pointer group">
+<div class="relative w-9 h-9 rounded-full p-0.5 ring-2 ring-primary-container/40 group-hover:ring-primary-container transition-all">
+<img alt="User avatar profile dropdown" class="w-full h-full object-cover rounded-full" data-alt="Intense high-definition cinematic avatar portrait of a modern streamer in dim neon purple lighting wearing sleek minimalist studio headphones, hyper-realistic, dark aesthetic, elegant obsidian background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5Tq1a4yhHh_klrqO9ojOX2bECv31btCKs1LWdOn_o21_JUCCjTThfRJMdJ1QInF5pIn4ceC2ET6eb4BkeDNhYz7QHdScaltizmAj2MF1ZSitMAQDFK2cTfYnZL5W_tzouUG6XLul8bUv6-1IJDaH2dVmQohImNil3khwstbralhSkGri7a0NrF8pf1FsAd9QYZ1EtlRbf84yl7P9ujickOve6JdzFrxIZel7HgtZTHMAZbW8NJb58"/>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-surface text-[18px] transition-transform group-hover:translate-y-0.5">expand_more</span>
+</div>
+</div>
+</header>
+<main class="pt-16 pb-20">
+<!-- SERIES HERO BANNER -->
+<section class="relative w-full min-h-[580px] lg:min-h-[640px] flex items-end">
+<!-- Backdrop Image with Gradient Masking -->
+<div class="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
+<div class="w-full h-full bg-cover bg-center scale-105 transform" data-alt="A sweeping cinematic science fiction backdrop depicting a luminous multidimensional tear rupturing space-time above a neon-lit cybernetic city, bathed in deep obsidian shadows, electric violet cosmic rift lights, and energetic radiant orange particle shockwaves. Ultra-high fidelity, atmospheric visual depth, and theatrical widescreen composition." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCPT7k6LScguTQ6cys-U1JhFeFMwp_CIQZBZvkaTJjEXYSaU9XYSr49blIVV4eYrHdSNdpdlDTRZfpbgoWImMCmbqGzIpIjBJY2TpUTjaI099ITohdpnW7Aj9040cwbVovCVJ1UGT8dDOplBDsa-wxHDxpQE301QHk-RBxkv8znB5cRaSEV4kDFdwuZF5Ev-BpLC1NlQRK8maja8BEbv3bLuoJOA1VT3OQ75k2R_HyEahCHM0o0zS84')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/20"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-background via-background/70 to-transparent w-full lg:w-3/4"></div>
+</div>
+<!-- Hero Content Container -->
+<div class="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-14 pt-28 pb-12 flex flex-col gap-6">
+<!-- Series Badge & Accents -->
+<div class="flex items-center gap-3 flex-wrap">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-label-sm font-label-sm uppercase bg-gradient-to-r from-secondary-container to-secondary text-white shadow-lg shadow-secondary-container/30">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+            Original de StreamTUC
+          </span>
+<span class="px-2.5 py-0.5 rounded text-label-sm font-label-sm bg-surface-container-high/80 text-primary border border-surface-variant/40 font-bold">TOP 1 EN ESPAÑA HOY</span>
+</div>
+<!-- Series Main Title -->
+<h1 class="text-display-mobile md:text-headline-xl lg:text-display font-display font-extrabold tracking-tight text-white max-w-3xl drop-shadow-md">
+          Crónicas del Multiverso
+        </h1>
+<!-- Metadata Cluster -->
+<div class="flex flex-wrap items-center gap-y-2 gap-x-4 text-on-surface-variant font-label-md text-label-md">
+<span class="flex items-center gap-1 text-primary-container font-bold">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+            9.2/10
+          </span>
+<span class="text-white font-semibold bg-emerald-950/70 text-emerald-400 border border-emerald-500/30 px-2 py-0.5 rounded">97% coincidencia</span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="text-on-surface">4 Temporadas</span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span>38 Episodios</span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span>2021-2024</span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="border border-outline/50 px-1.5 py-0.5 rounded text-label-sm font-label-sm font-bold text-on-surface">18+</span>
+<span class="border border-outline/50 px-1.5 py-0.5 rounded text-label-sm font-label-sm font-bold text-on-surface">Ultra HD 4K</span>
+<span class="border border-outline/50 px-1.5 py-0.5 rounded text-label-sm font-label-sm font-bold text-on-surface">Dolby Atmos</span>
+</div>
+<!-- Overview Synopsis -->
+<p class="max-w-2xl text-on-surface-variant font-body-lg text-body-lg line-clamp-3">
+          Cuando una fisura cuántica no autorizada conecta la Tierra con realidades alternas divergentes, un equipo clandestino de cosmólogos y soldados renegados debe contener una amenaza que borra líneas temporales completas antes de que la entropía consuma el universo primario.
+        </p>
+<!-- CTA Actions Bar -->
+<div class="flex flex-wrap items-center gap-3.5 pt-2">
+<!-- Primary Resume Button -->
+<button class="flex items-center gap-3 px-8 py-3.5 rounded-full bg-primary-container text-white font-title-md text-title-md font-bold shadow-lg shadow-primary-container/30 hover:bg-[#ff7700] hover:scale-105 active:scale-95 transition-all duration-150">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+            Reanudar T4:E3
+          </button>
+<!-- Secondary Watchlist & Details -->
+<button class="flex items-center gap-2 px-5 py-3.5 rounded-full bg-white/10 hover:bg-white/15 border border-white/15 text-white font-label-md text-label-md transition-all active:scale-95 backdrop-blur-md">
+<span class="material-symbols-outlined text-[20px]">restart_alt</span>
+            Reiniciar Serie
+          </button>
+<button class="flex items-center gap-2 px-5 py-3.5 rounded-full bg-white/10 hover:bg-white/15 border border-white/15 text-white font-label-md text-label-md transition-all active:scale-95 backdrop-blur-md">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+            Añadir a Favoritos
+          </button>
+<button class="w-12 h-12 rounded-full flex items-center justify-center bg-white/10 hover:bg-white/15 border border-white/15 text-white transition-all active:scale-95 backdrop-blur-md" title="Compartir serie">
+<span class="material-symbols-outlined text-[20px]">share</span>
+</button>
+</div>
+</div>
+</section>
+<!-- MAIN BODY GRID (EPISODES & PRODUCTION DETAILS) -->
+<div class="max-w-7xl mx-auto px-6 lg:px-14 mt-8 flex flex-col lg:grid lg:grid-cols-12 gap-10">
+<!-- CENTRAL EXPLORER COLUMN (EPISODES) -->
+<section class="lg:col-span-8 flex flex-col gap-6">
+<!-- Section Title & Season Filter Bar -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-surface-variant/30">
+<div>
+<h2 class="text-headline-md font-headline-md font-bold text-white tracking-tight">Episodios</h2>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Temporada seleccionada con audio y subtítulos en español neutro.</p>
+</div>
+<!-- Dropdown Style Mobile / Compact Indicator -->
+<div class="flex items-center gap-2 text-label-sm font-label-sm text-on-surface-variant bg-surface-container-low px-3 py-1.5 rounded-lg border border-surface-variant/40">
+<span class="material-symbols-outlined text-primary-container text-[18px]">verified</span>
+            Dolby Vision | HDR10+
+          </div>
+</div>
+<!-- Interactive Season Pills Bar -->
+<div class="flex items-center gap-2 overflow-x-auto custom-scrollbar pb-2">
+<button class="px-4 py-2 rounded-full border border-surface-variant/60 text-on-surface-variant hover:text-white hover:border-white/30 text-label-md font-label-md whitespace-nowrap transition-colors">
+            Temporada 1 (8 eps)
+          </button>
+<button class="px-4 py-2 rounded-full border border-surface-variant/60 text-on-surface-variant hover:text-white hover:border-white/30 text-label-md font-label-md whitespace-nowrap transition-colors">
+            Temporada 2 (10 eps)
+          </button>
+<button class="px-4 py-2 rounded-full border border-surface-variant/60 text-on-surface-variant hover:text-white hover:border-white/30 text-label-md font-label-md whitespace-nowrap transition-colors">
+            Temporada 3 (10 eps)
+          </button>
+<button class="px-5 py-2 rounded-full bg-primary-container text-white font-bold text-label-md font-label-md whitespace-nowrap shadow-md shadow-primary-container/20 flex items-center gap-1.5">
+<span>Temporada 4 (10 eps - Estreno)</span>
+<span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+</button>
+</div>
+<!-- Episode Cards Vertical Stacking -->
+<div class="flex flex-col gap-4 mt-2">
+<!-- Episode 1 -->
+<div class="group bg-surface-container-low/70 hover:bg-surface-container p-4 rounded-xl border border-surface-variant/30 hover:border-primary-container/40 transition-all duration-200 flex flex-col md:flex-row gap-5 items-start">
+<div class="relative w-full md:w-60 aspect-video rounded-lg overflow-hidden flex-shrink-0 bg-surface-container-high">
+<img alt="E01 - La Grieta Dimensional" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Cinematic television still shot showing a massive glowing blue quantum singularity rupturing an abandoned subterranean research facility with atmospheric dust motes, dramatic side lighting, and high-tech monitoring consoles in ultra detailed widescreen." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXGnRbcqxTQL4becuwVALVhS8MmxsRIyVhaSeIfh_QX6RiguCggnFj7b6OsVuGITSEpsgxZt064taFlVEy6RUI6Ftwc-v_6xyrIZRIDNb25AoyNe3umhkRAx6OrHMuUPvxstQfTjZtSCgDnEKD-9OZl9Vc3mSsP812LKrRUICcU5dXO1oZRF6tXFBBqJhxQFheGtkSkXJhzx61QxFcvTu0OG7sY57fypBmrP6zELol2bSWeSvJdz3T"/>
+<!-- Completed progress bar -->
+<div class="absolute bottom-0 inset-x-0 h-1 bg-surface-variant">
+<div class="h-full bg-primary-container w-full"></div>
+</div>
+<div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="w-11 h-11 rounded-full bg-primary-container text-white flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</span>
+</div>
+<span class="absolute top-2 left-2 px-2 py-0.5 rounded text-[10px] font-bold bg-black/70 text-white backdrop-blur-sm">Visto</span>
+</div>
+<div class="flex flex-col justify-between flex-grow gap-2 w-full">
+<div>
+<div class="flex items-center justify-between gap-2">
+<h3 class="text-title-md font-title-md font-bold text-white group-hover:text-primary transition-colors">
+                    E01 - La Grieta Dimensional
+                  </h3>
+<span class="text-label-sm font-label-sm text-on-surface-variant bg-surface-container-high px-2 py-0.5 rounded">58 min</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-2 line-clamp-2">
+                  Tras el colapso del Colisionador de Hadrones de Ginebra, la Dra. Elena Vega detecta fluctuaciones de radiación taquiónica provenientes de un universo paralelo donde la civilización nunca avanzó más allá de la era del bronce.
+                </p>
+</div>
+<div class="flex items-center justify-between pt-2 border-t border-surface-variant/20 text-on-surface-variant">
+<span class="text-label-sm font-label-sm text-outline">Emitido: 12 Octubre 2024</span>
+<button class="p-1.5 rounded-full hover:text-white hover:bg-surface-variant transition-colors" title="Descargar episodio">
+<span class="material-symbols-outlined text-[18px]">download</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Episode 2 -->
+<div class="group bg-surface-container-low/70 hover:bg-surface-container p-4 rounded-xl border border-surface-variant/30 hover:border-primary-container/40 transition-all duration-200 flex flex-col md:flex-row gap-5 items-start">
+<div class="relative w-full md:w-60 aspect-video rounded-lg overflow-hidden flex-shrink-0 bg-surface-container-high">
+<img alt="E02 - Eco en la Oscuridad" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="High contrast film still of a covert military reconnaissance team navigating a subterranean obsidian canyon illuminated solely by tactical ultraviolet flashlights and pulsating purple alien flora, photorealistic style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCs3yq254hMzZ0Ug456rdUT_dTI3GsTs_FeTn1fXrpSsQfib97k7kl1G4bgoJ8oTRAQpbk34GrTsYZXO6_VHShMOxNWTR3CMguRZNOUn57yUsi-A4Wh7GgfIFoZ85PF8TcrOizvpkpJLEzUxXlgmW4uKXeYC4OkeXhojUtzg6rMbTKlw6FTwQOdcCoXwbC75k76Zvkj_whOwZ6dAap24Qy9h8gLiDoP2SE5_1azCLq0P2IEDLBS6FCX"/>
+<div class="absolute bottom-0 inset-x-0 h-1 bg-surface-variant">
+<div class="h-full bg-primary-container w-full"></div>
+</div>
+<div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="w-11 h-11 rounded-full bg-primary-container text-white flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</span>
+</div>
+<span class="absolute top-2 left-2 px-2 py-0.5 rounded text-[10px] font-bold bg-black/70 text-white backdrop-blur-sm">Visto</span>
+</div>
+<div class="flex flex-col justify-between flex-grow gap-2 w-full">
+<div>
+<div class="flex items-center justify-between gap-2">
+<h3 class="text-title-md font-title-md font-bold text-white group-hover:text-primary transition-colors">
+                    E02 - Eco en la Oscuridad
+                  </h3>
+<span class="text-label-sm font-label-sm text-on-surface-variant bg-surface-container-high px-2 py-0.5 rounded">52 min</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-2 line-clamp-2">
+                  El pelotón de reconocimiento Alfa se aventura a través de la grieta primaria solo para descubrir que la entidad que habita el espacio liminal no está intentando invadir, sino advertirles de un colapso inminente.
+                </p>
+</div>
+<div class="flex items-center justify-between pt-2 border-t border-surface-variant/20 text-on-surface-variant">
+<span class="text-label-sm font-label-sm text-outline">Emitido: 19 Octubre 2024</span>
+<button class="p-1.5 rounded-full hover:text-white hover:bg-surface-variant transition-colors" title="Descargar episodio">
+<span class="material-symbols-outlined text-[18px]">download</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Episode 3 (Currently Watching / Highlighted) -->
+<div class="group bg-surface-container p-4 rounded-xl border-2 border-primary-container shadow-xl shadow-primary-container/10 flex flex-col md:flex-row gap-5 items-start relative">
+<div class="relative w-full md:w-60 aspect-video rounded-lg overflow-hidden flex-shrink-0 bg-surface-container-high ring-1 ring-primary-container/50">
+<img alt="E03 - Paradoja Temporal" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Cinematic frame capture depicting two identical temporal variants of a female scientist confronting each other inside an electric violet control room filled with floating zero-gravity holographic equations, dramatic warm neon lighting accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC61qR7f5UKBzaRxPipCOtivkhR7z_jXB0T9exArKHrO9BukpNFnDcq0qLRBnUIqxJRh4zoHzGH7tpaqyOs68blAJjmQ7altwJjoXATuBcYcq5pqWL3en7K27Bu4tv8yhHSTemMD4p8ZlMphDBIT43I5VBgjVwhmabXTPKVqn9IHRTBuGSvhM8bGPmfn72aEzm7ZFn6Deqnn_fiPZbLb09gPX-Lzp1hXnlX6KsFpdM9d2TqI8m3SYc6"/>
+<!-- In progress bar -->
+<div class="absolute bottom-0 inset-x-0 h-1.5 bg-surface-container-highest">
+<div class="h-full bg-primary-container w-3/5 rounded-r-full shadow-sm shadow-primary-container"></div>
+</div>
+<div class="absolute inset-0 bg-black/30 flex items-center justify-center">
+<span class="w-12 h-12 rounded-full bg-primary-container text-white flex items-center justify-center shadow-lg shadow-primary-container/40 transform scale-105">
+<span class="material-symbols-outlined text-[26px]" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</span>
+</div>
+<span class="absolute top-2 left-2 px-2 py-0.5 rounded text-[10px] font-bold bg-primary-container text-white shadow">Viendo ahora (38m restantes)</span>
+</div>
+<div class="flex flex-col justify-between flex-grow gap-2 w-full">
+<div>
+<div class="flex items-center justify-between gap-2">
+<div class="flex items-center gap-2">
+<h3 class="text-title-md font-title-md font-bold text-white group-hover:text-primary transition-colors">
+                      E03 - Paradoja Temporal
+                    </h3>
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+</div>
+<span class="text-label-sm font-label-sm text-primary-container font-bold bg-primary-container/10 border border-primary-container/30 px-2 py-0.5 rounded">1h 02 min</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-2 line-clamp-2">
+                  Elena se encuentra cara a cara con su versión alternativa de hace quince años. Juntas deben descifrar un enigma termodinámico mientras el Nexo empieza a fusionar sus recuerdos personales en una sola conciencia.
+                </p>
+</div>
+<div class="flex items-center justify-between pt-2 border-t border-surface-variant/20 text-on-surface-variant">
+<span class="text-label-sm font-label-sm text-primary font-medium">Progreso: 24 min de 62 min</span>
+<div class="flex items-center gap-2">
+<button class="p-1.5 rounded-full hover:text-white hover:bg-surface-variant transition-colors" title="Descargar episodio">
+<span class="material-symbols-outlined text-[18px]">download</span>
+</button>
+<button class="px-3 py-1 bg-primary-container text-white rounded text-label-sm font-label-sm font-bold flex items-center gap-1 hover:bg-[#ff7700]">
+                    Reanudar
+                  </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Episode 4 -->
+<div class="group bg-surface-container-low/70 hover:bg-surface-container p-4 rounded-xl border border-surface-variant/30 hover:border-primary-container/40 transition-all duration-200 flex flex-col md:flex-row gap-5 items-start">
+<div class="relative w-full md:w-60 aspect-video rounded-lg overflow-hidden flex-shrink-0 bg-surface-container-high">
+<img alt="E04 - El Nexo Central" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Grand wide shot of an immense orbital space station floating silently near a swirling violet nebula, with docking bays emitting warm orange navigational safety beacons, high detail modern science-fiction cinematography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvVE1VYh9sF3EI2NPrOheF3iI7rd8j1OMbFSVrcmsQcuLdCfSnrk45ztI98xBakwMLTrsrkk7ltXxxcGMQjPBNgD4v8u2XZLRuOvQIziNLk79MlxqPpQJ5R6PSxjOa3tXaihsPcdtuyTPLX9JoVnv6kB2F9tlRCupSEpgWBSI-mh61xHmw-7dFX51apqjfSfSAtx6C211rLyH5-KNNHDxQZ0Ba854sRGgX5lj_jaBRE6pMl7eNvv55"/>
+<div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="w-11 h-11 rounded-full bg-primary-container text-white flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</span>
+</div>
+<span class="absolute bottom-2 right-2 px-1.5 py-0.5 rounded text-[10px] font-bold bg-black/80 text-white">4K HDR</span>
+</div>
+<div class="flex flex-col justify-between flex-grow gap-2 w-full">
+<div>
+<div class="flex items-center justify-between gap-2">
+<h3 class="text-title-md font-title-md font-bold text-white group-hover:text-primary transition-colors">
+                    E04 - El Nexo Central
+                  </h3>
+<span class="text-label-sm font-label-sm text-on-surface-variant bg-surface-container-high px-2 py-0.5 rounded">54 min</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-2 line-clamp-2">
+                  El consejo interdimensional convoca un juicio sumario contra el planeta origen. Elena y Marcus planean un sabotaje contra el núcleo de antimateria que mantiene encerrada a la civilización de los Espejos.
+                </p>
+</div>
+<div class="flex items-center justify-between pt-2 border-t border-surface-variant/20 text-on-surface-variant">
+<span class="text-label-sm font-label-sm text-outline">Emitido: 2 Noviembre 2024</span>
+<button class="p-1.5 rounded-full hover:text-white hover:bg-surface-variant transition-colors" title="Descargar episodio">
+<span class="material-symbols-outlined text-[18px]">download</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Episode 5 -->
+<div class="group bg-surface-container-low/70 hover:bg-surface-container p-4 rounded-xl border border-surface-variant/30 hover:border-primary-container/40 transition-all duration-200 flex flex-col md:flex-row gap-5 items-start">
+<div class="relative w-full md:w-60 aspect-video rounded-lg overflow-hidden flex-shrink-0 bg-surface-container-high">
+<img alt="E05 - Punto de Inflexión" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Dramatic close-up film still of a battle-tested starship captain standing on a burning bridge looking into an amber tactical hologram of planetary disintegration, cinematic mood, smoky dark atmospheric aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKuqokXeeHVQmWitU_mQLiOLiZ0nXl6AoTKwucwY9vV3Kjo7gjbp8Dw0k6qVzn2HV52tkiapetacMPV3S9rhzjmnlQ1X2IYS5gfpxh-32IiP2gdKqfU9N9zn6OnmdJ2rKkBTVR9gJEaqDUPLFgzK-mC3evMzz2Dw53Ba0TVTkREbvClwbXaG1BhChyD38LkhOikufsZUETDwdBSRtVRHEmu86xnGUMH0ZnCPtdqtuJHnGrwOWWkIUY"/>
+<div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="w-11 h-11 rounded-full bg-primary-container text-white flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</span>
+</div>
+<span class="absolute bottom-2 right-2 px-1.5 py-0.5 rounded text-[10px] font-bold bg-black/80 text-white">4K HDR</span>
+</div>
+<div class="flex flex-col justify-between flex-grow gap-2 w-full">
+<div>
+<div class="flex items-center justify-between gap-2">
+<h3 class="text-title-md font-title-md font-bold text-white group-hover:text-primary transition-colors">
+                    E05 - Punto de Inflexión
+                  </h3>
+<span class="text-label-sm font-label-sm text-on-surface-variant bg-surface-container-high px-2 py-0.5 rounded">50 min</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-2 line-clamp-2">
+                  Un traidor en la tripulación activa la secuencia de cuarentena permanente. Atrapados en una burbuja de tiempo invertido, deben decidir si sacrificar su universo natal o dejar morir tres realidades hermanas.
+                </p>
+</div>
+<div class="flex items-center justify-between pt-2 border-t border-surface-variant/20 text-on-surface-variant">
+<span class="text-label-sm font-label-sm text-outline">Emitido: 9 Noviembre 2024</span>
+<button class="p-1.5 rounded-full hover:text-white hover:bg-surface-variant transition-colors" title="Descargar episodio">
+<span class="material-symbols-outlined text-[18px]">download</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SIDEBAR COLUMN: CAST & PRODUCTION METADATA -->
+<aside class="lg:col-span-4 flex flex-col gap-8">
+<!-- ELENCO PRINCIPAL -->
+<div class="bg-surface-container-low/60 rounded-xl p-6 border border-surface-variant/30 backdrop-blur-md">
+<h2 class="text-headline-sm font-headline-sm font-bold text-white pb-3 border-b border-surface-variant/30 flex items-center justify-between">
+<span>Elenco Principal</span>
+<span class="text-label-sm font-label-sm text-primary">Ver todos (18)</span>
+</h2>
+<div class="flex flex-col gap-4 mt-5">
+<!-- Cast member 1 -->
+<div class="flex items-center gap-3.5 group cursor-pointer">
+<div class="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 ring-1 ring-surface-variant group-hover:ring-primary-container transition-all">
+<img alt="Dra. Elena Vega" class="w-full h-full object-cover" data-alt="Portrait photography of a charismatic female actress in her mid 30s with focused gaze, studio rim lighting, neutral dark slate background, ultra clean aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdmkgk8allyIkzt7j7CoAclWy9_vf8-Kt-jdKaK9DqKKFZZk9E_oCwenb9ZrqhkS4G7fO6Y61ab48ddV-rbyGenUQAsuOLVEbqOYtHEMAuwkp1jciKSxEZLV0rPKRrBkXQWDzyIwcBdDVGjZVsYkrgVF_WtW3qoDeoSsjdkBXJgZ4HiWtcBxzXjKoITzaSTmduN_rYtdYOCQcfe6jDzqOKgf1KEpn8EuKTFO0vRjFUTV9Mm8k4mqoU"/>
+</div>
+<div>
+<h4 class="text-title-md font-title-md text-white group-hover:text-primary transition-colors">Marisa Paredes Riva</h4>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Dra. Elena Vega (38 eps)</p>
+</div>
+</div>
+<!-- Cast member 2 -->
+<div class="flex items-center gap-3.5 group cursor-pointer">
+<div class="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 ring-1 ring-surface-variant group-hover:ring-primary-container transition-all">
+<img alt="Comandante Marcus Thorne" class="w-full h-full object-cover" data-alt="Studio portrait of a rugged male actor in his early 40s with a subtle beard, dramatic cinematic split lighting, dark studio backdrop." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8uqeVx10QS5252aiQKbAsvZaPUxY0u0EbI4kzYFXMKVVWjzce1Y__FXbARgESSsnb_TGZMFAahChsieQwCVq2k3fGfn_SBjDxxRHbtuAByABiZEnXOnc6hJw7kt-mhj8QeDeUUC_7jNZYRrFYKd9A74x7yA2QHJ9PJ-atLEixBxE8kFoabnFHV3D5pQN66ipgtgjzN4up72fxiFkoorJ1OHOWXk5SXXVjfSR8D69AljcKCr8twp-g"/>
+</div>
+<div>
+<h4 class="text-title-md font-title-md text-white group-hover:text-primary transition-colors">Javier Coronado</h4>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Comandante Marcus Thorne (36 eps)</p>
+</div>
+</div>
+<!-- Cast member 3 -->
+<div class="flex items-center gap-3.5 group cursor-pointer">
+<div class="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 ring-1 ring-surface-variant group-hover:ring-primary-container transition-all">
+<img alt="Leo Kross" class="w-full h-full object-cover" data-alt="Headshot of a young talented actor with sharp intelligent eyes, minimal studio lighting on obsidian setting, high resolution headshot." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMQPUXlZzioWhLpBk3uwMIzaU0Cwv4WtFM-Giz0lS8ltGvZJXXwjKtYDFvmJkHRi1ydoN0bwKQ_r8ktVM62RjQdSc6inog1l6j6IXrfKpjVA9xFvSq-1e7SsdGZSi_egWGs6Fb2xX3n1Ym0_rrs3blwVgsiMOR6Jiv1KBtoRuNLtJo_stDaH0kA-KxJgUdeqiI18bIXzzYXznE1MS5ZyY3fspnyQxBk4CBPrmvq6TbN5bKGG1R_vml"/>
+</div>
+<div>
+<h4 class="text-title-md font-title-md text-white group-hover:text-primary transition-colors">Mateo Silberstein</h4>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Leo Kross / Entidad Nexo (28 eps)</p>
+</div>
+</div>
+<!-- Cast member 4 -->
+<div class="flex items-center gap-3.5 group cursor-pointer">
+<div class="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 ring-1 ring-surface-variant group-hover:ring-primary-container transition-all">
+<img alt="Canciller Vane" class="w-full h-full object-cover" data-alt="Portrait photo of an elegant senior actress with poised expression, soft high-end studio lighting, minimalist dark background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCo1lZos1dyVlc84U5jTGH9upIwM4IgKfDlNenPgRbmq1cGaJ8ulQvhNttYD_-QmD0FbS99aocnM_GLdcJRDC5y4d2k_VSxgLo2HOLVo649VivxyfOsSAOKA4ZNvd-RPLyaGMWHIrxFY39VM0-iSrj72t7sB_c_4oPGVcCmuvQyM2-Vm9fPk-dGXMUi7sGd-fYv8jJ-ELUDmWYxHURNZU62r9uFHtOniaEb2BbntyPQwrx8yLb5t3mV"/>
+</div>
+<div>
+<h4 class="text-title-md font-title-md text-white group-hover:text-primary transition-colors">Silvia Abascal</h4>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Canciller Vane (20 eps)</p>
+</div>
+</div>
+</div>
+</div>
+<!-- DETALLES DE LA PRODUCCIÓN -->
+<div class="bg-surface-container-low/60 rounded-xl p-6 border border-surface-variant/30 backdrop-blur-md flex flex-col gap-4">
+<h2 class="text-headline-sm font-headline-sm font-bold text-white pb-3 border-b border-surface-variant/30">
+            Detalles de la Producción
+          </h2>
+<div class="space-y-3 text-body-sm font-body-sm">
+<div>
+<span class="text-outline block text-label-sm font-label-sm uppercase">Creadores y Showrunners</span>
+<span class="text-white font-medium">David Benítez &amp; Andrea Valenzuela</span>
+</div>
+<div>
+<span class="text-outline block text-label-sm font-label-sm uppercase">Dirección Principal</span>
+<span class="text-white font-medium">Guillermo Santoro (T1-T4)</span>
+</div>
+<div>
+<span class="text-outline block text-label-sm font-label-sm uppercase">Banda Sonora Original</span>
+<span class="text-white font-medium">Max Richter &amp; Synthetica Collective</span>
+</div>
+<div>
+<span class="text-outline block text-label-sm font-label-sm uppercase">Géneros</span>
+<div class="flex flex-wrap gap-1.5 mt-1">
+<span class="bg-surface-container px-2 py-0.5 rounded text-on-surface text-label-sm">Ciencia Ficción</span>
+<span class="bg-surface-container px-2 py-0.5 rounded text-on-surface text-label-sm">Thriller Cuántico</span>
+<span class="bg-surface-container px-2 py-0.5 rounded text-on-surface text-label-sm">Drama Psicológico</span>
+</div>
+</div>
+<div>
+<span class="text-outline block text-label-sm font-label-sm uppercase">Idiomas de Audio</span>
+<span class="text-on-surface">Español (Atmos), Inglés [Original] (Atmos), Francés, Alemán, Portugués</span>
+</div>
+<div>
+<span class="text-outline block text-label-sm font-label-sm uppercase">Subtítulos</span>
+<span class="text-on-surface">Español, Inglés [CC], Francés, Alemán, Italiano, Portugués</span>
+</div>
+<div>
+<span class="text-outline block text-label-sm font-label-sm uppercase">Clasificación por Edad</span>
+<span class="text-white">18+ (Violencia de ciencia ficción, tensión psicológica continuada, lenguaje maduro)</span>
+</div>
+</div>
+</div>
+<!-- SHARE / BADGE HIGHLIGHT -->
+<div class="p-5 rounded-xl bg-gradient-to-br from-secondary-container/30 to-surface-container border border-secondary-container/40 flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-secondary-container flex items-center justify-center text-white flex-shrink-0">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+</div>
+<div>
+<h4 class="text-title-md font-title-md font-bold text-white">Ganadora de 7 Premios Turing</h4>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Mejor serie dramática, efectos visuales y sonido inmersivo 2023.</p>
+</div>
+</div>
+</aside>
+</div>
+<!-- SERIES SIMILARES (RECOMMENDED CAROUSEL / GRID) -->
+<section class="max-w-7xl mx-auto px-6 lg:px-14 mt-16">
+<div class="flex items-center justify-between pb-4 border-b border-surface-variant/30">
+<div>
+<h2 class="text-headline-md font-headline-md font-bold text-white">Series Similares</h2>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Títulos recomendados para amantes de 'Crónicas del Multiverso'.</p>
+</div>
+<div class="flex items-center gap-2">
+<button aria-label="Anterior" class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface hover:text-white hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+</button>
+<button aria-label="Siguiente" class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface hover:text-white hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Grid of Cards (2:3 aspect ratio) -->
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5 mt-6">
+<!-- Card 1 -->
+<div class="group relative rounded-xl overflow-hidden bg-surface-container-low border border-surface-variant/40 hover:border-primary-container transition-all duration-300 hover:scale-[1.03] hover:shadow-2xl hover:shadow-primary-container/20 cursor-pointer flex flex-col">
+<div class="aspect-[2/3] w-full overflow-hidden relative">
+<img alt="Abismo Cuántico" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Vertical theatrical poster for a high-concept sci-fi series showing a colossal glowing cybernetic portal inside a deep oceanic trench, deep navy and cyan tones, cinematic quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2duY7-VFH5P631a0VwceIi7thwLd8Zu9NsStWvdBQrZpZPHCSybtWb3Takr5GzEDwz5RytRCC1s5sa8npYXSnHeaiJ0L8kRr0lsPjtV4p8gdEuxTKJdMZAXA-2tn4lDedxokqRSNTCX0Rwi27_D0PrlekXJG3LCrF9W4U5XxpRxrrNoQS0ULaFyrwxceJv_tNi7r8tntB8wAfLS7Zme_PNpnNbmA6A9eCNxcTt1cNPVPYfi2AV44N"/>
+<span class="absolute top-2 left-2 px-2 py-0.5 rounded text-label-sm font-label-sm uppercase bg-secondary-container text-white font-bold">Original</span>
+<div class="absolute bottom-2 left-2 flex items-center gap-1 bg-black/80 px-2 py-0.5 rounded text-[11px] font-bold text-primary">
+<span class="material-symbols-outlined text-[13px]" style="font-variation-settings: 'FILL' 1;">star</span> 8.9
+            </div>
+</div>
+<div class="p-3.5 flex flex-col gap-1 bg-surface-container-low flex-grow justify-between">
+<div>
+<h3 class="text-title-md font-title-md font-bold text-white group-hover:text-primary transition-colors truncate">Abismo Cuántico</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant">3 Temporadas • 4K HDR</p>
+</div>
+<span class="text-[11px] font-semibold text-emerald-400">95% coincidencia</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group relative rounded-xl overflow-hidden bg-surface-container-low border border-surface-variant/40 hover:border-primary-container transition-all duration-300 hover:scale-[1.03] hover:shadow-2xl hover:shadow-primary-container/20 cursor-pointer flex flex-col">
+<div class="aspect-[2/3] w-full overflow-hidden relative">
+<img alt="Protocolo Entropía" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Cinematic vertical poster featuring a shadowed lone detective standing in a rain-slicked futuristic neon cityscape illuminated by purple and fiery amber holograms, dark moody cyberpunk thriller." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXX0fi-tX1jfKhpojvAYnKaBvaFbJPPOq8bhaGequKlHkkCmwpCJuscXB5SkZWbd3gIz2uK_vMYNM2KHy6dVyslLtTVSPBoHd0APim1wO79FRkzNxzWzfrFgyD1XhorFgRi1IUNyuhXCMK8bk58vYoHWr5xL0DZnDQ0MFffs5bcLBvVHSZgzQhR29Yknl1SIa33o4IzQmES1JzZ0biCcUT_T_cR5lwP7NMqkbwaikJYPyBZLS3Zd32"/>
+<span class="absolute top-2 left-2 px-2 py-0.5 rounded text-label-sm font-label-sm uppercase bg-secondary-container text-white font-bold">Original</span>
+<div class="absolute bottom-2 left-2 flex items-center gap-1 bg-black/80 px-2 py-0.5 rounded text-[11px] font-bold text-primary">
+<span class="material-symbols-outlined text-[13px]" style="font-variation-settings: 'FILL' 1;">star</span> 9.0
+            </div>
+</div>
+<div class="p-3.5 flex flex-col gap-1 bg-surface-container-low flex-grow justify-between">
+<div>
+<h3 class="text-title-md font-title-md font-bold text-white group-hover:text-primary transition-colors truncate">Protocolo Entropía</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant">2 Temporadas • Dolby Atmos</p>
+</div>
+<span class="text-[11px] font-semibold text-emerald-400">98% coincidencia</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group relative rounded-xl overflow-hidden bg-surface-container-low border border-surface-variant/40 hover:border-primary-container transition-all duration-300 hover:scale-[1.03] hover:shadow-2xl hover:shadow-primary-container/20 cursor-pointer flex flex-col">
+<div class="aspect-[2/3] w-full overflow-hidden relative">
+<img alt="Luz Residual" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Vertical TV series artwork of an astronaut helmet reflecting a surreal shattered solar eclipse in deep interstellar void, intense purple solar flares, ultra-sharp." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuTditiN3BoqaRmmCJXAhtjYbzmTNoyj_ue6n3OJyIlswMMpz6amWg8oLXdL0csO4OwWb8hmYJPyPsPhq1hsf2shbrDdPA6KK023l5EscMfegqWG5B5e6VxbqzLlmnVq0DknOWKhG1GRE_9TgEMrqMP83VRo7iV3eeipHaaVJQvB4br_ilKUniWb1fHdMO9emkJWd3WgBvf8Kq-0WA7ipI58sxYWmcX52kSc5Ud7naHMUts_WZVN_0"/>
+<div class="absolute bottom-2 left-2 flex items-center gap-1 bg-black/80 px-2 py-0.5 rounded text-[11px] font-bold text-primary">
+<span class="material-symbols-outlined text-[13px]" style="font-variation-settings: 'FILL' 1;">star</span> 8.7
+            </div>
+</div>
+<div class="p-3.5 flex flex-col gap-1 bg-surface-container-low flex-grow justify-between">
+<div>
+<h3 class="text-title-md font-title-md font-bold text-white group-hover:text-primary transition-colors truncate">Luz Residual</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Miniserie • 6 Episodios</p>
+</div>
+<span class="text-[11px] font-semibold text-emerald-400">91% coincidencia</span>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="group relative rounded-xl overflow-hidden bg-surface-container-low border border-surface-variant/40 hover:border-primary-container transition-all duration-300 hover:scale-[1.03] hover:shadow-2xl hover:shadow-primary-container/20 cursor-pointer flex flex-col">
+<div class="aspect-[2/3] w-full overflow-hidden relative">
+<img alt="Sintéticos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Vertical dramatic film poster depicting a high-tech synthetic android android hand reaching toward a delicate human hand against a stark black background with orange geometric light rays." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfmEuNmKnLPOgQK7HAFlxFj4x9dQ6MOwcwAYWi5bPkms5YXbgkLihz4Dn_rEU_bFRkC7vuBy0lfZ_0aB3aSzaZIRYd1dFKnUs8swr0UzwxSwNsDiSKrZo6vYVqQaxNjvEyDpr_M9svSk_CaTWI4GNmjQRzzn7dHkG6ijQ08w9RLa4JIeCRQHs5JrFKHcGvBSL9EijsG4LEabtlzxhEb1XKVmOCQFfuCyWBIf9Q7ww6qxfvuleU-eY6"/>
+<span class="absolute top-2 left-2 px-2 py-0.5 rounded text-label-sm font-label-sm uppercase bg-secondary-container text-white font-bold">Original</span>
+<div class="absolute bottom-2 left-2 flex items-center gap-1 bg-black/80 px-2 py-0.5 rounded text-[11px] font-bold text-primary">
+<span class="material-symbols-outlined text-[13px]" style="font-variation-settings: 'FILL' 1;">star</span> 9.3
+            </div>
+</div>
+<div class="p-3.5 flex flex-col gap-1 bg-surface-container-low flex-grow justify-between">
+<div>
+<h3 class="text-title-md font-title-md font-bold text-white group-hover:text-primary transition-colors truncate">Sintéticos</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant">4 Temporadas • 4K HDR</p>
+</div>
+<span class="text-[11px] font-semibold text-emerald-400">96% coincidencia</span>
+</div>
+</div>
+<!-- Card 5 (Hidden on tablet/mobile screens for optimal grid) -->
+<div class="hidden lg:flex group relative rounded-xl overflow-hidden bg-surface-container-low border border-surface-variant/40 hover:border-primary-container transition-all duration-300 hover:scale-[1.03] hover:shadow-2xl hover:shadow-primary-container/20 cursor-pointer flex-col">
+<div class="aspect-[2/3] w-full overflow-hidden relative">
+<img alt="La Última Frontera" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Vertical sci-fi series poster showing an ancient ruined monolith towering above an alien desert under dual purple moons, epic cinema lighting, sharp details." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3zUcoLTkvEQV7TfVJDVI0umEzzwqGV9B5D3t7oPjAlQtsQPqXuOqxKuH75_IOzPGNbiwoJuFwZWh8MVul8wZZ7x446SraYOtjtXOJxY_eQBAk-KkWSY3iTJg4meRq4M3Y0u5iLYreYunjFQ-197UAOvpE4tyMhjWWfoOHnKProlfU9AflkvwbiL1zkNKdxsxqW14O2ONw1FH_WjYLUXo50zvpygwe1BpkndV8iTiRq2vVCTL9A4D0"/>
+<div class="absolute bottom-2 left-2 flex items-center gap-1 bg-black/80 px-2 py-0.5 rounded text-[11px] font-bold text-primary">
+<span class="material-symbols-outlined text-[13px]" style="font-variation-settings: 'FILL' 1;">star</span> 8.8
+            </div>
+</div>
+<div class="p-3.5 flex flex-col gap-1 bg-surface-container-low flex-grow justify-between">
+<div>
+<h3 class="text-title-md font-title-md font-bold text-white group-hover:text-primary transition-colors truncate">La Última Frontera</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant">1 Temporada • Ultra HD</p>
+</div>
+<span class="text-[11px] font-semibold text-emerald-400">92% coincidencia</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- FOOTER -->
+<footer class="bg-surface-container-lowest dark:bg-surface-container-lowest text-primary dark:text-primary w-full border-t border-outline-variant/20">
+<div class="w-full max-w-7xl mx-auto px-6 lg:px-14 py-12 flex flex-col gap-6">
+<!-- Footer Top Row -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-surface-variant/20">
+<div class="flex items-center gap-2.5">
+<img alt="StreamTUC" class="w-6 h-6 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCi86Utcz3gZEPPKgp1xy8X25_Sg9061UZzigNqNl_fppljC10Phi5x-88km72PeCVDWbkSI_4L9tgyZjR2PY3tZCnA2NdXW-FX_Pjcc4ZQswUzWR755HRJup3HdM3ut_g96nGFWjCSqDW5V3dAIcHGrFqx115KcpzwtX_VMPtmtpDDIiCAWQ20POIFWfH_As3hdnR1cZNHWdSPsbdLJ9MA4-waqwFKlwobNOjiL3qGgEncegi6Js3H744VzeRv31EYkw"/>
+<span class="text-headline-sm font-headline-sm font-bold text-on-surface dark:text-on-surface">StreamTUC</span>
+</div>
+<!-- Social Media / App Badges -->
+<div class="flex items-center gap-4 text-on-surface-variant">
+<a aria-label="Audio settings" class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">graphic_eq</span>
+</a>
+<a aria-label="Mobile app download" class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">smartphone</span>
+</a>
+<a aria-label="Smart TV" class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">tv</span>
+</a>
+</div>
+</div>
+<!-- Links Grid -->
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 text-body-sm font-body-sm">
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary transition-colors duration-200" href="#">Centro de Ayuda</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary transition-colors duration-200" href="#">Términos de Uso</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary transition-colors duration-200" href="#">Privacidad</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary transition-colors duration-200" href="#">Configuración de Audio</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary transition-colors duration-200" href="#">Descargar Apps</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary transition-colors duration-200" href="#">Preferencias de Idioma</a>
+</div>
+<!-- Copyright Bottom -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 text-body-sm font-body-sm text-outline">
+<p>© 2024 StreamTUC, Inc. Todos los derechos reservados.</p>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary-container">speed</span>
+<span class="text-on-surface-variant">Conexión 4K Ultra HD Activa</span>
+</div>
+</div>
+</div>
+</footer>
+</body></html>
