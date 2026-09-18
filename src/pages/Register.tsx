@@ -1,9 +1,15 @@
 import { useState } from "react";
+
 import { Alert, Button, Card, Container, Form } from "react-bootstrap";
+
 import { useForm } from "react-hook-form";
+
 import { useNavigate } from "react-router";
+
 import { useLocalStorage } from "../hooks/useLocalStorage";
+
 import { initialUsers } from "../data/initialUsers";
+
 import type { User } from "../types/User";
 
 interface RegisterData {
@@ -93,13 +99,17 @@ export function Register() {
             </Alert>
           )}
 
-          <Form onSubmit={handleSubmit(onSubmit)}>
+          <Form
+            onSubmit={handleSubmit(onSubmit)}
+            autoComplete="off"
+          >
             <Form.Group className="mb-3">
               <Form.Label>Nombre de usuario</Form.Label>
 
               <Form.Control
                 type="text"
                 placeholder="Ingresá tu nombre de usuario"
+                autoComplete="off"
                 {...register("username", {
                   required: {
                     value: true,
@@ -131,6 +141,7 @@ export function Register() {
               <Form.Control
                 type="email"
                 placeholder="Ingresá tu email"
+                autoComplete="off"
                 {...register("email", {
                   required: {
                     value: true,
@@ -157,6 +168,7 @@ export function Register() {
               <Form.Control
                 type="password"
                 placeholder="Ingresá tu contraseña"
+                autoComplete="new-password"
                 {...register("password", {
                   required: {
                     value: true,
@@ -183,6 +195,7 @@ export function Register() {
               <Form.Control
                 type="password"
                 placeholder="Repetí tu contraseña"
+                autoComplete="new-password"
                 {...register("repeatPassword", {
                   required: {
                     value: true,
