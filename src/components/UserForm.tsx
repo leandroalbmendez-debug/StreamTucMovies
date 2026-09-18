@@ -1,7 +1,14 @@
-import { useState, type FormEvent } from "react";
 import { Button, Card, Form } from "react-bootstrap";
+import { useForm } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
 import type { User } from "../types/User";
+
+interface UserFormData {
+  username: string;
+  email: string;
+  password: string;
+  plan: "free" | "premium";
+}
 
 interface UserFormProps {
   onAddUser: (user: User) => void;
@@ -16,23 +23,28 @@ function UserForm({
   userToEdit,
   onCancelEdit,
 }: UserFormProps) {
-  const [username, setUsername] = useState(userToEdit?.username || "");
-  const [email, setEmail] = useState(userToEdit?.email || "");
-  const [password, setPassword] = useState(userToEdit?.password || "");
-  const [plan, setPlan] = useState<"free" | "premium">(
-    userToEdit?.plan || "free",
-  );
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<UserFormData>({
+    defaultValues: {
+      username: userToEdit?.username || "",
+      email: userToEdit?.email || "",
+      password: userToEdit?.password || "",
+      plan: userToEdit?.plan || "free",
+    },
+  });
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
+  const onSubmit = (data: UserFormData) => {
     if (userToEdit) {
       const updatedUser: User = {
         ...userToEdit,
-        username,
-        email,
-        password,
-        plan,
+        username: data.username,
+        email: data.email,
+        password: data.password,
+        plan: data.plan,
       };
 
       onUpdateUser(updatedUser);
@@ -40,21 +52,23 @@ function UserForm({
     } else {
       const newUser: User = {
         id: uuidv4(),
-        username,
-        email,
-        password,
+        username: data.username,
+        email: data.email,
+        password: data.password,
         role: "client",
-        plan,
+        plan: data.plan,
         favorites: [],
         comments: [],
       };
 
       onAddUser(newUser);
 
-      setUsername("");
-      setEmail("");
-      setPassword("");
-      setPlan("free");
+      reset({
+        username: "",
+        email: "",
+        password: "",
+        plan: "free",
+      });
     }
   };
 
@@ -65,24 +79,36 @@ function UserForm({
           {userToEdit ? "Editar usuario" : "Crear usuario"}
         </Card.Title>
 
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit(onSubmit)}>
           <Form.Group className="mb-3">
             <Form.Label>Nombre de usuario</Form.Label>
 
             <Form.Control
               type="text"
-              value={username}
-              onChange={(event) => setUsername(event.target.value)}
-              minLength={3}
-              pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ ]+"
-              required
               placeholder="Ingrese el nombre de usuario"
+              {...register("username", {
+                required: {
+                  value: true,
+                  message: "El nombre de usuario es obligatorio.",
+                },
+                minLength: {
+                  value: 3,
+                  message:
+                    "El nombre de usuario debe tener mínimo 3 caracteres.",
+                },
+                pattern: {
+                  value: /^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$/,
+                  message:
+                    "El nombre de usuario solo puede contener letras y espacios.",
+                },
+              })}
             />
 
-            <Form.Text className="text-muted">
-              El nombre debe tener mínimo 3 caracteres y solo puede contener
-              letras y espacios.
-            </Form.Text>
+            {errors.username && (
+              <Form.Text className="text-danger">
+                {errors.username.message}
+              </Form.Text>
+            )}
           </Form.Group>
 
           <Form.Group className="mb-3">
@@ -90,15 +116,25 @@ function UserForm({
 
             <Form.Control
               type="email"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              required
               placeholder="Ingrese el email"
+              {...register("email", {
+                required: {
+                  value: true,
+                  message: "El email es obligatorio.",
+                },
+                pattern: {
+                  value: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
+                  message:
+                    "Ingrese un email válido. Ejemplo: usuario@gmail.com",
+                },
+              })}
             />
 
-            <Form.Text className="text-muted">
-              Ingrese un email válido. Ejemplo: usuario@gmail.com
-            </Form.Text>
+            {errors.email && (
+              <Form.Text className="text-danger">
+                {errors.email.message}
+              </Form.Text>
+            )}
           </Form.Group>
 
           <Form.Group className="mb-3">
@@ -106,29 +142,31 @@ function UserForm({
 
             <Form.Control
               type="password"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-              minLength={6}
-              pattern="(?=.*[A-Za-z])(?=.*[0-9]).{6,}"
-              required
               placeholder="Ingrese la contraseña"
+              {...register("password", {
+                required: {
+                  value: true,
+                  message: "La contraseña es obligatoria.",
+                },
+                pattern: {
+                  value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/,
+                  message:
+                    "La contraseña debe tener mínimo 8 caracteres, una mayúscula, una minúscula y un número.",
+                },
+              })}
             />
 
-            <Form.Text className="text-muted">
-              La contraseña debe tener mínimo 6 caracteres e incluir al menos
-              una letra y un número.
-            </Form.Text>
+            {errors.password && (
+              <Form.Text className="text-danger">
+                {errors.password.message}
+              </Form.Text>
+            )}
           </Form.Group>
 
           <Form.Group className="mb-3">
             <Form.Label>Plan de streaming</Form.Label>
 
-            <Form.Select
-              value={plan}
-              onChange={(event) =>
-                setPlan(event.target.value as "free" | "premium")
-              }
-            >
+            <Form.Select {...register("plan")}>
               <option value="free">Gratis</option>
               <option value="premium">Premium</option>
             </Form.Select>
