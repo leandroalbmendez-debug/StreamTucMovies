@@ -6,7 +6,7 @@ import { Card } from "../components/catalog/Card";
 import { notifyFavoriteChange, queueFavoriteUpdate } from "../data/favoriteQueue";
 import type { Movie } from "../types/database";
 import type { User } from "../types/User";
-import { useLocalStorage } from "../hooks/useLocalStorage";
+import { useLocalStorage, useSessionStorage } from "../hooks/useLocalStorage";
 
 interface SearchResponse {
   results: Movie[];
@@ -16,9 +16,9 @@ interface SearchResponse {
 
 export function Search() {
   const { theme } = useStyle();
-  const [search, setSearch] = useLocalStorage("streamtuc-search-query", "");
-  const [movies, setMovies] = useLocalStorage<Movie[]>("streamtuc-search-results", []);
-  const [searched, setSearched] = useLocalStorage("streamtuc-search-completed", false);
+  const [search, setSearch] = useSessionStorage("streamtuc-search-query", "");
+  const [movies, setMovies] = useSessionStorage<Movie[]>("streamtuc-search-results", []);
+  const [searched, setSearched] = useSessionStorage("streamtuc-search-completed", false);
   const [loggedUser] = useLocalStorage<User | null>("streamtuc-logged-user", null);
   const [loading, setLoading] = useState(false);
   const [isAddingAll, setIsAddingAll] = useState(false);

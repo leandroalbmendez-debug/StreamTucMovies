@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Container, Row, Col, Form } from "react-bootstrap";
+import { Container, Row, Col, Form, Nav } from "react-bootstrap";
 import UserForm from "../components/UserForm";
 import UserTable from "../components/UserTable";
 import { CommentsAdminTable } from "../components/comments/CommentsAdminTable";
@@ -9,6 +9,7 @@ import { initialUsers } from "../data/initialUsers";
 import { useData } from "../context/database";
 import type { User } from "../types/User";
 import type { Comment } from "../types/comment";
+import { CustomMoviesAdmin } from "../components/CustomMoviesAdmin";
 
 function Admin() {
 	const [users, setUsers] = useLocalStorageCustom<User[]>(
@@ -44,6 +45,7 @@ function Admin() {
 	const { list: movies } = useData();
 	const [movieFilter, setMovieFilter] = useState("");
 	const [authorFilter, setAuthorFilter] = useState("");
+	const [activeTab, setActiveTab] = useState("users");
 
 	const getMovieTitle = (movieId: string) => {
 		const movie = movies.find((m) => String(m.id) === movieId);
@@ -84,6 +86,11 @@ function Admin() {
 		<Container fluid className="py-4">
 			<h1>Panel de Administración</h1>
 			<p>Gestión de usuarios de STREAMTUC</p>
+			<Nav variant="tabs" activeKey={activeTab} onSelect={(key) => setActiveTab(key || "users")} className="mb-4">
+				<Nav.Item><Nav.Link eventKey="users">Usuarios y comentarios</Nav.Link></Nav.Item>
+				<Nav.Item><Nav.Link eventKey="movies">Películas personalizadas</Nav.Link></Nav.Item>
+			</Nav>
+			{activeTab === "movies" ? <CustomMoviesAdmin /> : <>
 			<UserForm
 				onAddUser={addUser}
 				onUpdateUser={updateUser}
@@ -134,6 +141,7 @@ function Admin() {
 				onToggleHidden={toggleHidden}
 				onDelete={deleteComment}
 			/>
+			</>}
 		</Container>
 	);
 }

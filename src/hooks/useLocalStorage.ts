@@ -20,3 +20,24 @@ export function useLocalStorage<T>(
 
   return [value, setValue];
 }
+
+export function useSessionStorage<T>(
+  key: string,
+  initialValue: T
+): [T, React.Dispatch<React.SetStateAction<T>>] {
+  const [value, setValue] = useState<T>(() => {
+    const storedValue = sessionStorage.getItem(key);
+
+    if (storedValue) {
+      return JSON.parse(storedValue);
+    }
+
+    return initialValue;
+  });
+
+  useEffect(() => {
+    sessionStorage.setItem(key, JSON.stringify(value));
+  }, [key, value]);
+
+  return [value, setValue];
+}

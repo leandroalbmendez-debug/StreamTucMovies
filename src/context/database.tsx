@@ -1,10 +1,16 @@
-import { useContext, createContext, useState, useEffect, type ReactNode } from "react";
+import { useContext, createContext, useState, useEffect, useRef, type ReactNode } from "react";
 import type { DataContextValue, Movie } from "../types/database";
+import { CUSTOM_MOVIES_CHANGE_EVENT, CUSTOM_MOVIES_KEY, type CustomMovie } from "../data/customMovies";
 
 const DataEnviroment = createContext<DataContextValue | undefined>(undefined);
 
 export function DataCtx({ children }: { children: ReactNode }) {
 	const [list, setList] = useState<Movie[]>([]);
+	const tmdbListRef = useRef<Movie[]>([]);
+	const [customMovies, setCustomMovies] = useState<CustomMovie[]>(() => {
+		const stored = localStorage.getItem(CUSTOM_MOVIES_KEY);
+		return stored ? JSON.parse(stored) as CustomMovie[] : [];
+	});
 	const [data, setData] = useState<unknown>(null);
 	const [loading, setLoading] = useState<boolean>(true);
 	const apiKey = import.meta.env.VITE_API_KEY as string | undefined;
@@ -17,7 +23,7 @@ export function DataCtx({ children }: { children: ReactNode }) {
 		return `https://api.themoviedb.org/3/${endpoint}?api_key=${apiKey}&language=es-ES&page=${page}${genreQuery}`;
 	}
 
-	async function fetchData(requestUrl: string): Promise<void> {
+async function fetchData(requestUrl: string, includeCustom = false): Promise<void> {
 		setLoading(true);
 		try {
 			const response = await fetch(requestUrl);
@@ -26,7 +32,8 @@ export function DataCtx({ children }: { children: ReactNode }) {
 			}
 			const result = await response.json();
 			setData(result);
-			setList(result.results);
+			tmdbListRef.current = result.results;
+			setList(includeCustom ? [...customMovies, ...result.results] : result.results);
 		} catch (error) {
 			console.error(error);
 		} finally {
@@ -41,24 +48,38 @@ export function DataCtx({ children }: { children: ReactNode }) {
 
 	const jumpTo = async (newIndex: number): Promise<void> => {
 		setIndex(newIndex);
-		await fetchData(buildUrl(newIndex));
+		await fetchData(buildUrl(newIndex), newIndex === 1 && selectedGenre === null);
 	};
 
 	const selectGenre = async (genreId: number | null): Promise<void> => {
 		setSelectedGenre(genreId);
 		setIndex(1);
-		await fetchData(buildUrl(1, genreId));
+		await fetchData(buildUrl(1, genreId), genreId === null);
 	};
 
 	useEffect(() => {
-		fetchData(buildUrl(1, null));
+		const updateCustomMovies = () => {
+			const stored = localStorage.getItem(CUSTOM_MOVIES_KEY);
+			const nextCustomMovies = stored ? JSON.parse(stored) as CustomMovie[] : [];
+			setCustomMovies(nextCustomMovies);
+			setList(currentIndex === 1 && selectedGenre === null ? [...nextCustomMovies, ...tmdbListRef.current] : tmdbListRef.current);
+		};
+		window.addEventListener(CUSTOM_MOVIES_CHANGE_EVENT, updateCustomMovies);
+		return () => window.removeEventListener(CUSTOM_MOVIES_CHANGE_EVENT, updateCustomMovies);
 	}, []);
+
+	useEffect(() => {
+		fetchData(buildUrl(1, null), true);
+	}, []);
+
+	const maxPage = 500 + Math.ceil(customMovies.length / 30);
 
 	return (
 		<DataEnviroment.Provider
 			value={{
 				list,
 				setList,
+				maxPage,
 				currentIndex,
 				setIndex,
 				data,

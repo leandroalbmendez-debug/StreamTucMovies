@@ -1,13 +1,22 @@
 import { useEffect, useRef, useState } from "react";
 import { Button, Card as BootstrapCard, Spinner } from "react-bootstrap";
-import { FaHeart, FaRegHeart, FaStar } from "react-icons/fa";
+import { FaEdit, FaHeart, FaRegHeart, FaStar, FaTrash } from "react-icons/fa";
 import { Link } from "react-router";
 import { round } from "../../data/math";
 import { notifyFavoriteChange, queueFavoriteUpdate } from "../../data/favoriteQueue";
 import { initialUsers } from "../../data/initialUsers";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
-import type { Movie } from "../../types/database";
 import type { User } from "../../types/User";
+import { CustomMovieModal } from "../CustomMovieModal";
+import {
+	CUSTOM_MOVIE_BIN_KEY,
+	CUSTOM_MOVIES_KEY,
+	FEATURED_MOVIES_KEY,
+	notifyCustomMoviesChange,
+	isCustomMovie,
+	type CustomMovie,
+} from "../../data/customMovies";
+import type { Movie } from "../../types/database";
 
 type CatalogCardProps = {
 	movie: Movie;
@@ -23,6 +32,13 @@ export function Card({ movie, theme, detailState, detailFrom }: CatalogCardProps
 	);
 	const [, setUsers] = useLocalStorage<User[]>("streamtuc-users", initialUsers);
 	const [isUpdatingFavorite, setIsUpdatingFavorite] = useState(false);
+	const [featuredMovies, setFeaturedMovies] = useLocalStorage<Movie[]>(FEATURED_MOVIES_KEY, []);
+	const [, setCustomMovies] = useLocalStorage<CustomMovie[]>(CUSTOM_MOVIES_KEY, []);
+	const [, setBin] = useLocalStorage<CustomMovie[]>(CUSTOM_MOVIE_BIN_KEY, []);
+	const [showEdit, setShowEdit] = useState(false);
+	const isAdmin = loggedUser?.role === "admin";
+	const isCustom = isCustomMovie(movie);
+	const isFeatured = featuredMovies.some((item) => item.id === movie.id);
 	const pendingFavoriteState = useRef<boolean | null>(null);
 	const isFavorite = loggedUser?.favorites.includes(movie.id) ?? false;
 
@@ -71,19 +87,38 @@ export function Card({ movie, theme, detailState, detailFrom }: CatalogCardProps
 			});
 	}
 
+	function toggleFeatured() {
+		const stored = localStorage.getItem(FEATURED_MOVIES_KEY);
+		const current = stored ? JSON.parse(stored) as Movie[] : [];
+		setFeaturedMovies(isFeatured ? current.filter((item) => item.id !== movie.id) : [...current, movie]);
+		window.dispatchEvent(new Event("streamtuc-featured-change"));
+	}
+
+	function moveCustomToBin() {
+		if (!isCustom) return;
+		setCustomMovies((current) => current.filter((item) => item.id !== movie.id));
+		setBin((current) => [movie, ...current.filter((item) => item.id !== movie.id)]);
+		notifyCustomMoviesChange();
+	}
+
+	function saveCustomMovie(updatedMovie: CustomMovie) {
+		setCustomMovies((current) => current.map((item) => item.id === updatedMovie.id ? updatedMovie : item));
+		notifyCustomMoviesChange();
+	}
+
+	const imagePath = movie.poster_path
+		? movie.poster_path.startsWith("http") ? movie.poster_path : `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+		: `./src/assets/square ${theme}.png`;
+
 	return (
 		<BootstrapCard className="catalog-card h-100 position-relative">
 			<Link
 				to={`/detail/${movie.id}`}
-				state={detailState ? { movie: detailState, from: detailFrom } : undefined}
+				state={{ movie: detailState ?? movie, from: detailFrom }}
 				className="catalog-card-link text-decoration-none">
 				<div className="catalog-card-image-wrapper">
 					<BootstrapCard.Img
-						src={
-							movie.poster_path != null
-								? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-								: `./src/assets/square ${theme}.png`
-						}
+						src={imagePath}
 						alt={movie.title}
 							className="catalog-card-image object-fit-cover"
 					/>
@@ -99,17 +134,28 @@ export function Card({ movie, theme, detailState, detailFrom }: CatalogCardProps
 				<h3 title={movie.title}>{movie.title}</h3>
 				<div><span>{String(movie.release_date).slice(0, 4)}</span><span>•</span><span>Película</span></div>
 			</div>
-			<Button
-				variant={isFavorite ? "danger" : "dark"}
-				className="catalog-favorite-button"
-				type="button"
-				aria-label={isFavorite ? `Quitar ${movie.title} de favoritos` : `Agregar ${movie.title} a favoritos`}
-				aria-pressed={isFavorite}
-				aria-busy={isUpdatingFavorite}
-				disabled={!loggedUser || isUpdatingFavorite}
-				onClick={toggleFavorite}>
-				{isUpdatingFavorite ? <Spinner animation="border" size="sm" aria-hidden="true" /> : isFavorite ? <FaHeart /> : <FaRegHeart />}
-			</Button>
+			{isAdmin ? (
+				<div className="catalog-card-actions">
+					<Button variant={isFeatured ? "warning" : "dark"} type="button" aria-label={isFeatured ? `Quitar ${movie.title} de destacadas` : `Destacar ${movie.title}`} onClick={toggleFeatured}><FaStar /></Button>
+					{isCustom && <>
+						<Button variant="secondary" type="button" aria-label={`Editar ${movie.title}`} onClick={() => setShowEdit(true)}><FaEdit /></Button>
+						<Button variant="danger" type="button" aria-label={`Enviar ${movie.title} a la papelera`} onClick={moveCustomToBin}><FaTrash /></Button>
+					</>}
+				</div>
+			) : (
+				<Button
+					variant={isFavorite ? "danger" : "dark"}
+					className="catalog-favorite-button"
+					type="button"
+					aria-label={isFavorite ? `Quitar ${movie.title} de favoritos` : `Agregar ${movie.title} a favoritos`}
+					aria-pressed={isFavorite}
+					aria-busy={isUpdatingFavorite}
+					disabled={!loggedUser || isUpdatingFavorite}
+					onClick={toggleFavorite}>
+					{isUpdatingFavorite ? <Spinner animation="border" size="sm" aria-hidden="true" /> : isFavorite ? <FaHeart /> : <FaRegHeart />}
+				</Button>
+			)}
+			{isCustom && <CustomMovieModal key={`${movie.id}-${showEdit}`} show={showEdit} movie={movie} onHide={() => setShowEdit(false)} onSave={saveCustomMovie} />}
 		</BootstrapCard>
 	);
 }
