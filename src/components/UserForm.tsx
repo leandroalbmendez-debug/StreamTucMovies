@@ -1,6 +1,11 @@
-import { Button, Card, Form } from "react-bootstrap";
+import { useState } from "react";
+
+import { Alert, Button, Card, Form } from "react-bootstrap";
+
 import { useForm } from "react-hook-form";
+
 import { v4 as uuidv4 } from "uuid";
+
 import type { User } from "../types/User";
 
 interface UserFormData {
@@ -11,6 +16,7 @@ interface UserFormData {
 }
 
 interface UserFormProps {
+  users: User[];
   onAddUser: (user: User) => void;
   onUpdateUser: (user: User) => void;
   userToEdit: User | null;
@@ -18,11 +24,14 @@ interface UserFormProps {
 }
 
 function UserForm({
+  users,
   onAddUser,
   onUpdateUser,
   userToEdit,
   onCancelEdit,
 }: UserFormProps) {
+  const [formError, setFormError] = useState("");
+
   const {
     register,
     handleSubmit,
@@ -38,7 +47,31 @@ function UserForm({
   });
 
   const onSubmit = (data: UserFormData) => {
+    setFormError("");
+
     if (userToEdit) {
+      const emailExists = users.some(
+        (user) =>
+          user.id !== userToEdit.id &&
+          user.email.toLowerCase() === data.email.toLowerCase(),
+      );
+
+      const usernameExists = users.some(
+        (user) =>
+          user.id !== userToEdit.id &&
+          user.username.toLowerCase() === data.username.toLowerCase(),
+      );
+
+      if (emailExists) {
+        setFormError("Ya existe un usuario registrado con ese email.");
+        return;
+      }
+
+      if (usernameExists) {
+        setFormError("Ya existe un usuario registrado con ese nombre.");
+        return;
+      }
+
       const updatedUser: User = {
         ...userToEdit,
         username: data.username,
@@ -48,20 +81,6 @@ function UserForm({
       };
 
       onUpdateUser(updatedUser);
-      onCancelEdit();
-    } else {
-      const newUser: User = {
-        id: uuidv4(),
-        username: data.username,
-        email: data.email,
-        password: data.password,
-        role: "client",
-        plan: data.plan,
-        favorites: [],
-        comments: [],
-      };
-
-      onAddUser(newUser);
 
       reset({
         username: "",
@@ -69,7 +88,52 @@ function UserForm({
         password: "",
         plan: "free",
       });
+
+      onCancelEdit();
+
+      return;
     }
+
+    const emailExists = users.some(
+      (user) => user.email.toLowerCase() === data.email.toLowerCase(),
+    );
+
+    const usernameExists = users.some(
+      (user) =>
+        user.username.toLowerCase() === data.username.toLowerCase(),
+    );
+
+    if (emailExists) {
+      setFormError("Ya existe un usuario registrado con ese email.");
+      return;
+    }
+
+    if (usernameExists) {
+      setFormError("Ya existe un usuario registrado con ese nombre.");
+      return;
+    }
+
+    const newUser: User = {
+      id: uuidv4(),
+      username: data.username,
+      email: data.email,
+      password: data.password,
+      role: "client",
+      plan: data.plan,
+      favorites: [],
+      comments: [],
+    };
+
+    onAddUser(newUser);
+
+    reset({
+      username: "",
+      email: "",
+      password: "",
+      plan: "free",
+    });
+
+    setFormError("");
   };
 
   return (
@@ -79,13 +143,19 @@ function UserForm({
           {userToEdit ? "Editar usuario" : "Crear usuario"}
         </Card.Title>
 
-        <Form onSubmit={handleSubmit(onSubmit)}>
+        {formError && <Alert variant="danger">{formError}</Alert>}
+
+        <Form
+          onSubmit={handleSubmit(onSubmit)}
+          autoComplete="off"
+        >
           <Form.Group className="mb-3">
             <Form.Label>Nombre de usuario</Form.Label>
 
             <Form.Control
               type="text"
               placeholder="Ingrese el nombre de usuario"
+              autoComplete="off"
               {...register("username", {
                 required: {
                   value: true,
@@ -117,6 +187,7 @@ function UserForm({
             <Form.Control
               type="email"
               placeholder="Ingrese el email"
+              autoComplete="off"
               {...register("email", {
                 required: {
                   value: true,
@@ -143,6 +214,7 @@ function UserForm({
             <Form.Control
               type="password"
               placeholder="Ingrese la contraseña"
+              autoComplete="new-password"
               {...register("password", {
                 required: {
                   value: true,
