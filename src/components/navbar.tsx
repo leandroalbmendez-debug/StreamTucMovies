@@ -73,7 +73,7 @@ function Navbar() {
         variant="dark"
         expand="lg"
       >
-        <Container>
+        <Container fluid>
           <BootstrapNavbar.Brand
             as={Link}
             to="/"

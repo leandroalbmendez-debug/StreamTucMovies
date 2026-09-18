@@ -258,6 +258,23 @@ body {
 	border-radius: 0.75rem;
 }
 
+.favorites-controls {
+	margin-bottom: 1.5rem;
+}
+
+.favorites-controls .form-control {
+	margin-bottom: 0.75rem;
+}
+
+.favorites-genres {
+	margin-bottom: 0;
+}
+
+.favorites-empty-filter {
+	color: var(--on-surface-variant);
+	margin-bottom: 1.5rem;
+}
+
 .movie-title {
 	font-family: var(--font-display);
 }
@@ -405,6 +422,23 @@ body {
 	top: 50%;
 	transform: translateY(-50%);
 	pointer-events: none;
+}
+
+.catalog-search-form {
+	background: var(--surface-low);
+	border: 1px solid var(--surface-highest);
+	border-radius: 0.75rem;
+	padding: 1rem;
+}
+
+.catalog-search-form .form-label {
+	color: var(--on-surface-variant);
+	font-size: 0.78rem;
+	font-weight: 600;
+}
+
+.search-results-heading h2 {
+	font-size: clamp(1.35rem, 3vw, 2rem);
 }
 
 .catalog-genres {

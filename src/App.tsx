@@ -33,7 +33,7 @@ function ProtectedAdmin() {
     };
 
     return (
-      <Container className="py-5 text-center">
+      <Container fluid className="py-5 text-center">
         <h1>No tenés permisos</h1>
 
         <p className="mb-4">

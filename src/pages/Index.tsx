@@ -11,7 +11,7 @@ export function Index() {
 
   if (loading) {
     return (
-      <Container className="py-5 text-center">
+      <Container fluid className="py-5 text-center">
         <h1>Cargando STREAMTUC...</h1>
         <p>Estamos buscando las mejores películas para vos.</p>
       </Container>
@@ -20,7 +20,7 @@ export function Index() {
 
   if (!featuredMovie) {
     return (
-      <Container className="py-5 text-center">
+      <Container fluid className="py-5 text-center">
         <h1>No se pudieron cargar las películas</h1>
         <p>Intentá nuevamente más tarde.</p>
       </Container>
@@ -39,6 +39,7 @@ export function Index() {
         }}
       >
         <Container
+          fluid
           className="d-flex align-items-center py-5"
           style={{ minHeight: "500px" }}
         >
@@ -78,7 +79,7 @@ export function Index() {
         </Container>
       </section>
 
-      <Container className="py-5">
+      <Container fluid className="py-5">
         <section className="mb-5">
           <h2 className="mb-4">Películas destacadas</h2>
 

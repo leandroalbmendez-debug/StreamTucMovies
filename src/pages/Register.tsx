@@ -74,7 +74,7 @@ export function Register() {
   };
 
   return (
-    <Container className="py-5">
+    <Container fluid className="py-5">
       <Card className="mx-auto" style={{ maxWidth: "500px" }}>
         <Card.Body>
           <Card.Title className="text-center mb-4">

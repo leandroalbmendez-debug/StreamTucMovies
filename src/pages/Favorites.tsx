@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { Alert, Container, Row } from "react-bootstrap";
+import { Alert, Button, Col, Container, Form, Row } from "react-bootstrap";
 import { Navigate } from "react-router";
 import { Card } from "../components/catalog/Card";
+import { notifyFavoriteChange, queueFavoriteUpdate } from "../data/favoriteQueue";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import type { Movie } from "../types/database";
 import type { User } from "../types/User";
@@ -16,11 +17,46 @@ export function Favorites() {
 	const [movies, setMovies] = useState<Movie[]>([]);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(false);
+	const [search, setSearch] = useState("");
+	const [selectedGenre, setSelectedGenre] = useState<number | null>(null);
+	const genres = [
+		{ label: "Todos", id: null },
+		{ label: "Acción", id: 28 },
+		{ label: "Ciencia ficción", id: 878 },
+		{ label: "Drama", id: 18 },
+		{ label: "Thriller", id: 53 },
+		{ label: "Terror", id: 27 },
+		{ label: "Comedia", id: 35 },
+		{ label: "Animación", id: 16 },
+	];
+	const filteredMovies = movies.filter((movie) => {
+		const matchesSearch = movie.title.toLowerCase().includes(search.toLowerCase().trim());
+		const matchesGenre = selectedGenre === null || movie.genre_ids.includes(selectedGenre);
+		return matchesSearch && matchesGenre;
+	});
+	const [isRemovingAll, setIsRemovingAll] = useState(false);
+
+	const removeFilteredFavorites = async () => {
+		if (!loggedUser || filteredMovies.length === 0 || isRemovingAll) return;
+
+		setIsRemovingAll(true);
+		try {
+			for (const movie of filteredMovies) {
+				const updatedUser = await queueFavoriteUpdate(movie.id, false);
+				if (updatedUser) notifyFavoriteChange(updatedUser);
+			}
+		} finally {
+			setIsRemovingAll(false);
+		}
+	};
 
 	useEffect(() => {
-		const updateLoggedUser = () => {
-			const storedUser = localStorage.getItem("streamtuc-logged-user");
-			setLoggedUser(storedUser ? JSON.parse(storedUser) : null);
+		const updateLoggedUser = (event: Event) => {
+			const updatedUser = (event as CustomEvent<User>).detail;
+			setLoggedUser(updatedUser);
+			setMovies((currentMovies) =>
+				currentMovies.filter((movie) => updatedUser.favorites.includes(movie.id)),
+			);
 		};
 
 		window.addEventListener("streamtuc-favorites-change", updateLoggedUser);
@@ -77,7 +113,6 @@ export function Favorites() {
 
 	return (
 		<Container fluid className={`${theme}-mode py-4`}>
-			<h1 className="mb-4">Mis favoritos</h1>
 			{loading && <p>Cargando favoritos...</p>}
 			{error && (
 				<Alert variant="danger">
@@ -89,11 +124,43 @@ export function Favorites() {
 					Todavía no agregaste películas a favoritos.
 				</Alert>
 			)}
-			<Row className="row-cols-lg-5 row-cols-sm-3 row-cols-2 g-0">
-				{movies.map((movie) => (
-					<Container className="p-2" key={movie.id}>
+			{movies.length > 0 && (
+				<Container fluid className="favorites-controls px-0" aria-label="Filtrar favoritos">
+					<Form.Control
+						value={search}
+						onChange={(event) => setSearch(event.target.value)}
+						placeholder="Buscar en mis favoritos"
+						aria-label="Buscar en mis favoritos"
+					/>
+					<Row className="catalog-genres favorites-genres row-cols-lg-auto row-cols-md-6 row-cols-3" aria-label="Categorías">
+						{genres.map((genre) => (
+							<Button
+								className={selectedGenre === genre.id ? "active" : ""}
+								key={genre.label}
+								type="button"
+								onClick={() => setSelectedGenre(genre.id)}>
+								{genre.label}
+							</Button>
+						))}
+					</Row>
+					<Button
+						className="mt-3"
+						variant="outline-danger"
+						type="button"
+						onClick={() => void removeFilteredFavorites()}
+						disabled={isRemovingAll || filteredMovies.length === 0}>
+						{isRemovingAll ? "Quitando favoritos..." : "Quitar favoritos visibles"}
+					</Button>
+				</Container>
+			)}
+			{movies.length > 0 && filteredMovies.length === 0 && (
+				<p className="favorites-empty-filter">No hay favoritos que coincidan con esos filtros.</p>
+			)}
+			<Row className="row-cols-lg-6 row-cols-sm-3 row-cols-auto g-0">
+				{filteredMovies.map((movie) => (
+					<Col className="p-2" key={movie.id}>
 						<Card movie={movie} theme={theme} />
-					</Container>
+					</Col>
 				))}
 			</Row>
 		</Container>

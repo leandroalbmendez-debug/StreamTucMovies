@@ -1,4 +1,4 @@
-import { Navigate, useParams, Link } from "react-router";
+import { Navigate, useLocation, useParams, Link } from "react-router";
 import { Alert, Badge, Button, Col, Container, Image, ListGroup, Row } from "react-bootstrap";
 import { useData } from "../../context/database";
 import { CommentSection } from "../comments/CommentSection";
@@ -14,16 +14,19 @@ function formatReleaseDate(releaseDate: Movie["release_date"]): string {
 export function Detail() {
 	const {theme} = useStyle();
 	const { movieId } = useParams();
+	const location = useLocation();
 	const { list, loading } = useData();
-	const movie = list.find((item) => item.id === Number(movieId));
+	const detailState = location.state as { movie?: Movie; from?: string } | null;
+	const stateMovie = detailState?.movie;
+	const movie = list.find((item) => item.id === Number(movieId)) ?? stateMovie;
 
-	if (loading) {
-		return <Container className="py-5">Cargando película...</Container>;
+	if (loading && !stateMovie) {
+		return <Container fluid className="py-5">Cargando película...</Container>;
 	}
 
 	if (!movie) {
 		return (
-			<Container className="py-5">
+			<Container fluid className="py-5">
 				<Alert variant="warning">
 					No se encontró la película solicitada. Volvé al catálogo para elegir otra.
 				</Alert>
@@ -40,8 +43,8 @@ export function Detail() {
 					style={{ backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})` }}
 				/>
 			)}
-			<Container className="detail-content py-4">
-				<Link to="/catalog" className="detail-back-link">
+			<Container fluid className="detail-content py-4">
+				<Link to={detailState?.from ?? "/catalog"} className="detail-back-link">
 					<Button variant="outline-light" size="sm">Volver al catálogo</Button>
 				</Link>
 			<Row className="g-4">
