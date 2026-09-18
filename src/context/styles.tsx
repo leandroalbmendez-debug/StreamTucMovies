@@ -1,8 +1,16 @@
 import { useLocalStorage } from "@uidotdev/usehooks";
-import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
-import { useDeviceSize, useMediaQuery } from "react-device-sizes";
+import { createContext, useContext, type ReactNode } from "react";
+import { useMediaQuery } from "react-device-sizes";
 
-const StyleEnviroment = createContext<undefined>(undefined);
+interface StyleContextValue {
+	isMobile: boolean;
+	isTablet: boolean;
+	isLaptop: boolean;
+	theme: string;
+	switchTheme: () => void;
+}
+
+const StyleEnviroment = createContext<StyleContextValue | undefined>(undefined);
 
 export function StyleCtx({ children }: { children: ReactNode }) {
     const [theme, setTheme] = useLocalStorage("theme","light");

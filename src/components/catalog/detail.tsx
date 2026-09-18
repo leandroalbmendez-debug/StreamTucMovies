@@ -1,5 +1,5 @@
-import { Navigate, useParams } from "react-router";
-import { Alert, Badge, Col, Container, Image, ListGroup, Row } from "react-bootstrap";
+import { Navigate, useParams, Link } from "react-router";
+import { Alert, Badge, Button, Col, Container, Image, ListGroup, Row } from "react-bootstrap";
 import { useData } from "../../context/database";
 import { CommentSection } from "../comments/CommentSection";
 import type { Movie } from "../../types/database";
@@ -33,7 +33,17 @@ export function Detail() {
 	}
 
 	return (
-		<Container className="py-4">
+		<main className="detail-page">
+			{movie.backdrop_path && (
+				<div
+					className="detail-backdrop"
+					style={{ backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})` }}
+				/>
+			)}
+			<Container className="detail-content py-4">
+				<Link to="/catalog" className="detail-back-link">
+					<Button variant="outline-light" size="sm">Volver al catálogo</Button>
+				</Link>
 			<Row className="g-4">
 				<Col md={4} lg={3}>
 					<Image
@@ -44,7 +54,7 @@ export function Detail() {
 					/>
 				</Col>
 				<Col md={8} lg={9}>
-					<h1>{movie.title}</h1>
+					<h1 className="detail-title">{movie.title}</h1>
 					<p className="lead">{movie.original_title}</p>
 					<p>{movie.overview || "No hay sinopsis disponible."}</p>
 					<ListGroup>
@@ -63,18 +73,8 @@ export function Detail() {
 					</ListGroup>
 				</Col>
 			</Row>
-			{movie.backdrop_path && (
-				<Row className="mt-4">
-					<Col>
-						<Image
-							fluid
-							src={movie.backdrop_path != null ? `https://image.tmdb.org/t/p/original${movie.backdrop_path}` : `../src/assets/${theme}.png`}
-							alt={`Fondo de ${movie.title}`}
-						/>
-					</Col>
-				</Row>
-			)}
 			<CommentSection movieId={String(movie.id)} />
-		</Container>
+			</Container>
+		</main>
 	);
 }
