@@ -40,7 +40,7 @@ export function Detail() {
 			{movie.backdrop_path && (
 				<div
 					className="detail-backdrop"
-					style={{ backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})` }}
+					style={{ backgroundImage: `url(${movie.backdrop_path.startsWith("http") ? movie.backdrop_path : `https://image.tmdb.org/t/p/original${movie.backdrop_path}`})` }}
 				/>
 			)}
 			<Container fluid className="detail-content py-4">
@@ -52,7 +52,7 @@ export function Detail() {
 					<Image
 						fluid
 						rounded
-						src={movie.poster_path != null ? `https://image.tmdb.org/t/p/original${movie.poster_path}` : `../src/assets/${theme}.png`}
+						src={movie.poster_path ? (movie.poster_path.startsWith("http") ? movie.poster_path : `https://image.tmdb.org/t/p/original${movie.poster_path}`) : `../src/assets/${theme}.png`}
 						alt={movie.title}
 					/>
 				</Col>

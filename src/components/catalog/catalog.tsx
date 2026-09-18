@@ -6,6 +6,7 @@ import { Card } from "./Card";
 import { FaChevronDown, FaPlay, FaStar } from "react-icons/fa";
 import { Link } from "react-router";
 import { useState } from "react";
+import { isCustomMovie } from "../../data/customMovies";
 
 type SortOption = "popularity" | "vote_average";
 
@@ -18,14 +19,16 @@ export function Catalog() {
 		currentIndex,
 		selectedGenre,
 		selectGenre,
+		maxPage,
 	} = useData();
 	const { theme, isMobile, isTablet } = useStyle();
 	const [sortOption, setSortOption] = useState<SortOption>("popularity");
-	const sortedMovies = [...list].sort((firstMovie, secondMovie) =>
+	const sortedTmdbMovies = list.filter((movie) => !isCustomMovie(movie)).sort((firstMovie, secondMovie) =>
 		sortOption === "popularity"
 			? secondMovie.popularity - firstMovie.popularity
 			: secondMovie.vote_average - firstMovie.vote_average,
 	);
+	const sortedMovies = [...list.filter(isCustomMovie), ...sortedTmdbMovies];
 	const genres = [
 		{ label: "Todos", id: null },
 		{ label: "Acción", id: 28 },
@@ -119,7 +122,7 @@ export function Catalog() {
 						step={sizeQuery()}
 						tracker={currentIndex}
 						min={1}
-						max={500}
+						max={maxPage}
 						bump={nudge}
 						jump={jumpTo}
 					/>

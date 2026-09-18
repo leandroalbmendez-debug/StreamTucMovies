@@ -1,13 +1,29 @@
-import { Card, Col, Container, Row } from "react-bootstrap";
+import { Card, Carousel, Col, Container, Row } from "react-bootstrap";
 import { FaPlay, FaStar } from "react-icons/fa";
 import { Link } from "react-router";
 import { useData } from "../context/database";
+import { useEffect, useState } from "react";
+import { FEATURED_MOVIES_KEY } from "../data/customMovies";
+import type { Movie } from "../types/database";
 
 export function Index() {
   const { list, loading } = useData();
+  const [featuredMovies, setFeaturedMovies] = useState<Movie[]>(() => {
+    const stored = localStorage.getItem(FEATURED_MOVIES_KEY);
+    return stored ? JSON.parse(stored) as Movie[] : [];
+  });
+
+  useEffect(() => {
+    const refresh = () => {
+      const stored = localStorage.getItem(FEATURED_MOVIES_KEY);
+      setFeaturedMovies(stored ? JSON.parse(stored) as Movie[] : []);
+    };
+    window.addEventListener("streamtuc-featured-change", refresh);
+    return () => window.removeEventListener("streamtuc-featured-change", refresh);
+  }, []);
 
   const featuredMovie = list[0];
-  const featuredMovies = list.slice(0, 16);
+  const catalogMovies = list.slice(0, 16);
 
   if (loading) {
     return (
@@ -82,9 +98,28 @@ export function Index() {
       <Container fluid className="py-5">
         <section className="mb-5">
           <h2 className="mb-4">Películas destacadas</h2>
+          <Carousel interval={5000}>
+            {(featuredMovies.length ? featuredMovies : list.slice(0, 5)).map((movie) => (
+              <Carousel.Item key={movie.id}>
+                <img
+                  className="d-block w-100"
+                  src={movie.backdrop_path ? (movie.backdrop_path.startsWith("http") ? movie.backdrop_path : `https://image.tmdb.org/t/p/original${movie.backdrop_path}`) : (movie.poster_path.startsWith("http") ? movie.poster_path : `https://image.tmdb.org/t/p/w500${movie.poster_path}`)}
+                  alt={movie.title}
+                  style={{ height: "360px", objectFit: "cover" }}
+                />
+                <Carousel.Caption>
+                  <h3>{movie.title}</h3>
+                  <Link to={`/detail/${movie.id}`} className="btn btn-light">Ver detalles</Link>
+                </Carousel.Caption>
+              </Carousel.Item>
+            ))}
+          </Carousel>
+        </section>
+        <section className="mb-5">
+          <h2 className="mb-4">Películas destacadas</h2>
 
           <Row>
-            {featuredMovies.map((movie) => (
+            {catalogMovies.map((movie) => (
               <Col
                 key={movie.id}
                 md={6}
