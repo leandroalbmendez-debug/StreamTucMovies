@@ -8,7 +8,7 @@ export function NotFound() {
     location.pathname === "/recuperar-contrasena";
 
   return (
-    <Container className="py-5 text-center">
+    <Container fluid className="py-5 text-center">
       <div className="py-5">
         <h1 className="display-1 fw-bold">404</h1>
 

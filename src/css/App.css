@@ -64,6 +64,48 @@ body {
 	font-family: var(--font-body);
 }
 
+.app-shell {
+	background: var(--surface);
+	color: var(--on-surface);
+	min-height: 100vh;
+}
+
+.app-shell h1,
+.app-shell h2,
+.app-shell h3,
+.app-shell h4,
+.app-shell .card-title,
+.app-shell .navbar-brand {
+	font-family: var(--font-display);
+}
+
+.app-shell .card,
+.app-shell .list-group-item,
+.app-shell .table {
+	background-color: var(--surface-low);
+	border-color: var(--surface-highest);
+	color: var(--on-surface);
+}
+
+.app-shell .form-control,
+.app-shell .form-select {
+	background-color: var(--surface-lowest);
+	border-color: var(--surface-highest);
+	color: var(--on-surface);
+}
+
+.app-shell .form-control::placeholder {
+	color: var(--on-surface-variant);
+}
+
+.app-shell .form-control:focus,
+.app-shell .form-select:focus {
+	background-color: var(--surface-lowest);
+	border-color: var(--primary-container);
+	box-shadow: 0 0 0 0.2rem rgb(255 104 0 / 0.16);
+	color: var(--on-surface);
+}
+
 .catalog-navbar {
 	background: rgb(18 19 23 / 0.82);
 	backdrop-filter: blur(16px);
@@ -153,8 +195,84 @@ body {
 	--on-surface: #251b17;
 	--on-surface-variant: #684f45;
 	--outline-variant: #c3aaa0;
+	--primary: #a23f00;
+	--primary-container: #c44f00;
+	--secondary: #6000bf;
+	--secondary-container: #8a22e6;
 	background-color: var(--surface);
 	color: var(--on-surface);
+}
+
+.detail-page {
+	background: var(--surface);
+	min-height: calc(100vh - 56px);
+	position: relative;
+}
+
+.detail-backdrop {
+	background-position: center;
+	background-size: cover;
+	height: 34rem;
+	left: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+.detail-backdrop::after {
+	background: linear-gradient(180deg, rgb(18 19 23 / 0.35), var(--surface) 88%);
+	content: "";
+	inset: 0;
+	position: absolute;
+}
+
+.detail-content {
+	position: relative;
+	z-index: 1;
+}
+
+.detail-back-link {
+	display: inline-block;
+	margin-bottom: 1.5rem;
+	text-decoration: none;
+}
+
+.detail-title {
+	font-size: clamp(2rem, 5vw, 3.75rem);
+	margin-top: 1rem;
+}
+
+.detail-page .list-group {
+	background: rgb(18 19 23 / 0.65);
+	border-radius: 0.75rem;
+	overflow: hidden;
+}
+
+.comments-section {
+	border-top: 1px solid var(--surface-highest);
+	margin-top: 3rem !important;
+	padding-top: 2rem;
+}
+
+.comments-section .card {
+	border-radius: 0.75rem;
+}
+
+.favorites-controls {
+	margin-bottom: 1.5rem;
+}
+
+.favorites-controls .form-control {
+	margin-bottom: 0.75rem;
+}
+
+.favorites-genres {
+	margin-bottom: 0;
+}
+
+.favorites-empty-filter {
+	color: var(--on-surface-variant);
+	margin-bottom: 1.5rem;
 }
 
 .movie-title {
@@ -304,6 +422,23 @@ body {
 	top: 50%;
 	transform: translateY(-50%);
 	pointer-events: none;
+}
+
+.catalog-search-form {
+	background: var(--surface-low);
+	border: 1px solid var(--surface-highest);
+	border-radius: 0.75rem;
+	padding: 1rem;
+}
+
+.catalog-search-form .form-label {
+	color: var(--on-surface-variant);
+	font-size: 0.78rem;
+	font-weight: 600;
+}
+
+.search-results-heading h2 {
+	font-size: clamp(1.35rem, 3vw, 2rem);
 }
 
 .catalog-genres {

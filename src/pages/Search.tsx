@@ -1,17 +1,12 @@
 import { useState } from "react";
-import { Card, Col, Container, Form, Row, Spinner } from "react-bootstrap";
-import { FaSearch, FaStar } from "react-icons/fa";
-import { Link } from "react-router";
-
-interface Movie {
-  id: number;
-  title: string;
-  overview: string;
-  vote_average: number;
-  release_date: string;
-  poster_path: string | null;
-  backdrop_path: string | null;
-}
+import { Button, Container, Form, Row, Spinner } from "react-bootstrap";
+import { FaSearch } from "react-icons/fa";
+import { useStyle } from "../context/styles";
+import { Card } from "../components/catalog/Card";
+import { notifyFavoriteChange, queueFavoriteUpdate } from "../data/favoriteQueue";
+import type { Movie } from "../types/database";
+import type { User } from "../types/User";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 interface SearchResponse {
   results: Movie[];
@@ -20,10 +15,27 @@ interface SearchResponse {
 }
 
 export function Search() {
-  const [search, setSearch] = useState("");
-  const [movies, setMovies] = useState<Movie[]>([]);
+  const { theme } = useStyle();
+  const [search, setSearch] = useLocalStorage("streamtuc-search-query", "");
+  const [movies, setMovies] = useLocalStorage<Movie[]>("streamtuc-search-results", []);
+  const [searched, setSearched] = useLocalStorage("streamtuc-search-completed", false);
+  const [loggedUser] = useLocalStorage<User | null>("streamtuc-logged-user", null);
   const [loading, setLoading] = useState(false);
-  const [searched, setSearched] = useState(false);
+  const [isAddingAll, setIsAddingAll] = useState(false);
+
+  const addAllSearchResults = async () => {
+    if (!loggedUser || movies.length === 0 || isAddingAll) return;
+
+    setIsAddingAll(true);
+    try {
+      for (const movie of movies) {
+        const updatedUser = await queueFavoriteUpdate(movie.id, true);
+        if (updatedUser) notifyFavoriteChange(updatedUser);
+      }
+    } finally {
+      setIsAddingAll(false);
+    }
+  };
 
   const searchMovies = async () => {
     if (search.trim() === "") {
@@ -63,10 +75,16 @@ export function Search() {
   };
 
   return (
-    <Container className="py-5">
-      <h1 className="mb-4">Buscar películas</h1>
+    <Container fluid className={`${theme}-mode catalog-page`}>
+      <section className="catalog-explorer search-page">
+        <div className="catalog-section-heading">
+          <div>
+            <span className="catalog-eyebrow">Encontrá tu próxima película</span>
+            <h1>Buscar películas</h1>
+          </div>
+        </div>
 
-      <Form onSubmit={handleSubmit} className="mb-5">
+      <Form onSubmit={handleSubmit} className="catalog-search-form mb-5">
         <Form.Group>
           <Form.Label>Buscar por nombre</Form.Label>
 
@@ -98,71 +116,27 @@ export function Search() {
 
       {!loading && searched && (
         <>
-          <h2 className="mb-4">
-            Resultados para: <strong>{search}</strong>
-          </h2>
+          <div className="catalog-section-heading search-results-heading">
+            <h2>Resultados para: <strong>{search}</strong></h2>
+            <Button type="button" variant="primary" onClick={() => void addAllSearchResults()} disabled={!loggedUser || movies.length === 0 || isAddingAll}>
+              {isAddingAll ? <Spinner animation="border" size="sm" aria-hidden="true" /> : "Agregar todos a favoritos"}
+            </Button>
+          </div>
 
           {movies.length === 0 ? (
             <p>No se encontraron películas con ese nombre.</p>
           ) : (
-            <Row>
+            <Row className="catalog-grid">
               {movies.map((movie) => (
-                <Col
-                  key={movie.id}
-                  md={6}
-                  lg={3}
-                  className="mb-4"
-                >
-                  <Card className="h-100">
-                    {movie.poster_path ? (
-                      <Card.Img
-                        variant="top"
-                        src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                        alt={movie.title}
-                        style={{
-                          height: "350px",
-                          objectFit: "cover",
-                        }}
-                      />
-                    ) : (
-                      <div
-                        className="bg-secondary text-white d-flex align-items-center justify-content-center"
-                        style={{ height: "350px" }}
-                      >
-                        Sin imagen
-                      </div>
-                    )}
-
-                    <Card.Body className="d-flex flex-column">
-                      <Card.Title>
-                        {movie.title}
-                      </Card.Title>
-
-                      <Card.Text>
-                        <FaStar className="me-1" />
-                        {movie.vote_average.toFixed(1)}
-                      </Card.Text>
-
-                      <Card.Text>
-                        {movie.release_date
-                          ? movie.release_date.slice(0, 4)
-                          : "Sin fecha"}
-                      </Card.Text>
-
-                      <Link
-                        to={`/detail/${movie.id}`}
-                        className="btn btn-primary mt-auto"
-                      >
-                        Ver detalles
-                      </Link>
-                    </Card.Body>
-                  </Card>
-                </Col>
+                <div key={movie.id}>
+                  <Card movie={movie} theme={theme} detailState={movie} detailFrom="/search" />
+                </div>
               ))}
             </Row>
           )}
         </>
       )}
+      </section>
     </Container>
   );
 }
