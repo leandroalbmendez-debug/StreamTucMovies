@@ -8,13 +8,24 @@ export const FEATURED_MOVIES_KEY = "streamtuc-featured-movies";
 export const CUSTOM_MOVIES_CHANGE_EVENT = "streamtuc-custom-movies-change";
 
 export const MOVIE_GENRES = [
+  { label: "Aventura", id: 12 },
   { label: "Acción", id: 28 },
+  { label: "Animación", id: 16 },
+  { label: "Comedia", id: 35 },
   { label: "Ciencia ficción", id: 878 },
+  { label: "Crimen", id: 80 },
+  { label: "Documental", id: 99 },
   { label: "Drama", id: 18 },
+  { label: "Familia", id: 10751 },
+  { label: "Fantasía", id: 14 },
+  { label: "Historia", id: 36 },
+  { label: "Misterio", id: 9648 },
+  { label: "Música", id: 10402 },
+  { label: "Romance", id: 10749 },
   { label: "Thriller", id: 53 },
   { label: "Terror", id: 27 },
-  { label: "Comedia", id: 35 },
-  { label: "Animación", id: 16 },
+  { label: "Guerra", id: 10752 },
+  { label: "Western", id: 37 },
 ];
 
 export function createCustomMovie(values: Partial<Movie>): CustomMovie {
