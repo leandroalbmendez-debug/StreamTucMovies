@@ -10,10 +10,16 @@ import {
   saveFeaturedMovies,
   type CustomMovie,
 } from "../data/customMovies";
+import { initialMovies } from "../data/initialMovies";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
+const initialCustomMovies: CustomMovie[] = initialMovies.map((movie) => ({
+  ...movie,
+  isCustom: true,
+}));
+
 export function CustomMoviesAdmin() {
-  const [movies, setMovies] = useLocalStorage<CustomMovie[]>(CUSTOM_MOVIES_KEY, []);
+  const [movies, setMovies] = useLocalStorage<CustomMovie[]>(CUSTOM_MOVIES_KEY, initialCustomMovies);
   const [bin, setBin] = useLocalStorage<CustomMovie[]>(CUSTOM_MOVIE_BIN_KEY, []);
   const [editing, setEditing] = useState<CustomMovie | null>(null);
   const [showModal, setShowModal] = useState(false);
@@ -40,12 +46,15 @@ export function CustomMoviesAdmin() {
   const moveToBin = (movie: CustomMovie) => {
     setMovies((current) => current.filter((item) => item.id !== movie.id));
     setBin((current) => [movie, ...current.filter((item) => item.id !== movie.id)]);
+    saveFeaturedMovies(featuredMovies.filter((item) => item.id !== movie.id));
     notifyCustomMoviesChange();
   };
 
   const clearList = () => {
     setBin((current) => [...movies, ...current.filter((item) => !movies.some((movie) => movie.id === item.id))]);
     setMovies([]);
+    const movieIds = new Set(movies.map((movie) => movie.id));
+    saveFeaturedMovies(featuredMovies.filter((movie) => !movieIds.has(movie.id)));
     setConfirmClear(false);
     notifyCustomMoviesChange();
   };
@@ -66,25 +75,73 @@ export function CustomMoviesAdmin() {
     saveFeaturedMovies(nextFeaturedMovies);
   };
 
+  const toggleVisibility = (movie: CustomMovie) => {
+    const nextMovies = movies.map((item) => item.id === movie.id
+      ? { ...item, isHidden: !item.isHidden }
+      : item);
+    setMovies(nextMovies);
+    localStorage.setItem(CUSTOM_MOVIES_KEY, JSON.stringify(nextMovies));
+    notifyCustomMoviesChange();
+  };
+
+  const toggleAllVisibility = () => {
+    const shouldHide = movies.some((movie) => !movie.isHidden);
+    const nextMovies = movies.map((movie) => ({ ...movie, isHidden: shouldHide }));
+    setMovies(nextMovies);
+    localStorage.setItem(CUSTOM_MOVIES_KEY, JSON.stringify(nextMovies));
+    notifyCustomMoviesChange();
+  };
+
+  const toggleAllFeatured = () => {
+    const movieIds = new Set(movies.map((movie) => movie.id));
+    const allMoviesAreFeatured = movies.length > 0 && movies.every((movie) => featuredMovies.some((item) => item.id === movie.id));
+    const nextFeaturedMovies = allMoviesAreFeatured
+      ? featuredMovies.filter((movie) => !movieIds.has(movie.id))
+      : [
+          ...featuredMovies.filter((movie) => !movieIds.has(movie.id)),
+          ...movies,
+        ];
+    setFeaturedMovies(nextFeaturedMovies);
+    saveFeaturedMovies(nextFeaturedMovies);
+  };
+
   return (
     <>
       <div className="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
         <h2 className="mb-0">Películas personalizadas</h2>
         <div className="d-flex gap-2">
+          <Button variant="outline-secondary" disabled={!movies.length} onClick={toggleAllVisibility}>
+            {movies.length > 0 && movies.every((movie) => movie.isHidden) ? "Mostrar todas" : "Ocultar todas"}
+          </Button>
+          <Button variant="outline-warning" disabled={!movies.length} onClick={toggleAllFeatured}>
+            {movies.length > 0 && movies.every((movie) => featuredMovies.some((item) => item.id === movie.id)) ? "Quitar destacadas" : "Destacar todas"}
+          </Button>
           <Button variant="outline-danger" disabled={!movies.length} onClick={() => setConfirmClear(true)}>Limpiar lista</Button>
           <Button onClick={() => { setEditing(null); setShowModal(true); }}>Agregar película</Button>
         </div>
       </div>
       <Table striped bordered hover responsive>
-        <thead><tr><th>Título</th><th>Géneros</th><th>Estreno</th><th>Acciones</th></tr></thead>
+        <thead><tr><th>Portada</th><th>Título</th><th>Géneros</th><th>Estreno</th><th>Acciones</th></tr></thead>
         <tbody>
           {movies.map((movie) => (
             <tr key={movie.id}>
+              <td>
+                <img
+                  src={movie.poster_path}
+                  alt={`Portada de ${movie.title}`}
+                  width="48"
+                  height="72"
+                  className="rounded object-fit-cover"
+                />
+              </td>
               <td>{movie.title}</td>
               <td>{movie.genre_ids.map((id) => MOVIE_GENRES.find((genre) => genre.id === id)?.label || id).join(", ") || "Sin género"}</td>
               <td>{String(movie.release_date) || "-"}</td>
               <td>
                 <Button size="sm" variant={featuredMovies.some((item) => item.id === movie.id) ? "warning" : "outline-warning"} className="me-2" onClick={() => toggleFeatured(movie)} aria-label={`Destacar ${movie.title}`}><span aria-hidden="true">★</span></Button>
+                <Button size="sm" variant={movie.isHidden ? "outline-secondary" : "secondary"} className="me-2" onClick={() => toggleVisibility(movie)} aria-label={movie.isHidden ? `Mostrar ${movie.title} en el catálogo` : `Ocultar ${movie.title} del catálogo`}>
+                  {movie.isHidden ? "Mostrar" : "Ocultar"}
+                </Button>
                 <Button size="sm" variant="warning" className="me-2" onClick={() => { setEditing(movie); setShowModal(true); }}>Editar</Button>
                 <Button size="sm" variant="danger" onClick={() => moveToBin(movie)}>Eliminar</Button>
               </td>

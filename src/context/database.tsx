@@ -32,7 +32,8 @@ async function fetchData(requestUrl: string, includeCustom = false): Promise<voi
 			tmdbListRef.current = result.results;
 			const currentCustomMovies = readCustomMovies();
 			setCustomMovies(currentCustomMovies);
-			setList(includeCustom ? [...currentCustomMovies, ...result.results] : result.results);
+			const visibleCustomMovies = currentCustomMovies.filter((movie) => !movie.isHidden);
+			setList(includeCustom ? [...visibleCustomMovies, ...result.results] : result.results);
 		} catch (error) {
 			console.error(error);
 		} finally {
@@ -60,7 +61,8 @@ async function fetchData(requestUrl: string, includeCustom = false): Promise<voi
 		const updateCustomMovies = () => {
 			const nextCustomMovies = readCustomMovies();
 			setCustomMovies(nextCustomMovies);
-			setList(currentIndex === 1 && selectedGenre === null ? [...nextCustomMovies, ...tmdbListRef.current] : tmdbListRef.current);
+			const visibleCustomMovies = nextCustomMovies.filter((movie) => !movie.isHidden);
+			setList(currentIndex === 1 && selectedGenre === null ? [...visibleCustomMovies, ...tmdbListRef.current] : tmdbListRef.current);
 		};
 		window.addEventListener(CUSTOM_MOVIES_CHANGE_EVENT, updateCustomMovies);
 		return () => window.removeEventListener(CUSTOM_MOVIES_CHANGE_EVENT, updateCustomMovies);
