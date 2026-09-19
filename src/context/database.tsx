@@ -1,16 +1,13 @@
 import { useContext, createContext, useState, useEffect, useRef, type ReactNode } from "react";
 import type { DataContextValue, Movie } from "../types/database";
-import { CUSTOM_MOVIES_CHANGE_EVENT, CUSTOM_MOVIES_KEY, type CustomMovie } from "../data/customMovies";
+import { CUSTOM_MOVIES_CHANGE_EVENT, readCustomMovies, type CustomMovie } from "../data/customMovies";
 
 const DataEnviroment = createContext<DataContextValue | undefined>(undefined);
 
 export function DataCtx({ children }: { children: ReactNode }) {
 	const [list, setList] = useState<Movie[]>([]);
 	const tmdbListRef = useRef<Movie[]>([]);
-	const [customMovies, setCustomMovies] = useState<CustomMovie[]>(() => {
-		const stored = localStorage.getItem(CUSTOM_MOVIES_KEY);
-		return stored ? JSON.parse(stored) as CustomMovie[] : [];
-	});
+	const [customMovies, setCustomMovies] = useState<CustomMovie[]>(readCustomMovies);
 	const [data, setData] = useState<unknown>(null);
 	const [loading, setLoading] = useState<boolean>(true);
 	const apiKey = import.meta.env.VITE_API_KEY as string | undefined;
@@ -33,7 +30,9 @@ async function fetchData(requestUrl: string, includeCustom = false): Promise<voi
 			const result = await response.json();
 			setData(result);
 			tmdbListRef.current = result.results;
-			setList(includeCustom ? [...customMovies, ...result.results] : result.results);
+			const currentCustomMovies = readCustomMovies();
+			setCustomMovies(currentCustomMovies);
+			setList(includeCustom ? [...currentCustomMovies, ...result.results] : result.results);
 		} catch (error) {
 			console.error(error);
 		} finally {
@@ -59,8 +58,7 @@ async function fetchData(requestUrl: string, includeCustom = false): Promise<voi
 
 	useEffect(() => {
 		const updateCustomMovies = () => {
-			const stored = localStorage.getItem(CUSTOM_MOVIES_KEY);
-			const nextCustomMovies = stored ? JSON.parse(stored) as CustomMovie[] : [];
+			const nextCustomMovies = readCustomMovies();
 			setCustomMovies(nextCustomMovies);
 			setList(currentIndex === 1 && selectedGenre === null ? [...nextCustomMovies, ...tmdbListRef.current] : tmdbListRef.current);
 		};

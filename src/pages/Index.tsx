@@ -1,13 +1,21 @@
-import { Card, Carousel, Col, Container, Row } from "react-bootstrap";
+import { Card as BootstrapCard, Carousel, Col, Container, Row } from "react-bootstrap";
 import { FaPlay, FaStar } from "react-icons/fa";
 import { Link } from "react-router";
 import { useData } from "../context/database";
 import { useEffect, useState } from "react";
 import { FEATURED_MOVIES_KEY } from "../data/customMovies";
 import type { Movie } from "../types/database";
+import { Card as CatalogCard } from "../components/catalog/Card";
+import { useStyle } from "../context/styles";
+
+function movieImageUrl(path: string | null | undefined, size: "w500" | "original") {
+  if (!path) return "";
+  return path.startsWith("http") ? path : `https://image.tmdb.org/t/p/${size}${path}`;
+}
 
 export function Index() {
   const { list, loading } = useData();
+  const { theme } = useStyle();
   const [featuredMovies, setFeaturedMovies] = useState<Movie[]>(() => {
     const stored = localStorage.getItem(FEATURED_MOVIES_KEY);
     return stored ? JSON.parse(stored) as Movie[] : [];
@@ -49,7 +57,7 @@ export function Index() {
         className="text-white"
         style={{
           minHeight: "500px",
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.8)), url(https://image.tmdb.org/t/p/original${featuredMovie.backdrop_path})`,
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.8)), url(${movieImageUrl(featuredMovie.backdrop_path || featuredMovie.poster_path, "original")})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -103,7 +111,7 @@ export function Index() {
               <Carousel.Item key={movie.id}>
                 <img
                   className="d-block w-100"
-                  src={movie.backdrop_path ? (movie.backdrop_path.startsWith("http") ? movie.backdrop_path : `https://image.tmdb.org/t/p/original${movie.backdrop_path}`) : (movie.poster_path.startsWith("http") ? movie.poster_path : `https://image.tmdb.org/t/p/w500${movie.poster_path}`)}
+                  src={movieImageUrl(movie.backdrop_path || movie.poster_path, movie.backdrop_path ? "original" : "w500")}
                   alt={movie.title}
                   style={{ height: "360px", objectFit: "cover" }}
                 />
@@ -118,43 +126,13 @@ export function Index() {
         <section className="mb-5">
           <h2 className="mb-4">Películas destacadas</h2>
 
-          <Row>
+          <Row className="catalog-grid">
             {catalogMovies.map((movie) => (
               <Col
                 key={movie.id}
-                md={6}
-                lg={3}
-                className="mb-4"
+                className="p-2"
               >
-                <Card className="h-100">
-                  {movie.backdrop_path && (
-                    <Card.Img
-                      variant="top"
-                      src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}
-                      alt={movie.title}
-                      style={{
-                        height: "180px",
-                        objectFit: "cover",
-                      }}
-                    />
-                  )}
-
-                  <Card.Body className="d-flex flex-column">
-                    <Card.Title>{movie.title}</Card.Title>
-
-                    <Card.Text>
-                      <FaStar className="me-1" />
-                      {movie.vote_average.toFixed(1)}
-                    </Card.Text>
-
-                    <Link
-                      to={`/detail/${movie.id}`}
-                      className="btn btn-primary mt-auto"
-                    >
-                      Ver detalles
-                    </Link>
-                  </Card.Body>
-                </Card>
+                <CatalogCard movie={movie} theme={theme} />
               </Col>
             ))}
           </Row>
@@ -167,16 +145,16 @@ export function Index() {
 
           <Row className="justify-content-center">
             <Col md={5} className="mb-4">
-              <Card className="h-100 text-center">
-                <Card.Body className="d-flex flex-column">
-                  <Card.Title className="fs-3">
+              <BootstrapCard className="h-100 text-center">
+                <BootstrapCard.Body className="d-flex flex-column">
+                  <BootstrapCard.Title className="fs-3">
                     Plan Gratis
-                  </Card.Title>
+                  </BootstrapCard.Title>
 
-                  <Card.Text>
+                  <BootstrapCard.Text>
                     Disfrutá de nuestro catálogo de películas
                     y comenzá tu experiencia en STREAMTUC.
-                  </Card.Text>
+                  </BootstrapCard.Text>
 
                   <ul className="text-start">
                     <li>Acceso al catálogo</li>
@@ -190,21 +168,21 @@ export function Index() {
                   >
                     Registrarme
                   </Link>
-                </Card.Body>
-              </Card>
+                </BootstrapCard.Body>
+              </BootstrapCard>
             </Col>
 
             <Col md={5} className="mb-4">
-              <Card className="h-100 text-center">
-                <Card.Body className="d-flex flex-column">
-                  <Card.Title className="fs-3">
+              <BootstrapCard className="h-100 text-center">
+                <BootstrapCard.Body className="d-flex flex-column">
+                  <BootstrapCard.Title className="fs-3">
                     Plan Premium
-                  </Card.Title>
+                  </BootstrapCard.Title>
 
-                  <Card.Text>
+                  <BootstrapCard.Text>
                     Disfrutá de una experiencia completa
                     con STREAMTUC.
-                  </Card.Text>
+                  </BootstrapCard.Text>
 
                   <ul className="text-start">
                     <li>Todo el catálogo</li>
@@ -219,8 +197,8 @@ export function Index() {
                   >
                     Registrarme
                   </Link>
-                </Card.Body>
-              </Card>
+                </BootstrapCard.Body>
+              </BootstrapCard>
             </Col>
           </Row>
         </section>

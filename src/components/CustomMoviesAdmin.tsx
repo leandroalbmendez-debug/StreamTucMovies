@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Modal, Table } from "react-bootstrap";
 import { CustomMovieModal } from "./CustomMovieModal";
 import {
@@ -6,6 +6,8 @@ import {
   CUSTOM_MOVIES_KEY,
   MOVIE_GENRES,
   notifyCustomMoviesChange,
+  readFeaturedMovies,
+  saveFeaturedMovies,
   type CustomMovie,
 } from "../data/customMovies";
 import { useLocalStorage } from "../hooks/useLocalStorage";
@@ -16,6 +18,16 @@ export function CustomMoviesAdmin() {
   const [editing, setEditing] = useState<CustomMovie | null>(null);
   const [showModal, setShowModal] = useState(false);
   const [confirmClear, setConfirmClear] = useState(false);
+  const [featuredMovies, setFeaturedMovies] = useState<CustomMovie[]>(() => readFeaturedMovies() as CustomMovie[]);
+
+  useEffect(() => {
+    const refreshFeaturedMovies = () => {
+      setFeaturedMovies(readFeaturedMovies() as CustomMovie[]);
+    };
+
+    window.addEventListener("streamtuc-featured-change", refreshFeaturedMovies);
+    return () => window.removeEventListener("streamtuc-featured-change", refreshFeaturedMovies);
+  }, [setFeaturedMovies]);
 
   const saveMovie = (movie: CustomMovie) => {
     setMovies((current) => {
@@ -46,6 +58,14 @@ export function CustomMoviesAdmin() {
 
   const permanentlyDelete = (id: number) => setBin((current) => current.filter((movie) => movie.id !== id));
 
+  const toggleFeatured = (movie: CustomMovie) => {
+    const nextFeaturedMovies = featuredMovies.some((item) => item.id === movie.id)
+      ? featuredMovies.filter((item) => item.id !== movie.id)
+      : [...featuredMovies, movie];
+    setFeaturedMovies(nextFeaturedMovies);
+    saveFeaturedMovies(nextFeaturedMovies);
+  };
+
   return (
     <>
       <div className="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
@@ -64,6 +84,7 @@ export function CustomMoviesAdmin() {
               <td>{movie.genre_ids.map((id) => MOVIE_GENRES.find((genre) => genre.id === id)?.label || id).join(", ") || "Sin género"}</td>
               <td>{String(movie.release_date) || "-"}</td>
               <td>
+                <Button size="sm" variant={featuredMovies.some((item) => item.id === movie.id) ? "warning" : "outline-warning"} className="me-2" onClick={() => toggleFeatured(movie)} aria-label={`Destacar ${movie.title}`}><span aria-hidden="true">★</span></Button>
                 <Button size="sm" variant="warning" className="me-2" onClick={() => { setEditing(movie); setShowModal(true); }}>Editar</Button>
                 <Button size="sm" variant="danger" onClick={() => moveToBin(movie)}>Eliminar</Button>
               </td>

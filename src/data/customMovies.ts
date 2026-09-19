@@ -55,6 +55,33 @@ export function notifyCustomMoviesChange() {
   window.dispatchEvent(new Event(CUSTOM_MOVIES_CHANGE_EVENT));
 }
 
+export function saveFeaturedMovies(movies: Movie[]) {
+  localStorage.setItem(FEATURED_MOVIES_KEY, JSON.stringify(movies));
+  window.dispatchEvent(new Event("streamtuc-featured-change"));
+}
+
+export function readFeaturedMovies(): Movie[] {
+  const stored = localStorage.getItem(FEATURED_MOVIES_KEY);
+  if (!stored) return [];
+
+  try {
+    return JSON.parse(stored) as Movie[];
+  } catch {
+    return [];
+  }
+}
+
+export function readCustomMovies(): CustomMovie[] {
+  const stored = localStorage.getItem(CUSTOM_MOVIES_KEY);
+  if (!stored) return [];
+
+  try {
+    return (JSON.parse(stored) as CustomMovie[]).map((movie) => createCustomMovie(movie));
+  } catch {
+    return [];
+  }
+}
+
 export function isCustomMovie(movie: Movie): movie is CustomMovie {
   return "isCustom" in movie && movie.isCustom === true;
 }
