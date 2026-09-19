@@ -4,7 +4,8 @@ import { useData } from "../../context/database";
 import { CommentSection } from "../comments/CommentSection";
 import type { Movie } from "../../types/database";
 import { useStyle } from "../../context/styles";
-import { MOVIE_GENRES } from "../../data/customMovies";
+import { isCustomMovie, MOVIE_GENRES } from "../../data/customMovies";
+import { customMovieImageUrl, movieImageUrl } from "../../data/movieImages";
 
 function formatReleaseDate(releaseDate: Movie["release_date"]): string {
 	return releaseDate instanceof Date
@@ -41,7 +42,7 @@ export function Detail() {
 			{movie.backdrop_path && (
 				<div
 					className="detail-backdrop"
-					style={{ backgroundImage: `url(${movie.backdrop_path.startsWith("http") ? movie.backdrop_path : `https://image.tmdb.org/t/p/original${movie.backdrop_path}`})` }}
+					style={{ backgroundImage: `url(${isCustomMovie(movie) ? customMovieImageUrl(movie.backdrop_path) : movieImageUrl(movie.backdrop_path, "original")})` }}
 				/>
 			)}
 			<Container fluid className="detail-content py-4">
@@ -53,7 +54,7 @@ export function Detail() {
 					<Image
 						fluid
 						rounded
-						src={movie.poster_path ? (movie.poster_path.startsWith("http") ? movie.poster_path : `https://image.tmdb.org/t/p/original${movie.poster_path}`) : `../src/assets/${theme}.png`}
+						src={(isCustomMovie(movie) ? customMovieImageUrl(movie.poster_path) : movieImageUrl(movie.poster_path, "original")) || `../src/assets/${theme}.png`}
 						alt={movie.title}
 					/>
 				</Col>

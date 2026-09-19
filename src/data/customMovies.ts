@@ -1,6 +1,6 @@
 import type { Movie } from "../types/database";
 
-export type CustomMovie = Movie & { isCustom: true };
+export type CustomMovie = Movie & { isCustom: true; isHidden?: boolean };
 
 export const CUSTOM_MOVIES_KEY = "streamtuc-custom-movies";
 export const CUSTOM_MOVIE_BIN_KEY = "streamtuc-custom-movie-bin";
@@ -28,7 +28,7 @@ export const MOVIE_GENRES = [
   { label: "Western", id: 37 },
 ];
 
-export function createCustomMovie(values: Partial<Movie>): CustomMovie {
+export function createCustomMovie(values: Partial<Movie> & { isHidden?: boolean }): CustomMovie {
   const title = values.title?.trim() || "Sin título";
   const id = values.id ?? -Date.now();
 
@@ -47,6 +47,7 @@ export function createCustomMovie(values: Partial<Movie>): CustomMovie {
     video: false,
     vote_average: values.vote_average || 0,
     vote_count: values.vote_count || 0,
+    isHidden: values.isHidden ?? false,
     isCustom: true,
   };
 }

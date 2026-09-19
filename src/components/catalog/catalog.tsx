@@ -7,6 +7,7 @@ import { FaChevronDown, FaPlay, FaStar } from "react-icons/fa";
 import { Link } from "react-router";
 import { useState } from "react";
 import { isCustomMovie } from "../../data/customMovies";
+import { movieImageUrl } from "../../data/movieImages";
 
 type SortOption = "popularity" | "vote_average";
 
@@ -56,7 +57,7 @@ export function Catalog() {
 				<section
 					className="catalog-hero"
 					style={{
-						backgroundImage: `url(https://image.tmdb.org/t/p/original${sortedMovies[0].backdrop_path})`,
+						backgroundImage: `url(${movieImageUrl(sortedMovies[0].backdrop_path, "original")})`,
 					}}>
 					<div className="catalog-hero-content">
 						<span className="catalog-eyebrow">Cine sin límites</span>

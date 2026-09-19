@@ -91,14 +91,14 @@ export function CustomMovieModal({ show, movie, onHide, onSave }: Props) {
               />
             </Form.Group>
             <Form.Group className="col-md-6">
-              <Form.Label>URL del póster</Form.Label>
+              <Form.Label>URL o ruta pública del póster</Form.Label>
               <Form.Control
                 value={draft.poster_path}
                 onChange={(event) => update("poster_path", event.target.value)}
               />
             </Form.Group>
             <Form.Group className="col-md-6">
-              <Form.Label>URL del fondo</Form.Label>
+              <Form.Label>URL o ruta pública del fondo</Form.Label>
               <Form.Control
                 value={draft.backdrop_path}
                 onChange={(event) => update("backdrop_path", event.target.value)}

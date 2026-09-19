@@ -3,6 +3,7 @@ import { Button, Card as BootstrapCard, Spinner } from "react-bootstrap";
 import { FaEdit, FaHeart, FaRegHeart, FaStar, FaTrash } from "react-icons/fa";
 import { Link } from "react-router";
 import { round } from "../../data/math";
+import { customMovieImageUrl, movieImageUrl } from "../../data/movieImages";
 import { notifyFavoriteChange, queueFavoriteUpdate } from "../../data/favoriteQueue";
 import { initialUsers } from "../../data/initialUsers";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
@@ -110,6 +111,9 @@ export function Card({ movie, theme, detailState, detailFrom }: CatalogCardProps
 		if (!isCustom) return;
 		setCustomMovies((current) => current.filter((item) => item.id !== movie.id));
 		setBin((current) => [movie, ...current.filter((item) => item.id !== movie.id)]);
+		const storedFeatured = localStorage.getItem(FEATURED_MOVIES_KEY);
+		const currentFeatured = storedFeatured ? JSON.parse(storedFeatured) as Movie[] : [];
+		saveFeaturedMovies(currentFeatured.filter((item) => item.id !== movie.id));
 		notifyCustomMoviesChange();
 	}
 
@@ -118,9 +122,7 @@ export function Card({ movie, theme, detailState, detailFrom }: CatalogCardProps
 		notifyCustomMoviesChange();
 	}
 
-	const imagePath = movie.poster_path
-		? movie.poster_path.startsWith("http") ? movie.poster_path : `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-		: `./src/assets/square ${theme}.png`;
+	const imagePath = (isCustom ? customMovieImageUrl(movie.poster_path) : movieImageUrl(movie.poster_path)) || `./src/assets/square ${theme}.png`;
 
 	return (
 		<BootstrapCard className="catalog-card h-100 position-relative">
