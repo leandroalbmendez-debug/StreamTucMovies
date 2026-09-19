@@ -3,14 +3,16 @@ import { FaPlay, FaStar } from "react-icons/fa";
 import { Link } from "react-router";
 import { useData } from "../context/database";
 import { useEffect, useState } from "react";
-import { FEATURED_MOVIES_KEY } from "../data/customMovies";
+import { FEATURED_MOVIES_KEY, isCustomMovie } from "../data/customMovies";
 import type { Movie } from "../types/database";
 import { Card as CatalogCard } from "../components/catalog/Card";
 import { useStyle } from "../context/styles";
+import { customMovieImageUrl, movieImageUrl } from "../data/movieImages";
 
-function movieImageUrl(path: string | null | undefined, size: "w500" | "original") {
-  if (!path) return "";
-  return path.startsWith("http") ? path : `https://image.tmdb.org/t/p/${size}${path}`;
+function imageUrl(movie: Movie, size: "w500" | "original") {
+  return isCustomMovie(movie)
+    ? customMovieImageUrl(movie.backdrop_path || movie.poster_path)
+    : movieImageUrl(movie.backdrop_path || movie.poster_path, size);
 }
 
 export function Index() {
@@ -30,18 +32,31 @@ export function Index() {
     return () => window.removeEventListener("streamtuc-featured-change", refresh);
   }, []);
 
-  const featuredMovie = list[0];
-  const displayedFeaturedMovies = featuredMovies.length >= 12
-    ? featuredMovies
-    : [
-        ...featuredMovies,
-        ...list
-          .filter((movie) => !featuredMovies.some((featuredMovie) => featuredMovie.id === movie.id))
-          .sort((firstMovie, secondMovie) => secondMovie.vote_average - firstMovie.vote_average)
-          .slice(0, 12 - featuredMovies.length),
-      ];
+  const visibleCustomMovies = list.filter(isCustomMovie);
+  const visibleCustomMovieIds = new Set(visibleCustomMovies.map((movie) => movie.id));
+  const featuredCustomIds = new Set(
+    featuredMovies.filter(isCustomMovie).map((movie) => movie.id),
+  );
+  const featuredCustomMovies = featuredMovies
+    .filter((movie) => isCustomMovie(movie) && visibleCustomMovieIds.has(movie.id))
+    .map((movie) => visibleCustomMovies.find((customMovie) => customMovie.id === movie.id) ?? movie);
+  const remainingCustomMovies = visibleCustomMovies.filter((movie) => !featuredCustomIds.has(movie.id));
+  const featuredTmdbMovies = featuredMovies.filter((movie) => !isCustomMovie(movie));
+  const featuredIds = new Set([
+    ...featuredCustomMovies.map((movie) => movie.id),
+    ...remainingCustomMovies.map((movie) => movie.id),
+    ...featuredTmdbMovies.map((movie) => movie.id),
+  ]);
+  const firstPageTmdbMovies = list.filter((movie) => !isCustomMovie(movie) && !featuredIds.has(movie.id));
+  const displayedFeaturedMovies = [
+    ...featuredCustomMovies,
+    ...remainingCustomMovies,
+    ...featuredTmdbMovies,
+    ...firstPageTmdbMovies,
+  ].slice(0, 17);
   const carouselMovies = displayedFeaturedMovies.slice(0, 5);
   const remainingFeaturedMovies = displayedFeaturedMovies.slice(5);
+  const featuredMovie = displayedFeaturedMovies[0];
 
   if (loading) {
     return (
@@ -67,7 +82,7 @@ export function Index() {
         className="text-white"
         style={{
           minHeight: "500px",
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.8)), url(${movieImageUrl(featuredMovie.backdrop_path || featuredMovie.poster_path, "original")})`,
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.8)), url(${imageUrl(featuredMovie, "original")})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -121,7 +136,7 @@ export function Index() {
               <Carousel.Item key={movie.id}>
                 <img
                   className="d-block w-100"
-                  src={movieImageUrl(movie.backdrop_path || movie.poster_path, movie.backdrop_path ? "original" : "w500")}
+                  src={imageUrl(movie, movie.backdrop_path ? "original" : "w500")}
                   alt={movie.title}
                   style={{ height: "360px", objectFit: "cover" }}
                 />
