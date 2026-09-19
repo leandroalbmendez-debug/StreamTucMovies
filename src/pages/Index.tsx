@@ -31,7 +31,15 @@ export function Index() {
   }, []);
 
   const featuredMovie = list[0];
-  const displayedFeaturedMovies = featuredMovies.length ? featuredMovies : list.slice(0, 16);
+  const displayedFeaturedMovies = featuredMovies.length >= 12
+    ? featuredMovies
+    : [
+        ...featuredMovies,
+        ...list
+          .filter((movie) => !featuredMovies.some((featuredMovie) => featuredMovie.id === movie.id))
+          .sort((firstMovie, secondMovie) => secondMovie.vote_average - firstMovie.vote_average)
+          .slice(0, 12 - featuredMovies.length),
+      ];
   const carouselMovies = displayedFeaturedMovies.slice(0, 5);
   const remainingFeaturedMovies = displayedFeaturedMovies.slice(5);
 
