@@ -31,7 +31,9 @@ export function Index() {
   }, []);
 
   const featuredMovie = list[0];
-  const catalogMovies = list.slice(0, 16);
+  const displayedFeaturedMovies = featuredMovies.length ? featuredMovies : list.slice(0, 16);
+  const carouselMovies = displayedFeaturedMovies.slice(0, 5);
+  const remainingFeaturedMovies = displayedFeaturedMovies.slice(5);
 
   if (loading) {
     return (
@@ -103,11 +105,11 @@ export function Index() {
         </Container>
       </section>
 
-      <Container fluid className="py-5">
+      <Container fluid className={`${theme}-mode catalog-page`}>
         <section className="mb-5">
           <h2 className="mb-4">Películas destacadas</h2>
           <Carousel interval={5000}>
-            {(featuredMovies.length ? featuredMovies : list.slice(0, 5)).map((movie) => (
+            {carouselMovies.map((movie) => (
               <Carousel.Item key={movie.id}>
                 <img
                   className="d-block w-100"
@@ -124,10 +126,10 @@ export function Index() {
           </Carousel>
         </section>
         <section className="mb-5">
-          <h2 className="mb-4">Películas destacadas</h2>
+          <h2 className="mb-4">Más películas destacadas</h2>
 
           <Row className="catalog-grid">
-            {catalogMovies.map((movie) => (
+            {remainingFeaturedMovies.map((movie) => (
               <Col
                 key={movie.id}
                 className="p-2"
@@ -139,13 +141,13 @@ export function Index() {
         </section>
 
         <section className="mb-5">
-          <h2 className="text-center mb-4">
-            Elegí tu plan de STREAMTUC
-          </h2>
+          <div className="catalog-section-heading">
+            <h2>Elegí tu plan de STREAMTUC</h2>
+          </div>
 
           <Row className="justify-content-center">
             <Col md={5} className="mb-4">
-              <BootstrapCard className="h-100 text-center">
+              <BootstrapCard className="catalog-card subscription-card h-100 text-center">
                 <BootstrapCard.Body className="d-flex flex-column">
                   <BootstrapCard.Title className="fs-3">
                     Plan Gratis
@@ -173,7 +175,7 @@ export function Index() {
             </Col>
 
             <Col md={5} className="mb-4">
-              <BootstrapCard className="h-100 text-center">
+              <BootstrapCard className="catalog-card subscription-card h-100 text-center">
                 <BootstrapCard.Body className="d-flex flex-column">
                   <BootstrapCard.Title className="fs-3">
                     Plan Premium
