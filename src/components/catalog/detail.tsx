@@ -4,6 +4,7 @@ import { useData } from "../../context/database";
 import { CommentSection } from "../comments/CommentSection";
 import type { Movie } from "../../types/database";
 import { useStyle } from "../../context/styles";
+import { MOVIE_GENRES } from "../../data/customMovies";
 
 function formatReleaseDate(releaseDate: Movie["release_date"]): string {
 	return releaseDate instanceof Date
@@ -71,7 +72,11 @@ export function Detail() {
 						<ListGroup.Item><strong>Video:</strong> {movie.video ? "Sí" : "No"}</ListGroup.Item>
 						<ListGroup.Item>
 							<strong>Géneros:</strong>{" "}
-							{movie.genre_ids.length ? movie.genre_ids.map((genreId) => <Badge key={genreId} bg="secondary" className="me-1">{genreId}</Badge>) : "Sin géneros"}
+							{movie.genre_ids.length ? movie.genre_ids.map((genreId) => (
+								<Badge key={genreId} bg="secondary" className="me-1">
+									{MOVIE_GENRES.find((genre) => genre.id === genreId)?.label ?? `Género ${genreId}`}
+								</Badge>
+							)) : "Sin géneros"}
 						</ListGroup.Item>
 					</ListGroup>
 				</Col>

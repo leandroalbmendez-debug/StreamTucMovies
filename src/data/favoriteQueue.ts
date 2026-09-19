@@ -9,15 +9,16 @@ export function queueFavoriteUpdate(movieId: number, favoriteState?: boolean): P
 		const loggedUser = storedUser ? (JSON.parse(storedUser) as User) : null;
 		if (!loggedUser) return null;
 
-		const isFavorite = loggedUser.favorites.includes(movieId);
+		const favoriteIds = loggedUser.favorites ?? [];
+		const isFavorite = favoriteIds.includes(movieId);
 		const shouldBeFavorite = favoriteState ?? !isFavorite;
 		if (isFavorite === shouldBeFavorite) return loggedUser;
 
 		const updatedUser = {
 			...loggedUser,
 			favorites: shouldBeFavorite
-				? [...loggedUser.favorites, movieId]
-				: loggedUser.favorites.filter((favoriteId) => favoriteId !== movieId),
+				? [...favoriteIds, movieId]
+				: favoriteIds.filter((favoriteId) => favoriteId !== movieId),
 		};
 		const storedUsers = localStorage.getItem("streamtuc-users");
 		const users = storedUsers ? (JSON.parse(storedUsers) as User[]) : initialUsers;

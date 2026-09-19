@@ -7,6 +7,7 @@ import { useLocalStorage } from "../hooks/useLocalStorage";
 import type { Movie } from "../types/database";
 import type { User } from "../types/User";
 import { useStyle } from "../context/styles";
+import { MOVIE_GENRES, readCustomMovies, readFeaturedMovies, saveFeaturedMovies, type CustomMovie } from "../data/customMovies";
 
 export function Favorites() {
 	const { theme } = useStyle();
@@ -19,36 +20,67 @@ export function Favorites() {
 	const [error, setError] = useState(false);
 	const [search, setSearch] = useState("");
 	const [selectedGenre, setSelectedGenre] = useState<number | null>(null);
-	const genres = [
-		{ label: "Todos", id: null },
-		{ label: "Acción", id: 28 },
-		{ label: "Ciencia ficción", id: 878 },
-		{ label: "Drama", id: 18 },
-		{ label: "Thriller", id: 53 },
-		{ label: "Terror", id: 27 },
-		{ label: "Comedia", id: 35 },
-		{ label: "Animación", id: 16 },
-	];
+	const [featuredMovies, setFeaturedMovies] = useState<Movie[]>(readFeaturedMovies);
+	const genres = [{ label: "Todos", id: null }, ...MOVIE_GENRES];
 	const filteredMovies = movies.filter((movie) => {
 		const matchesSearch = movie.title.toLowerCase().includes(search.toLowerCase().trim());
-		const matchesGenre = selectedGenre === null || movie.genre_ids.includes(selectedGenre);
+		const matchesGenre = selectedGenre === null || (movie.genre_ids ?? []).includes(selectedGenre);
 		return matchesSearch && matchesGenre;
 	});
 	const [isRemovingAll, setIsRemovingAll] = useState(false);
+	const [isFeaturingAll, setIsFeaturingAll] = useState(false);
+	const allFilteredMoviesAreFavorite = Boolean(
+		loggedUser &&
+		filteredMovies.length > 0 &&
+		filteredMovies.every((movie) => loggedUser.favorites?.includes(movie.id)),
+	);
+	const allFilteredMoviesAreFeatured = Boolean(
+		filteredMovies.length > 0 &&
+		filteredMovies.every((movie) => featuredMovies.some((featuredMovie) => featuredMovie.id === movie.id)),
+	);
 
-	const removeFilteredFavorites = async () => {
+	const toggleFilteredFavorites = async () => {
 		if (!loggedUser || filteredMovies.length === 0 || isRemovingAll) return;
 
 		setIsRemovingAll(true);
+		const favoriteState = !allFilteredMoviesAreFavorite;
+		let latestUser: User | null = loggedUser;
 		try {
 			for (const movie of filteredMovies) {
-				const updatedUser = await queueFavoriteUpdate(movie.id, false);
-				if (updatedUser) notifyFavoriteChange(updatedUser);
+				const updatedUser = await queueFavoriteUpdate(movie.id, favoriteState);
+				if (updatedUser) latestUser = updatedUser;
+			}
+			if (latestUser) {
+				setLoggedUser(latestUser);
+				notifyFavoriteChange(latestUser);
 			}
 		} finally {
 			setIsRemovingAll(false);
 		}
 	};
+
+	const toggleFilteredFeatures = () => {
+		if (filteredMovies.length === 0 || isFeaturingAll) return;
+
+		setIsFeaturingAll(true);
+		const nextFeaturedMovies = allFilteredMoviesAreFeatured
+			? featuredMovies.filter((featuredMovie) => !filteredMovies.some((movie) => movie.id === featuredMovie.id))
+			: [
+					...featuredMovies.filter((featuredMovie) => !filteredMovies.some((movie) => movie.id === featuredMovie.id)),
+					...filteredMovies,
+			];
+		setFeaturedMovies(nextFeaturedMovies);
+		saveFeaturedMovies(nextFeaturedMovies);
+		setIsFeaturingAll(false);
+	};
+
+	useEffect(() => {
+		const refreshFeaturedMovies = () => {
+			setFeaturedMovies(readFeaturedMovies());
+		};
+		window.addEventListener("streamtuc-featured-change", refreshFeaturedMovies);
+		return () => window.removeEventListener("streamtuc-featured-change", refreshFeaturedMovies);
+	}, [setFeaturedMovies]);
 
 	useEffect(() => {
 		const updateLoggedUser = (event: Event) => {
@@ -66,6 +98,9 @@ export function Favorites() {
 
 	useEffect(() => {
 		if (!loggedUser || loggedUser.favorites.length === 0) {
+			setMovies([]);
+			setError(false);
+			setLoading(false);
 			return;
 		}
 
@@ -78,8 +113,15 @@ export function Favorites() {
 			setError(false);
 
 			try {
-				const favoriteMovies = await Promise.all(
-					favoriteIds.map(async (movieId) => {
+				const customMovies = readCustomMovies();
+				const customFavorites = favoriteIds
+					.map((movieId) => customMovies.find((movie) => movie.id === movieId))
+					.filter((movie): movie is CustomMovie => Boolean(movie));
+				const tmdbFavoriteIds = favoriteIds.filter(
+					(movieId) => !customFavorites.some((movie) => movie.id === movieId),
+				);
+				const tmdbResults = await Promise.allSettled(
+					tmdbFavoriteIds.map(async (movieId) => {
 						const response = await fetch(
 							`https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=es-ES`,
 							{ signal: controller.signal },
@@ -87,10 +129,20 @@ export function Favorites() {
 						if (!response.ok) {
 							throw new Error(`HTTP error! Status: ${response.status}`);
 						}
-						return response.json() as Promise<Movie>;
+						const movie = await response.json() as Movie & {
+							genres?: Array<{ id: number }>;
+						};
+						return {
+							...movie,
+							genre_ids: movie.genre_ids ?? movie.genres?.map((genre) => genre.id) ?? [],
+						};
 					}),
 				);
-				setMovies(favoriteMovies);
+				const tmdbMovies = tmdbResults
+					.filter((result): result is PromiseFulfilledResult<Movie> => result.status === "fulfilled")
+					.map((result) => result.value);
+				setMovies([...customFavorites, ...tmdbMovies]);
+				setError(tmdbMovies.length === 0 && customFavorites.length === 0 && favoriteIds.length > 0);
 			} catch (fetchError) {
 				if (!controller.signal.aborted) {
 					console.error(fetchError);
@@ -114,7 +166,7 @@ export function Favorites() {
 	return (
 		<Container fluid className={`${theme}-mode py-4`}>
 			{loading && <p>Cargando favoritos...</p>}
-			{error && (
+			{!loading && error && (
 				<Alert variant="danger">
 					No se pudieron cargar tus películas favoritas.
 				</Alert>
@@ -145,12 +197,22 @@ export function Favorites() {
 					</Row>
 					<Button
 						className="mt-3"
-						variant="outline-danger"
+						variant={allFilteredMoviesAreFavorite ? "outline-danger" : "outline-primary"}
 						type="button"
-						onClick={() => void removeFilteredFavorites()}
+						onClick={() => void toggleFilteredFavorites()}
 						disabled={isRemovingAll || filteredMovies.length === 0}>
-						{isRemovingAll ? "Quitando favoritos..." : "Quitar favoritos visibles"}
+						{isRemovingAll ? "Actualizando favoritos..." : allFilteredMoviesAreFavorite ? "Quitar favoritos visibles" : "Agregar favoritos visibles"}
 					</Button>
+					{loggedUser.role === "admin" && (
+						<Button
+							className="mt-3 ms-2"
+							variant="outline-warning"
+							type="button"
+							onClick={toggleFilteredFeatures}
+							disabled={isFeaturingAll || filteredMovies.length === 0}>
+							{isFeaturingAll ? "Actualizando destacadas..." : allFilteredMoviesAreFeatured ? "Quitar destacadas" : "Destacar favoritos visibles"}
+						</Button>
+					)}
 				</Container>
 			)}
 			{movies.length > 0 && filteredMovies.length === 0 && (

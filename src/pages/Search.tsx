@@ -7,6 +7,7 @@ import { notifyFavoriteChange, queueFavoriteUpdate } from "../data/favoriteQueue
 import type { Movie } from "../types/database";
 import type { User } from "../types/User";
 import { useLocalStorage, useSessionStorage } from "../hooks/useLocalStorage";
+import { FEATURED_MOVIES_KEY, readCustomMovies, saveFeaturedMovies } from "../data/customMovies";
 
 interface SearchResponse {
   results: Movie[];
@@ -19,18 +20,34 @@ export function Search() {
   const [search, setSearch] = useSessionStorage("streamtuc-search-query", "");
   const [movies, setMovies] = useSessionStorage<Movie[]>("streamtuc-search-results", []);
   const [searched, setSearched] = useSessionStorage("streamtuc-search-completed", false);
-  const [loggedUser] = useLocalStorage<User | null>("streamtuc-logged-user", null);
+  const [loggedUser, setLoggedUser] = useLocalStorage<User | null>("streamtuc-logged-user", null);
   const [loading, setLoading] = useState(false);
   const [isAddingAll, setIsAddingAll] = useState(false);
+  const [isFeaturingAll, setIsFeaturingAll] = useState(false);
+  const [featuredMovies, setFeaturedMovies] = useLocalStorage<Movie[]>(FEATURED_MOVIES_KEY, []);
 
-  const addAllSearchResults = async () => {
+  const allSearchResultsAreFavorite = Boolean(
+    loggedUser &&
+    movies.length > 0 &&
+    movies.every((movie) => loggedUser.favorites?.includes(movie.id)),
+  );
+  const allSearchResultsAreFeatured = Boolean(
+    movies.length > 0 &&
+    movies.every((movie) => featuredMovies.some((featuredMovie) => featuredMovie.id === movie.id)),
+  );
+
+  const updateAllSearchFavorites = async () => {
     if (!loggedUser || movies.length === 0 || isAddingAll) return;
 
     setIsAddingAll(true);
+    const favoriteState = !allSearchResultsAreFavorite;
     try {
       for (const movie of movies) {
-        const updatedUser = await queueFavoriteUpdate(movie.id, true);
-        if (updatedUser) notifyFavoriteChange(updatedUser);
+        const updatedUser = await queueFavoriteUpdate(movie.id, favoriteState);
+        if (updatedUser) {
+          setLoggedUser(updatedUser);
+          notifyFavoriteChange(updatedUser);
+        }
       }
     } finally {
       setIsAddingAll(false);
@@ -59,14 +76,37 @@ export function Search() {
       }
 
       const data: SearchResponse = await response.json();
-
-      setMovies(data.results);
+      const query = search.trim().toLowerCase();
+      const customResults = readCustomMovies().filter((movie) =>
+        movie.title.toLowerCase().includes(query),
+      );
+      const resultIds = new Set(data.results.map((movie) => movie.id));
+      setMovies([
+        ...customResults,
+        ...data.results.filter((movie) => !resultIds.has(movie.id) || !customResults.some((customMovie) => customMovie.id === movie.id)),
+      ]);
     } catch (error) {
       console.error(error);
-      setMovies([]);
+      const query = search.trim().toLowerCase();
+      setMovies(readCustomMovies().filter((movie) => movie.title.toLowerCase().includes(query)));
     } finally {
       setLoading(false);
     }
+  };
+
+  const toggleAllSearchFeatures = () => {
+    if (movies.length === 0 || isFeaturingAll) return;
+
+    setIsFeaturingAll(true);
+    const nextFeaturedMovies = allSearchResultsAreFeatured
+      ? featuredMovies.filter((featuredMovie) => !movies.some((movie) => movie.id === featuredMovie.id))
+      : [
+          ...featuredMovies.filter((featuredMovie) => !movies.some((movie) => movie.id === featuredMovie.id)),
+          ...movies,
+      ];
+    setFeaturedMovies(nextFeaturedMovies);
+    saveFeaturedMovies(nextFeaturedMovies);
+    setIsFeaturingAll(false);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -118,9 +158,16 @@ export function Search() {
         <>
           <div className="catalog-section-heading search-results-heading">
             <h2>Resultados para: <strong>{search}</strong></h2>
-            <Button type="button" variant="primary" onClick={() => void addAllSearchResults()} disabled={!loggedUser || movies.length === 0 || isAddingAll}>
-              {isAddingAll ? <Spinner animation="border" size="sm" aria-hidden="true" /> : "Agregar todos a favoritos"}
-            </Button>
+            <div className="d-flex flex-wrap gap-2">
+              <Button type="button" variant="primary" onClick={() => void updateAllSearchFavorites()} disabled={!loggedUser || movies.length === 0 || isAddingAll}>
+                {isAddingAll ? <Spinner animation="border" size="sm" aria-hidden="true" /> : allSearchResultsAreFavorite ? "Quitar todas" : "Agregar todos a favoritos"}
+              </Button>
+              {loggedUser?.role === "admin" && (
+                <Button type="button" variant="warning" onClick={toggleAllSearchFeatures} disabled={movies.length === 0 || isFeaturingAll}>
+                  {isFeaturingAll ? <Spinner animation="border" size="sm" aria-hidden="true" /> : allSearchResultsAreFeatured ? "Quitar destacadas" : "Destacar todas"}
+                </Button>
+              )}
+            </div>
           </div>
 
           {movies.length === 0 ? (

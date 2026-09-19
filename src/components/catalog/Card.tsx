@@ -14,6 +14,8 @@ import {
 	FEATURED_MOVIES_KEY,
 	notifyCustomMoviesChange,
 	isCustomMovie,
+	readFeaturedMovies,
+	saveFeaturedMovies,
 	type CustomMovie,
 } from "../../data/customMovies";
 import type { Movie } from "../../types/database";
@@ -32,7 +34,7 @@ export function Card({ movie, theme, detailState, detailFrom }: CatalogCardProps
 	);
 	const [, setUsers] = useLocalStorage<User[]>("streamtuc-users", initialUsers);
 	const [isUpdatingFavorite, setIsUpdatingFavorite] = useState(false);
-	const [featuredMovies, setFeaturedMovies] = useLocalStorage<Movie[]>(FEATURED_MOVIES_KEY, []);
+	const [featuredMovies, setFeaturedMovies] = useState<Movie[]>(readFeaturedMovies);
 	const [, setCustomMovies] = useLocalStorage<CustomMovie[]>(CUSTOM_MOVIES_KEY, []);
 	const [, setBin] = useLocalStorage<CustomMovie[]>(CUSTOM_MOVIE_BIN_KEY, []);
 	const [showEdit, setShowEdit] = useState(false);
@@ -40,7 +42,7 @@ export function Card({ movie, theme, detailState, detailFrom }: CatalogCardProps
 	const isCustom = isCustomMovie(movie);
 	const isFeatured = featuredMovies.some((item) => item.id === movie.id);
 	const pendingFavoriteState = useRef<boolean | null>(null);
-	const isFavorite = loggedUser?.favorites.includes(movie.id) ?? false;
+	const isFavorite = loggedUser?.favorites?.includes(movie.id) ?? false;
 
 	useEffect(() => {
 		if (pendingFavoriteState.current !== null && isFavorite === pendingFavoriteState.current) {
@@ -58,6 +60,15 @@ export function Card({ movie, theme, detailState, detailFrom }: CatalogCardProps
 		window.addEventListener("streamtuc-favorites-change", handleFavoriteChange);
 		return () => window.removeEventListener("streamtuc-favorites-change", handleFavoriteChange);
 	}, [setLoggedUser]);
+
+	useEffect(() => {
+		const handleFeaturedChange = () => {
+			setFeaturedMovies(readFeaturedMovies());
+		};
+
+		window.addEventListener("streamtuc-featured-change", handleFeaturedChange);
+		return () => window.removeEventListener("streamtuc-featured-change", handleFeaturedChange);
+	}, [setFeaturedMovies]);
 
 	function toggleFavorite() {
 		if (!loggedUser || isUpdatingFavorite) {
@@ -90,8 +101,9 @@ export function Card({ movie, theme, detailState, detailFrom }: CatalogCardProps
 	function toggleFeatured() {
 		const stored = localStorage.getItem(FEATURED_MOVIES_KEY);
 		const current = stored ? JSON.parse(stored) as Movie[] : [];
-		setFeaturedMovies(isFeatured ? current.filter((item) => item.id !== movie.id) : [...current, movie]);
-		window.dispatchEvent(new Event("streamtuc-featured-change"));
+		const nextFeaturedMovies = isFeatured ? current.filter((item) => item.id !== movie.id) : [...current, movie];
+		setFeaturedMovies(nextFeaturedMovies);
+		saveFeaturedMovies(nextFeaturedMovies);
 	}
 
 	function moveCustomToBin() {
@@ -136,6 +148,9 @@ export function Card({ movie, theme, detailState, detailFrom }: CatalogCardProps
 			</div>
 			{isAdmin ? (
 				<div className="catalog-card-actions">
+					<Button variant={isFavorite ? "danger" : "dark"} type="button" aria-label={isFavorite ? `Quitar ${movie.title} de favoritos` : `Agregar ${movie.title} a favoritos`} aria-pressed={isFavorite} aria-busy={isUpdatingFavorite} disabled={isUpdatingFavorite} onClick={toggleFavorite}>
+						{isUpdatingFavorite ? <Spinner animation="border" size="sm" aria-hidden="true" /> : isFavorite ? <FaHeart /> : <FaRegHeart />}
+					</Button>
 					<Button variant={isFeatured ? "warning" : "dark"} type="button" aria-label={isFeatured ? `Quitar ${movie.title} de destacadas` : `Destacar ${movie.title}`} onClick={toggleFeatured}><FaStar /></Button>
 					{isCustom && <>
 						<Button variant="secondary" type="button" aria-label={`Editar ${movie.title}`} onClick={() => setShowEdit(true)}><FaEdit /></Button>

@@ -104,10 +104,16 @@ function Admin() {
   };
 
   return (
-    <Container fluid className="py-4">
-      <h1>Panel de Administración</h1>
+    <Container fluid className="catalog-page">
+      <div className="catalog-explorer">
+        <div className="catalog-section-heading">
+          <div>
+            <span className="catalog-eyebrow">Gestión de STREAMTUC</span>
+            <h1>Panel de Administración</h1>
+          </div>
+        </div>
 
-      <p>Gestión de usuarios de STREAMTUC</p>
+        <p>Gestión de usuarios de STREAMTUC</p>
 
       <Nav
         variant="tabs"
@@ -128,7 +134,7 @@ function Admin() {
         </Nav.Item>
       </Nav>
 
-      {activeTab === "movies" ? (
+        {activeTab === "movies" ? (
         <CustomMoviesAdmin />
       ) : (
         <>
@@ -202,7 +208,8 @@ function Admin() {
             onDelete={deleteComment}
           />
         </>
-      )}
+        )}
+      </div>
     </Container>
   );
 }
