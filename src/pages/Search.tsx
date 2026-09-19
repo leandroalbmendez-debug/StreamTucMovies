@@ -162,9 +162,11 @@ export function Search() {
               <Button type="button" variant="primary" onClick={() => void updateAllSearchFavorites()} disabled={!loggedUser || movies.length === 0 || isAddingAll}>
                 {isAddingAll ? <Spinner animation="border" size="sm" aria-hidden="true" /> : allSearchResultsAreFavorite ? "Quitar todas" : "Agregar todos a favoritos"}
               </Button>
-              <Button type="button" variant="warning" onClick={toggleAllSearchFeatures} disabled={movies.length === 0 || isFeaturingAll}>
-                {isFeaturingAll ? <Spinner animation="border" size="sm" aria-hidden="true" /> : allSearchResultsAreFeatured ? "Quitar destacadas" : "Destacar todas"}
-              </Button>
+              {loggedUser?.role === "admin" && (
+                <Button type="button" variant="warning" onClick={toggleAllSearchFeatures} disabled={movies.length === 0 || isFeaturingAll}>
+                  {isFeaturingAll ? <Spinner animation="border" size="sm" aria-hidden="true" /> : allSearchResultsAreFeatured ? "Quitar destacadas" : "Destacar todas"}
+                </Button>
+              )}
             </div>
           </div>
 
