@@ -98,6 +98,9 @@ export function Favorites() {
 
 	useEffect(() => {
 		if (!loggedUser || loggedUser.favorites.length === 0) {
+			setMovies([]);
+			setError(false);
+			setLoading(false);
 			return;
 		}
 
@@ -163,7 +166,7 @@ export function Favorites() {
 	return (
 		<Container fluid className={`${theme}-mode py-4`}>
 			{loading && <p>Cargando favoritos...</p>}
-			{error && (
+			{!loading && error && (
 				<Alert variant="danger">
 					No se pudieron cargar tus películas favoritas.
 				</Alert>
