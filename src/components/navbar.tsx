@@ -28,6 +28,7 @@ function Navbar() {
   });
 
   const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
     const updateLoggedUser = () => {
@@ -50,6 +51,19 @@ function Navbar() {
     };
   }, []);
 
+  // Cierra el menú mobile si el usuario scrollea con el menú abierto,
+  // en vez de dejarlo pegado en pantalla sin cerrarse solo.
+  useEffect(() => {
+    if (!expanded) return;
+
+    const handleScroll = () => setExpanded(false);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [expanded]);
+
+  const closeMenu = () => setExpanded(false);
+
   const handleLogout = () => {
     localStorage.removeItem("streamtuc-logged-user");
 
@@ -58,6 +72,7 @@ function Navbar() {
     window.dispatchEvent(new Event("streamtuc-auth-change"));
 
     setShowLogoutModal(false);
+    closeMenu();
 
     navigate("/login");
   };
@@ -72,12 +87,15 @@ function Navbar() {
         className={`${theme}-mode catalog-navbar`}
         variant="dark"
         expand="lg"
+        expanded={expanded}
+        onToggle={setExpanded}
       >
         <Container fluid>
           <BootstrapNavbar.Brand
             as={Link}
             to="/"
             className="catalog-brand"
+            onClick={closeMenu}
           >
             <img
               src={logo}
@@ -90,21 +108,21 @@ function Navbar() {
 
           <BootstrapNavbar.Collapse id="navbar-streamtuc">
             <Nav className="me-auto">
-              <Nav.Link as={Link} to="/">
+              <Nav.Link as={Link} to="/" onClick={closeMenu}>
                 Inicio
               </Nav.Link>
 
-              <Nav.Link as={Link} to="/catalog">
+              <Nav.Link as={Link} to="/catalog" onClick={closeMenu}>
                 Catálogo
               </Nav.Link>
 
-              <Nav.Link as={Link} to="/search">
+              <Nav.Link as={Link} to="/search" onClick={closeMenu}>
                 <FaSearch className="me-1" />
                 Buscar
               </Nav.Link>
 
               {!isAuthPage && !loggedUser && (
-                <Nav.Link as={Link} to="/login">
+                <Nav.Link as={Link} to="/login" onClick={closeMenu}>
                   Login
                 </Nav.Link>
               )}
@@ -136,12 +154,12 @@ function Navbar() {
                     Hola, {loggedUser.username}
                   </Nav.Link>
 
-                  <Nav.Link as={Link} to="/favorites">
+                  <Nav.Link as={Link} to="/favorites" onClick={closeMenu}>
                     Favoritos
                   </Nav.Link>
 
                   {loggedUser.role === "admin" && (
-                    <Nav.Link as={Link} to="/admin">
+                    <Nav.Link as={Link} to="/admin" onClick={closeMenu}>
                       Administrar
                     </Nav.Link>
                   )}
@@ -158,7 +176,7 @@ function Navbar() {
               ) : (
                 <>
                   {!isAuthPage && (
-                    <Nav.Link as={Link} to="/login">
+                    <Nav.Link as={Link} to="/login" onClick={closeMenu}>
                       Iniciar sesión
                     </Nav.Link>
                   )}
