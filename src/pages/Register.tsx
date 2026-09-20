@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 
 import { useNavigate } from "react-router";
 
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaCheck, FaEye, FaEyeSlash, FaTimes } from "react-icons/fa";
 
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
@@ -39,12 +39,24 @@ export function Register() {
     register,
     handleSubmit,
     getValues,
+    watch,
     formState: { errors },
   } = useForm<RegisterData>({
     defaultValues: {
       plan: "free",
     },
   });
+
+  const passwordValue = watch("password", "");
+
+  const passwordRequirements = [
+    { label: "Mínimo 8 caracteres", met: passwordValue.length >= 8 },
+    { label: "Una letra mayúscula", met: /[A-Z]/.test(passwordValue) },
+    { label: "Una letra minúscula", met: /[a-z]/.test(passwordValue) },
+    { label: "Un número", met: /\d/.test(passwordValue) },
+  ];
+
+  const isPasswordValid = passwordRequirements.every((req) => req.met);
 
   const onSubmit = (data: RegisterData) => {
     setRegisterError("");
@@ -174,6 +186,11 @@ export function Register() {
                   type={showPassword ? "text" : "password"}
                   placeholder="Ingresá tu contraseña"
                   autoComplete="new-password"
+                  className={
+                    passwordValue.length > 0 && isPasswordValid
+                      ? "is-valid"
+                      : undefined
+                  }
                   {...register("password", {
                     required: {
                       value: true,
@@ -198,6 +215,26 @@ export function Register() {
                   {showPassword ? <FaEyeSlash /> : <FaEye />}
                 </Button>
               </InputGroup>
+
+              {passwordValue.length > 0 && (
+                <ul className="password-requirements list-unstyled small mt-2 mb-0">
+                  {passwordRequirements.map((requirement) => (
+                    <li
+                      key={requirement.label}
+                      className={
+                        requirement.met ? "text-success" : "text-danger"
+                      }
+                    >
+                      {requirement.met ? (
+                        <FaCheck className="me-1" />
+                      ) : (
+                        <FaTimes className="me-1" />
+                      )}
+                      {requirement.label}
+                    </li>
+                  ))}
+                </ul>
+              )}
 
               {errors.password && (
                 <Form.Text className="text-danger">
