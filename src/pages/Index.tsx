@@ -1,3 +1,4 @@
+import { AboutUs } from "../components/AboutUs";
 import { Card as BootstrapCard, Carousel, Col, Container, Row } from "react-bootstrap";
 import { FaPlay, FaStar } from "react-icons/fa";
 import { Link } from "react-router";
@@ -227,6 +228,7 @@ export function Index() {
             </Col>
           </Row>
         </section>
+      <AboutUs />
       </Container>
     </>
   );
