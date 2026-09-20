@@ -1,10 +1,12 @@
 import { useState } from "react";
 
-import { Alert, Button, Card, Container, Form } from "react-bootstrap";
+import { Alert, Button, Card, Container, Form, InputGroup } from "react-bootstrap";
 
 import { useForm } from "react-hook-form";
 
 import { useNavigate } from "react-router";
+
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
@@ -30,6 +32,8 @@ export function Register() {
 
   const [registerError, setRegisterError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showRepeatPassword, setShowRepeatPassword] = useState(false);
 
   const {
     register,
@@ -165,22 +169,35 @@ export function Register() {
             <Form.Group className="mb-3">
               <Form.Label>Contraseña</Form.Label>
 
-              <Form.Control
-                type="password"
-                placeholder="Ingresá tu contraseña"
-                autoComplete="new-password"
-                {...register("password", {
-                  required: {
-                    value: true,
-                    message: "La contraseña es obligatoria.",
-                  },
-                  pattern: {
-                    value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/,
-                    message:
-                      "La contraseña debe tener mínimo 8 caracteres, una mayúscula, una minúscula y un número.",
-                  },
-                })}
-              />
+              <InputGroup>
+                <Form.Control
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Ingresá tu contraseña"
+                  autoComplete="new-password"
+                  {...register("password", {
+                    required: {
+                      value: true,
+                      message: "La contraseña es obligatoria.",
+                    },
+                    pattern: {
+                      value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/,
+                      message:
+                        "La contraseña debe tener mínimo 8 caracteres, una mayúscula, una minúscula y un número.",
+                    },
+                  })}
+                />
+
+                <Button
+                  type="button"
+                  variant="outline-secondary"
+                  aria-label={
+                    showPassword ? "Ocultar contraseña" : "Mostrar contraseña"
+                  }
+                  onClick={() => setShowPassword((prev) => !prev)}
+                >
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </Button>
+              </InputGroup>
 
               {errors.password && (
                 <Form.Text className="text-danger">
@@ -192,20 +209,35 @@ export function Register() {
             <Form.Group className="mb-3">
               <Form.Label>Repetir contraseña</Form.Label>
 
-              <Form.Control
-                type="password"
-                placeholder="Repetí tu contraseña"
-                autoComplete="new-password"
-                {...register("repeatPassword", {
-                  required: {
-                    value: true,
-                    message: "Tenés que repetir la contraseña.",
-                  },
-                  validate: (value) =>
-                    value === getValues("password") ||
-                    "Las contraseñas no coinciden.",
-                })}
-              />
+              <InputGroup>
+                <Form.Control
+                  type={showRepeatPassword ? "text" : "password"}
+                  placeholder="Repetí tu contraseña"
+                  autoComplete="new-password"
+                  {...register("repeatPassword", {
+                    required: {
+                      value: true,
+                      message: "Tenés que repetir la contraseña.",
+                    },
+                    validate: (value) =>
+                      value === getValues("password") ||
+                      "Las contraseñas no coinciden.",
+                  })}
+                />
+
+                <Button
+                  type="button"
+                  variant="outline-secondary"
+                  aria-label={
+                    showRepeatPassword
+                      ? "Ocultar contraseña"
+                      : "Mostrar contraseña"
+                  }
+                  onClick={() => setShowRepeatPassword((prev) => !prev)}
+                >
+                  {showRepeatPassword ? <FaEyeSlash /> : <FaEye />}
+                </Button>
+              </InputGroup>
 
               {errors.repeatPassword && (
                 <Form.Text className="text-danger">

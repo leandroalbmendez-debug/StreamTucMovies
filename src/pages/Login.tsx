@@ -1,10 +1,12 @@
 import { useState } from "react";
 
-import { Alert, Button, Card, Container, Form } from "react-bootstrap";
+import { Alert, Button, Card, Container, Form, InputGroup } from "react-bootstrap";
 
 import { useForm } from "react-hook-form";
 
 import { Link, useNavigate } from "react-router";
+
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
@@ -23,6 +25,8 @@ export function Login() {
 	const [users] = useLocalStorage<User[]>("streamtuc-users", initialUsers);
 
 	const [loginError, setLoginError] = useState("");
+
+	const [showPassword, setShowPassword] = useState(false);
 
 	const {
 		register,
@@ -104,17 +108,29 @@ export function Login() {
 						<Form.Group className="mb-3">
 							<Form.Label>Contraseña</Form.Label>
 
-							<Form.Control
-								type="password"
-								placeholder="Ingresá tu contraseña"
-								autoComplete="new-password"
-								{...register("password", {
-									required: {
-										value: true,
-										message: "La contraseña es obligatoria.",
-									},
-								})}
-							/>
+							<InputGroup>
+								<Form.Control
+									type={showPassword ? "text" : "password"}
+									placeholder="Ingresá tu contraseña"
+									autoComplete="new-password"
+									{...register("password", {
+										required: {
+											value: true,
+											message: "La contraseña es obligatoria.",
+										},
+									})}
+								/>
+
+								<Button
+									type="button"
+									variant="outline-secondary"
+									aria-label={
+										showPassword ? "Ocultar contraseña" : "Mostrar contraseña"
+									}
+									onClick={() => setShowPassword((prev) => !prev)}>
+									{showPassword ? <FaEyeSlash /> : <FaEye />}
+								</Button>
+							</InputGroup>
 
 							{errors.password && (
 								<Form.Text className="text-danger">
