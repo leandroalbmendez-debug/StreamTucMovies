@@ -4,6 +4,7 @@ import { CommentList } from './CommentList';
 import { useLocalStorage } from '@uidotdev/usehooks';
 import type { User } from '../../types/User';
 import { useStyle } from '../../context/styles';
+import { FaComments } from 'react-icons/fa';
 
 interface Props {
   movieId: string;
@@ -16,12 +17,17 @@ export function CommentSection({ movieId }: Props) {
 
   return (
     <section className={`comments-section ${theme}-mode mt-4`}>
-      <h4>Comentarios ({comments.length})</h4>
+      <h4 className="comments-section-title">
+        <FaComments className="comments-section-icon" />
+        Comentarios ({comments.length})
+      </h4>
       {loggedUser ? (
-        <CommentForm
-          loggedInAuthor={loggedUser.username}
-          onSubmit={addComment}
-        />
+        <div className="comment-form-panel">
+          <CommentForm
+            loggedInAuthor={loggedUser.username}
+            onSubmit={addComment}
+          />
+        </div>
       ) : (
         <p className="text-muted">Iniciá sesión para publicar un comentario.</p>
       )}

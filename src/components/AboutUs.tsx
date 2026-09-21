@@ -35,17 +35,23 @@ export function AboutUs() {
       </div>
 
       <Row className="gy-4 justify-content-center">
-        {TEAM.map((member) => (
+        {TEAM.map((member, index) => (
           <Col key={member.name} md={4} className="text-center">
-            <Card className="about-us-card h-100">
+            <Card
+              className={`about-us-card h-100 ${
+                index % 2 === 1 ? "about-us-card-secondary" : ""
+              }`}
+            >
               <Card.Body className="d-flex flex-column align-items-center">
-                <img
-                  src={member.photo}
-                  alt={member.name}
-                  className="about-us-photo"
-                />
-                <Card.Title className="mt-3 mb-0">{member.name}</Card.Title>
-                <Card.Subtitle className="about-us-role mb-3">
+                <span className="about-us-photo-wrapper">
+                  <img
+                    src={member.photo}
+                    alt={member.name}
+                    className="about-us-photo"
+                  />
+                </span>
+                <Card.Title className="mt-3 mb-1">{member.name}</Card.Title>
+                <Card.Subtitle as="span" className="about-us-role mb-3">
                   {member.role}
                 </Card.Subtitle>
                 <Card.Text>{member.bio}</Card.Text>
