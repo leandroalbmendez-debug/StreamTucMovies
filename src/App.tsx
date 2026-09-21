@@ -14,6 +14,7 @@ import { useLocalStorage } from "@uidotdev/usehooks";
 import "./css/App.css";
 import Layout from "./pages/Layout";
 import { Search } from "./pages/Search";
+import { Profiles } from "./pages/Profiles";
 
 function ProtectedAdmin() {
   const [loggedUser] = useLocalStorage<User | null>(
@@ -48,6 +49,19 @@ function ProtectedAdmin() {
   }
 
   return <Admin />;
+}
+
+function ProtectedProfiles() {
+  const [loggedUser] = useLocalStorage<User | null>(
+    "streamtuc-logged-user",
+    null,
+  );
+
+  if (!loggedUser) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return <Profiles />;
 }
 
 const router = createBrowserRouter([
@@ -89,6 +103,10 @@ const router = createBrowserRouter([
       {
         path: "/detail/:movieId",
         element: <Detail />,
+      },
+            {
+        path: "/profiles",
+        element: <ProtectedProfiles />,
       },
       {
         path: "*",
