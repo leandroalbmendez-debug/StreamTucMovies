@@ -20,6 +20,7 @@ Si el catálogo no carga ninguna película, lo más probable es que falte el `.e
 - `pnpm build` — build de producción
 - `pnpm preview` — previsualizar el build
 - `pnpm exec tsc -b` — chequeo de tipos
+- `pnpm run lint` — chequeo de lint (0 errores)
 
 ## Equipo
 
