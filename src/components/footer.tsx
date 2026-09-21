@@ -1,4 +1,4 @@
-import { Container, Row, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import { Link } from "react-router";
 import {
   FaInstagram,
@@ -22,7 +22,7 @@ export function Footer() {
 
   return (
     <footer className="app-footer">
-      <Container fluid>
+      <div className="app-footer-inner">
         <Row className="gy-4">
           <Col md={4}>
             <Link to="/" className="app-footer-brand">
@@ -70,7 +70,7 @@ export function Footer() {
         <p className="app-footer-copy">
           © {year} STREAMTUC. Todos los derechos reservados.
         </p>
-      </Container>
+      </div>
     </footer>
   );
 }

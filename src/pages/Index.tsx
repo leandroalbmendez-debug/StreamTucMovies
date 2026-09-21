@@ -90,7 +90,7 @@ export function Index() {
       >
         <Container
           fluid
-          className="d-flex align-items-center py-5"
+          className="d-flex align-items-center justify-content-center text-center py-5"
           style={{ minHeight: "500px" }}
         >
           <div style={{ maxWidth: "650px" }}>
@@ -102,7 +102,7 @@ export function Index() {
               {featuredMovie.title}
             </h1>
 
-            <div className="d-flex gap-3 mb-3">
+            <div className="d-flex gap-3 mb-3 justify-content-center">
               <span>
                 <FaStar className="me-1" />
                 {featuredMovie.vote_average.toFixed(1)}
