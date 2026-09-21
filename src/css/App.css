@@ -289,6 +289,11 @@ body {
 	border-radius: 0.75rem;
 }
 
+.comments-section .text-muted,
+.comments-section .text-body-secondary {
+	color: var(--on-surface-variant) !important;
+}
+
 .favorites-controls {
 	margin-bottom: 1.5rem;
 }
