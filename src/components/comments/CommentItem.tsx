@@ -30,7 +30,7 @@ export function CommentItem({ comment, canEdit, canDelete, onUpdate, onDelete }:
   // Si un admin lo ocultó, no mostramos el contenido real ni permitimos editar/borrar
   if (comment.hidden) {
     return (
-      <Card className="mb-2">
+      <Card className="comment-card comment-card-hidden mb-3">
         <Card.Body>
           <Card.Subtitle className="mb-1 text-body-secondary">
             {comment.author}
@@ -44,13 +44,20 @@ export function CommentItem({ comment, canEdit, canDelete, onUpdate, onDelete }:
   }
 
   return (
-    <Card className="mb-2">
+    <Card className="comment-card mb-3">
       <Card.Body>
         <div className="d-flex justify-content-between align-items-start">
-          <Card.Subtitle className="mb-1 text-body-secondary">
-            {comment.author}
-            {!isEditing && comment.rating ? ` — ${comment.rating}/10 ⭐` : ''}
-          </Card.Subtitle>
+          <div className="comment-card-author">
+            <span className="comment-avatar" aria-hidden="true">
+              {comment.author.charAt(0).toUpperCase()}
+            </span>
+            <div>
+              <Card.Subtitle className="mb-0">{comment.author}</Card.Subtitle>
+              {!isEditing && comment.rating ? (
+                <span className="comment-rating-badge">{comment.rating}/10 ⭐</span>
+              ) : null}
+            </div>
+          </div>
           {!isEditing && (
             <div className="d-flex gap-2">
               {canEdit && (

@@ -1,32 +1,35 @@
 import { Container } from "react-bootstrap";
 import { Link } from "react-router";
+import { FaFilm } from "react-icons/fa";
 
 export function NotFound() {
   return (
-    <Container fluid className="py-5 text-center">
-      <div className="py-5">
-        <h1 className="display-1 fw-bold">404</h1>
+    <div className="status-page">
+      <div className="status-page-glow" aria-hidden="true" />
+      <Container fluid className="status-page-container">
+        <div className="status-page-panel">
+          <div className="status-page-icon">
+            <FaFilm />
+          </div>
 
-        <h2 className="mb-3">
-          Página no encontrada
-        </h2>
+          <h1 className="status-page-code">404</h1>
 
-        <p className="lead mb-4">
-          Parece que esta película se perdió del catálogo
-          de STREAMTUC.
-        </p>
+          <h2 className="status-page-title">Página no encontrada</h2>
 
-        <p className="fs-5 mb-4">
-          La página que estás buscando no existe o fue movida.
-        </p>
+          <p className="status-page-lead">
+            Parece que esta película se perdió del catálogo
+            de STREAMTUC.
+          </p>
 
-        <Link
-          to="/"
-          className="btn btn-primary"
-        >
-          Volver al inicio
-        </Link>
-      </div>
-    </Container>
+          <p className="status-page-text">
+            La página que estás buscando no existe o fue movida.
+          </p>
+
+          <Link to="/" className="status-page-button">
+            Volver al inicio
+          </Link>
+        </div>
+      </Container>
+    </div>
   );
 }
