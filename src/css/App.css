@@ -1101,3 +1101,131 @@ body {
 	margin-top: 0.15rem;
 	padding: 0.1rem 0.6rem;
 }
+
+.admin-edit-button,
+.admin-delete-button {
+    align-items: center;
+    border-radius: 999px !important;
+    display: inline-flex;
+    font-size: 0.72rem;
+    font-weight: 700;
+    gap: 0.4rem;
+    padding: 0.45rem 0.8rem;
+    transition:
+        background 180ms ease,
+        border-color 180ms ease,
+        box-shadow 180ms ease,
+        color 180ms ease,
+        transform 180ms ease;
+}
+
+.admin-edit-button {
+    background: rgb(255 104 0 / 0.12) !important;
+    border: 1px solid rgb(255 104 0 / 0.45) !important;
+    color: var(--primary-container) !important;
+}
+
+.admin-edit-button:hover,
+.admin-edit-button:focus-visible {
+    background: var(--primary-container) !important;
+    border-color: var(--primary-container) !important;
+    box-shadow: 0 8px 20px -10px rgb(255 104 0 / 0.7);
+    color: white !important;
+    transform: translateY(-2px);
+}
+
+.admin-delete-button {
+    background: rgb(255 80 80 / 0.1) !important;
+    border: 1px solid rgb(255 80 80 / 0.4) !important;
+    color: #ff8f8f !important;
+}
+
+.admin-delete-button:hover,
+.admin-delete-button:focus-visible {
+    background: var(--error-container) !important;
+    border-color: var(--error-container) !important;
+    box-shadow: 0 8px 20px -10px rgb(147 0 10 / 0.7);
+    color: white !important;
+    transform: translateY(-2px);
+}
+.admin-comment-button,
+.admin-secondary-button,
+.admin-featured-button,
+.admin-add-button,
+.admin-restore-button {
+    align-items: center;
+    border-radius: 999px !important;
+    display: inline-flex;
+    font-size: 0.72rem;
+    font-weight: 700;
+    gap: 0.4rem;
+    padding: 0.45rem 0.8rem;
+    transition:
+        background 180ms ease,
+        border-color 180ms ease,
+        box-shadow 180ms ease,
+        color 180ms ease,
+        transform 180ms ease;
+}
+
+.admin-secondary-button {
+    background: rgb(255 255 255 / 0.05) !important;
+    border: 1px solid var(--surface-highest) !important;
+    color: var(--on-surface-variant) !important;
+}
+
+.admin-secondary-button:hover,
+.admin-secondary-button:focus-visible {
+    background: rgb(255 104 0 / 0.12) !important;
+    border-color: var(--primary-container) !important;
+    color: var(--primary-container) !important;
+    transform: translateY(-2px);
+}
+
+.admin-featured-button {
+    background: rgb(255 104 0 / 0.1) !important;
+    border: 1px solid rgb(255 104 0 / 0.4) !important;
+    color: var(--primary) !important;
+}
+
+.admin-featured-button:hover,
+.admin-featured-button:focus-visible,
+.admin-featured-button.active {
+    background: var(--primary-container) !important;
+    border-color: var(--primary-container) !important;
+    box-shadow: 0 8px 20px -10px rgb(255 104 0 / 0.7);
+    color: white !important;
+    transform: translateY(-2px);
+}
+
+.admin-add-button {
+    background: linear-gradient(
+        135deg,
+        var(--primary-container),
+        var(--secondary-container)
+    ) !important;
+    border: none !important;
+    color: white !important;
+}
+
+.admin-add-button:hover,
+.admin-add-button:focus-visible {
+    box-shadow: 0 10px 24px -10px rgb(255 104 0 / 0.7);
+    color: white !important;
+    transform: translateY(-2px);
+}
+
+.admin-restore-button {
+    background: rgb(108 0 214 / 0.1) !important;
+    border: 1px solid rgb(108 0 214 / 0.4) !important;
+    color: var(--secondary) !important;
+}
+
+.admin-restore-button:hover,
+.admin-restore-button:focus-visible {
+    background: var(--secondary-container) !important;
+    border-color: var(--secondary-container) !important;
+    box-shadow: 0 8px 20px -10px rgb(108 0 214 / 0.7);
+    color: white !important;
+    transform: translateY(-2px);
+}
