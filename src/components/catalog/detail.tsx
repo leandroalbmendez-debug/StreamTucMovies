@@ -6,6 +6,8 @@ import type { Movie } from "../../types/database";
 import { useStyle } from "../../context/styles";
 import { isCustomMovie, MOVIE_GENRES } from "../../data/customMovies";
 import { customMovieImageUrl, movieImageUrl } from "../../data/movieImages";
+import lightPlaceholder from "../../assets/light.png";
+import darkPlaceholder from "../../assets/dark.png";
 
 function formatReleaseDate(releaseDate: Movie["release_date"]): string {
 	return releaseDate instanceof Date
@@ -54,7 +56,7 @@ export function Detail() {
 					<Image
 						fluid
 						rounded
-						src={(isCustomMovie(movie) ? customMovieImageUrl(movie.poster_path) : movieImageUrl(movie.poster_path, "original")) || `../src/assets/${theme}.png`}
+						src={(isCustomMovie(movie) ? customMovieImageUrl(movie.poster_path) : movieImageUrl(movie.poster_path, "original")) || (theme === "dark" ? darkPlaceholder : lightPlaceholder)}
 						alt={movie.title}
 					/>
 				</Col>

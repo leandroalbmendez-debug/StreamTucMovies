@@ -1,3 +1,5 @@
+import squareLightPlaceholder from "../../assets/square light.png";
+import squareDarkPlaceholder from "../../assets/square dark.png";
 import { useEffect, useRef, useState } from "react";
 import { Button, Card as BootstrapCard, Spinner } from "react-bootstrap";
 import { FaEdit, FaHeart, FaRegHeart, FaStar, FaTrash } from "react-icons/fa";
@@ -20,6 +22,7 @@ import {
 	type CustomMovie,
 } from "../../data/customMovies";
 import type { Movie } from "../../types/database";
+
 
 type CatalogCardProps = {
 	movie: Movie;
@@ -122,7 +125,7 @@ export function Card({ movie, theme, detailState, detailFrom }: CatalogCardProps
 		notifyCustomMoviesChange();
 	}
 
-	const imagePath = (isCustom ? customMovieImageUrl(movie.poster_path) : movieImageUrl(movie.poster_path)) || `./src/assets/square ${theme}.png`;
+		const imagePath = (isCustom ? customMovieImageUrl(movie.poster_path) : movieImageUrl(movie.poster_path)) || (theme === "dark" ? squareDarkPlaceholder : squareLightPlaceholder);
 
 	return (
 		<BootstrapCard className="catalog-card h-100 position-relative">

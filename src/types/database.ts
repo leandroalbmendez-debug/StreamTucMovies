@@ -20,6 +20,7 @@ export type Movie = {
 export type DataContextValue = {
 	list: Movie[];
 	setList: Dispatch<SetStateAction<Movie[]>>;
+      error: boolean;
       maxPage: number;
 	currentIndex: number;
 	setIndex: Dispatch<SetStateAction<number>>;

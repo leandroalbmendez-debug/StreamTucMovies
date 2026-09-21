@@ -10,6 +10,7 @@ export function DataCtx({ children }: { children: ReactNode }) {
 	const [customMovies, setCustomMovies] = useState<CustomMovie[]>(readCustomMovies);
 	const [data, setData] = useState<unknown>(null);
 	const [loading, setLoading] = useState<boolean>(true);
+	const [error, setError] = useState<boolean>(false);
 	const apiKey = import.meta.env.VITE_API_KEY as string | undefined;
 	const [currentIndex, setIndex] = useState(1);
 	const [selectedGenre, setSelectedGenre] = useState<number | null>(null);
@@ -20,8 +21,9 @@ export function DataCtx({ children }: { children: ReactNode }) {
 		return `https://api.themoviedb.org/3/${endpoint}?api_key=${apiKey}&language=es-ES&page=${page}${genreQuery}`;
 	}
 
-async function fetchData(requestUrl: string, includeCustom = false): Promise<void> {
+	async function fetchData(requestUrl: string, includeCustom = false): Promise<void> {
 		setLoading(true);
+		setError(false);
 		try {
 			const response = await fetch(requestUrl);
 			if (!response.ok) {
@@ -34,8 +36,9 @@ async function fetchData(requestUrl: string, includeCustom = false): Promise<voi
 			setCustomMovies(currentCustomMovies);
 			const visibleCustomMovies = currentCustomMovies.filter((movie) => !movie.isHidden);
 			setList(includeCustom ? [...visibleCustomMovies, ...result.results] : result.results);
-		} catch (error) {
-			console.error(error);
+		} catch (fetchError) {
+			console.error(fetchError);
+			setError(true);
 		} finally {
 			setLoading(false);
 		}
@@ -76,9 +79,10 @@ async function fetchData(requestUrl: string, includeCustom = false): Promise<voi
 
 	return (
 		<DataEnviroment.Provider
-			value={{
+		value={{
 				list,
 				setList,
+				error,
 				maxPage,
 				currentIndex,
 				setIndex,
