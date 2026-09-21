@@ -103,6 +103,15 @@ function Admin() {
     setAllComments((prev) => prev.filter((c) => c.id !== id));
   };
 
+    const commentCountByAuthor = useMemo(() => {
+    const counts: Record<string, number> = {};
+    allComments.forEach((comment) => {
+      const key = comment.authorId ?? comment.author;
+      counts[key] = (counts[key] || 0) + 1;
+    });
+    return counts;
+  }, [allComments]);
+
   return (
     <Container fluid className="catalog-page">
       <div className="catalog-explorer">
@@ -155,10 +164,11 @@ function Admin() {
 
           <h2 className="mb-3">Usuarios registrados</h2>
 
-          <UserTable
+           <UserTable
             users={users}
             onDeleteUser={deleteUser}
             onEditUser={editUser}
+            commentCounts={commentCountByAuthor}
           />
 
           <h2 className="mt-5 mb-3">Comentarios</h2>
