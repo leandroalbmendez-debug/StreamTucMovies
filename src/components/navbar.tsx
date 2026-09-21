@@ -158,6 +158,10 @@ function Navbar() {
                     Favoritos
                   </Nav.Link>
 
+                  <Nav.Link as={Link} to="/profiles" onClick={closeMenu}>
+                    Perfiles
+                  </Nav.Link>
+
                   {loggedUser.role === "admin" && (
                     <Nav.Link as={Link} to="/admin" onClick={closeMenu}>
                       Administrar
