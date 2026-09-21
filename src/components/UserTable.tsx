@@ -70,6 +70,7 @@ function UserTable({
                   className="p-0"
                   disabled={user.favorites.length === 0}
                   onClick={() => setUserToViewFavorites(user)}
+                  aria-label={`Ver favoritos de ${user.username}`}
                 >
                   {user.favorites.length}
                 </Button>
