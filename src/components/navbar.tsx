@@ -56,24 +56,6 @@ function Navbar() {
   // El listener se arma con una demora: al abrir el menú a mitad de página,
   // el propio crecimiento del navbar sticky dispara un scroll de compensación
   // del browser, que si se escuchara de inmediato cerraría el menú apenas abre.
-  useEffect(() => {
-    if (!expanded) return;
-
-    let armed = false;
-    const armTimer = setTimeout(() => {
-      armed = true;
-    }, 150);
-
-    const handleScroll = () => {
-      if (armed) setExpanded(false);
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    return () => {
-      clearTimeout(armTimer);
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [expanded]);
 
   const closeMenu = () => setExpanded(false);
 
@@ -101,6 +83,7 @@ function Navbar() {
         variant={theme === "dark" ? "dark" : "light"}
         expand="lg"
         expanded={expanded}
+        onMouseLeave={() => setExpanded(false)}
         onToggle={setExpanded}
       >
         <Container fluid>
