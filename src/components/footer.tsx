@@ -51,6 +51,7 @@ export function Footer() {
               <li><Link to="/catalog">Catálogo</Link></li>
               <li><Link to="/search">Buscar</Link></li>
               <li><Link to="/favorites">Favoritos</Link></li>
+              <li><Link to="/about">Sobre nosotros</Link></li>
             </ul>
           </Col>
 

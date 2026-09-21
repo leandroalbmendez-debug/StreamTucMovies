@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Form, Modal } from "react-bootstrap";
+import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import { createCustomMovie, MOVIE_GENRES, type CustomMovie } from "../data/customMovies";
 import type { Movie } from "../types/database";
 import { useStyle } from "../context/styles";
@@ -72,16 +72,19 @@ export function CustomMovieModal({ show, movie, onHide, onSave }: Props) {
               onChange={(event) => update("overview", event.target.value)}
             />
           </Form.Group>
-          <div className="row g-3">
-            <Form.Group className="col-md-6">
+          <Row className="g-3">
+            <Col md={6}>
+              <Form.Group>
               <Form.Label>Fecha de estreno</Form.Label>
               <Form.Control
                 type="date"
                 value={String(draft.release_date)}
                 onChange={(event) => update("release_date", event.target.value)}
               />
-            </Form.Group>
-            <Form.Group className="col-md-6">
+              </Form.Group>
+            </Col>
+            <Col md={6}>
+              <Form.Group>
               <Form.Label>Calificación</Form.Label>
               <Form.Control
                 type="number"
@@ -91,22 +94,27 @@ export function CustomMovieModal({ show, movie, onHide, onSave }: Props) {
                 value={draft.vote_average || ""}
                 onChange={(event) => update("vote_average", Number(event.target.value))}
               />
-            </Form.Group>
-            <Form.Group className="col-md-6">
+              </Form.Group>
+            </Col>
+            <Col md={6}>
+              <Form.Group>
               <Form.Label>URL o ruta pública del póster</Form.Label>
               <Form.Control
                 value={draft.poster_path}
                 onChange={(event) => update("poster_path", event.target.value)}
               />
-            </Form.Group>
-            <Form.Group className="col-md-6">
+              </Form.Group>
+            </Col>
+            <Col md={6}>
+              <Form.Group>
               <Form.Label>URL o ruta pública del fondo</Form.Label>
               <Form.Control
                 value={draft.backdrop_path}
                 onChange={(event) => update("backdrop_path", event.target.value)}
               />
-            </Form.Group>
-          </div>
+              </Form.Group>
+            </Col>
+          </Row>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" type="button" onClick={onHide}>Cancelar</Button>

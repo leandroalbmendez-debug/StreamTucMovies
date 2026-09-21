@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Alert, Button, Col, Container, Form, Row, Spinner } from "react-bootstrap";
-import { Navigate } from "react-router";
+import { Navigate, useNavigate } from "react-router";
 import { Card } from "../components/catalog/Card";
 import { notifyFavoriteChange, queueFavoriteUpdate } from "../data/favoriteQueue";
 import { useLocalStorage } from "@uidotdev/usehooks";
@@ -8,10 +8,10 @@ import type { Movie } from "../types/database";
 import type { User } from "../types/User";
 import { useStyle } from "../context/styles";
 import { MOVIE_GENRES, readCustomMovies, readFeaturedMovies, saveFeaturedMovies, type CustomMovie } from "../data/customMovies";
-import { Link } from "react-router";
 import { FaArrowLeft } from "react-icons/fa";
 
 export function Favorites() {
+	const navigate = useNavigate();
 	const { theme } = useStyle();
 	const [loggedUser, setLoggedUser] = useLocalStorage<User | null>(
 		"streamtuc-logged-user",
@@ -173,10 +173,10 @@ export function Favorites() {
 
 		return (
 		<Container fluid className={`${theme}-mode py-4`}>
-			<Link to="/catalog" className="btn btn-outline-secondary btn-sm mb-3">
+			<Button variant="outline-secondary" size="sm" className="mb-3" onClick={() => navigate("/catalog")}>
 				<FaArrowLeft className="me-2" />
 				Volver al catálogo
-			</Link>
+			</Button>
 
 			{loading && (
 				<div className="text-center py-5">

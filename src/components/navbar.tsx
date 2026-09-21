@@ -1,9 +1,9 @@
 import {
-  Button,
-  Container,
-  Modal,
-  Nav,
-  Navbar as BootstrapNavbar,
+	Button,
+	Container,
+	Modal,
+	Nav,
+	Navbar as BootstrapNavbar,
 } from "react-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router";
 import { useEffect, useState } from "react";
@@ -13,228 +13,212 @@ import logo from "../assets/Logo.png";
 import { FaMoon, FaSun, FaSearch } from "react-icons/fa";
 
 function Navbar() {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const { theme, switchTheme } = useStyle();
+	const navigate = useNavigate();
+	const location = useLocation();
+	const { theme, switchTheme } = useStyle();
 
-  const [loggedUser, setLoggedUser] = useState<User | null>(() => {
-    const storedUser = localStorage.getItem("streamtuc-logged-user");
+	const [loggedUser, setLoggedUser] = useState<User | null>(() => {
+		const storedUser = localStorage.getItem("streamtuc-logged-user");
 
-    if (storedUser) {
-      return JSON.parse(storedUser);
-    }
+		if (storedUser) {
+			return JSON.parse(storedUser);
+		}
 
-    return null;
-  });
+		return null;
+	});
 
-  const [showLogoutModal, setShowLogoutModal] = useState(false);
-  const [expanded, setExpanded] = useState(false);
+	const [showLogoutModal, setShowLogoutModal] = useState(false);
+	const [expanded, setExpanded] = useState(false);
 
-  useEffect(() => {
-    const updateLoggedUser = () => {
-      const storedUser = localStorage.getItem("streamtuc-logged-user");
+	useEffect(() => {
+		const updateLoggedUser = () => {
+			const storedUser = localStorage.getItem("streamtuc-logged-user");
 
-      if (storedUser) {
-        setLoggedUser(JSON.parse(storedUser));
-      } else {
-        setLoggedUser(null);
-      }
-    };
+			if (storedUser) {
+				setLoggedUser(JSON.parse(storedUser));
+			} else {
+				setLoggedUser(null);
+			}
+		};
 
-    window.addEventListener("streamtuc-auth-change", updateLoggedUser);
+		window.addEventListener("streamtuc-auth-change", updateLoggedUser);
 
-    return () => {
-      window.removeEventListener(
-        "streamtuc-auth-change",
-        updateLoggedUser,
-      );
-    };
-  }, []);
+		return () => {
+			window.removeEventListener("streamtuc-auth-change", updateLoggedUser);
+		};
+	}, []);
 
-  // Cierra el menú mobile si el usuario scrollea con el menú abierto,
-  // en vez de dejarlo pegado en pantalla sin cerrarse solo.
-  // El listener se arma con una demora: al abrir el menú a mitad de página,
-  // el propio crecimiento del navbar sticky dispara un scroll de compensación
-  // del browser, que si se escuchara de inmediato cerraría el menú apenas abre.
-  useEffect(() => {
-    if (!expanded) return;
+	const handleNavbarBlur = (event: React.FocusEvent<HTMLElement>) => {
+		const nextFocusedElement = event.relatedTarget as Node | null;
 
-    let armed = false;
-    const armTimer = setTimeout(() => {
-      armed = true;
-    }, 150);
+		if (
+			!nextFocusedElement ||
+			!event.currentTarget.contains(nextFocusedElement)
+		) {
+			setExpanded(false);
+		}
+	};
 
-    const handleScroll = () => {
-      if (armed) setExpanded(false);
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
+	const handleLogout = () => {
+		localStorage.removeItem("streamtuc-logged-user");
 
-    return () => {
-      clearTimeout(armTimer);
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [expanded]);
+		setLoggedUser(null);
 
-  const closeMenu = () => setExpanded(false);
+		window.dispatchEvent(new Event("streamtuc-auth-change"));
 
-  const handleLogout = () => {
-    localStorage.removeItem("streamtuc-logged-user");
+		setShowLogoutModal(false);
 
-    setLoggedUser(null);
+		navigate("/login");
+	};
 
-    window.dispatchEvent(new Event("streamtuc-auth-change"));
+	const isAuthPage =
+		location.pathname === "/login" || location.pathname === "/register";
 
-    setShowLogoutModal(false);
-    closeMenu();
+	return (
+		<>
+			<BootstrapNavbar
+				className={`${theme}-mode catalog-navbar`}
+				variant={theme === "dark" ? "dark" : "light"}
+				expand="lg"
+				expanded={expanded}
+				onToggle={setExpanded}
+				onMouseLeave={() => setExpanded(false)}>
+				<Container fluid>
+					<BootstrapNavbar.Brand
+						as={Link}
+						to="/"
+						className="catalog-brand">
+						<img
+							src={logo}
+							alt="StreamTUC"
+							className="catalog-brand-logo"
+						/>
+					</BootstrapNavbar.Brand>
 
-    navigate("/login");
-  };
+					<div className="catalog-navbar-actions">
+						<BootstrapNavbar.Toggle aria-controls="navbar-streamtuc" />
+					</div>
 
-  const isAuthPage =
-    location.pathname === "/login" ||
-    location.pathname === "/register";
+					<BootstrapNavbar.Collapse id="navbar-streamtuc">
+						<Nav className="me-auto">
+							<Nav.Link
+								as={Link}
+								to="/">
+								Inicio
+							</Nav.Link>
 
-  return (
-    <>
-      <BootstrapNavbar
-        className={`${theme}-mode catalog-navbar`}
-        variant={theme === "dark" ? "dark" : "light"}
-        expand="lg"
-        expanded={expanded}
-        onToggle={setExpanded}
-      >
-        <Container fluid>
-          <BootstrapNavbar.Brand
-            as={Link}
-            to="/"
-            className="catalog-brand"
-            onClick={closeMenu}
-          >
-            <img
-              src={logo}
-              alt="StreamTUC"
-              className="catalog-brand-logo"
-            />
-          </BootstrapNavbar.Brand>
+							<Nav.Link
+								as={Link}
+								to="/catalog">
+								Catálogo
+							</Nav.Link>
 
-          <BootstrapNavbar.Toggle aria-controls="navbar-streamtuc" />
+							<Nav.Link
+								as={Link}
+								to="/search">
+								<FaSearch className="me-1" />
+								Buscar
+							</Nav.Link>
 
-          <BootstrapNavbar.Collapse id="navbar-streamtuc">
-            <Nav className="me-auto">
-              <Nav.Link as={Link} to="/" onClick={closeMenu}>
-                Inicio
-              </Nav.Link>
+							{!isAuthPage && !loggedUser && (
+								<Nav.Link
+									as={Link}
+									to="/login">
+									Login
+								</Nav.Link>
+							)}
+						</Nav>
 
-              <Nav.Link as={Link} to="/catalog" onClick={closeMenu}>
-                Catálogo
-              </Nav.Link>
+						<Nav className="align-items-lg-center">
+							<Button
+								variant="link"
+								className="catalog-theme-button"
+								type="button"
+								aria-label={
+									theme === "dark"
+										? "Cambiar a tema claro"
+										: "Cambiar a tema oscuro"
+								}
+								title={theme === "dark" ? "Tema claro" : "Tema oscuro"}
+								onClick={switchTheme}>
+								{theme === "dark" ? <FaSun /> : <FaMoon />}
+							</Button>
+							{loggedUser && !isAuthPage ? (
+								<>
+									<Nav.Link disabled>Hola, {loggedUser.username}</Nav.Link>
 
-              <Nav.Link as={Link} to="/search" onClick={closeMenu}>
-                <FaSearch className="me-1" />
-                Buscar
-              </Nav.Link>
+									<Nav.Link
+										as={Link}
+										to="/favorites">
+										Favoritos
+									</Nav.Link>
 
-              {!isAuthPage && !loggedUser && (
-                <Nav.Link as={Link} to="/login" onClick={closeMenu}>
-                  Login
-                </Nav.Link>
-              )}
-            </Nav>
+									<Nav.Link
+										as={Link}
+										to="/profiles">
+										Perfiles
+									</Nav.Link>
 
-            <Nav className="align-items-lg-center">
-              <Button
-                variant="link"
-                className="catalog-theme-button"
-                type="button"
-                aria-label={
-                  theme === "dark"
-                    ? "Cambiar a tema claro"
-                    : "Cambiar a tema oscuro"
-                }
-                title={
-                  theme === "dark"
-                    ? "Tema claro"
-                    : "Tema oscuro"
-                }
-                onClick={switchTheme}
-              >
-                {theme === "dark" ? <FaSun /> : <FaMoon />}
-              </Button>
+									{loggedUser.role === "admin" && (
+										<Nav.Link
+											as={Link}
+											to="/admin">
+											Administrar
+										</Nav.Link>
+									)}
 
-              {loggedUser && !isAuthPage ? (
-                <>
-                  <Nav.Link disabled>
-                    Hola, {loggedUser.username}
-                  </Nav.Link>
+									<Button
+										variant="outline-light"
+										size="sm"
+										onClick={() => setShowLogoutModal(true)}
+										className="catalog-logout-button ms-lg-2">
+										Cerrar sesión
+									</Button>
+								</>
+							) : (
+								<>
+									{!isAuthPage && (
+										<Nav.Link
+											as={Link}
+											to="/login">
+											Iniciar sesión
+										</Nav.Link>
+									)}
+								</>
+							)}
+						</Nav>
+					</BootstrapNavbar.Collapse>
+				</Container>
+			</BootstrapNavbar>
 
-                  <Nav.Link as={Link} to="/favorites" onClick={closeMenu}>
-                    Favoritos
-                  </Nav.Link>
+			<Modal
+				show={showLogoutModal}
+				onHide={() => setShowLogoutModal(false)}
+				centered>
+				<Modal.Header closeButton>
+					<Modal.Title>¿Cerrar sesión?</Modal.Title>
+				</Modal.Header>
 
-                  <Nav.Link as={Link} to="/profiles" onClick={closeMenu}>
-                    Perfiles
-                  </Nav.Link>
+				<Modal.Body>
+					¿Estás seguro de que querés cerrar tu sesión de STREAMTUC?
+				</Modal.Body>
 
-                  {loggedUser.role === "admin" && (
-                    <Nav.Link as={Link} to="/admin" onClick={closeMenu}>
-                      Administrar
-                    </Nav.Link>
-                  )}
+				<Modal.Footer>
+					<Button
+						variant="secondary"
+						onClick={() => setShowLogoutModal(false)}>
+						Cancelar
+					</Button>
 
-                  <Button
-                    variant="outline-light"
-                    size="sm"
-                    onClick={() => setShowLogoutModal(true)}
-                    className="catalog-logout-button ms-lg-2"
-                  >
-                    Cerrar sesión
-                  </Button>
-                </>
-              ) : (
-                <>
-                  {!isAuthPage && (
-                    <Nav.Link as={Link} to="/login" onClick={closeMenu}>
-                      Iniciar sesión
-                    </Nav.Link>
-                  )}
-                </>
-              )}
-            </Nav>
-          </BootstrapNavbar.Collapse>
-        </Container>
-      </BootstrapNavbar>
-
-      <Modal
-        show={showLogoutModal}
-        onHide={() => setShowLogoutModal(false)}
-        centered
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>¿Cerrar sesión?</Modal.Title>
-        </Modal.Header>
-
-        <Modal.Body>
-          ¿Estás seguro de que querés cerrar tu sesión de STREAMTUC?
-        </Modal.Body>
-
-        <Modal.Footer>
-          <Button
-            variant="secondary"
-            onClick={() => setShowLogoutModal(false)}
-          >
-            Cancelar
-          </Button>
-
-          <Button
-            variant="danger"
-            onClick={handleLogout}
-          >
-            Sí, cerrar sesión
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </>
-  );
+					<Button
+						variant="danger"
+						onClick={handleLogout}>
+						Sí, cerrar sesión
+					</Button>
+				</Modal.Footer>
+			</Modal>
+		</>
+	);
 }
 
 export default Navbar;

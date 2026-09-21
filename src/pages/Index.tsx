@@ -1,7 +1,6 @@
-import { AboutUs } from "../components/AboutUs";
-import { Badge, Card as BootstrapCard, Carousel, Col, Container, Row } from "react-bootstrap";
+import { Badge, Button, Card as BootstrapCard, Carousel, Col, Container, Row } from "react-bootstrap";
 import { FaCrown, FaPlay, FaStar } from "react-icons/fa";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useData } from "../context/database";
 import { useEffect, useState } from "react";
 import { FEATURED_MOVIES_KEY, isCustomMovie } from "../data/customMovies";
@@ -17,6 +16,7 @@ function imageUrl(movie: Movie, size: "w500" | "original") {
 }
 
 export function Index() {
+  const navigate = useNavigate();
   const { list, loading } = useData();
   const { theme } = useStyle();
   const [featuredMovies, setFeaturedMovies] = useState<Movie[]>(() => {
@@ -120,7 +120,7 @@ export function Index() {
 
             <Link
               to={`/detail/${featuredMovie.id}`}
-              className="btn btn-light"
+              className="catalog-hero-button"
             >
               <FaPlay className="me-2" />
               Ver detalles
@@ -143,7 +143,7 @@ export function Index() {
                 />
                 <Carousel.Caption>
                   <h3>{movie.title}</h3>
-                  <Link to={`/detail/${movie.id}`} className="btn btn-light">Ver detalles</Link>
+                  <Link to={`/detail/${movie.id}`} className="catalog-hero-button">Ver detalles</Link>
                 </Carousel.Caption>
               </Carousel.Item>
             ))}
@@ -188,12 +188,13 @@ export function Index() {
                     <li>Lista de favoritos</li>
                   </ul>
 
-                  <Link
-                    to="/register"
-                    className="btn btn-outline-primary mt-auto"
+                  <Button
+                    onClick={() => navigate("/register")}
+                    variant="outline-primary"
+                    className="mt-auto"
                   >
                     Registrarme
-                  </Link>
+                  </Button>
                 </BootstrapCard.Body>
               </BootstrapCard>
             </Col>
@@ -222,18 +223,18 @@ export function Index() {
                     <li>Experiencia Premium</li>
                   </ul>
 
-                  <Link
-                    to="/register"
-                    className="btn btn-primary mt-auto"
+                  <Button
+                    onClick={() => navigate("/register")}
+                    variant="primary"
+                    className="mt-auto"
                   >
                     Registrarme
-                  </Link>
+                  </Button>
                 </BootstrapCard.Body>
               </BootstrapCard>
             </Col>
           </Row>
         </section>
-      <AboutUs />
       </Container>
     </>
   );

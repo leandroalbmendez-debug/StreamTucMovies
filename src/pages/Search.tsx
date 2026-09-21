@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Alert, Button, Container, Form, Row, Spinner } from "react-bootstrap";
+import { Alert, Button, Col, Container, Form, Row, Spinner } from "react-bootstrap";
 import { FaSearch } from "react-icons/fa";
 import { useStyle } from "../context/styles";
 import { Card } from "../components/catalog/Card";
@@ -136,13 +136,13 @@ export function Search() {
               onChange={(event) => setSearch(event.target.value)}
             />
 
-            <button
+            <Button
               type="submit"
-              className="btn btn-primary"
+              variant="primary"
             >
               <FaSearch className="me-2" />
               Buscar
-            </button>
+            </Button>
           </div>
         </Form.Group>
       </Form>
@@ -175,9 +175,9 @@ export function Search() {
           ) : (
             <Row className="catalog-grid">
               {movies.map((movie) => (
-                <div key={movie.id}>
+                <Col key={movie.id}>
                   <Card movie={movie} theme={theme} detailState={movie} detailFrom="/search" />
-                </div>
+                </Col>
               ))}
             </Row>
           )}

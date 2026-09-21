@@ -213,14 +213,40 @@ body {
 }
 
 .catalog-theme-button {
+	align-items: center;
 	color: var(--on-surface-variant) !important;
+	display: inline-flex;
 	font-size: 0.9rem;
+	justify-content: left;
+	line-height: 1;
 	padding: 0.5rem;
 }
 
 .catalog-theme-button:hover,
 .catalog-theme-button:focus-visible {
 	color: var(--primary-container) !important;
+}
+
+.catalog-navbar-actions {
+	align-items: center;
+	display: flex;
+	gap: 0.25rem;
+	margin-left: auto;
+	order: 2;
+}
+
+.catalog-navbar .navbar-collapse {
+	order: 3;
+}
+
+@media (min-width: 992px) {
+	.catalog-navbar-actions {
+		order: 3;
+	}
+
+	.catalog-navbar .navbar-collapse {
+		order: 2;
+	}
 }
 
 .app-shell .btn {
@@ -757,12 +783,21 @@ body {
 	color: #fff;
 	font-size: 0.62rem;
 	font-weight: 700;
-	left: 0.6rem;
 	letter-spacing: 0.03em;
 	padding: 0.25rem 0.65rem;
+	white-space: nowrap;
+}
+
+.catalog-card-image-actions {
+	align-items: center;
+	display: flex;
+	flex-direction: row-reverse;
+	gap: 0.5rem;
+	bottom: 0;
 	position: absolute;
-	top: 0.6rem;
-	z-index: 2;
+	right: 0.15rem;
+	z-index: 3;
+	padding: 5px 0px;
 }
 
 .catalog-card-image {
@@ -848,10 +883,6 @@ body {
 }
 
 .catalog-favorite-button {
-	position: absolute;
-	top: 0.75rem;
-	right: 0.75rem;
-	z-index: 1;
 	width: 2.5rem;
 	height: 2.5rem;
 	display: grid;

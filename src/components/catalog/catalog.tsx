@@ -1,5 +1,5 @@
 import { useData } from "../../context/database";
-import { Alert, Container, Row } from "react-bootstrap";
+import { Alert, Button, Container, Row } from "react-bootstrap";
 import { Paginator } from "../paginator";
 import { useStyle } from "../../context/styles";
 import { Card } from "./Card";
@@ -98,14 +98,14 @@ export function Catalog() {
 				</div>
 				<div className="catalog-genres" aria-label="Géneros">
 					{genres.map((genre) => (
-						<button
+						<Button
 							className={selectedGenre === genre.id ? "active" : ""}
 							key={genre.label}
 							type="button"
 							onClick={() => void selectGenre(genre.id)}
 							disabled={loading}>
 							{genre.label}
-						</button>
+						</Button>
 					))}
 				</div>
 								<Row className="catalog-grid">
