@@ -15,6 +15,7 @@ import "./css/App.css";
 import Layout from "./pages/Layout";
 import { Search } from "./pages/Search";
 import { Profiles } from "./pages/Profiles";
+import { ErrorBoundary } from "./components/ErrorBoundary";
 
 function ProtectedAdmin() {
   const [loggedUser] = useLocalStorage<User | null>(
@@ -117,7 +118,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <ErrorBoundary>
+      <RouterProvider router={router} />
+    </ErrorBoundary>
+  );
 }
 
 export default App;

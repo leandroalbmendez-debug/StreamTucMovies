@@ -1,78 +1,24 @@
-# React + TypeScript + Vite
+# StreamTUC
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Catálogo de películas y series desarrollado como proyecto académico grupal. Incluye autenticación, catálogo público con datos de TMDB, sistema de comentarios, favoritos, panel de administración (usuarios, comentarios y películas personalizadas) y planes Free/Premium.
 
-Currently, two official plugins are available:
+## Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+React + TypeScript + Vite, react-bootstrap, pnpm.
 
-## React Compiler
+## Cómo correrlo
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+1. `pnpm install`
+2. Crear un archivo `.env` en la raíz con tu propia API key de [TMDB](https://www.themoviedb.org/settings/api): VITE_API_KEY = "tu-api-key-de-tmdb"
+3. `pnpm dev`
 
-Note: This will impact Vite dev & build performances.
-You can also try [the experimental native React Compiler support in plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#rust-react-compiler) by using `compiler: true` in the plugin options instead of using the Babel plugin.
+## Scripts
 
-## Expanding the ESLint configuration
+- `pnpm dev` — entorno de desarrollo
+- `pnpm build` — build de producción
+- `pnpm preview` — previsualizar el build
+- `pnpm exec tsc -b` — chequeo de tipos
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Equipo
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
-
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
+Franco David Ruiz Pastorino, Lucas Lencina, Leandro Mendez.

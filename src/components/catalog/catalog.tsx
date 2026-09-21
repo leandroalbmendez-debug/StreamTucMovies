@@ -1,5 +1,5 @@
 import { useData } from "../../context/database";
-import { Container, Row } from "react-bootstrap";
+import { Alert, Container, Row } from "react-bootstrap";
 import { Paginator } from "../paginator";
 import { useStyle } from "../../context/styles";
 import { Card } from "./Card";
@@ -14,6 +14,7 @@ type SortOption = "popularity" | "vote_average";
 export function Catalog() {
 	const {
 		loading,
+		error,
 		list,
 		nudge,
 		jumpTo,
@@ -107,9 +108,17 @@ export function Catalog() {
 						</button>
 					))}
 				</div>
-				<Row className="catalog-grid">
+								<Row className="catalog-grid">
 					{loading ? (
 						<p className="catalog-loading">Cargando películas...</p>
+					) : error && sortedMovies.length === 0 ? (
+						<Alert variant="danger">
+							No pudimos cargar el catálogo. Probá recargar la página en unos minutos.
+						</Alert>
+					) : sortedMovies.length === 0 ? (
+						<Alert variant="info">
+							No encontramos películas para este filtro.
+						</Alert>
 					) : (
 						sortedMovies.map((movie) => (
 							<div key={movie.id}>
