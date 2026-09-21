@@ -63,14 +63,9 @@ export function Detail() {
 					<p className="lead">{movie.original_title}</p>
 					<p>{movie.overview || "No hay sinopsis disponible."}</p>
 					<ListGroup>
-						<ListGroup.Item><strong>ID:</strong> {movie.id}</ListGroup.Item>
 						<ListGroup.Item><strong>Fecha de estreno:</strong> {formatReleaseDate(movie.release_date)}</ListGroup.Item>
-						<ListGroup.Item><strong>Idioma original:</strong> {movie.original_language}</ListGroup.Item>
-						<ListGroup.Item><strong>Popularidad:</strong> {movie.popularity}</ListGroup.Item>
-						<ListGroup.Item><strong>Votos:</strong> {movie.vote_count}</ListGroup.Item>
-						<ListGroup.Item><strong>Promedio:</strong> {movie.vote_average}/10</ListGroup.Item>
-						<ListGroup.Item><strong>Contenido adulto:</strong> {movie.adult ? "Sí" : "No"}</ListGroup.Item>
-						<ListGroup.Item><strong>Video:</strong> {movie.video ? "Sí" : "No"}</ListGroup.Item>
+						<ListGroup.Item><strong>Calificación:</strong> {movie.vote_average.toFixed(1)}/10 ({movie.vote_count} votos)</ListGroup.Item>
+						<ListGroup.Item><strong>Clasificación:</strong> {movie.adult ? "Contenido para adultos" : "Apta para todo público"}</ListGroup.Item>
 						<ListGroup.Item>
 							<strong>Géneros:</strong>{" "}
 							{movie.genre_ids.length ? movie.genre_ids.map((genreId) => (

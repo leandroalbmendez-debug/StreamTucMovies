@@ -8,10 +8,18 @@ interface UserTableProps {
   onEditUser: (user: User) => void;
 }
 
+interface UserTableProps {
+  users: User[];
+  onDeleteUser: (id: string) => void;
+  onEditUser: (user: User) => void;
+  commentCounts: Record<string, number>;
+}
+
 function UserTable({
   users,
   onDeleteUser,
   onEditUser,
+  commentCounts,
 }: UserTableProps) {
   const [userToDelete, setUserToDelete] = useState<User | null>(null);
 
@@ -47,7 +55,7 @@ function UserTable({
               <td>{user.role}</td>
               <td>{user.plan}</td>
               <td>{user.favorites.length}</td>
-              <td>{user.comments.length}</td>
+              <td>{(commentCounts[user.id] ?? 0) + (commentCounts[user.username] ?? 0)}</td>
 
               <td>
                 {user.role !== "admin" && (
