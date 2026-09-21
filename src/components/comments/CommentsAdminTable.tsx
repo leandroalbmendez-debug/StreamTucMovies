@@ -1,8 +1,7 @@
 import { Badge, Button, Table } from 'react-bootstrap';
 import type { Comment } from '../../types/comment';
 import type { Movie } from '../../types/database';
-import { isCustomMovie, MOVIE_GENRES } from '../../data/customMovies';
-import { customMovieImageUrl, movieImageUrl } from '../../data/movieImages';
+import { getMoviePosterUrl, MOVIE_GENRES } from '../../data/customMovies';
 
 interface Props {
   comments: Comment[];
@@ -18,13 +17,6 @@ function getMovieGenreLabels(movie: Movie | undefined) {
     .map((id) => MOVIE_GENRES.find((genre) => genre.id === id)?.label)
     .filter((label): label is string => Boolean(label));
   return labels.length ? labels.join(', ') : 'Sin género';
-}
-
-function getMoviePosterUrl(movie: Movie | undefined) {
-  if (!movie) return '';
-  return isCustomMovie(movie)
-    ? customMovieImageUrl(movie.poster_path)
-    : movieImageUrl(movie.poster_path);
 }
 
 export function CommentsAdminTable({ comments, getMovieTitle, getMovie, onToggleHidden, onDelete }: Props) {

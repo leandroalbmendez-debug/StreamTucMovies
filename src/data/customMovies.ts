@@ -1,4 +1,6 @@
 import type { Movie } from "../types/database";
+import { initialMovies } from "./initialMovies";
+import { customMovieImageUrl, movieImageUrl } from "./movieImages";
 
 export type CustomMovie = Movie & { isCustom: true; isHidden?: boolean };
 
@@ -74,7 +76,9 @@ export function readFeaturedMovies(): Movie[] {
 
 export function readCustomMovies(): CustomMovie[] {
   const stored = localStorage.getItem(CUSTOM_MOVIES_KEY);
-  if (!stored) return [];
+  if (!stored) {
+    return initialMovies.map((movie) => createCustomMovie({ ...movie, isHidden: false }));
+  }
 
   try {
     return (JSON.parse(stored) as CustomMovie[]).map((movie) => createCustomMovie(movie));
@@ -85,4 +89,9 @@ export function readCustomMovies(): CustomMovie[] {
 
 export function isCustomMovie(movie: Movie): movie is CustomMovie {
   return "isCustom" in movie && movie.isCustom === true;
+}
+
+export function getMoviePosterUrl(movie: Movie | undefined | null): string {
+  if (!movie) return "";
+  return isCustomMovie(movie) ? customMovieImageUrl(movie.poster_path) : movieImageUrl(movie.poster_path);
 }

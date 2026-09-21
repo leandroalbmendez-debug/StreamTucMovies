@@ -137,7 +137,7 @@ function UserForm({
   };
 
   return (
-    <Card className="catalog-card subscription-card mb-4">
+    <Card id="user-form-card" className="catalog-card subscription-card mb-4">
       <Card.Body>
         <Card.Title className="mb-4">
           {userToEdit ? "Editar usuario" : "Crear usuario"}

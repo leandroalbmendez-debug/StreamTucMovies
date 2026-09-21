@@ -208,8 +208,9 @@ function Navbar() {
         show={showLogoutModal}
         onHide={() => setShowLogoutModal(false)}
         centered
+        dialogClassName={`${theme}-mode`}
       >
-        <Modal.Header closeButton>
+        <Modal.Header closeButton closeVariant={theme === "dark" ? "white" : undefined}>
           <Modal.Title>¿Cerrar sesión?</Modal.Title>
         </Modal.Header>
 

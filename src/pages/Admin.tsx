@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Alert, Container, Row, Col, Form, Nav } from "react-bootstrap";
 import UserForm from "../components/UserForm";
 import UserTable from "../components/UserTable";
@@ -54,6 +54,12 @@ function Admin() {
   const cancelEdit = () => {
     setUserToEdit(null);
   };
+
+  useEffect(() => {
+    if (userToEdit) {
+      document.getElementById("user-form-card")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [userToEdit]);
 
   const [allComments, setAllComments] = useLocalStorage<Comment[]>(
     "comments",
@@ -170,6 +176,7 @@ function Admin() {
             onDeleteUser={deleteUser}
             onEditUser={editUser}
             commentCounts={commentCountByAuthor}
+            getMovie={getMovie}
           />
 
           <h2 className="mt-5 mb-3">Comentarios</h2>
