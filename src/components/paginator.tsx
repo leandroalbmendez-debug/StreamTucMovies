@@ -51,7 +51,7 @@ export function Paginator({
 				<input
 					className="page-link"
 					autoFocus
-					aria-label="Jump to page"
+					aria-label="Ir a la página"
 					type="number"
 					min={min}
 					max={max}
