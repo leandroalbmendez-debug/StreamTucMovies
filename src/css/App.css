@@ -561,6 +561,28 @@ body {
 	transform: translateY(-3px);
 }
 
+
+.plan-free {
+	border-color: rgb(255 255 255 / 0.12);
+}
+
+.plan-premium {
+	position: relative;
+	border-color: var(--primary-container);
+	box-shadow: 0 16px 36px -8px rgb(255 104 0 / 0.35);
+}
+
+.plan-premium-badge {
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+}
+
+.plan-premium-title svg {
+	color: var(--primary-container);
+	margin-right: 0.5rem;
+}
+
 .catalog-card-link {
 	display: block;
 	height: 100%;

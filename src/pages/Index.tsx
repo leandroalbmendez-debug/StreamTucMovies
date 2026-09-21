@@ -1,6 +1,6 @@
 import { AboutUs } from "../components/AboutUs";
-import { Card as BootstrapCard, Carousel, Col, Container, Row } from "react-bootstrap";
-import { FaPlay, FaStar } from "react-icons/fa";
+import { Badge, Card as BootstrapCard, Carousel, Col, Container, Row } from "react-bootstrap";
+import { FaCrown, FaPlay, FaStar } from "react-icons/fa";
 import { Link } from "react-router";
 import { useData } from "../context/database";
 import { useEffect, useState } from "react";
@@ -169,9 +169,9 @@ export function Index() {
             <h2>Elegí tu plan de STREAMTUC</h2>
           </div>
 
-          <Row className="justify-content-center">
+                    <Row className="justify-content-center">
             <Col md={5} className="mb-4">
-              <BootstrapCard className="catalog-card subscription-card h-100 text-center">
+              <BootstrapCard className="catalog-card subscription-card plan-free h-100 text-center">
                 <BootstrapCard.Body className="d-flex flex-column">
                   <BootstrapCard.Title className="fs-3">
                     Plan Gratis
@@ -199,9 +199,14 @@ export function Index() {
             </Col>
 
             <Col md={5} className="mb-4">
-              <BootstrapCard className="catalog-card subscription-card h-100 text-center">
+              <BootstrapCard className="catalog-card subscription-card plan-premium h-100 text-center">
+                <Badge bg="warning" text="dark" className="plan-premium-badge">
+                  Más elegido
+                </Badge>
+
                 <BootstrapCard.Body className="d-flex flex-column">
-                  <BootstrapCard.Title className="fs-3">
+                  <BootstrapCard.Title className="fs-3 plan-premium-title">
+                    <FaCrown />
                     Plan Premium
                   </BootstrapCard.Title>
 
