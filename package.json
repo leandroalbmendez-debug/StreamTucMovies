@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "@uidotdev/usehooks": "^2.4.1",
-    "axios": "^1.20.0",
     "bootstrap": "^5.3.8",
     "react": "^19.3.0",
     "react-bootstrap": "^2.10.10",
@@ -20,7 +19,6 @@
     "react-hook-form": "^7.88.0",
     "react-icons": "^5.7.0",
     "react-router": "^8.3.1",
-    "react-router-dom": "^7.18.3",
     "uuid": "^14.0.2"
   },
   "devDependencies": {
