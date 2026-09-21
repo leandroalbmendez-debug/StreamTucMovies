@@ -1,5 +1,6 @@
-import { Badge, Button, Table } from 'react-bootstrap';
-import type { Comment } from '../../types/comment';
+import { Badge, Button, Table } from "react-bootstrap";
+import { FaEye, FaEyeSlash, FaTrash } from "react-icons/fa";
+import type { Comment } from "../../types/comment";
 
 interface Props {
   comments: Comment[];
@@ -8,9 +9,18 @@ interface Props {
   onDelete: (id: string) => void;
 }
 
-export function CommentsAdminTable({ comments, getMovieTitle, onToggleHidden, onDelete }: Props) {
+export function CommentsAdminTable({
+  comments,
+  getMovieTitle,
+  onToggleHidden,
+  onDelete,
+}: Props) {
   if (comments.length === 0) {
-    return <p className="text-muted">No hay comentarios que coincidan con el filtro.</p>;
+    return (
+      <p className="text-muted">
+        No hay comentarios que coincidan con el filtro.
+      </p>
+    );
   }
 
   return (
@@ -26,20 +36,28 @@ export function CommentsAdminTable({ comments, getMovieTitle, onToggleHidden, on
           <th>Acciones</th>
         </tr>
       </thead>
+
       <tbody>
         {comments.map((comment) => (
           <tr key={comment.id}>
             <td>{comment.author}</td>
+
             <td>{getMovieTitle(comment.movieId)}</td>
+
             <td style={{ maxWidth: 300 }}>
               {comment.hidden ? (
-                <span className="fst-italic text-muted">Comentario oculto por un administrador</span>
+                <span className="fst-italic text-muted">
+                  Comentario oculto por un administrador
+                </span>
               ) : (
                 comment.text
               )}
             </td>
-            <td>{comment.rating ? `${comment.rating}/10` : '—'}</td>
+
+            <td>{comment.rating ? `${comment.rating}/10` : "—"}</td>
+
             <td>{new Date(comment.createdAt).toLocaleDateString()}</td>
+
             <td>
               {comment.hidden ? (
                 <Badge bg="secondary">Oculto</Badge>
@@ -47,20 +65,23 @@ export function CommentsAdminTable({ comments, getMovieTitle, onToggleHidden, on
                 <Badge bg="success">Visible</Badge>
               )}
             </td>
+
             <td>
               <Button
-                variant={comment.hidden ? 'outline-secondary' : 'warning'}
+                className="admin-comment-button me-2"
                 size="sm"
-                className="me-2"
                 onClick={() => onToggleHidden(comment.id)}
               >
-                {comment.hidden ? 'Mostrar' : 'Ocultar'}
+                {comment.hidden ? <FaEye /> : <FaEyeSlash />}
+                {comment.hidden ? "Mostrar" : "Ocultar"}
               </Button>
+
               <Button
-                variant="danger"
+                className="admin-delete-button"
                 size="sm"
                 onClick={() => onDelete(comment.id)}
               >
+                <FaTrash />
                 Eliminar
               </Button>
             </td>
