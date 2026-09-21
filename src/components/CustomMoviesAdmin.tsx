@@ -70,6 +70,17 @@ export function CustomMoviesAdmin() {
 
   const permanentlyDelete = (id: number) => setBin((current) => current.filter((movie) => movie.id !== id));
 
+  const restoreSampleMovies = () => {
+    setMovies((current) => {
+      const existingIds = new Set(current.map((movie) => movie.id));
+      const missing = initialCustomMovies.filter((movie) => !existingIds.has(movie.id));
+      return missing.length ? [...current, ...missing] : current;
+    });
+    notifyCustomMoviesChange();
+  };
+
+  const allSampleMoviesPresent = initialCustomMovies.every((movie) => movies.some((item) => item.id === movie.id));
+
   const toggleFeatured = (movie: CustomMovie) => {
     const nextFeaturedMovies = featuredMovies.some((item) => item.id === movie.id)
       ? featuredMovies.filter((item) => item.id !== movie.id)
@@ -147,6 +158,7 @@ export function CustomMoviesAdmin() {
             {movies.length > 0 && movies.every((movie) => featuredMovies.some((item) => item.id === movie.id)) ? "Quitar destacadas" : "Destacar todas"}
           </Button>
           <Button variant="outline-danger" disabled={!movies.length} onClick={() => setConfirmClear(true)}>Limpiar lista</Button>
+          <Button variant="outline-secondary" disabled={allSampleMoviesPresent} onClick={restoreSampleMovies}>Restaurar películas de ejemplo</Button>
           <Button onClick={() => { setEditing(null); setShowModal(true); }}>Agregar película</Button>
         </div>
       </div>
