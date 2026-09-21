@@ -106,6 +106,37 @@ body {
 	color: var(--on-surface);
 }
 
+
+.modal-content {
+	background-color: var(--surface-low);
+	border-color: var(--surface-highest);
+	color: var(--on-surface);
+}
+
+.modal-header,
+.modal-footer {
+	border-color: var(--surface-highest);
+}
+
+.modal .form-control,
+.modal .form-select {
+	background-color: var(--surface-lowest);
+	border-color: var(--surface-highest);
+	color: var(--on-surface);
+}
+
+.modal .form-control::placeholder {
+	color: var(--on-surface-variant);
+}
+
+.modal .form-control:focus,
+.modal .form-select:focus {
+	background-color: var(--surface-lowest);
+	border-color: var(--primary-container);
+	box-shadow: 0 0 0 0.2rem rgb(255 104 0 / 0.16);
+	color: var(--on-surface);
+}
+
 .catalog-navbar {
 	background: rgb(18 19 23 / 0.82);
 	backdrop-filter: blur(16px);
