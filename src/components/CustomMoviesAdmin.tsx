@@ -128,7 +128,7 @@ export function CustomMoviesAdmin() {
     <>
       <div className="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
         <h2 className="mb-0">Películas personalizadas</h2>
-                <div className="d-flex gap-2">
+                <div className="d-flex flex-wrap gap-2">
           <Form.Select
             size="sm"
             style={{ maxWidth: "200px" }}

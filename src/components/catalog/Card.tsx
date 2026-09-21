@@ -139,6 +139,9 @@ export function Card({ movie, theme, detailState, detailFrom }: CatalogCardProps
 						alt={movie.title}
 							className="catalog-card-image object-fit-cover"
 					/>
+					{isCustom && (
+						<span className="catalog-card-origin-badge">Original STREAMTUC</span>
+					)}
 					<div className="catalog-card-overlay text-light">
 						<span className="catalog-card-genre">Película destacada</span>
 						<h3>{movie.title}</h3>

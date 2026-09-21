@@ -12,6 +12,8 @@ React + TypeScript + Vite, react-bootstrap, pnpm.
 2. Crear un archivo `.env` en la raíz con tu propia API key de [TMDB](https://www.themoviedb.org/settings/api): VITE_API_KEY = "tu-api-key-de-tmdb"
 3. `pnpm dev`
 
+Si el catálogo no carga ninguna película, lo más probable es que falte el `.env` o que la `VITE_API_KEY` sea inválida/esté vencida — cada persona del equipo necesita su propia key de TMDB, no se comparte una sola.
+
 ## Scripts
 
 - `pnpm dev` — entorno de desarrollo

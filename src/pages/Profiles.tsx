@@ -1,8 +1,12 @@
 import { Card, Col, Container, Row } from "react-bootstrap";
 import { useNavigate } from "react-router";
-import { FaPlus, FaUserCircle } from "react-icons/fa";
+import { FaChild, FaPlus, FaUserAstronaut, FaUserNinja } from "react-icons/fa";
 
-const SIMULATED_PROFILES = ["Perfil 1", "Perfil 2", "Niños"];
+const SIMULATED_PROFILES = [
+  { name: "Perfil 1", icon: FaUserAstronaut },
+  { name: "Perfil 2", icon: FaUserNinja },
+  { name: "Niños", icon: FaChild },
+];
 
 export function Profiles() {
   const navigate = useNavigate();
@@ -16,8 +20,8 @@ export function Profiles() {
       <h1 className="mb-5">¿Quién está viendo?</h1>
 
       <Row className="justify-content-center g-4">
-        {SIMULATED_PROFILES.map((profile) => (
-          <Col key={profile} xs={6} md={3} lg={2}>
+        {SIMULATED_PROFILES.map(({ name, icon: Icon }) => (
+          <Col key={name} xs={6} md={3} lg={2}>
             <Card
               role="button"
               className="profile-card h-100"
@@ -25,8 +29,8 @@ export function Profiles() {
               onClick={handleSelectProfile}
             >
               <Card.Body className="d-flex flex-column align-items-center justify-content-center">
-                <FaUserCircle size={64} className="mb-3" />
-                <Card.Text>{profile}</Card.Text>
+                <Icon size={64} className="mb-3" />
+                <Card.Text>{name}</Card.Text>
               </Card.Body>
             </Card>
           </Col>

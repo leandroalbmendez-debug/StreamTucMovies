@@ -113,7 +113,7 @@ export function Catalog() {
 						<p className="catalog-loading">Cargando películas...</p>
 					) : error && sortedMovies.length === 0 ? (
 						<Alert variant="danger">
-							No pudimos cargar el catálogo. Probá recargar la página en unos minutos.
+							No pudimos cargar el catálogo. Revisá que tu archivo <code>.env</code> tenga una <code>VITE_API_KEY</code> válida de TMDB (mirá el README) y volvé a intentar.
 						</Alert>
 					) : sortedMovies.length === 0 ? (
 						<Alert variant="info">

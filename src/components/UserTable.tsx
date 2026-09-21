@@ -6,12 +6,6 @@ interface UserTableProps {
   users: User[];
   onDeleteUser: (id: string) => void;
   onEditUser: (user: User) => void;
-}
-
-interface UserTableProps {
-  users: User[];
-  onDeleteUser: (id: string) => void;
-  onEditUser: (user: User) => void;
   commentCounts: Record<string, number>;
 }
 
@@ -52,8 +46,16 @@ function UserTable({
             <tr key={user.id}>
               <td>{user.username}</td>
               <td>{user.email}</td>
-              <td>{user.role}</td>
-              <td>{user.plan}</td>
+              <td>
+                <span className={`admin-pill admin-pill-${user.role === "admin" ? "accent" : "neutral"}`}>
+                  {user.role === "admin" ? "Admin" : "Cliente"}
+                </span>
+              </td>
+              <td>
+                <span className={`admin-pill admin-pill-${user.plan === "premium" ? "accent" : "neutral"}`}>
+                  {user.plan === "premium" ? "Premium" : "Gratis"}
+                </span>
+              </td>
               <td>{user.favorites.length}</td>
               <td>{(commentCounts[user.id] ?? 0) + (commentCounts[user.username] ?? 0)}</td>
 

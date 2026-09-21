@@ -10,11 +10,21 @@ import {
 import logo from "../assets/Logo.png";
 
 const SOCIAL_LINKS = [
-  { label: "Instagram", icon: FaInstagram, href: "/404" },
-  { label: "Twitter", icon: FaTwitter, href: "/404" },
-  { label: "Facebook", icon: FaFacebookF, href: "/404" },
-  { label: "YouTube", icon: FaYoutube, href: "/404" },
-  { label: "GitHub", icon: FaGithub, href: "/404" },
+  { label: "Instagram", icon: FaInstagram, href: "/404", external: false },
+  { label: "Twitter", icon: FaTwitter, href: "/404", external: false },
+  { label: "Facebook", icon: FaFacebookF, href: "/404", external: false },
+  {
+    label: "YouTube",
+    icon: FaYoutube,
+    href: "https://www.youtube.com/watch?v=UQAKL29bv3k",
+    external: true,
+  },
+  {
+    label: "GitHub",
+    icon: FaGithub,
+    href: "https://github.com/leandroalbmendez-debug/StreamTucMovies",
+    external: true,
+  },
 ];
 
 export function Footer() {
@@ -47,16 +57,29 @@ export function Footer() {
           <Col md={4}>
             <h6 className="app-footer-heading">Seguinos</h6>
             <div className="app-footer-socials">
-              {SOCIAL_LINKS.map(({ label, icon: Icon, href }) => (
-                <Link
-                  key={label}
-                  to={href}
-                  aria-label={label}
-                  className="app-footer-social"
-                >
-                  <Icon />
-                </Link>
-              ))}
+              {SOCIAL_LINKS.map(({ label, icon: Icon, href, external }) =>
+                external ? (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className="app-footer-social"
+                  >
+                    <Icon />
+                  </a>
+                ) : (
+                  <Link
+                    key={label}
+                    to={href}
+                    aria-label={label}
+                    className="app-footer-social"
+                  >
+                    <Icon />
+                  </Link>
+                ),
+              )}
             </div>
             <p className="app-footer-legal">
               STREAMTUC es un proyecto educativo sin fines comerciales.
