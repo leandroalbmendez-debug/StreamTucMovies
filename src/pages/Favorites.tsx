@@ -98,6 +98,9 @@ export function Favorites() {
 			window.removeEventListener("streamtuc-favorites-change", updateLoggedUser);
 	}, [setLoggedUser]);
 
+	const loggedUserId = loggedUser?.id;
+	const favoritesKey = loggedUser?.favorites?.join(",") ?? "";
+
 	useEffect(() => {
 		if (!loggedUser || loggedUser.favorites.length === 0) {
 			setMovies([]);
@@ -159,7 +162,7 @@ export function Favorites() {
 
 		void fetchFavorites();
 		return () => controller.abort();
-	}, [loggedUser]);
+	}, [loggedUserId, favoritesKey]);
 
 	if (!loggedUser) {
 		return <Navigate to="/login" replace />;
