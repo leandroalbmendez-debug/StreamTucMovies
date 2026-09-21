@@ -1,12 +1,7 @@
 import { useState } from "react";
 import { Button, Modal, Table } from "react-bootstrap";
+import { FaPen, FaTrash } from "react-icons/fa";
 import type { User } from "../types/User";
-
-interface UserTableProps {
-  users: User[];
-  onDeleteUser: (id: string) => void;
-  onEditUser: (user: User) => void;
-}
 
 interface UserTableProps {
   users: User[];
@@ -55,25 +50,28 @@ function UserTable({
               <td>{user.role}</td>
               <td>{user.plan}</td>
               <td>{user.favorites.length}</td>
-              <td>{(commentCounts[user.id] ?? 0) + (commentCounts[user.username] ?? 0)}</td>
-
+              <td>
+                {(commentCounts[user.id] ?? 0) +
+                  (commentCounts[user.username] ?? 0)}
+              </td>
               <td>
                 {user.role !== "admin" && (
                   <>
                     <Button
-                      variant="warning"
+                      className="admin-edit-button me-2"
                       size="sm"
-                      className="me-2"
                       onClick={() => onEditUser(user)}
                     >
+                      <FaPen />
                       Editar
                     </Button>
 
                     <Button
-                      variant="danger"
+                      className="admin-delete-button"
                       size="sm"
                       onClick={() => setUserToDelete(user)}
                     >
+                      <FaTrash />
                       Eliminar
                     </Button>
                   </>
