@@ -35,15 +35,17 @@ export function CommentForm({ onSubmit, loggedInAuthor }: Props) {
         </Form.Group>
       )}
       <Form.Group className="mb-2">
+        <Form.Label className="visually-hidden">Comentario</Form.Label>
         <Form.Control
           as="textarea"
           rows={3}
-          placeholder="Escribe tu comentario..."
+          placeholder="Escribí tu comentario..."
           value={text}
           onChange={(e) => setText(e.target.value)}
         />
       </Form.Group>
       <Form.Group className="mb-2">
+        <Form.Label className="visually-hidden">Calificación</Form.Label>
         <Form.Select
           value={rating}
           onChange={(e) => setRating(Number(e.target.value))}

@@ -3,7 +3,7 @@ import { Alert, Button, Col, Container, Form, Row } from "react-bootstrap";
 import { Navigate } from "react-router";
 import { Card } from "../components/catalog/Card";
 import { notifyFavoriteChange, queueFavoriteUpdate } from "../data/favoriteQueue";
-import { useLocalStorage } from "../hooks/useLocalStorage";
+import { useLocalStorage } from "@uidotdev/usehooks";
 import type { Movie } from "../types/database";
 import type { User } from "../types/User";
 import { useStyle } from "../context/styles";
