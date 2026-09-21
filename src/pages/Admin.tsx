@@ -66,8 +66,10 @@ function Admin() {
   const [authorFilter, setAuthorFilter] = useState("");
   const [activeTab, setActiveTab] = useState("users");
 
+  const getMovie = (movieId: string) => movies.find((m) => String(m.id) === movieId);
+
   const getMovieTitle = (movieId: string) => {
-    const movie = movies.find((m) => String(m.id) === movieId);
+    const movie = getMovie(movieId);
     return movie ? movie.title : `Película #${movieId}`;
   };
 
@@ -213,6 +215,7 @@ function Admin() {
           <CommentsAdminTable
             comments={filteredComments}
             getMovieTitle={getMovieTitle}
+            getMovie={getMovie}
             onToggleHidden={toggleHidden}
             onDelete={deleteComment}
           />

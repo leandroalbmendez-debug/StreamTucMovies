@@ -53,13 +53,26 @@ function Navbar() {
 
   // Cierra el menú mobile si el usuario scrollea con el menú abierto,
   // en vez de dejarlo pegado en pantalla sin cerrarse solo.
+  // El listener se arma con una demora: al abrir el menú a mitad de página,
+  // el propio crecimiento del navbar sticky dispara un scroll de compensación
+  // del browser, que si se escuchara de inmediato cerraría el menú apenas abre.
   useEffect(() => {
     if (!expanded) return;
 
-    const handleScroll = () => setExpanded(false);
+    let armed = false;
+    const armTimer = setTimeout(() => {
+      armed = true;
+    }, 150);
+
+    const handleScroll = () => {
+      if (armed) setExpanded(false);
+    };
     window.addEventListener("scroll", handleScroll, { passive: true });
 
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      clearTimeout(armTimer);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, [expanded]);
 
   const closeMenu = () => setExpanded(false);
@@ -85,7 +98,7 @@ function Navbar() {
     <>
       <BootstrapNavbar
         className={`${theme}-mode catalog-navbar`}
-        variant="dark"
+        variant={theme === "dark" ? "dark" : "light"}
         expand="lg"
         expanded={expanded}
         onToggle={setExpanded}

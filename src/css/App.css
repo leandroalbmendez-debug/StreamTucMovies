@@ -87,6 +87,52 @@ body {
 	color: var(--on-surface);
 }
 
+.app-shell .table thead th {
+	background: var(--surface-container);
+	border-bottom: 2px solid var(--primary-container);
+	color: var(--on-surface-variant);
+	font-size: 0.72rem;
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	vertical-align: middle;
+}
+
+.app-shell .table-hover > tbody > tr:hover > * {
+	background-color: rgb(255 104 0 / 0.07);
+	color: var(--on-surface);
+}
+
+.app-shell .table td {
+	vertical-align: middle;
+}
+
+.admin-pill {
+	border-radius: 999px;
+	display: inline-block;
+	font-size: 0.72rem;
+	font-weight: 700;
+	padding: 0.25rem 0.75rem;
+	white-space: nowrap;
+}
+
+.admin-pill-accent {
+	background: rgb(255 104 0 / 0.16);
+	color: var(--primary-container);
+}
+
+.admin-pill-neutral {
+	background: var(--surface-highest);
+	color: var(--on-surface-variant);
+}
+
+.comments-admin-poster {
+	border-radius: 0.4rem;
+	height: 64px;
+	object-fit: cover;
+	width: 44px;
+}
+
 .app-shell .form-control,
 .app-shell .form-select {
 	background-color: var(--surface-lowest);
@@ -146,6 +192,11 @@ body {
 	z-index: 10;
 }
 
+.light-mode .catalog-navbar {
+	background: rgb(247 243 241 / 0.9);
+	border-bottom: 1px solid rgb(195 170 160 / 0.5);
+}
+
 .catalog-navbar .navbar-brand,
 .catalog-brand {
 	color: var(--primary-container);
@@ -170,6 +221,76 @@ body {
 .catalog-theme-button:hover,
 .catalog-theme-button:focus-visible {
 	color: var(--primary-container) !important;
+}
+
+.app-shell .btn {
+	--bs-btn-border-radius: 999px;
+	--bs-btn-hover-border-radius: 999px;
+	--bs-btn-active-border-radius: 999px;
+	font-weight: 600;
+	transition: filter 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+}
+
+.app-shell .btn:hover,
+.app-shell .btn:focus-visible {
+	filter: brightness(1.1);
+}
+
+.app-shell .btn:active {
+	transform: translateY(1px);
+}
+
+.app-shell .btn-primary {
+	--bs-btn-bg: var(--primary-container);
+	--bs-btn-border-color: var(--primary-container);
+	--bs-btn-hover-bg: var(--primary-container);
+	--bs-btn-hover-border-color: var(--primary-container);
+	--bs-btn-active-bg: var(--primary-container);
+	--bs-btn-active-border-color: var(--primary-container);
+	--bs-btn-disabled-bg: var(--primary-container);
+	--bs-btn-disabled-border-color: var(--primary-container);
+	--bs-btn-color: #fff;
+	--bs-btn-hover-color: #fff;
+	--bs-btn-active-color: #fff;
+	box-shadow: 0 8px 20px -10px rgb(255 104 0 / 0.5);
+}
+
+.app-shell .btn-outline-primary {
+	--bs-btn-color: var(--primary-container);
+	--bs-btn-border-color: var(--primary-container);
+	--bs-btn-hover-bg: var(--primary-container);
+	--bs-btn-hover-border-color: var(--primary-container);
+	--bs-btn-hover-color: #fff;
+	--bs-btn-active-bg: var(--primary-container);
+	--bs-btn-active-border-color: var(--primary-container);
+	--bs-btn-active-color: #fff;
+}
+
+.app-shell .btn-secondary {
+	--bs-btn-bg: var(--surface-highest);
+	--bs-btn-border-color: var(--surface-highest);
+	--bs-btn-hover-bg: var(--surface-highest);
+	--bs-btn-hover-border-color: var(--outline-variant);
+	--bs-btn-color: var(--on-surface);
+	--bs-btn-hover-color: var(--on-surface);
+	--bs-btn-active-bg: var(--surface-highest);
+	--bs-btn-active-color: var(--on-surface);
+}
+
+.app-shell .btn-outline-secondary {
+	--bs-btn-color: var(--on-surface-variant);
+	--bs-btn-border-color: var(--outline-variant);
+	--bs-btn-hover-bg: var(--surface-highest);
+	--bs-btn-hover-border-color: var(--outline-variant);
+	--bs-btn-hover-color: var(--on-surface);
+	--bs-btn-active-bg: var(--surface-highest);
+	--bs-btn-active-color: var(--on-surface);
+}
+
+.app-shell .btn-warning {
+	--bs-btn-color: #2b1400;
+	--bs-btn-hover-color: #2b1400;
+	--bs-btn-active-color: #2b1400;
 }
 
 .catalog-logout-button {
@@ -630,6 +751,20 @@ body {
 	position: relative;
 }
 
+.catalog-card-origin-badge {
+	background: linear-gradient(135deg, var(--primary-container), var(--secondary-container));
+	border-radius: 999px;
+	color: #fff;
+	font-size: 0.62rem;
+	font-weight: 700;
+	left: 0.6rem;
+	letter-spacing: 0.03em;
+	padding: 0.25rem 0.65rem;
+	position: absolute;
+	top: 0.6rem;
+	z-index: 2;
+}
+
 .catalog-card-image {
 	display: block;
 	height: 100%;
@@ -740,6 +875,12 @@ body {
 	.catalog-section-heading { align-items: start; flex-direction: column; }
 	.catalog-controls { align-self: stretch; }
 	.catalog-controls select { width: 100%; }
+
+	.plan-premium-badge {
+		display: inline-block;
+		margin: 0 0 0.75rem;
+		position: static;
+	}
 }
 
 .app-footer {
