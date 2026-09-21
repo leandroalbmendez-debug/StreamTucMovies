@@ -8,6 +8,8 @@ import type { Movie } from "../types/database";
 import type { User } from "../types/User";
 import { useStyle } from "../context/styles";
 import { MOVIE_GENRES, readCustomMovies, readFeaturedMovies, saveFeaturedMovies, type CustomMovie } from "../data/customMovies";
+import { Link } from "react-router";
+import { FaArrowLeft } from "react-icons/fa";
 
 export function Favorites() {
 	const { theme } = useStyle();
@@ -163,8 +165,13 @@ export function Favorites() {
 		return <Navigate to="/login" replace />;
 	}
 
-	return (
+		return (
 		<Container fluid className={`${theme}-mode py-4`}>
+			<Link to="/catalog" className="btn btn-outline-secondary btn-sm mb-3">
+				<FaArrowLeft className="me-2" />
+				Volver al catálogo
+			</Link>
+
 			{loading && <p>Cargando favoritos...</p>}
 			{!loading && error && (
 				<Alert variant="danger">

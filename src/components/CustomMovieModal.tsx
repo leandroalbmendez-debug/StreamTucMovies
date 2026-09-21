@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { createCustomMovie, MOVIE_GENRES, type CustomMovie } from "../data/customMovies";
 import type { Movie } from "../types/database";
+import { useStyle } from "../context/styles";
 
 type Props = {
   show: boolean;
@@ -12,6 +13,7 @@ type Props = {
 
 export function CustomMovieModal({ show, movie, onHide, onSave }: Props) {
   const [draft, setDraft] = useState<CustomMovie>(() => movie || createCustomMovie({}));
+    const { theme } = useStyle();
 
   const update = (field: keyof Movie, value: string | number | number[]) => {
     setDraft((current) => ({ ...current, [field]: value }));
@@ -32,9 +34,9 @@ export function CustomMovieModal({ show, movie, onHide, onSave }: Props) {
   };
 
   return (
-    <Modal show={show} onHide={onHide} centered size="lg">
+        <Modal show={show} onHide={onHide} centered size="lg" dialogClassName={`${theme}-mode`}>
       <Form onSubmit={handleSubmit}>
-        <Modal.Header closeButton>
+        <Modal.Header closeButton closeVariant={theme === "dark" ? "white" : undefined}>
           <Modal.Title>{movie ? "Editar película" : "Nueva película"}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
