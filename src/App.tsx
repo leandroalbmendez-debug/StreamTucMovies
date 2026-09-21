@@ -17,6 +17,7 @@ import { Search } from "./pages/Search";
 import { Profiles } from "./pages/Profiles";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { RecoverPassword } from "./pages/RecoverPassword";
+import AboutUsPage from "./pages/AboutUs";
 
 function ProtectedAdmin() {
   const [loggedUser] = useLocalStorage<User | null>(
@@ -85,6 +86,10 @@ const router = createBrowserRouter([
       {
         path: "/search",
         element: <Search />,
+      },
+      {
+        path: "/about",
+        element: <AboutUsPage />,
       },
       {
         path: "/admin",

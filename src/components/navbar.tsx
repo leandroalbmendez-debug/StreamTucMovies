@@ -1,9 +1,9 @@
 import {
-  Button,
-  Container,
-  Modal,
-  Nav,
-  Navbar as BootstrapNavbar,
+	Button,
+	Container,
+	Modal,
+	Nav,
+	Navbar as BootstrapNavbar,
 } from "react-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router";
 import { useEffect, useState } from "react";
