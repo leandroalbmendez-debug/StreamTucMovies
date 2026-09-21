@@ -72,6 +72,9 @@ export function DataCtx({ children }: { children: ReactNode }) {
 	}, []);
 
 	useEffect(() => {
+		// loading/error ya arrancan en (true/false), que es lo que fetchData() setea
+		// de entrada, así que esto no dispara un render extra.
+		// eslint-disable-next-line react-hooks/set-state-in-effect
 		fetchData(buildUrl(1, null), true);
 	}, []);
 
@@ -98,10 +101,11 @@ export function DataCtx({ children }: { children: ReactNode }) {
 	);
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useData = () => {
 	const context = useContext(DataEnviroment);
 	if (context === undefined) {
-		throw new Error("useUsers must be used within a UserProvider");
+		throw new Error("useData must be used within a DataCtx");
 	}
 	return context;
 };

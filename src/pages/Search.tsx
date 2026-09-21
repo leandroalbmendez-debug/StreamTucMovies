@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Container, Form, Row, Spinner } from "react-bootstrap";
+import { Alert, Button, Container, Form, Row, Spinner } from "react-bootstrap";
 import { FaSearch } from "react-icons/fa";
 import { useStyle } from "../context/styles";
 import { Card } from "../components/catalog/Card";
@@ -171,7 +171,7 @@ export function Search() {
           </div>
 
           {movies.length === 0 ? (
-            <p>No se encontraron películas con ese nombre.</p>
+            <Alert variant="info">No se encontraron películas con ese nombre.</Alert>
           ) : (
             <Row className="catalog-grid">
               {movies.map((movie) => (

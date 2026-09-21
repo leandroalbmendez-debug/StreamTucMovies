@@ -40,10 +40,11 @@ export function StyleCtx({ children }: { children: ReactNode }) {
 	);
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useStyle = () => {
 	const context = useContext(StyleEnviroment);
 	if (context === undefined) {
-		throw new Error("useUsers must be used within a UserProvider");
+		throw new Error("useStyle must be used within a StyleCtx");
 	}
 	return context;
 };

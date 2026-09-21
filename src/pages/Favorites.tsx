@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Alert, Button, Col, Container, Form, Row } from "react-bootstrap";
+import { Alert, Button, Col, Container, Form, Row, Spinner } from "react-bootstrap";
 import { Navigate } from "react-router";
 import { Card } from "../components/catalog/Card";
 import { notifyFavoriteChange, queueFavoriteUpdate } from "../data/favoriteQueue";
@@ -103,6 +103,9 @@ export function Favorites() {
 
 	useEffect(() => {
 		if (!loggedUser || loggedUser.favorites.length === 0) {
+			// Sincroniza la lista visible con "sin favoritos"; el render de abajo
+			// depende de este reseteo (línea ~184), no solo del montaje inicial.
+			// eslint-disable-next-line react-hooks/set-state-in-effect
 			setMovies([]);
 			setError(false);
 			setLoading(false);
@@ -175,7 +178,12 @@ export function Favorites() {
 				Volver al catálogo
 			</Link>
 
-			{loading && <p>Cargando favoritos...</p>}
+			{loading && (
+				<div className="text-center py-5">
+					<Spinner animation="border" />
+					<p className="mt-3">Cargando favoritos...</p>
+				</div>
+			)}
 			{!loading && error && (
 				<Alert variant="danger">
 					No se pudieron cargar tus películas favoritas.
