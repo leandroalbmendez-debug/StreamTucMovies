@@ -3,7 +3,6 @@ import { Alert, Container, Row, Col, Form, Nav } from "react-bootstrap";
 import UserForm from "../components/UserForm";
 import UserTable from "../components/UserTable";
 import { CommentsAdminTable } from "../components/comments/CommentsAdminTable";
-import { useLocalStorage as useLocalStorageCustom } from "../hooks/useLocalStorage";
 import { useLocalStorage } from "@uidotdev/usehooks";
 import { initialUsers } from "../data/initialUsers";
 import { useData } from "../context/database";
@@ -12,7 +11,7 @@ import type { Comment } from "../types/comment";
 import { CustomMoviesAdmin } from "../components/CustomMoviesAdmin";
 
 function Admin() {
-  const [users, setUsers] = useLocalStorageCustom<User[]>(
+  const [users, setUsers] = useLocalStorage<User[]>(
     "streamtuc-users",
     initialUsers,
   );

@@ -8,7 +8,7 @@ import { round } from "../../data/math";
 import { customMovieImageUrl, movieImageUrl } from "../../data/movieImages";
 import { notifyFavoriteChange, queueFavoriteUpdate } from "../../data/favoriteQueue";
 import { initialUsers } from "../../data/initialUsers";
-import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { useLocalStorage } from "@uidotdev/usehooks";
 import type { User } from "../../types/User";
 import { CustomMovieModal } from "../CustomMovieModal";
 import {

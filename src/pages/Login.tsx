@@ -8,7 +8,7 @@ import { Link, useNavigate } from "react-router";
 
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
-import { useLocalStorage } from "../hooks/useLocalStorage";
+import { useLocalStorage } from "@uidotdev/usehooks";
 
 import { initialUsers } from "../data/initialUsers";
 

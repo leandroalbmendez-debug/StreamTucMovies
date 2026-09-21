@@ -11,7 +11,7 @@ import {
   type CustomMovie,
 } from "../data/customMovies";
 import { initialMovies } from "../data/initialMovies";
-import { useLocalStorage } from "../hooks/useLocalStorage";
+import { useLocalStorage } from "@uidotdev/usehooks";
 import { useStyle } from "../context/styles";
 
 const initialCustomMovies: CustomMovie[] = initialMovies.map((movie) => ({

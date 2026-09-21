@@ -6,7 +6,7 @@ import { Card } from "../components/catalog/Card";
 import { notifyFavoriteChange, queueFavoriteUpdate } from "../data/favoriteQueue";
 import type { Movie } from "../types/database";
 import type { User } from "../types/User";
-import { useLocalStorage, useSessionStorage } from "../hooks/useLocalStorage";
+import { useLocalStorage, useSessionStorage } from "@uidotdev/usehooks";
 import { FEATURED_MOVIES_KEY, readCustomMovies, saveFeaturedMovies } from "../data/customMovies";
 
 interface SearchResponse {
