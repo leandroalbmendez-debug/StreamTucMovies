@@ -16,6 +16,7 @@ import Layout from "./pages/Layout";
 import { Search } from "./pages/Search";
 import { Profiles } from "./pages/Profiles";
 import { ErrorBoundary } from "./components/ErrorBoundary";
+import { RecoverPassword } from "./pages/RecoverPassword";
 
 function ProtectedAdmin() {
   const [loggedUser] = useLocalStorage<User | null>(
@@ -105,9 +106,13 @@ const router = createBrowserRouter([
         path: "/detail/:movieId",
         element: <Detail />,
       },
-            {
+      {
         path: "/profiles",
         element: <ProtectedProfiles />,
+      },
+      {
+        path: "/recuperar-contrasena",
+        element: <RecoverPassword />,
       },
       {
         path: "*",
