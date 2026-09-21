@@ -6,21 +6,21 @@ import leandro from "../assets/team/leandro.jpg";
 const TEAM = [
   {
     name: "Franco David Ruiz Pastorino",
-    role: "Scrum Master & Coder",
+    role: "Scrum Master & Diseñador Multimedia",
     photo: franco,
-    bio: "Fanático del cine de culto y de mantener los sprints bajo control. Cuando no está facilitando dailies, está armando el próximo maratón de películas del equipo.",
+    bio: "Diseñador multimedia de profesión, así que fue el primero en preocuparse por cómo se ve STREAMTUC. También ofició de Scrum Master, manteniendo los sprints del equipo en orden. Cuando no está revisando una paleta de colores, está armando el próximo maratón de películas.",
   },
   {
     name: "Lucas Lencina",
-    role: "Coder",
+    role: "Profesor de Educación Física",
     photo: lucas,
-    bio: "Devora ciencia ficción y código limpio en partes iguales. Cree que un buen componente reutilizable es tan satisfactorio como un buen plot twist.",
+    bio: "Profesor de educación física de profesión, se metió de lleno a programar para este proyecto. Le pone la misma garra a resolver un bug que a planear una clase, y siempre tiene una recomendación de ciencia ficción a mano.",
   },
   {
     name: "Leandro Mendez",
-    role: "Coder",
+    role: "Profesor de Inglés",
     photo: leandro,
-    bio: "Entre un commit y otro, siempre tiene una película en la lista de pendientes. Disfruta tanto pulir una interfaz como debatir el final de una saga.",
+    bio: "Profesor de inglés, por eso ve todo en versión original. Entre corregir tareas y escribir código para STREAMTUC, siempre tiene una película pendiente — y una opinión fuerte sobre el final de alguna saga.",
   },
 ];
 
